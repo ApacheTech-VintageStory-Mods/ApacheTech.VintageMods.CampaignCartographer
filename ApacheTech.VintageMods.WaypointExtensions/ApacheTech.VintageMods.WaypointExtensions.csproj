@@ -1,0 +1,138 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>preview</LangVersion>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<OutputType>Library</OutputType>
+		<ApplicationIcon>__Icon.ico</ApplicationIcon>
+		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+		<Configurations>Debug;Release;Package</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<ModPackagerDir>C:\Users\Apache\source\repos\ModPackager\ModPackager\bin\Release\net6.0\publish\win-x64\</ModPackagerDir>
+		<ModPackagerName>ModPackager.exe</ModPackagerName>
+		<ModPackagerPath>$(ModPackagerDir)$(ModPackagerName)</ModPackagerPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Package|AnyCPU'">
+	  <Optimize>true</Optimize>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<None Remove=".gitkeep" />
+		<None Remove="ApacheTech.VintageMods.WaypointExtensions.csproj.DotSettings" />
+		<None Remove="app.config" />
+		<None Remove="CREDITS.md" />
+		<None Remove="LICENCE.md" />
+		<None Remove="ModInfoFileGenerator.exe" />
+		<None Remove="packager.exe" />
+		<None Remove="README.md" />
+		<None Remove="_EmbeddedResources\Global\settings-global-client.json" />
+		<None Remove="_EmbeddedResources\Global\version-current.json" />
+		<None Remove="_EmbeddedResources\Global\version-installed.json" />
+		<None Remove="_EmbeddedResources\World\settings-server.json" />
+		<None Remove="_EmbeddedResources\World\settings-world-client.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="_Includes\CREDITS.md">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Include="_Includes\LICENCE.md">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+		<Content Include="_Includes\README.md">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="_EmbeddedResources\Global\version-current.json" />
+		<EmbeddedResource Include="_EmbeddedResources\Global\version-installed.json" />
+		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-client.json" />
+		<EmbeddedResource Include="_EmbeddedResources\World\settings-world-client.json" />
+		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-server.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="ApacheTech.VintageMods.WaypointExtensions.saproj">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ApacheTech.VintageMods.FluentChatCommands" Version="1.0.0" />
+		<PackageReference Include="IsExternalInit" Version="1.0.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core.csproj">
+			<Private>true</Private>
+		</ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="0Harmony">
+			<HintPath>D:\Games\Vintage Story\Lib\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="cairo-sharp">
+			<HintPath>D:\Games\Vintage Story\Lib\cairo-sharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="protobuf-net">
+			<HintPath>D:\Games\Vintage Story\Lib\protobuf-net.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VintagestoryAPI">
+			<HintPath>D:\Games\Vintage Story\VintagestoryAPI.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VintagestoryLib">
+			<HintPath>D:\Games\Vintage Story\VintagestoryLib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="_Includes\assets\.gitkeep">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\wpex\lang\en.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\wpex\lang\common\error-messages\en.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\wpex\patches\.gitkeep">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\UserStories.txt">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="__Icon.ico">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Features\Uninstall\" />
+	  <Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+		<Exec Command=":: Clean the target directory. ::&#xD;&#xA;del /f /s /q $(TargetDir) &gt; NUL&#xD;&#xA;rmdir /s /q $(TargetDir)&#xD;&#xA;&#xD;&#xA;:: Clean all previous releases. ::&#xD;&#xA;if exist &quot;$(SolutionDir).releases\$(ProjectName)*.zip&quot; del &quot;$(SolutionDir).releases\$(ProjectName)*.zip&quot;&#xD;&#xA;&#xD;&#xA;:: Rebuild the necessary folders. ::&#xD;&#xA;if not exist $(SolutionDir).releases mkdir $(SolutionDir).releases" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="if $(Configuration) == Package (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)_Includes\&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;:: Package the mod. ::&#xD;&#xA;cd &quot;$(ModPackagerDir)&quot;&#xD;&#xA;&quot;$(ModPackagerPath)&quot; -a &quot;$(TargetPath)&quot;&#xD;&#xA;&#xD;&#xA;:: Copy mod package to releases directory. ::&#xD;&#xA;copy /y &quot;$(TargetDir)release\*.zip&quot; &quot;$(SolutionDir).releases&quot;&#xD;&#xA;&#xD;&#xA;)" />
+	</Target>
+
+</Project>

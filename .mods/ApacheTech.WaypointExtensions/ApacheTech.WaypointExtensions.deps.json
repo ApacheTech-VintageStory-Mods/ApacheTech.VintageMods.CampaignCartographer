@@ -1,0 +1,109 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "ApacheTech.WaypointExtensions/1.4.0": {
+        "dependencies": {
+          "JetBrains.Annotations": "2021.2.0",
+          "Microsoft.CSharp": "4.7.0",
+          "NETStandard.Library": "2.0.3",
+          "VintageMods.Core": "1.0.0"
+        },
+        "runtime": {
+          "ApacheTech.WaypointExtensions.dll": {}
+        }
+      },
+      "JetBrains.Annotations/2021.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/JetBrains.Annotations.dll": {
+            "assemblyVersion": "2021.2.0.0",
+            "fileVersion": "2021.2.0.0"
+          }
+        }
+      },
+      "Microsoft.CSharp/4.7.0": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.CSharp.dll": {
+            "assemblyVersion": "4.0.5.0",
+            "fileVersion": "4.700.19.56404"
+          }
+        }
+      },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "System.ComponentModel.Composition/6.0.0-preview.7.21377.19": {
+        "runtime": {
+          "lib/netstandard2.0/System.ComponentModel.Composition.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "6.0.21.37719"
+          }
+        }
+      },
+      "VintageMods.Core/1.0.0": {
+        "dependencies": {
+          "JetBrains.Annotations": "2021.2.0",
+          "System.ComponentModel.Composition": "6.0.0-preview.7.21377.19"
+        },
+        "runtime": {
+          "VintageMods.Core.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ApacheTech.WaypointExtensions/1.4.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "JetBrains.Annotations/2021.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kKSyoVfndMriKHLfYGmr0uzQuI4jcc3TKGyww7buJFCYeHb/X0kodYBPL7n9454q7v6ASiRmDgpPGaDGerg/Hg==",
+      "path": "jetbrains.annotations/2021.2.0",
+      "hashPath": "jetbrains.annotations.2021.2.0.nupkg.sha512"
+    },
+    "Microsoft.CSharp/4.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "path": "microsoft.csharp/4.7.0",
+      "hashPath": "microsoft.csharp.4.7.0.nupkg.sha512"
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "System.ComponentModel.Composition/6.0.0-preview.7.21377.19": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MawUP5bYmMnQ1ESq9XZGri6IlQZJnCQyIZWj8zqOOJO0IU3y9dlCLptxTsDSDEa9L+WSlAYbYLFMjPirRmJEsQ==",
+      "path": "system.componentmodel.composition/6.0.0-preview.7.21377.19",
+      "hashPath": "system.componentmodel.composition.6.0.0-preview.7.21377.19.nupkg.sha512"
+    },
+    "VintageMods.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

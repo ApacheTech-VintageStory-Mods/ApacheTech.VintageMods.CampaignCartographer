@@ -1,0 +1,56 @@
+{
+  "Meta.ModTitle": "Waypoint Extensions, by Apache Gaming",
+  "Meta.ModDescription": "Quickly, and easily add waypoints at your current location, as well as other useful features.",
+
+  "UI.SettingsWindow.Headers.Wpex": "Waypoint Extensions",
+  "UI.SettingsWindow.Labels.AutoTranslocator": "Automatic Translocator Waypoints:",
+  "UI.SettingsWindow.Tooltips.AutoTranslocator": "Automatically add translocator waypoints when teleporting through a translocator.",
+  "UI.SettingsWindow.Labels.AutoTrader": "Automatic Trader Waypoints:",
+  "UI.SettingsWindow.Tooltips.AutoTrader": "Automatically add trader waypoints when you talk to them.",
+  "UI.SettingsWindow.Labels.Donate": "Donate to the Mod Author",
+
+  "Errors.InvalidArgument": "Waypoint Extensions: Invalid Argument.",
+  "Errors.TraderNotFound": "No traders have been found within range of the player.",
+  "Errors.TranslocatorNotFound": "No fixed translocators have been found within range of the player.",
+  "Errors.TeleporterNotFound": "No teleporter blocks have been found within range of the player.",
+  "Errors.WaypointAlreadyExists": "A waypoint for this trader already exists.",
+
+  "Messages.AutoTrader": "Automatic Trader Waypoints: {0}",
+  "Messages.AutoTranslocator": "Automatic Translocator Waypoints: {0}",
+  "Messages.TranslocatorWaypoint": "Translocator to ({0}, {1}, {2})",
+  "Messages.TeleporterWaypoint": "Teleporter to ({0})",
+
+  "Messages.SpecifyIcon": "Please specify an icon.",
+  "Messages.ConfirmationRequest": "Please type `.wputil purge-icon {0} confirm` to confirm your choice.",
+  "Messages.PurgingWaypoints": "Purging waypoints with the `{0}` icon.",
+
+  "Messages.RecentreOnPosition": "Re-centring world map at X = {0}, Z = {1}.",
+  "Messages.RecentreOnPlayer": "Re-centring world map on {0} (X = {1}, Z = {2}).",
+
+  "Messages.BroadcastGPS": "{0} is currently at `{1}, {2}, {3}`.",
+  "Messages.LocationCopiedToClipboard": "Player location copied to clipboard.",
+
+  "Phrases.Confirm": "confirm",
+
+  "ChatCommands.wp.Description": "Quickly, and easily add waypoints at your current location.",
+  "ChatCommands.wp.SyntaxMessage": "[pin (Optional)] [type] [title (Optional)]",
+  "ChatCommands.wp.SyntaxMessage_Full": "[pin (Optional)] [{0}] [title (Optional)]",
+
+  "ChatCommands.wpt.Description": "Adds a waypoint for a trader at your current location.",
+  "ChatCommands.wpt.SyntaxMessage": "[pin]",
+
+  "ChatCommands.cm.Description": "Re-centres the map on the given location or player.",
+  "ChatCommands.cm.SyntaxMessage": "[plr|player|pos|position|spawn]",
+
+  "ChatCommands.wpex.Description": "Waypoint utilities.",
+  "ChatCommands.wpex.SyntaxMessage": "[purge-icon|purge-nearby]",
+
+  "ChatCommands.gps.Description": "Broadcasts your current coordinates as an in-game chat message.",
+  "ChatCommands.gps.SyntaxMessage": "",
+
+  "ChatCommands.wptl.Description": "Adds a waypoint to a fixed translocator, within five blocks of the player.",
+  "ChatCommands.wptl.SyntaxMessage": "[pin]",
+
+  "ChatCommands.wptp.Description": "Broadcasts your current coordinates as an in-game chat message.",
+  "ChatCommands.wptp.SyntaxMessage": "[pin]"
+}

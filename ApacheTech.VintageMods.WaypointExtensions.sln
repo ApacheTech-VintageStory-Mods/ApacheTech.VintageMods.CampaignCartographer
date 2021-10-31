@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.WaypointExtensions", "ApacheTech.VintageMods.WaypointExtensions\ApacheTech.VintageMods.WaypointExtensions.csproj", "{46248F78-5AE9-4A59-8670-D98B74AE0E15}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.Core", "..\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core.csproj", "{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.WaypointExtensions.Tests", "ApacheTech.VintageMods.WaypointExtensions.Tests\ApacheTech.VintageMods.WaypointExtensions.Tests.csproj", "{97E28DD8-716A-433B-B18B-F2C827255CA3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C75312BB-E327-4D17-8290-79303D4613F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mod", "Mod", "{D48746BB-6446-4A9C-8834-06EB7D23FBF3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{314D353D-BE52-4726-AA67-84BF52306622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApacheTech.VintageMods.DotNetFrameworkLauncher", "..\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher.csproj", "{EBC0233E-F9F2-4B60-B145-143CD650A63B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15} = {46248F78-5AE9-4A59-8670-D98B74AE0E15}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VintageMods.Core", "..\VintageMods\VintageMods.Core\VintageMods.Core.csproj", "{C491398B-38BC-4FF9-841A-281F39FD762B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.WaypointExtensions", "..\VintageMods\VintageMods.Mods.WaypointExtensions\ApacheTech.WaypointExtensions.csproj", "{E049CF66-4698-43FC-B7DE-7F73A5E7B877}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "VintageMods.Core.AssetEnums", "..\VintageMods\VintageMods.Core.AssetEnums\VintageMods.Core.AssetEnums.shproj", "{5B146732-BAC6-48E3-B67C-9A1F4CCC30E6}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\VintageMods\VintageMods.Core.AssetEnums\VintageMods.Core.AssetEnums.projitems*{5b146732-bac6-48e3-b67c-9a1f4ccc30e6}*SharedItemsImports = 13
+		..\VintageMods\VintageMods.Core.AssetEnums\VintageMods.Core.AssetEnums.projitems*{c491398b-38bc-4ff9-841a-281f39fd762b}*SharedItemsImports = 5
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Package|Any CPU = Package|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Package|Any CPU.Build.0 = Package|Any CPU
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Package|Any CPU.Build.0 = Package|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Package|Any CPU.Build.0 = Package|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97E28DD8-716A-433B-B18B-F2C827255CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.Build.0 = Package|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C491398B-38BC-4FF9-841A-281F39FD762B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C491398B-38BC-4FF9-841A-281F39FD762B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C491398B-38BC-4FF9-841A-281F39FD762B}.Package|Any CPU.ActiveCfg = Release|Any CPU
+		{C491398B-38BC-4FF9-841A-281F39FD762B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C491398B-38BC-4FF9-841A-281F39FD762B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E049CF66-4698-43FC-B7DE-7F73A5E7B877}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E049CF66-4698-43FC-B7DE-7F73A5E7B877}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E049CF66-4698-43FC-B7DE-7F73A5E7B877}.Package|Any CPU.ActiveCfg = Release|Any CPU
+		{E049CF66-4698-43FC-B7DE-7F73A5E7B877}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E049CF66-4698-43FC-B7DE-7F73A5E7B877}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{46248F78-5AE9-4A59-8670-D98B74AE0E15} = {D48746BB-6446-4A9C-8834-06EB7D23FBF3}
+		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE} = {C75312BB-E327-4D17-8290-79303D4613F5}
+		{97E28DD8-716A-433B-B18B-F2C827255CA3} = {D48746BB-6446-4A9C-8834-06EB7D23FBF3}
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B} = {314D353D-BE52-4726-AA67-84BF52306622}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01CD805C-7D3A-4E45-AE8B-9D591FAB2366}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+As a user,
+Given 
+When 
+Then 
+
+As a server admin,
+Given 
+When 
+Then 
