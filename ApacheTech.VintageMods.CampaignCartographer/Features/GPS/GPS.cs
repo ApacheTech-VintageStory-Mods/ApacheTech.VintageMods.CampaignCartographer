@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Linq;
+using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.Extensions.Game;
-using ApacheTech.VintageMods.Core.Hosting;
-using ApacheTech.VintageMods.Core.Services.Configuration.Contracts;
-using ApacheTech.VintageMods.Core.Services.Configuration.Extensions;
+using ApacheTech.VintageMods.Core.Common.Extensions.System;
+using ApacheTech.VintageMods.Core.Hosting.Configuration;
+using ApacheTech.VintageMods.Core.Hosting.Configuration.Abstractions;
+using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
-using ApacheTech.VintageMods.WaypointExtensions.Features.GPS.Packets;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 using Vintagestory.API.Server;
 
-namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
 {
     /// <summary>
     ///     Feature: Global Positioning System.
@@ -26,8 +27,8 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
     /// <seealso cref="UniversalModSystem" />
     public sealed class GPS : UniversalModSystem
     {
-        private IGlobalConfiguration _globalSettings;
-        private GPSOptionsPacket _packet = new();
+        private IJsonSettingsFile _globalSettings;
+        private GpsSettings _packet = new();
 
         /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
@@ -37,8 +38,8 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
         {
             ModServices.Network.DefaultClientChannel
                 .RegisterMessageType<WhisperPacket>()
-                .RegisterMessageType<GPSOptionsPacket>()
-                .SetMessageHandler<GPSOptionsPacket>(OnClientSetPropertyPacketReceived);
+                .RegisterMessageType<GpsSettings>()
+                .SetMessageHandler<GpsSettings>(OnClientSetPropertyPacketReceived);
 
             FluentChat.ClientCommand("gps")
                 .RegisterWith(capi)
@@ -57,7 +58,7 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
         {
             ModServices.Network.DefaultServerChannel
                 .RegisterMessageType<WhisperPacket>()
-                .RegisterMessageType<GPSOptionsPacket>()
+                .RegisterMessageType<GpsSettings>()
                 .SetMessageHandler<WhisperPacket>(OnServerWhisperPacketReceived);
 
             FluentChat
@@ -65,8 +66,8 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
                 .HasSubCommand("gps")
                 .WithHandler(OnServerConfigCommand);
 
-            _globalSettings = ModServices.IOC.Resolve<IGlobalConfiguration>();
-            _packet = _globalSettings.FeatureAs<GPSOptionsPacket>("GPS");
+            _globalSettings = ModSettings.Global;
+            _packet = _globalSettings.Feature<GpsSettings>("GPS");
             sapi.Event.PlayerNowPlaying += OnServerPlayerJoin;
         }
 
@@ -146,7 +147,7 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
         ///     Sets a property within the class, from the other app-side.
         /// </summary>
         /// <param name="packet">The packet, containing the property name, and value to set.</param>
-        private void OnClientSetPropertyPacketReceived(GPSOptionsPacket packet)
+        private void OnClientSetPropertyPacketReceived(GpsSettings packet)
         {
             _packet = packet;
         }
@@ -189,9 +190,9 @@ namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS
 
         private void SetWhispersAllowed(bool value)
         {
-            _packet.WhispersAllowed = value;
-            _globalSettings.SaveFeature("GPS", _packet);
-            ModServices.Network.DefaultServerChannel.BroadcastPacket(_packet);
+            ModServices.Network.DefaultServerChannel
+                .BroadcastPacket(_packet
+                    .With(p => p.WhispersAllowed = value));
         }
 
         /// <summary>

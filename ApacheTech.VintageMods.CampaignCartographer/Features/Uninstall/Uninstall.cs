@@ -3,7 +3,7 @@ using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
 
-namespace ApacheTech.VintageMods.WaypointExtensions.Features.Uninstall
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.Uninstall
 {
     /// <summary>
     ///     Feature: Uninstall (.wpUninstall | /wpUninstall)

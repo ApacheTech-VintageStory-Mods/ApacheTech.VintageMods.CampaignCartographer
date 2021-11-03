@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using ProtoBuf;
 
-namespace ApacheTech.VintageMods.WaypointExtensions.Features.GPS.Packets
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets
 {
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]

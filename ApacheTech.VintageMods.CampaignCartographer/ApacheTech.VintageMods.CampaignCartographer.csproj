@@ -45,9 +45,6 @@
 		<Content Include="_Includes\LICENCE.md">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
-		<Content Include="_Includes\README.md">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -56,12 +53,6 @@
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-client.json" />
 		<EmbeddedResource Include="_EmbeddedResources\World\settings-world-client.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-server.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="ApacheTech.VintageMods.WaypointExtensions.saproj">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
 	</ItemGroup>
 
 	<ItemGroup>

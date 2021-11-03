@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.WaypointExtensions", "ApacheTech.VintageMods.WaypointExtensions\ApacheTech.VintageMods.WaypointExtensions.csproj", "{46248F78-5AE9-4A59-8670-D98B74AE0E15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.CampaignCartographer", "ApacheTech.VintageMods.CampaignCartographer\ApacheTech.VintageMods.CampaignCartographer.csproj", "{46248F78-5AE9-4A59-8670-D98B74AE0E15}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.Core", "..\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core.csproj", "{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.WaypointExtensions.Tests", "ApacheTech.VintageMods.WaypointExtensions.Tests\ApacheTech.VintageMods.WaypointExtensions.Tests.csproj", "{97E28DD8-716A-433B-B18B-F2C827255CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.CampaignCartographer.Tests", "ApacheTech.VintageMods.CampaignCartographer.Tests\ApacheTech.VintageMods.CampaignCartographer.Tests.csproj", "{97E28DD8-716A-433B-B18B-F2C827255CA3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C75312BB-E327-4D17-8290-79303D4613F5}"
 EndProject
