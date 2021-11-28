@@ -1,10 +1,10 @@
 ﻿using ApacheTech.VintageMods.Core.Annotation.Attributes;
 using Vintagestory.API.Common;
 
-[assembly: ModDependency("game", "1.15.7")]
+[assembly: ModDependency("game", "1.15.9")]
 
 [assembly:ModInfo(
-    "[VintageMods] - Campaign Cartographer",
+    "Campaign Cartographer",
     "wpex",
     Description = "Adds multiple Cartography related features to the game, such as custom waypoint icons, GPS, auto waypoint markers, and more.",
     Side = "Universal",
@@ -18,7 +18,7 @@ using Vintagestory.API.Common;
 
 [assembly: VintageModInfo(
     ModId = "wpex",
-    ModName = "[VintageMods] - Campaign Cartographer",
-    RootDirectoryName = "WaypointExtensions",
+    ModName = "Campaign Cartographer",
+    RootDirectoryName = "CampaignCartographer",
     NetworkVersion = "1.0.0",
     Version = "2.0.0")]

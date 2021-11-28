@@ -1,6 +1,12 @@
-﻿using ApacheTech.VintageMods.Core.Abstractions.ModSystems.Composite;
+﻿using ApacheTech.Common.DependencyInjection.Abstractions;
+using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints;
+using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Broker;
+using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Handlers;
+using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
+using ApacheTech.VintageMods.CampaignCartographer.Services.GUI;
+using ApacheTech.VintageMods.Core.Abstractions.ModSystems.Composite;
+using ApacheTech.VintageMods.Core.Hosting.Configuration;
 using ApacheTech.VintageMods.Core.Hosting.Configuration.Extensions;
-using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Abstractions;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.Core.Services.FileSystem.Enums;
 using ApacheTech.VintageMods.FluentChatCommands;
@@ -25,6 +31,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// <param name="services">The service collection.</param>
         protected override void ConfigureServerModServices(IServiceCollection services)
         {
+            services.RegisterSingleton(_ => ModSettings.Global.Feature<GpsSettings>("GPS"));
+            services.RegisterSingleton(_ => ModSettings.Global.Feature<AutoWaypointsSettings>("AutoWaypoints"));
+            services.RegisterSingleton<GPSChatCommandBroker>();
+            services.RegisterSingleton<WhisperCommandHandler>();
         }
 
         /// <summary>
@@ -33,6 +43,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// <param name="services">The service collection.</param>
         protected override void ConfigureClientModServices(IServiceCollection services)
         {
+            services.RegisterSingleton(_ => ModSettings.World.Feature<AutoWaypointsSettings>("AutoWaypoints"));
+            services.RegisterSingleton<TestWindow>();
         }
 
         /// <summary>

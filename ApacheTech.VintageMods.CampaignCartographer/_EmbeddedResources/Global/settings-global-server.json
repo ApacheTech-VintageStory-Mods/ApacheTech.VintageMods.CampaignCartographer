@@ -1,7 +1,15 @@
 {
-  "Features" : {
+  "Features": {
+
     "GPS": {
       "WhispersAllowed": true
+    },
+
+    "AutoWaypoints": {
+      "Translocators": true,
+      "Teleporters": true,
+      "Traders": true,
+      "Meteors": true
     }
   } 
 }

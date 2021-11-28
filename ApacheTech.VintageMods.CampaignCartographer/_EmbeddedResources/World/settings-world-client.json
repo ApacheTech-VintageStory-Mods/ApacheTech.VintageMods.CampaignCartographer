@@ -1,3 +1,10 @@
 {
-
+  "Features": {
+    "AutoWaypoints": {
+      "Translocators": true,
+      "Teleporters": true,
+      "Traders": true,
+      "Meteors": true
+    }
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "Code",
+  "name": "Campaign Cartographer",
+  "modId": "wpex",
+  "side": "Universal",
+  "description": "Adds multiple Cartography related features to the game, such as custom waypoint icons, GPS, auto waypoint markers, and more.",
+  "version": "2.0.0",
+  "website": "https://apachetech.co.uk",
+  "authors": [
+    "ApacheTech Solutions"
+  ],
+  "contributors": [
+    "ApacheTech Solutions"
+  ],
+  "requiredOnClient": false,
+  "requiredOnServer": false,
+  "networkVersion": "1.0.0",
+  "dependencies": {
+    "game": "1.15.9"
+  }
+}

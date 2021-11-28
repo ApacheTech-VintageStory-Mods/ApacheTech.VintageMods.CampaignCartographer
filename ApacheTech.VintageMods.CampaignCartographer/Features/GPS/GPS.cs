@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
+using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Broker;
 using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
-using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
-using ApacheTech.VintageMods.Core.Common.Extensions.Game;
-using ApacheTech.VintageMods.Core.Common.Extensions.System;
-using ApacheTech.VintageMods.Core.Hosting.Configuration;
-using ApacheTech.VintageMods.Core.Hosting.Configuration.Abstractions;
+using ApacheTech.VintageMods.Core.Abstractions.Features;
+using ApacheTech.VintageMods.Core.Extensions.Game;
+using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
+using JetBrains.Annotations;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -15,27 +15,32 @@ using Vintagestory.API.Server;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
 {
-    /// <summary>
-    ///     Feature: Global Positioning System.
-    /// 
-    ///      - Display your current XYZ coordinates.
-    ///      - Copy your current XYZ coordinates to clipboard.
-    ///      - Send your current XYZ coordinates as a chat message to the current chat group.
-    ///      - Whisper your current XYZ coordinates to a single player (server settings permitting).
-    ///      - Server: Enable/Disable permissions to whisper to other members of the server.
-    /// </summary>
-    /// <seealso cref="UniversalModSystem" />
-    public sealed class GPS : UniversalModSystem
+    [UsedImplicitly]
+    internal sealed class GPS : IUniversalFeatureHandler
     {
-        private IJsonSettingsFile _globalSettings;
-        private GpsSettings _packet = new();
+        private readonly GPSChatCommandBroker _broker;
+        private GpsSettings _settings;
+
+        private ICoreClientAPI _capi;
+        private ICoreServerAPI _sapi;
+
+        [SidedServiceProviderConstructor(EnumAppSide.Client)]
+        public GPS() { }
+
+        [SidedServiceProviderConstructor(EnumAppSide.Server)]
+        public GPS(GPSChatCommandBroker broker, GpsSettings settings)
+        {
+            _broker = broker;
+            _settings = settings;
+        }
 
         /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
         /// </summary>
         /// <param name="capi">The core API implemented by the client. The main interface for accessing the client. Contains all sub-components, and some miscellaneous methods.</param>
-        public override void StartClientSide(ICoreClientAPI capi)
+        public void StartClientSide(ICoreClientAPI capi)
         {
+            _capi = capi;
             ModServices.Network.DefaultClientChannel
                 .RegisterMessageType<WhisperPacket>()
                 .RegisterMessageType<GpsSettings>()
@@ -54,8 +59,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         ///     Minor convenience method to save yourself the check for/cast to ICoreServerAPI in Start()
         /// </summary>
         /// <param name="sapi">The core API implemented by the server. The main interface for accessing the server. Contains all sub-components, and some miscellaneous methods.</param>
-        public override void StartServerSide(ICoreServerAPI sapi)
+        public void StartServerSide(ICoreServerAPI sapi)
         {
+            _sapi = sapi;
             ModServices.Network.DefaultServerChannel
                 .RegisterMessageType<WhisperPacket>()
                 .RegisterMessageType<GpsSettings>()
@@ -66,8 +72,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
                 .HasSubCommand("gps")
                 .WithHandler(OnServerConfigCommand);
 
-            _globalSettings = ModSettings.Global;
-            _packet = _globalSettings.Feature<GpsSettings>("GPS");
             sapi.Event.PlayerNowPlaying += OnServerPlayerJoin;
         }
 
@@ -80,9 +84,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="args">The arguments sent along with the command.</param>
         private void OnClientDefaultHandler(int groupId, CmdArgs args)
         {
-            var player = Capi.World.Player;
+            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player);
-            Capi.ShowChatMessage(pos);
+            _capi.ShowChatMessage(pos);
         }
 
         /// <summary>
@@ -93,9 +97,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="args">The arguments sent along with the command.</param>
         private void OnClientSubCommandBroadcast(string subCommandName, int groupId, CmdArgs args)
         {
-            var player = Capi.World.Player;
+            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player);
-            Capi.SendChatMessage(pos);
+            _capi.SendChatMessage(pos);
         }
 
         /// <summary>
@@ -106,10 +110,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="args">The arguments sent along with the command.</param>
         private void OnClientSubCommandClipboard(string subCommandName, int groupId, CmdArgs args)
         {
-            var player = Capi.World.Player;
+            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player);
-            Capi.Forms.SetClipboardText($"{player.PlayerName}: {pos}");
-            Capi.ShowChatMessage(Lang.Get("wpex:features.gps.client.location-copied-to-clipboard"));
+            _capi.Forms.SetClipboardText($"{player.PlayerName}: {pos}");
+            _capi.ShowChatMessage(Lang.Get("wpex:features.gps.client.location-copied-to-clipboard"));
         }
 
         /// <summary>
@@ -122,15 +126,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         {
             if (!ModServices.Network.DefaultClientChannel.Connected)
             {
-                Capi.ShowChatMessage(Lang.Get("wpex:error-messages.mod-not-installed-on-server"));
+                _capi.ShowChatMessage(Lang.Get("wpex:error-messages.mod-not-installed-on-server"));
                 return;
             }
-            if (!_packet.WhispersAllowed)
+            if (!_settings.WhispersAllowed)
             {
-                Capi.ShowChatMessage(Lang.Get("wpex:error-messages.feature-disabled"));
+                _capi.ShowChatMessage(Lang.Get("wpex:error-messages.feature-disabled"));
                 return;
             }
-            var message = PlayerLocationMessage(Capi.World.Player);
+            var message = PlayerLocationMessage(_capi.World.Player);
             var recipient = args.PopWord();
 
             ModServices.Network.DefaultClientChannel.SendPacket(new WhisperPacket
@@ -149,50 +153,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="packet">The packet, containing the property name, and value to set.</param>
         private void OnClientSetPropertyPacketReceived(GpsSettings packet)
         {
-            _packet = packet;
+            _settings = packet;
         }
 
         /// <summary>
         ///     Called when a Server Admin changes the settings for the GPS feature.
         /// </summary>
         /// <param name="subCommandName">Name of the sub command.</param>
-        /// <param name="player">The player.</param>
-        /// <param name="groupId">The group identifier.</param>
-        /// <param name="args">The arguments.</param>
+        /// <param name="player">The player that initiated the command.</param>
+        /// <param name="groupId">The chat group to pass messages back to.</param>
+        /// <param name="args">The arguments passed in, by the user.</param>
         private void OnServerConfigCommand(string subCommandName, IServerPlayer player, int groupId, CmdArgs args)
         {
-            // TODO: Breaks Open/Closed, DRY, SRP... Refactor to fix SOLID concerns.
-            switch (args.PopWord())
-            {
-                case "whisper":
-                    switch (args.PopWord())
-                    {
-                        case "enable":
-                            SetWhispersAllowed(true);
-                            player.SendMessage(groupId, Lang.Get("wpex:features.gps.server.gps-whisper-enabled"), EnumChatType.CommandSuccess);
-                            break;
-
-                        case "disable":
-                            SetWhispersAllowed(false);
-                            player.SendMessage(groupId, Lang.Get("wpex:features.gps.server.gps-whisper-disabled"), EnumChatType.CommandSuccess);
-                            break;
-
-                        default:
-                            player.SendMessage(groupId, Lang.Get("wpex:features.gps.server.invalid-command-syntax"), EnumChatType.CommandError);
-                            break;
-                    }
-                    break;
-                default:
-                    player.SendMessage(groupId, Lang.Get("wpex:features.gps.server.invalid-command-syntax"), EnumChatType.CommandError);
-                    break;
-            }
-        }
-
-        private void SetWhispersAllowed(bool value)
-        {
-            ModServices.Network.DefaultServerChannel
-                .BroadcastPacket(_packet
-                    .With(p => p.WhispersAllowed = value));
+            _broker.OnServerConfigCommand(player, groupId, args);
         }
 
         /// <summary>
@@ -201,7 +174,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="joiningPlayer">The player that is joining the server.</param>
         private void OnServerPlayerJoin(IServerPlayer joiningPlayer)
         {
-            ModServices.Network.DefaultServerChannel.SendPacket(_packet, joiningPlayer);
+            ModServices.Network.DefaultServerChannel.SendPacket(_settings, joiningPlayer);
         }
 
         /// <summary>
@@ -211,20 +184,21 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="packet">The packet set from the Client.</param>
         private void OnServerWhisperPacketReceived(IServerPlayer fromPlayer, WhisperPacket packet)
         {
-            var toPlayer = Sapi.World.AllOnlinePlayers
-                .FirstOrDefault(p => p.PlayerName.StartsWith(packet.RecipientName, StringComparison.InvariantCultureIgnoreCase));
+            var toPlayer = _sapi.World.AllOnlinePlayers
+                .FirstOrDefault(p => 
+                    p.PlayerName.StartsWith(packet.RecipientName, StringComparison.InvariantCultureIgnoreCase));
 
             if (toPlayer is null)
             {
-                Sapi.SendMessage(fromPlayer, packet.GroupId, Lang.Get("wpex:features.gps.client.player-not-found", packet.RecipientName), EnumChatType.OwnMessage);
+                _sapi.SendMessage(fromPlayer, packet.GroupId, Lang.Get("wpex:features.gps.client.player-not-found", packet.RecipientName), EnumChatType.OwnMessage);
                 return;
             }
 
             var receivedMessage = Lang.Get("wpex:features.gps.server.whisper-received", fromPlayer.PlayerName, packet.Message);
-            Sapi.SendMessage(toPlayer as IServerPlayer, packet.GroupId, receivedMessage, EnumChatType.OwnMessage);
+            _sapi.SendMessage(toPlayer as IServerPlayer, packet.GroupId, receivedMessage, EnumChatType.OwnMessage);
 
             var sentMessage = Lang.Get("wpex:features.gps.server.whisper-sent", toPlayer.PlayerName, packet.Message);
-            Sapi.SendMessage(fromPlayer, packet.GroupId, sentMessage, EnumChatType.OwnMessage);
+            _sapi.SendMessage(fromPlayer, packet.GroupId, sentMessage, EnumChatType.OwnMessage);
         }
 
         /// <summary>
@@ -232,7 +206,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// </summary>
         /// <param name="player">The player to find the location of.</param>
         /// <returns>A string representation of the XYZ coordinates of the player.</returns>
-        private string PlayerLocationMessage(IPlayer player)
+        private static string PlayerLocationMessage(IPlayer player)
         {
             var pos = player.Entity.Pos.AsBlockPos.RelativeToSpawn();
             return $"X = {pos.X}, Y = {pos.Y}, Z = {pos.Z}.";
