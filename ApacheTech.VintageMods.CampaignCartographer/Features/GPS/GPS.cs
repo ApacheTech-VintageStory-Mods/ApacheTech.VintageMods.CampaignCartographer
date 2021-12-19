@@ -2,12 +2,10 @@
 using System.Linq;
 using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Broker;
 using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
-using ApacheTech.VintageMods.Core.Abstractions.Features;
+using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
-using JetBrains.Annotations;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
@@ -15,30 +13,29 @@ using Vintagestory.API.Server;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
 {
-    [UsedImplicitly]
-    internal sealed class GPS : IUniversalFeatureHandler
+    /// <summary>
+    ///     Feature: Global Positioning System.
+    /// 
+    ///      - Display your current XYZ coordinates.
+    ///      - Copy your current XYZ coordinates to clipboard.
+    ///      - Send your current XYZ coordinates as a chat message to the current chat group.
+    ///      - Whisper your current XYZ coordinates to a single player (server settings permitting).
+    ///      - Server: Enable/Disable permissions to whisper to other members of the server.
+    /// </summary>
+    /// <seealso cref="UniversalModSystem" />
+    public sealed class GPS : UniversalModSystem
     {
-        private readonly GPSChatCommandBroker _broker;
+        private GPSChatCommandBroker _broker;
         private GpsSettings _settings;
 
         private ICoreClientAPI _capi;
         private ICoreServerAPI _sapi;
 
-        [SidedServiceProviderConstructor(EnumAppSide.Client)]
-        public GPS() { }
-
-        [SidedServiceProviderConstructor(EnumAppSide.Server)]
-        public GPS(GPSChatCommandBroker broker, GpsSettings settings)
-        {
-            _broker = broker;
-            _settings = settings;
-        }
-
         /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
         /// </summary>
         /// <param name="capi">The core API implemented by the client. The main interface for accessing the client. Contains all sub-components, and some miscellaneous methods.</param>
-        public void StartClientSide(ICoreClientAPI capi)
+        public override void StartClientSide(ICoreClientAPI capi)
         {
             _capi = capi;
             ModServices.Network.DefaultClientChannel
@@ -59,9 +56,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         ///     Minor convenience method to save yourself the check for/cast to ICoreServerAPI in Start()
         /// </summary>
         /// <param name="sapi">The core API implemented by the server. The main interface for accessing the server. Contains all sub-components, and some miscellaneous methods.</param>
-        public void StartServerSide(ICoreServerAPI sapi)
+        public override void StartServerSide(ICoreServerAPI sapi)
         {
             _sapi = sapi;
+            _broker = ModServices.IOC.Resolve<GPSChatCommandBroker>();
+            _settings = ModServices.IOC.Resolve<GpsSettings>();
+
             ModServices.Network.DefaultServerChannel
                 .RegisterMessageType<WhisperPacket>()
                 .RegisterMessageType<GpsSettings>()
@@ -185,7 +185,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         private void OnServerWhisperPacketReceived(IServerPlayer fromPlayer, WhisperPacket packet)
         {
             var toPlayer = _sapi.World.AllOnlinePlayers
-                .FirstOrDefault(p => 
+                .FirstOrDefault(p =>
                     p.PlayerName.StartsWith(packet.RecipientName, StringComparison.InvariantCultureIgnoreCase));
 
             if (toPlayer is null)
