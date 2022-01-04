@@ -2,13 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<LangVersion>preview</LangVersion>
+		<LangVersion>latest</LangVersion>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<OutputType>Library</OutputType>
-		<ApplicationIcon>__Icon.ico</ApplicationIcon>
 		<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release;Package</Configurations>
 	</PropertyGroup>
 
@@ -21,6 +20,17 @@
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Package|AnyCPU'">
 	  <Optimize>true</Optimize>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Features\MapMarker\**" />
+	  <Compile Remove="Store\**" />
+	  <EmbeddedResource Remove="Features\MapMarker\**" />
+	  <EmbeddedResource Remove="Store\**" />
+	  <None Remove="Features\MapMarker\**" />
+	  <None Remove="Store\**" />
+	</ItemGroup>
+
+	<!-- BEGIN -->
 	
 	<ItemGroup>
 		<None Remove=".gitkeep" />
@@ -30,10 +40,10 @@
 		<None Remove="LICENCE.md" />
 		<None Remove="ModInfoFileGenerator.exe" />
 		<None Remove="packager.exe" />
-		<None Remove="README.md" />
+		<None Remove="_EmbeddedResources\Global\default-waypoints.json" />
 		<None Remove="_EmbeddedResources\Global\settings-global-client.json" />
-		<None Remove="_EmbeddedResources\Global\version-current.json" />
-		<None Remove="_EmbeddedResources\Global\version-installed.json" />
+		<None Remove="_EmbeddedResources\Global\version.data" />
+		<None Remove="_EmbeddedResources\World\custom-waypoints.json" />
 		<None Remove="_EmbeddedResources\World\settings-server.json" />
 		<None Remove="_EmbeddedResources\World\settings-world-client.json" />
 	</ItemGroup>
@@ -48,20 +58,60 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="_EmbeddedResources\Global\version-current.json" />
-		<EmbeddedResource Include="_EmbeddedResources\Global\version-installed.json" />
+		<EmbeddedResource Include="_EmbeddedResources\Global\version.data" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-client.json" />
+		<EmbeddedResource Include="_EmbeddedResources\Global\default-waypoints.json" />
 		<EmbeddedResource Include="_EmbeddedResources\World\settings-world-client.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-server.json" />
+		<EmbeddedResource Include="_EmbeddedResources\World\custom-waypoints.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ApacheTech.VintageMods.FluentChatCommands" Version="1.0.0" />
-		<PackageReference Include="IsExternalInit" Version="1.0.1">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>
+		<None Update="modinfo.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\.gitkeep">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\campaigncartographer\lang\en.json">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\assets\campaigncartographer\patches\.gitkeep">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\UserStories.txt">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
+		<None Update="_Includes\__Icon.png">
+			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Features\PublicLocations\Dialogue\" />
+		<Folder Include="Features\PublicLocations\Packets\" />
+		<Folder Include="Features\HomeLocations\Dialogue\" />
+		<Folder Include="Features\HomeLocations\Packets\" />
+		<Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md" Link="_Includes\README.md" />
+		<None Include="ApacheTech.VintageMods.CampaignCartographer.saproj">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="ApacheTech.VintageMods.FluentChatCommands" Version="1.4.1" />
+		<PackageReference Include="IsExternalInit" Version="1.0.2">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="System.CodeDom" Version="6.0.0" />
+	</ItemGroup>
+
+	<!-- END -->
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core.csproj">
@@ -70,63 +120,67 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="0Harmony">
-			<HintPath>D:\Games\Vintage Story\Lib\0Harmony.dll</HintPath>
-			<Private>false</Private>
+		<!-- Vintage Story Game Libraries -->
+		<Reference Include="Microsoft.CSharp">
+		  <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll</HintPath>
 		</Reference>
-		<Reference Include="cairo-sharp">
-			<HintPath>D:\Games\Vintage Story\Lib\cairo-sharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="protobuf-net">
-			<HintPath>D:\Games\Vintage Story\Lib\protobuf-net.dll</HintPath>
+		<Reference Include="Vintagestory">
+			<HintPath>$(VINTAGE_STORY)\Vintagestory.exe</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="VintagestoryAPI">
-			<HintPath>D:\Games\Vintage Story\VintagestoryAPI.dll</HintPath>
+			<HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="VintagestoryLib">
-			<HintPath>D:\Games\Vintage Story\VintagestoryLib.dll</HintPath>
+			<HintPath>$(VINTAGE_STORY)\VintagestoryLib.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VSCreativeMod">
+			<HintPath>$(VINTAGE_STORY)\Mods\VSCreativeMod.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="VSSurvivalMod">
+			<HintPath>$(VINTAGE_STORY)\Mods\VSSurvivalMod.dll</HintPath>
 			<Private>false</Private>
 		</Reference>
 		<Reference Include="VSEssentials">
-		  <HintPath>D:\Games\Vintage Story\Mods\VSEssentials.dll</HintPath>
+			<HintPath>$(VINTAGE_STORY)\Mods\VSEssentials.dll</HintPath>
+			<Private>false</Private>
 		</Reference>
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="modinfo.json">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\assets\.gitkeep">
-		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\assets\wpex\lang\en.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\assets\wpex\lang\common\error-messages\en.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\assets\wpex\patches\.gitkeep">
-		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\UserStories.txt">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="__Icon.ico">
-		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Properties\PublishProfiles\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="ApacheTech.VintageMods.CampaignCartographer.saproj">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+		<!-- Vintage Story Included Libraries -->
+		<Reference Include="0Harmony">
+			<HintPath>$(VINTAGE_STORY)\Lib\0Harmony.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="AnimatedGif">
+			<HintPath>$(VINTAGE_STORY)\Lib\AnimatedGif.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="cairo-sharp">
+			<HintPath>$(VINTAGE_STORY)\Lib\cairo-sharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Newtonsoft.Json">
+			<HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="OpenTK">
+			<HintPath>$(VINTAGE_STORY)\Lib\OpenTK.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="protobuf-net">
+			<HintPath>$(VINTAGE_STORY)\Lib\protobuf-net.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="System.Data.SQLite">
+			<HintPath>$(VINTAGE_STORY)\Lib\System.Data.SQLite.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Tavis.JsonPatch">
+			<HintPath>$(VINTAGE_STORY)\Lib\Tavis.JsonPatch.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
 	</ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent">
@@ -136,5 +190,7 @@
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	  <Exec Command="if $(Configuration) == Debug (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;xcopy &quot;$(TargetDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if $(Configuration) == Package (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)_Includes\&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;:: Package the mod. ::&#xD;&#xA;cd &quot;$(ModPackagerDir)&quot;&#xD;&#xA;&quot;$(ModPackagerPath)&quot; -a &quot;$(TargetPath)&quot;&#xD;&#xA;&#xD;&#xA;:: Copy mod package to releases directory. ::&#xD;&#xA;copy /y &quot;$(TargetDir)release\*.zip&quot; &quot;$(SolutionDir).releases&quot;&#xD;&#xA;&#xD;&#xA;)" />
 	</Target>
+
+	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

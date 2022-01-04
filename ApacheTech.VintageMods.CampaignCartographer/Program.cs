@@ -1,19 +1,18 @@
 ﻿using ApacheTech.Common.DependencyInjection.Abstractions;
-using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints;
-using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Broker;
-using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Handlers;
-using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
-using ApacheTech.VintageMods.CampaignCartographer.Services.GUI;
-using ApacheTech.VintageMods.Core.Abstractions.ModSystems.Composite;
-using ApacheTech.VintageMods.Core.Hosting.Configuration;
+using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Hosting;
 using ApacheTech.VintageMods.Core.Hosting.Configuration.Extensions;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.Core.Services.FileSystem.Enums;
+using ApacheTech.VintageMods.Core.Services.MefLab;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.Server;
+
+// ReSharper disable UnusedType.Global
+// ReSharper disable StringLiteralTypo
 
 namespace ApacheTech.VintageMods.CampaignCartographer
 {
@@ -22,29 +21,32 @@ namespace ApacheTech.VintageMods.CampaignCartographer
     ///     
     ///     Registrations performed within this class should be global scope; by convention, features should aim to be as stand-alone as they can be.
     /// </summary>
+    /// <remarks>
+    ///     Only one derived instance of this class should be added to any single mod within
+    ///     the VintageMods domain. This class will enable Dependency Injection, and add all
+    ///     of the domain services. Derived instances should only have minimal functionality, 
+    ///     instantiating, and adding Application specific services to the IOC Container.
+    /// </remarks>
     /// <seealso cref="ModHost" />
     internal sealed class Program : ModHost
     {
         /// <summary>
-        ///     Allows a mod to include Singleton, Scoped, or Transient services to the DI Container.
+        ///     Allows a mod to include Singleton, or Transient services to the IOC Container.
         /// </summary>
         /// <param name="services">The service collection.</param>
         protected override void ConfigureServerModServices(IServiceCollection services)
         {
-            services.RegisterSingleton(_ => ModSettings.Global.Feature<GpsSettings>("GPS"));
-            services.RegisterSingleton(_ => ModSettings.Global.Feature<AutoWaypointsSettings>("AutoWaypoints"));
-            services.RegisterSingleton<GPSChatCommandBroker>();
-            services.RegisterSingleton<WhisperCommandHandler>();
+            services.RegisterSingleton<IMefLabContractMediator>(sp => sp.Resolve<MefLabMediator>());
         }
 
         /// <summary>
-        ///     Allows a mod to include Singleton, Scoped, or Transient services to the DI Container.
+        ///     Allows a mod to include Singleton, or Transient services to the IOC Container.
         /// </summary>
         /// <param name="services">The service collection.</param>
         protected override void ConfigureClientModServices(IServiceCollection services)
         {
-            services.RegisterSingleton(_ => ModSettings.World.Feature<AutoWaypointsSettings>("AutoWaypoints"));
-            services.RegisterSingleton<TestWindow>();
+            services.RegisterSingleton<IMefLabContractMediator>(sp => sp.Resolve<MefLabMediator>());
+            services.RegisterSingleton<WaypointService>();
         }
 
         /// <summary>
@@ -58,9 +60,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         protected override void StartPreClientSide(ICoreClientAPI capi)
         {
             ModServices.FileSystem
-                .RegisterFile("version-installed.json", FileScope.Global)
                 .RegisterSettingsFile("settings-global-client.json", FileScope.Global)
-                .RegisterSettingsFile("settings-world-client.json", FileScope.World);
+                .RegisterSettingsFile("settings-world-client.json", FileScope.World)
+                .RegisterFile("version.data", FileScope.Global);
         }
 
         /// <summary>
@@ -74,23 +76,52 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         protected override void StartPreServerSide(ICoreServerAPI sapi)
         {
             ModServices.FileSystem
-                .RegisterFile("version-installed.json", FileScope.Global)
+                .RegisterFile("version.data", FileScope.Global)
                 .RegisterSettingsFile("settings-global-server.json", FileScope.Global);
-
-            FluentChat
-                .ServerCommand("wpconfig")
-                .HasDescription(Lang.Get("wpex:features.wpconfig.server.description"))
-                .RequiresPrivilege(Privilege.controlserver)
-                .RegisterWith(sapi);
         }
 
         /// <summary>
         ///     Side agnostic Start method, called after all mods received a call to StartPre().
         /// </summary>
-        /// <param name="api">The API.</param>
+        /// <param name="api">
+        ///     Common API Components that are available on the server and the client.
+        ///     Cast to ICoreServerAPI or ICoreClientAPI to access side specific features.
+        /// </param>
         public override void Start(ICoreAPI api)
         {
+            base.Start(api);
             ModServices.Harmony.UseHarmony();
+        }
+
+        /// <summary>
+        ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
+        /// </summary>
+        /// <param name="capi">
+        ///     The core API implemented by the client.
+        ///     The main interface for accessing the client.
+        ///     Contains all sub-components, and some miscellaneous methods.
+        /// </param>
+        public override void StartClientSide(ICoreClientAPI capi)
+        {
+            //capi.EnableAsyncTasks();
+        }
+
+        /// <summary>
+        ///     If this mod allows runtime reloading, you must implement this method to unregister any listeners / handlers
+        /// </summary>
+        public override void Dispose()
+        {
+            ApiEx.Run(DisposeClient, DisposeServer);
+        }
+
+        private static void DisposeClient()
+        {
+            FluentChat.DisposeClientCommands();
+        }
+
+        private static void DisposeServer()
+        {
+            FluentChat.DisposeServerCommands();
         }
     }
 }

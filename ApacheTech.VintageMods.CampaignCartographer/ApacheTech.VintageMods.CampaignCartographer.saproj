@@ -1,5 +1,5 @@
 <SmartAssemblyProject ProjectId="{0593dcfa-1e1c-4852-b886-d5b76e1ea057}" Version="2.0">
-    <MainAssemblyFileName>.\bin\Release\netstandard2.0\ApacheTech.VintageMods.WaypointExtensions.dll</MainAssemblyFileName>
+    <MainAssemblyFileName>.\bin\Release\netstandard2.0\ApacheTech.VintageMods.CampaignCartographer.dll</MainAssemblyFileName>
     <FriendlyName>ApacheTech.VintageMods.WaypointExtensions</FriendlyName>
     <CompanyName>ApacheTech Solutions</CompanyName>
     <Configuration Name="Release">
@@ -15,7 +15,7 @@
             <StrongNameSigning Sign="0" />
         </Options>
         <ApplicationName>ApacheTech.VintageMods.WaypointExtensions</ApplicationName>
-        <Destination DestinationFileName=".\bin\Release\netstandard2.0\src\ApacheTech.VintageMods.WaypointExtensions.dll" />
+        <Destination DestinationFileName=".\bin\Release\netstandard2.0\temp\ApacheTech.VintageMods.CampaignCartographer.dll" />
         <Assemblies>
             <Assembly AssemblyName="netstandard, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
                 <Merging />
@@ -27,7 +27,7 @@
             </Assembly>
             <Assembly AssemblyName="ApacheTech.VintageMods.Core, Culture=neutral, PublicKeyToken=null">
                 <Merging Merge="1">
-                    <Pruning Prune="1">
+                    <Pruning Prune="0">
                         <Exclusion />
                     </Pruning>
                     <Obfuscation />
@@ -312,6 +312,7 @@
             </Assembly>
             <Assembly AssemblyName="System.CodeDom, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51">
                 <Merging />
+                <Embedding Compress="1" Encrypt="1" />
             </Assembly>
             <Assembly AssemblyName="SmartAssembly.Attributes, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
                 <Merging>
@@ -322,6 +323,86 @@
             </Assembly>
             <Assembly AssemblyName="MonoMac, Culture=neutral, PublicKeyToken=null">
                 <Merging />
+            </Assembly>
+            <Assembly AssemblyName="ApacheTech.Common.DependencyInjection, Culture=neutral, PublicKeyToken=null">
+                <Merging Merge="1">
+                    <Pruning>
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="VSSurvivalMod, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="ApacheTech.Common.Extensions.Harmony, Culture=neutral, PublicKeyToken=null">
+                <Merging Merge="1">
+                    <Pruning>
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="ApacheTech.Common.Extensions, Culture=neutral, PublicKeyToken=null">
+                <Merging Merge="1">
+                    <Pruning Prune="0">
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.CSharp, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging Merge="0">
+                    <Pruning>
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="System.Dynamic, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging Merge="0">
+                    <Pruning>
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="VSCreativeMod, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding Compress="1" Encrypt="1" />
+            </Assembly>
+            <Assembly AssemblyName="ApacheTech.VintageMods.CampaignCartographer, Culture=neutral, PublicKeyToken=null">
+                <Merging>
+                    <ResourcesCompression />
+                    <MemberRefsProxy />
+                    <Pruning>
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation />
+                    <ControlFlow />
+                </Merging>
+                <Embedding />
             </Assembly>
         </Assemblies>
     </Configuration>
