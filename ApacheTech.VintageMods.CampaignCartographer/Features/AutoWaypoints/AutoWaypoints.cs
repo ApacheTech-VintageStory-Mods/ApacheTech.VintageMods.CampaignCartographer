@@ -1,45 +1,53 @@
-﻿using ApacheTech.VintageMods.Core.Abstractions.Features;
-using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
+﻿using System;
+using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
+using ApacheTech.VintageMods.CampaignCartographer.Services.GUI;
+using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Services;
 using Vintagestory.API.Client;
-using Vintagestory.API.Common;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
+
+// ReSharper disable UnusedType.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 {
     /// <summary>
-    ///     Automatic Waypoint Addition(.wpAuto)
-    ///      - Contains a GUI that can be used to control the settings for the feature.
+    ///     Automatic Waypoint Addition (.wpAuto)
+    ///      - Contains a GUI that can be used to control the settings for the feature (Shift + F7).
     ///      - Enable / Disable all automatic waypoint placements.
     ///      - Automatically add waypoints for Translocators, as the player travels between them.
     ///      - Automatically add waypoints for Teleporters, as the player travels between them.
     ///      - Automatically add waypoints for Traders, as the player interacts with them.
-    ///      - Automatically add waypoints for Meteors, when the player shift-right-clicks on Meteoric Iron Blocks.
+    ///      - Automatically add waypoints for Meteors, when the player punches a Meteoric Iron Block.
     ///      - Server: Send Teleporter information to clients, when creating Teleporter waypoints.
     /// </summary>
-    /// <seealso cref="AutoWaypointsModSystem" />
-    /// <seealso cref="IUniversalFeatureHandler" />
-    public class AutoWaypoints : IUniversalFeatureHandler
+    /// <seealso cref="Features.AutoWaypoints" />
+    /// <seealso cref="UniversalModSystem" />
+    public sealed class AutoWaypoints : UniversalModSystem
     {
-        private readonly AutoWaypointsSettings _settings;
+        public event EventHandler<TeleporterLocation> TeleporterLocationReceived;
 
-        [SidedServiceProviderConstructor(EnumAppSide.Server)]
-        public AutoWaypoints() { }
-
-
-        [SidedServiceProviderConstructor(EnumAppSide.Client)]
-        public AutoWaypoints(AutoWaypointsSettings settings)
+        public override void StartServerSide(ICoreServerAPI api)
         {
-            _settings = settings;
+            ModServices.Network.DefaultServerChannel
+                .RegisterMessageType<TeleporterLocation>();
         }
 
-        public void StartClientSide(ICoreClientAPI capi)
+        public override void StartClientSide(ICoreClientAPI api)
         {
-            
+            Capi.Input.RegisterGuiDialogueHotKey<AutoWaypointsDialogue>(
+                LangEx.FeatureString("AutoWaypoints", "Title"),
+                GlKeys.F7, HotkeyType.GUIOrOtherControls, shiftPressed: true);
+
+            ModServices.Network.DefaultClientChannel
+                .RegisterMessageType<TeleporterLocation>()
+                .SetMessageHandler<TeleporterLocation>(OnReceiveTeleporterLocation);
         }
 
-        public void StartServerSide(ICoreServerAPI sapi)
+        private void OnReceiveTeleporterLocation(TeleporterLocation location)
         {
-
+            TeleporterLocationReceived?.Invoke(this, location);
         }
     }
 }
