@@ -125,19 +125,19 @@ These are features that have not yet been implemented, but are planned for relea
 
 **Automatic Waypoints GUI**
 
-![Automatic Waypoints GUI Screenshot](https://imgur.com/YXfbKEA)
+![Automatic Waypoints GUI Screenshot](https://i.imgur.com/YXfbKEA.png)
 
 **Own Player Pins GUI**
 
-![Own Player Pins GUI Screenshot](https://imgur.com/uVmXnSx)
+![Own Player Pins GUI Screenshot](https://i.imgur.com/uVmXnSx.png)
 
 **Friends Player Pins GUI**
 
-![Friends Player Pins Player Pins GUI Screenshot](https://imgur.com/3FTOTZ0)
+![Friends Player Pins Player Pins GUI Screenshot](https://i.imgur.com/3FTOTZ0.png)
 
 **Other Player Pins GUI**
 
-![Other Player Pins GUI Screenshot](https://imgur.com/heSBu9o)
+![Other Player Pins GUI Screenshot](https://i.imgur.com/heSBu9o.png)
 
 ## Client-Side Commands:
 
