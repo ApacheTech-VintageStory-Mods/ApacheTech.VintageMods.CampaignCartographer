@@ -1,0 +1,56 @@
+{
+	"code": "AutoWaypointSettingsDialogue",
+	"padding": 8,
+	"disableWorldInteract": false,
+	"alignment": "CenterMiddle",
+	"rows": [
+		{ 
+			"height": 30, 
+			"elements": [
+				{
+					"width": 400,
+					"code": "auto-traders",
+					"label": "Automatically Add Waypoints for Traders: ",
+					"type": "switch",
+					"tooltip": "A unique waypoint will be added for traders, when you first interact with them."
+				}
+			]
+		},
+		{ 
+			"height": 30, 
+			"elements": [
+				{
+					"width": 400,
+					"code": "auto-teleporters",
+					"label": "Automatically Add Waypoints for Teleporter Blocks: ",
+					"type": "switch",
+					"tooltip": "A unique waypoint will be added for teleporters, when you first travel through them."
+				}
+			]
+		},
+		{ 
+			"height": 30, 
+			"elements": [
+				{
+					"width": 400,
+					"code": "auto-translocators",
+					"label": "Automatically Add Waypoints for Translocators: ",
+					"type": "switch",
+					"tooltip": "A unique waypoint will be added for translocators, when you first travel through them."
+				}
+			]
+		},
+		{ 
+			"height": 30, 
+			"elements": [
+				{
+					"width": 400,
+					"code": "auto-deposits",
+					"label": "Automatically Add Waypoints for Surface Deposits: ",
+					"type": "switch",
+					"tooltip": "A unique waypoint will be added for mineable metals, when you collect surface deposits."
+				}
+			]
+		}
+	]
+}

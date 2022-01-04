@@ -1,5 +1,0 @@
-{
-  "wpex:error-messages.feature-not-available-client-side": "This feature is not available from the client. Please use the equivalent server command instead.",
-  "wpex:error-messages.mod-not-installed-on-server": "Waypoint Extensions is not installed on the Server. Please ask your server administrator to install the Waypoint Extensions on the server, for added functionality.",
-  "wpex:error-messages.feature-disabled": "The server administrator has disabled this feature."
-}

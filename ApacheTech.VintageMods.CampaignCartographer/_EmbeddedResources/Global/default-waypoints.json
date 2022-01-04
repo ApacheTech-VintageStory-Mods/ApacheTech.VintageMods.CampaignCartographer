@@ -1,0 +1,1012 @@
+// =======================================================================
+//  Waypoint Extensions Mod, by Apache Gaming
+//    - .wp chat command syntax list.
+//
+//  Default Waypoint Types
+//  
+//   • Note: Changes made to the waypoint below will not be saved between
+//           updates. To override a default waypoint type, use the custom
+//           waypoint types array, and provide the same name within the
+//           syntax field.
+// =======================================================================
+
+// ReSharper disable StringLiteralTypo
+[
+  // =====================================================================
+  //  A
+  // =====================================================================
+  {
+    "Syntax": [ "anthracite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Anthracite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "andesite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Andesite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  //  B
+  // =====================================================================
+  {
+    "Syntax": [ "basalt" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Basalt",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "bauxite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Bauxite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "bees", "beehive" ],
+    "Icon": "Bee",
+    "Colour": "Yellow",
+    "DefaultTitle": "Bees",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "berry", "berries", "bush" ],
+    "Icon": "Star2",
+    "Colour": "Red",
+    "DefaultTitle": "Berry Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "bismuth", "bismuthinite" ],
+    "Icon": "Pick",
+    "Colour": "MediumSeaGreen",
+    "DefaultTitle": "Bismuth",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "black-coal", "blcoal" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Black Coal",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "blackcurrant" ],
+    "Icon": "Star2",
+    "Colour": "Red",
+    "DefaultTitle": "Blackcurrant Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "blue-clay", "bclay" ],
+    "Icon": "Pick",
+    "Colour": "SteelBlue",
+    "DefaultTitle": "Blue Clay",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "blueberry" ],
+    "Icon": "Rocks",
+    "Colour": "Red",
+    "DefaultTitle": "Blueberry Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "borax" ],
+    "Icon": "Pick",
+    "Colour": "Coral",
+    "DefaultTitle": "Borax",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "brown-coal", "brcoal" ],
+    "Icon": "Pick",
+    "Colour": "Brown",
+    "DefaultTitle": "Brown Coal",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // C
+  // =====================================================================
+  {
+    "Syntax": [ "cave" ],
+    "Icon": "Cave",
+    "Colour": "Navy",
+    "DefaultTitle": "Cave",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "chalk", "chaulk" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Chaulk",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "chert" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Chert",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "conglomerate" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Conglomerate",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "chromium", "chromite" ],
+    "Icon": "Pick",
+    "Colour": "WhiteSmoke",
+    "DefaultTitle": "Chromium",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "cinnabar" ],
+    "Icon": "Pick",
+    "Colour": "Red",
+    "DefaultTitle": "Cinnabar",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "cranberry" ],
+    "Icon": "Star2",
+    "Colour": "Red",
+    "DefaultTitle": "Cranberry Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "claystone" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Claystone",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "copper" ],
+    "Icon": "Pick",
+    "Colour": "Orange",
+    "DefaultTitle": "Copper",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "corundum" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Corundum",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // E
+  // =====================================================================
+  {
+    "Syntax": [ "diamond" ],
+    "Icon": "Pick",
+    "Colour": "Cyan",
+    "DefaultTitle": "Diamond",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // E
+  // =====================================================================
+  {
+    "Syntax": [ "emerald" ],
+    "Icon": "Pick",
+    "Colour": "Green",
+    "DefaultTitle": "Emerald",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // F
+  // =====================================================================
+  {
+    "Syntax": [ "fire-clay", "fclay" ],
+    "Icon": "Pick",
+    "Colour": "SandyBrown",
+    "DefaultTitle": "Fire Clay",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "fluorite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Fluorite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // G
+  // =====================================================================
+  {
+    "Syntax": [ "gold" ],
+    "Icon": "Pick",
+    "Colour": "Gold",
+    "DefaultTitle": "Gold",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "granite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Granite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "graphite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Graphite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "greenmarble" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Green Marble",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // H
+  // =====================================================================
+  {
+    "Syntax": [ "halite", "salt" ],
+    "Icon": "Pick",
+    "Colour": "Pink",
+    "DefaultTitle": "Halite (Salt)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "home" ],
+    "Icon": "Home",
+    "Colour": "Chartreuse",
+    "DefaultTitle": "Home",
+    "HorizontalCoverageRadius": 2,
+    "VerticalCoverageRadius": 2
+  },
+
+  // =====================================================================
+  // I
+  // =====================================================================
+  {
+    "Syntax": [ "iron", "hematite", "magnetite", "limonite" ],
+    "Icon": "Pick",
+    "Colour": "DimGray",
+    "DefaultTitle": "Iron",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  //  K
+  // =====================================================================
+  {
+    "Syntax": [ "kernite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Kernite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "kimberlite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Kimberlite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // L
+  // =====================================================================
+  {
+    "Syntax": [ "lapis" ],
+    "Icon": "Pick",
+    "Colour": "Blue",
+    "DefaultTitle": "Lapis Lazuli",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "limestone" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Limestone",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "galena", "lead" ],
+    "Icon": "Pick",
+    "Colour": "SlateGray",
+    "DefaultTitle": "Lead",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // M
+  // =====================================================================
+  {
+    "Syntax": [ "malachite" ],
+    "Icon": "Pick",
+    "Colour": "DarkGreen",
+    "DefaultTitle": "Malachite (Copper)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "meteor" ],
+    "Icon": "Pick",
+    "Colour": "Gray",
+    "DefaultTitle": "Meteor",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "mushroom", "fungi" ],
+    "Icon": "Pick",
+    "Colour": "Linen",
+    "DefaultTitle": "Mushrooms",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // O
+  // =====================================================================
+  {
+    "Syntax": [ "obsidian" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Obsidian",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "olivine" ],
+    "Icon": "Pick",
+    "Colour": "SeaGreen",
+    "DefaultTitle": "Olivine",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // P
+  // =====================================================================
+  {
+    "Syntax": [ "peat" ],
+    "Icon": "Pick",
+    "Colour": "Sienna",
+    "DefaultTitle": "Peat",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "pentlandite" ],
+    "Icon": "Pick",
+    "Colour": "SeaGreen",
+    "DefaultTitle": "Pentlandite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "peridotite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Peridotite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "phosphorite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Phosphorite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "phyllite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Phyllite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "platinum" ],
+    "Icon": "Pick",
+    "Colour": "GhostWhite",
+    "DefaultTitle": "Platinum",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "poi" ],
+    "Icon": "Star1",
+    "Colour": "White",
+    "DefaultTitle": "Point Of Interest",
+    "HorizontalCoverageRadius": 1,
+    "VerticalCoverageRadius": 1
+  },
+
+  // =====================================================================
+  // Q
+  // =====================================================================
+  {
+    "Syntax": [ "quartz" ],
+    "Icon": "Pick",
+    "Colour": "Seashell",
+    "DefaultTitle": "Quartz",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // R
+  // =====================================================================
+  {
+    "Syntax": [ "redcurrant" ],
+    "Icon": "Star2",
+    "Colour": "Red",
+    "DefaultTitle": "Redcurrant Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "redmarble" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Rose Marble",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "resin" ],
+    "Icon": "Circle",
+    "Colour": "Peru",
+    "DefaultTitle": "Resin",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "rhodochrosite", "rhodium" ],
+    "Icon": "Pick",
+    "Colour": "Maroon",
+    "DefaultTitle": "Rhodium",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "ruins" ],
+    "Icon": "Ruins",
+    "Colour": "LightGray",
+    "DefaultTitle": "Ruins",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // S
+  // =====================================================================
+  {
+    "Syntax": [ "saltpeter" ],
+    "Icon": "Pick",
+    "Colour": "FloralWhite",
+    "DefaultTitle": "Saltpeter",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "sandstone" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Sandstone",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "scoria" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Scoria",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "shale" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Shale",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "silver" ],
+    "Icon": "Pick",
+    "Colour": "Silver",
+    "DefaultTitle": "Silver",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "slate" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Slate",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "stibnite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Stibnite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "suevite" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Suevite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "sulphur", "sulfur" ],
+    "Icon": "Pick",
+    "Colour": "GoldenRod",
+    "DefaultTitle": "Sulphur",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // T
+  // =====================================================================
+  {
+    "Syntax": [ "cassiterite", "tin" ],
+    "Icon": "Pick",
+    "Colour": "Gainsboro",
+    "DefaultTitle": "Tin",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "titanium", "ilmenite" ],
+    "Icon": "Pick",
+    "Colour": "AntiqueWhite",
+    "DefaultTitle": "Titanium",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "trader" ],
+    "Icon": "Trader",
+    "Colour": "Aqua",
+    "DefaultTitle": "Trader",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "translocator", "tl" ],
+    "Icon": "Spiral",
+    "Colour": "Fuchsia",
+    "DefaultTitle": "Translocator",
+    "HorizontalCoverageRadius": 2,
+    "VerticalCoverageRadius": 2
+  },
+  {
+    "Syntax": [ "tuff" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "Tuff",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // U
+  // =====================================================================
+  {
+    "Syntax": [ "uranium" ],
+    "Icon": "Pick",
+    "Colour": "DarkCyan",
+    "DefaultTitle": "Uranium",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  //  W
+  // =====================================================================
+  {
+    "Syntax": [ "whitecurrant" ],
+    "Icon": "Star2",
+    "Colour": "Red",
+    "DefaultTitle": "Whitecurrant Bush",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "whitemarble" ],
+    "Icon": "Rocks",
+    "Colour": "Black",
+    "DefaultTitle": "White Marble",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "wolframite" ],
+    "Icon": "Pick",
+    "Colour": "Black",
+    "DefaultTitle": "Wolframite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  // =====================================================================
+  // Z
+  // =====================================================================
+  {
+    "Syntax": [ "sphalerite", "zinc" ],
+    "Icon": "Pick",
+    "Colour": "NavajoWhite",
+    "DefaultTitle": "Zinc",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+
+  // =====================================================================
+  //  Mushrooms
+  // =====================================================================
+  {
+    "Syntax": [ "almondmushroom" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Almond Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "beardedtooth" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Bearded Tooth Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "bitterbolete" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Bitter Bolete Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "blacktrumpet" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Black Trumpet Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "chanterelle" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Chanterelle Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "commonmorel" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Common Morel Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "deathcap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Death Cap Mushroom (Poisonous)"
+  },
+  {
+    "Syntax": [ "devilbolete" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Devil Bolet Mushroome",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "earthball" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Earth Ball Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "elfinsaddle" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Elfin Saddle Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "fieldmushroom" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Field Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "flyagaric" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Fly Agaric Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "golddropmilkcap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Gold Drop Milkcap Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "greencrackedrussula" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Green Cracked Russula Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "indigomilkcap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Indigo Milkcap Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "jackolantern" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Jack o' Lantern Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "kingbolete" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "King Bolete Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "lobster" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Lobster Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "mushroom" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "orangeoakbolete" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Orange Oak Bolete Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "paddystraw" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Paddy Straw Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+
+  {
+    "Syntax": [ "puffball" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Puffball Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "redwinecap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Red Wine Cap Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "saffronmilkcap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Saffron Milkcap Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "violetwebcap" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Violet Web Cap Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "chickenofthewoods" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Chicken of the Woods Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "dryadsaddle" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Dryad Saddle Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "pinkoyster" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Pink Oyster Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "tinderhoof" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Tinderhoof Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "whiteoyster" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "White Oyster Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "reishi" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Reishi Mushroom"
+  },
+  {
+    "Syntax": [ "funeralbell" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Funeral Bell Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "deerear" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Deer Ear Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "livermushroom" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Liver Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "pinkbonnet" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Pink Bonnet Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "shiitake" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Shiitake Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "witchhat" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Witch Hat Mushroom",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  },
+  {
+    "Syntax": [ "devilstooth" ],
+    "Icon": "Circle",
+    "Colour": "White",
+    "DefaultTitle": "Devil's Tooth Mushroom (Poisonous)",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10
+  }
+]

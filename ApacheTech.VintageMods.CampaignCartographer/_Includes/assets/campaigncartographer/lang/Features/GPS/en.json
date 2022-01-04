@@ -1,0 +1,13 @@
+{
+  "Features.GPS.Client.Description": "Shows information about the player's current location.",
+  "Features.GPS.Client.location-copied-to-clipboard": "Player location copied to clipboard.",
+  "Features.GPS.Client.player-not-found": "No player with the name `{0}` found on the server.",
+
+  "Features.GPS.Server.invalid-command-syntax": "Invalid Syntax. Please try again.",
+  "Features.GPS.Server.whisper-received": "[From {0}]: {1}",
+  "Features.GPS.Server.whisper-sent": "[To {0}]: {1}",
+
+  "Features.GPS.Dialogue.Title": "GPS Admin",
+  "Features.GPS.Dialogue.lblWhispers": "Whispers Allowed:",
+  "Features.GPS.Dialogue.lblWhispers.HoverText": "Determines whether or not players can whisper GPS coordinates to each other."
+}

@@ -1,0 +1,22 @@
+// ========================================================================
+//    Custom Waypoint Types
+//
+//    Available Icons: circle, bee, cave, home, ladder, pick, rocks, 
+//                     ruins, spiral, star1, star2, trader, vessel
+//
+//    Available Colours: https://www.99colors.net/dot-net-colors
+//
+//    Note:  Here, you can add your own, custom waypoint types, which will
+//           be saved when this file is automatically updated. To override
+//           one of the default waypoint types, use the example below to
+//           create a record with the same names within the Syntax field.
+// ========================================================================
+
+[
+  {
+    "Syntax": ["bees", "beehive"], // The command name (.wp example)
+    "Icon": "Bee", // The icon to use for the waypoint marker.
+    "Colour": "Yellow", // The colour of the waypoint marker.
+    "DefaultTitle": "Bees" // The default title, if the user doesn't provide one.
+  }
+]

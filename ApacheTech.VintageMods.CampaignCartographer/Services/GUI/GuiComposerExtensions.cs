@@ -24,11 +24,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.GUI
         public static ElementBounds DefaultButtonBounds(this GuiCompositeSettings _) => DefaultButtonBounds();
 
         public static void RegisterGuiDialogueHotKey<TDialogue>(
-            this IInputAPI api, string displayText, GlKeys hotKey, HotkeyType hotKeyType)
+            this IInputAPI api, string displayText, GlKeys hotKey, HotkeyType hotKeyType, bool altPressed = false, bool ctrlPressed = false, bool shiftPressed = false)
             where TDialogue : GuiDialog
         {
             var dialogue = ModServices.IOC.Resolve<TDialogue>();
-            api.RegisterHotKey(dialogue.ToggleKeyCombinationCode, displayText, hotKey, hotKeyType);
+            api.RegisterHotKey(dialogue.ToggleKeyCombinationCode, displayText, hotKey, hotKeyType, altPressed, ctrlPressed, shiftPressed);
             api.SetHotKeyHandler(dialogue.ToggleKeyCombinationCode, _ => ToggleGui(dialogue));
         }
 

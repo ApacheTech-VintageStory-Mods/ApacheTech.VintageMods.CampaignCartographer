@@ -1,0 +1,8 @@
+{
+  "campaigncartographer:Features.CentreMap.Description": "Re-centres the map on the given location or player.",
+  "campaigncartographer:Features.CentreMap.CentreMapOnPlayer": "Re-centred map on player: {0} ({1}, {2}, {3})",
+  "campaigncartographer:Features.CentreMap.CentreMapOnPlayerSpawn": "Re-centred map on player spawn point: ({0}, {1})",
+  "campaigncartographer:Features.CentreMap.CentreMapOnPosition": "Re-centred map on position: ({0}, {1})",
+  "campaigncartographer:Features.CentreMap.CentreMapOnWorldSpawn": "Re-centred map on world spawn: ({0}, {1})",
+  "campaigncartographer:Features.CentreMap.CentreMapOnWaypoint": "Re-centred map on waypoint {0}: {1} ({2}, {3})"
+}
