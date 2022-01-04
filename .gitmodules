@@ -1,0 +1,6 @@
+[submodule "ApacheTech.VintageMods.DotNetFrameworkLauncher"]
+	path = ApacheTech.VintageMods.DotNetFrameworkLauncher
+	url = https://github.com/ApacheTechSolutions/ApacheTech.VintageMods.DotNetFrameworkLauncher
+[submodule "ApacheTech.VintageMods.Core"]
+	path = ApacheTech.VintageMods.Core
+	url = https://github.com/ApacheTechSolutions/ApacheTech.VintageMods.Core
