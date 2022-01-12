@@ -4,6 +4,9 @@
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
 {
+    /// <summary>
+    ///     Dictionaries that map between block codes, and waypoint types.
+    /// </summary>
     public static class CrossMaps
     {
         public static Dictionary<string, string> Ores { get; } = new()

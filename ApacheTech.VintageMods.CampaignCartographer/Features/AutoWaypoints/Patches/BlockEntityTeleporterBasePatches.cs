@@ -11,9 +11,7 @@ using Vintagestory.GameContent;
 // ReSharper disable IdentifierTypo
 // ReSharper disable InconsistentNaming
 // ReSharper disable UnusedType.Global
-// ReSharper disable UnusedMember.Local
-
-#pragma warning disable IDE0051 // Remove unused private members
+// ReSharper disable UnusedMember.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Patches
 {
@@ -22,10 +20,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BlockEntityTeleporterBase), "OnEntityCollide")]
-        private static bool Patch_BlockEntityTeleporter_OnEntityCollide_Prefix(BlockEntityTeleporterBase __instance, IReadOnlyDictionary<long, TeleportingEntity> ___tpingEntities)
+        public static bool Patch_BlockEntityTeleporter_OnEntityCollide_Prefix(BlockEntityTeleporterBase __instance, IReadOnlyDictionary<long, TeleportingEntity> ___tpingEntities)
         {
+            if (ApiEx.Side.IsServer()) return true; // Single-player race condition fix.
             if (__instance is BlockEntityStaticTranslocator) return true;
-            if (ApiEx.Side.IsServer()) return true;
             if (!Settings.Teleporters) return true;
             var playerId = ApiEx.Client.World.Player.Entity.EntityId;
             if (!___tpingEntities.ContainsKey(playerId)) return true;
@@ -33,7 +31,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
 
             var titleTemplate = LangEx.FeatureCode("ManualWaypoints.TeleporterWaypoints", "TeleporterWaypointTitle");
             __instance.AddWaypoint(titleTemplate);
-            ApiEx.Client.Logger.VerboseDebug($"Added Waypoint: {titleTemplate}");
             return true;
         }
     }

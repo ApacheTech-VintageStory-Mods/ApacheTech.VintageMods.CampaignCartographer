@@ -1,9 +1,7 @@
-﻿using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints;
-using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -32,8 +30,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
             FluentChat.ClientCommand("wptp")
                 .RegisterWith(_capi = capi)
                 .HasDescription(LangEx.FeatureString("ManualWaypoints.TeleporterWaypoints", "Description"))
-                .HasDefaultHandler(DefaultHandler)
-                .HasSubCommand("auto").WithHandler(OnAutoSubCommand);
+                .HasDefaultHandler(DefaultHandler);
         }
 
         private void DefaultHandler(int groupId, CmdArgs args)
@@ -56,16 +53,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
             
             var titleTemplate = LangEx.FeatureCode("ManualWaypoints.TeleporterWaypoints", "TeleporterWaypointTitle");
             teleporter.AddWaypoint(titleTemplate);
-        }
-
-        private static void OnAutoSubCommand(string subCommandName, int groupId, CmdArgs args)
-        {
-            var settings = ModServices.IOC.Resolve<AutoWaypointsSettings>();
-            settings.Teleporters = !settings.Teleporters;
-            var state = LangEx.BooleanString(settings.Teleporters);
-            // TODO: Strings need adding to lang file.
-            var message = LangEx.FeatureString("AutoWaypoints.TeleporterWaypoints", "AutoTeleportersEnabled", state);
-            ApiEx.Client.ShowChatMessage(message);
         }
     }
 }

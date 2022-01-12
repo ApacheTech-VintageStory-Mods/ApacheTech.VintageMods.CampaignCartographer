@@ -1,7 +1,11 @@
 ﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Commands;
+using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Services;
+using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
+using Vintagestory.API.Common;
 
 // ReSharper disable All
 
@@ -17,8 +21,20 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
     {
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            var command = ModServices.IOC.Resolve<ManualWaypointsChatCommand>();
-            capi.RegisterCommand(command);
+            capi.RegisterCommand(ModServices.IOC.Resolve<ManualWaypointsChatCommand>());
+
+            FluentChat.ClientCommand("wpsettings")
+                .RegisterWith(capi)
+                .HasDescription(LangEx.FeatureString("ManualWaypoints", "SettingsCommandDescription"))
+                .HasDefaultHandler(OnClientDefaultHandler);
+        }
+
+        private void OnClientDefaultHandler(int groupId, CmdArgs args)
+        {
+            var dialogue = ModServices.IOC.Resolve<ManualWaypointsMenuScreen>();
+            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
+                dialogue.TryClose();
+            dialogue.TryOpen();
         }
     }
 }

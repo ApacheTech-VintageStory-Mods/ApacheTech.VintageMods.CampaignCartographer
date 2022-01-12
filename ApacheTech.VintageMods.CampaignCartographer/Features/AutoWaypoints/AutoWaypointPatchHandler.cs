@@ -5,6 +5,7 @@ using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Extensions.System;
 using ApacheTech.VintageMods.Core.Services;
 using Vintagestory.API.Common;
@@ -12,6 +13,10 @@ using Vintagestory.GameContent;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 {
+    /// <summary>
+    ///     Acts as a mediator between block patches, and the waypoint service.
+    /// </summary>
+    /// <seealso cref="WorldSettingsConsumer{AutoWaypointsSettings}" />
     public sealed class AutoWaypointPatchHandler : WorldSettingsConsumer<AutoWaypointsSettings>
     {
         // DEV: Still lots of O/C issues in this class, but without needing
@@ -19,11 +24,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 
         private readonly WaypointService _service;
 
+        /// <summary>
+        /// 	Initialises a new instance of the <see cref="AutoWaypointPatchHandler"/> class.
+        /// </summary>
         public AutoWaypointPatchHandler()
         {
             _service = ModServices.IOC.Resolve<WaypointService>();
         }
 
+        /// <summary>
+        ///     Called when a player interacts with a block.
+        ///     Filters out uninteresting blocks, and passes interesting blocks to the waypoint service for processing.
+        /// </summary>
+        /// <param name="block">The block.</param>
         public void HandleInteraction(Block block)
         {
             switch (block)
@@ -38,6 +51,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
                     HandleOrganics(block);
                     break;
                 default:
+                    // For some reason, the resin log is not of type BlockLog.
                     if (!block.Variant.ContainsKey("type")) break;
                     if (block.Variant["type"].StartsWith("resin"))
                         HandleOrganics(block);
@@ -68,17 +82,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
             return AddWaypointFor(block, MapSurfaceOre(block.Code.Path));
         }
 
-        private string MapSurfaceOre(string assetCode)
+        private static string MapSurfaceOre(string assetCode)
         {
             return Map(CrossMaps.Ores, assetCode);
         }
 
-        private string MapLooseStones(string assetCode)
+        private static string MapLooseStones(string assetCode)
         {
             return Map(CrossMaps.Stones, assetCode);
         }
 
-        private string MapOrganicMaterial(string assetCode)
+        private static string MapOrganicMaterial(string assetCode)
         {
             return Map(CrossMaps.Organics, assetCode);
         }
@@ -99,8 +113,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
             var position = ApiEx.ClientMain.Player.Entity.BlockSelection.Position;
             var title = block.GetPlacedBlockName(ApiEx.ClientMain, position);
             var waypoint = _service.GetWaypointModel(syntax);
+
+            if (waypoint is null)
+            {
+                ApiEx.Client.EnqueueShowChatMessage(LangEx.FeatureString("ManualWaypoints", "InvalidSyntax", syntax));
+                return false;
+            }
+
             waypoint?
-                .With(p => p.DefaultTitle = title)
+                .With(p => p.Title = title)
                 .AddToMap(position);
             return true;
         }

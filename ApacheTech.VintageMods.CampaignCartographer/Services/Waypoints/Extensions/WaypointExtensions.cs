@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
+using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Extensions.System;
@@ -19,23 +20,35 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
     {
         private static readonly List<BlockPos> PositionsBeingHandled = new();
 
-        public static void AddToMap(this WaypointInfoModel waypoint, BlockPos position = null, bool pinned = false)
+        /// <summary>
+        ///     Adds a <see cref="ManualWaypointTemplateModel"/> to the world map. These are waypoints that haven't been added before.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <param name="position">The position.</param>
+        /// <param name="pinned">The pinned.</param>
+        public static void AddToMap(this ManualWaypointTemplateModel waypoint, BlockPos position = null, bool pinned = false)
         {
+            // DEV NOTE:    This method looks needlessly complicated because of race conditions when running in single-player mode.
+            //              In these cases, it's possible for this method to be run multiple times, resulting in multiple waypoints
+            //              being added. This was intended as a temporary fix, however, it seems like without adding a global cooldown
+            //              for waypoint related actions, this is the best way to resolve the issues. This still enables waypoints
+            //              to be added in rapid succession, but limits the calls to one pass-through per block, per second.
+
             position ??= ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
             if (PositionsBeingHandled.Contains(position)) return;
             PositionsBeingHandled.Add(position);
             try
             {
-                if (position.WaypointExistsWithinRadius(waypoint.HorizontalCoverageRadius, waypoint.VerticalCoverageRadius, 
+                if (position.WaypointExistsWithinRadius(waypoint.HorizontalCoverageRadius, waypoint.VerticalCoverageRadius,
                         p =>
                         {
-                            var sameIcons = p.Icon.EndsWith(waypoint.Icon, StringComparison.InvariantCultureIgnoreCase);
+                            var sameIcons = p.Icon.EndsWith(waypoint.DisplayedIcon, StringComparison.InvariantCultureIgnoreCase);
                             var sameColour = p.Color == waypoint.Colour.ColourValue();
                             return sameIcons && sameColour;
                         })) return;
                 ApiEx.ClientMain.EnqueueMainThreadTask(() =>
                 {
-                    position.AddWaypointAtPos(waypoint.Icon.ToLower(), waypoint.Colour.ToLower(), waypoint.DefaultTitle, pinned);
+                    position.AddWaypointAtPos(waypoint.DisplayedIcon.ToLower(), waypoint.Colour.ToLower(), waypoint.Title, pinned);
                 }, "");
             }
             finally
@@ -44,6 +57,41 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
             }
         }
 
+        /// <summary>
+        ///     Adds a <see cref="WaypointDto"/> to the world map. These are waypoints that are being imported into the game, and have a position already.
+        /// </summary>
+        /// <param name="waypoint">The waypoint to add.</param>
+        public static void AddToMap(this WaypointDto waypoint)
+        {
+            // DEV NOTE:    This method looks needlessly complicated because of race conditions when running in single-player mode.
+            //              In these cases, it's possible for this method to be run multiple times, resulting in multiple waypoints
+            //              being added. This was intended as a temporary fix, however, it seems like without adding a global cooldown
+            //              for waypoint related actions, this is the best way to resolve the issues. This still enables waypoints
+            //              to be added in rapid succession, but limits the calls to one pass-through per block, per second.
+
+            var position = waypoint.Position;
+            if (PositionsBeingHandled.Contains(position)) return;
+            PositionsBeingHandled.Add(position);
+            try
+            {
+                ApiEx.ClientMain.EnqueueMainThreadTask(() =>
+                {
+                    position.AddWaypointAtPos(waypoint.ServerIcon.ToLower(), waypoint.Colour.ToLower(), waypoint.Title, waypoint.Pinned);
+                }, "");
+            }
+            finally
+            {
+                ApiEx.Client.RegisterDelayedCallback(_ => { PositionsBeingHandled.Remove(position); }, 1000);
+            }
+        }
+
+        /// <summary>
+        ///     Determines whether the specified waypoint is within a set horizontal distance of a specific block, or location within the game world.
+        /// </summary>
+        /// <param name="waypoint">The waypoint.</param>
+        /// <param name="targetPosition">The target position.</param>
+        /// <param name="squareDistance">The maximum square distance tolerance level.</param>
+        /// <returns>System.Boolean.</returns>
         public static bool IsInHorizontalRangeOf(this Waypoint waypoint, BlockPos targetPosition, float squareDistance)
         {
             var waypointPos = waypoint.Position.AsBlockPos;
@@ -61,10 +109,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
         /// <param name="colour">The colour of the waypoint.</param>    
         /// <param name="title">The title to set.</param>
         /// <param name="pinned">if set to <c>true</c>, the waypoint will be pinned to the world map.</param>
-        public static void AddWaypointAtPos(this BlockPos pos, string icon, string colour, string title, bool pinned)
+        /// <param name="allowDuplicates">if set to <c>true</c>, the waypoint will not be placed, if another similar waypoint already exists at that position.</param>
+        public static void AddWaypointAtPos(this BlockPos pos, string icon, string colour, string title, bool pinned, bool allowDuplicates = false)
         {
             if (pos is null) return;
-            if (pos.WaypointExistsAtPos(p => p.Icon == icon && p.Title == title)) return;
+            if (!allowDuplicates)
+            {
+                if (pos.WaypointExistsAtPos(p => p.Icon == icon && p.Title == title)) return;
+            }
             pos = pos.RelativeToSpawn();
             ApiEx.Client.SendChatMessage($"/waypoint addati {icon} {pos.X} {pos.Y} {pos.Z} {(pinned ? "true" : "false")} {colour} {title}");
         }

@@ -3,24 +3,35 @@ using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.Game;
 using Vintagestory.API.Common;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Commands
 {
+    /// <summary>
+    ///     Quickly and easily add waypoints at your current position, via the chat window.
+    ///     There are over 130 pre-defined waypoints for many different block types, and areas of interest.
+    /// </summary>
+    /// <seealso cref="ClientChatCommand" />
     public sealed class ManualWaypointsChatCommand : ClientChatCommand
     {
         private readonly WaypointService _waypointService;
-        private readonly string _syntaxList;
+        private string SyntaxList => _waypointService is null
+            ? "---" 
+            : string.Join(" | ", _waypointService.WaypointTypes.Keys);
 
+        /// <summary>
+        /// 	Initialises a new instance of the <see cref="ManualWaypointsChatCommand"/> class.
+        /// </summary>
+        /// <param name="waypointService">The waypoint service.</param>
         public ManualWaypointsChatCommand(WaypointService waypointService)
         {
+            _waypointService = waypointService;
             Command = "wp";
             Description = GetDescription();
             Syntax = GetSyntax();
-            _waypointService = waypointService;
-            _syntaxList = string.Join(" | ", _waypointService.WaypointTypes.Keys);
         }
 
         /// <summary>
@@ -46,8 +57,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.C
             }
 
             var pos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
-            _waypointService.GetWaypointModel(option)?
-                .With(p => p.DefaultTitle = args.PopAll().IfNullOrWhitespace(p.DefaultTitle))
+            var syntax = option.ToLowerInvariant();
+            var waypoint = _waypointService.GetWaypointModel(syntax);
+
+            if (waypoint is null)
+            {
+                ApiEx.Client.EnqueueShowChatMessage(LangEx.FeatureString("ManualWaypoints", "InvalidSyntax", syntax));
+                return;
+            }
+
+            waypoint
+                .With(p => p.Title = args.PopAll().IfNullOrWhitespace(p.Title))
                 .AddToMap(pos, pin);
         }
 
@@ -72,7 +92,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.C
         /// <returns>A string representation of the localised syntax of the command.</returns>
         public override string GetSyntax()
         {
-            return LangEx.FeatureString("ManualWaypoints.ManualWaypoints", "SyntaxMessage_Full", _syntaxList);
+            return LangEx.FeatureString("ManualWaypoints.ManualWaypoints", "SyntaxMessage_Full", SyntaxList);
         }
 
         /// <summary>

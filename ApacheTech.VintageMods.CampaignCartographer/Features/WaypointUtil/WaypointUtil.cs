@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue;
+using System.Threading;
+using System.Threading.Tasks;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Exports;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Imports;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
+using ApacheTech.VintageMods.Core.Abstractions;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
-using Newtonsoft.Json;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
+using Vintagestory.API.MathTools;
 
 // ReSharper disable StringLiteralTypo
 // ReSharper disable UnusedType.Global
@@ -30,7 +30,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
     ///      • Remove all waypoints with a specified icon.
     ///      • Remove all waypoints where the title starts with a specified string.
     /// </summary>
-    /// <seealso cref="ApacheTech.VintageMods.Core.Abstractions.ModSystems.ClientModSystem" />
+    /// <seealso cref="ClientModSystem" />
     public sealed class WaypointUtil : ClientModSystem
     {
         private WaypointService _service;
@@ -38,21 +38,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         private Action _cachedAction;
         private ICoreClientAPI _capi;
 
-        private const string Confirm = "confirm"; // LangEx.FeatureString("WaypointUtil", "Confirm")
-        private const string ConfirmationMessage = "Type `.wpUtil {0}` to confirm your choice."; // LangEx.FeatureCode("WaypointUtil", "ConfirmationMessage")
+        private static string Confirm => LangEx.FeatureString("WaypointUtil", "Confirm");
+        private static string ConfirmationMessage => LangEx.FeatureString("WaypointUtil", "ConfirmationMessage", Confirm);
 
         public override void StartClientSide(ICoreClientAPI capi)
         {
             _capi = capi;
             _service = ModServices.IOC.Resolve<WaypointService>();
-            
 
-            capi.Input.RegisterHotKey("ofd", "Open File Dialogue", GlKeys.F7, HotkeyType.GUIOrOtherControls);
-            capi.Input.SetHotKeyHandler("ofd", _ => new OpenFolderDialogue(capi).TryOpen());
-
-
-            FluentChat.ClientCommand("wputil").RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("WaypointUtil", "Description"))
+            FluentChat.ClientCommand("wputil")
+                .RegisterWith(capi)
+                .HasDescription(LangEx.FeatureString("WaypointUtil", "SettingsCommandDescription"))
                 .HasSubCommand("export").WithHandler(OnExport)
                 .HasSubCommand("import").WithHandler(OnImport)
                 .HasSubCommand("purge-all").WithHandler(OnPurgeAll)
@@ -60,41 +56,50 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
                 .HasSubCommand("purge-icon").WithHandler(OnPurgeByIcon)
                 .HasSubCommand("purge-colour").WithHandler(OnPurgeByColour)
                 .HasSubCommand("purge-title").WithHandler(OnPurgeByTitle)
-                .HasSubCommand("confirm").WithHandler(OnConfirmation)
-                .HasSubCommand("cancel").WithHandler(OnCancel);
+                .HasSubCommand(Confirm).WithHandler(OnConfirmation)
+                .HasSubCommand("cancel").WithHandler(OnCancel)
+                // TODO: Remove before official release.
+                .HasSubCommand("stress-test").WithHandler(OnStressTest);
+        }
+
+        private static void OnStressTest(string subCommandName, int groupId, CmdArgs args)
+        {
+            Task.Factory.StartNew(() =>
+            {
+                using var _ = TimedOperation.Profile("Stress Test");
+                var random = new Random();
+                for (var i = 0; i < 10000; i++)
+                {
+                    var blockPos = new BlockPos(
+                        random.Next(-1000, 1000) + 500000, 
+                        random.Next(1,256),
+                        random.Next(-1000, 1000) + 500000);
+                    blockPos.AddWaypointAtPos("star1", "red", $"Waypoint Stress Test: {i}", false, true);
+                    Thread.Sleep(50);
+                }
+            });
         }
 
         /// <summary>
         ///      • Export all waypoints.
         /// </summary>
-        private void OnExport(string subCommandName, int groupId, CmdArgs args)
+        private static void OnExport(string subCommandName, int groupId, CmdArgs args)
         {
-            var waypoints = _service.GetWaypoints().Values;
-            var exportList = waypoints.Select(WaypointDto.FromWaypoint).ToList();
-            var json = JsonConvert.SerializeObject(exportList, Formatting.Indented);
-            File.WriteAllText(@"C:\waypoints.json", json);
+            var dialogue = ModServices.IOC.Resolve<WaypointExportDialogue>();
+            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
+                dialogue.TryClose();
+            dialogue.TryOpen();
         }
 
         /// <summary>
         ///      • Import waypoints from file.
         /// </summary>
-        private void OnImport(string subCommandName, int groupId, CmdArgs args)
+        private static void OnImport(string subCommandName, int groupId, CmdArgs args)
         {
-            var option = args.PopWord("");
-            var json = File.ReadAllText(@"C:\waypoints.json");
-            var waypoints = JsonConvert.DeserializeObject<List<WaypointDto>>(json);
-
-            if (option.Equals("purge", StringComparison.InvariantCultureIgnoreCase))
-            {
-                _service.PurgeAll();
-            }
-            var replace = option.Equals("replace", StringComparison.InvariantCultureIgnoreCase);
-
-            foreach (var w in waypoints)
-            {
-                if (replace) _service.PurgeWaypointsAtPos(w.Position);
-                w.Position.AddWaypointAtPos(w.Icon, w.Colour, w.Title, w.Pinned);
-            }
+            var dialogue = ModServices.IOC.Resolve<WaypointImportDialogue>();
+            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
+                dialogue.TryClose();
+            dialogue.TryOpen();
         }
 
         /// <summary>

@@ -6,14 +6,8 @@ using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 
-// ReSharper disable StringLiteralTypo
-// ReSharper disable UnusedParameter.Local
-// ReSharper disable InconsistentNaming
 // ReSharper disable UnusedType.Global
-// ReSharper disable UnusedMember.Local
-
-#pragma warning disable IDE0051 // Remove unused private members
-#pragma warning disable IDE0060 // Remove unused parameter
+// ReSharper disable UnusedMember.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Patches
 {
@@ -24,11 +18,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(GuiDialogTrader), "OnGuiOpened")]
-        private static void Patch_GuiDialogTrader_OnGuiOpened_Postfix(GuiDialogTrader __instance)
+        public static void Patch_GuiDialogTrader_OnGuiOpened_Postfix()
         {
+            if (ApiEx.Side.IsServer()) return; // Single-player race condition fix.
             if (!Settings.Traders) return;
             if (++_timesRun > 1) return;
-            ApiEx.Client.RegisterDelayedCallback(_ => _timesRun = 0, 1000 * 30);
+            ApiEx.Client.RegisterDelayedCallback(_ => _timesRun = 0, 1000);
             ApiEx.ClientMain.EnqueueMainThreadTask(() =>
             {
                 ApiEx.Client.TriggerChatMessage(".wpt");

@@ -1,10 +1,33 @@
 {
   "Features": {
+    "General": {
+      "FirstRun": true
+    },
     "AutoWaypoints": {
-      "Translocators": true,
-      "Teleporters": true,
-      "Traders": true,
-      "Meteors": true
+      "Translocators": false,
+      "Teleporters": false,
+      "Traders": false,
+      "SurfaceDeposits": false,
+      "LooseStones": false,
+      "Organics": false
+    },
+    "ManualWaypoints": {
+      "BlockSelectionWaypointTemplate": {
+        "ServerIcon": "circle",
+        "DisplayedIcon": "circle",
+        "Colour": "black",
+        "HorizontalCoverageRadius": 10,
+        "VerticalCoverageRadius": 10
+      }
+    },
+    "PlayerPins": {
+      "SelfColour": "White",
+      "SelfScale": 0,
+      "FriendColour": "Cyan",
+      "FriendScale": 0,
+      "OthersColour": "76, 76, 76",
+      "OthersScale": 0,
+      "Friends": {}
     }
   }
 }

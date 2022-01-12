@@ -16,6 +16,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.E
     {
         private static readonly WaypointService WaypointService;
 
+        /// <summary>
+        /// 	Initialises static members of the <see cref="BlockEntityStaticTranslocatorExtensions"/> class.
+        /// </summary>
         static BlockEntityStaticTranslocatorExtensions()
         {
             WaypointService = ModServices.IOC.Resolve<WaypointService>();
@@ -48,7 +51,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.E
             WaypointService.GetWaypointModel("tl")?
                 .With(p =>
                 {
-                    p.DefaultTitle = message;
+                    p.Title = message;
                 })
                 .AddToMap(sourcePos);
 

@@ -44,7 +44,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.M
         /// </summary>
         /// <value>The default title of the waypoint marker.</value>
         [ProtoMember(4)]
-        public string DefaultTitle { get; set; } = LangEx.FeatureString("ManualWaypoints", "ManualWaypoints.DefaultWaypointTitle");
+        public string DefaultTitle { get; set; } = LangEx.FeatureString("ManualWaypoints.WaypointTemplate", "DefaultTitle");
 
         /// <summary>
         ///     Determines how far apart waypoints of the same type can be.
@@ -59,5 +59,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.M
         /// <value>The minimum distance between two waypoints of the same type.</value>
         [ProtoMember(6)]
         public int VerticalCoverageRadius { get; set; } = 10;
+
+        /// <summary>
+        ///     Determines whether or not this waypoint type is enabled for manual entry.
+        /// </summary>
+        /// <returns><c>true</c> if this waypoint type should be added to the manual waypoints syntax list; otherwise <c>false</c></returns>
+        [ProtoMember(7)]
+        public bool Enabled { get; set; } = true;
     }
 }

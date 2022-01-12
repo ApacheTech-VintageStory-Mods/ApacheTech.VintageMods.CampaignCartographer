@@ -1,5 +1,4 @@
 ﻿using ApacheTech.Common.Extensions.System;
-using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
@@ -37,8 +36,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
             FluentChat.ClientCommand("wpt")
                 .RegisterWith(_capi = capi)
                 .HasDescription(LangEx.FeatureString("ManualWaypoints.TraderWaypoints", "Description"))
-                .HasDefaultHandler(DefaultHandler)
-                .HasSubCommand("auto").WithHandler(OnAutoSubCommand);
+                .HasDefaultHandler(DefaultHandler);
         }
 
         private void DefaultHandler(int groupId, CmdArgs args)
@@ -64,20 +62,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
                 _waypointService.GetWaypointModel("trader")?
                     .With(p =>
                     {
-                        p.DefaultTitle = wpTitle;
+                        p.Title = wpTitle;
                         p.Colour = TraderModel.GetColourFor(trader);
                     })
                     .AddToMap(trader.Pos.AsBlockPos);
             }
-        }
-
-        private static void OnAutoSubCommand(string subCommandName, int groupId, CmdArgs args)
-        {
-            var settings = ModServices.IOC.Resolve<AutoWaypointsSettings>();
-            settings.Traders = !settings.Traders;
-            var state = LangEx.BooleanString(settings.Traders);
-            var message = LangEx.FeatureString("AutoWaypoints.TraderWaypoints", "AutoTradersEnabled", state);
-            ApiEx.Client.ShowChatMessage(message);
         }
     }
 }

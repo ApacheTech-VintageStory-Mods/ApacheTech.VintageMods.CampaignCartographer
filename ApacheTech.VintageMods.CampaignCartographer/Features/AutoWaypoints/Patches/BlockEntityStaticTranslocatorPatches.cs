@@ -8,12 +8,8 @@ using Vintagestory.API.Common.Entities;
 using Vintagestory.GameContent;
 
 // ReSharper disable StringLiteralTypo
-// ReSharper disable UnusedParameter.Local
-// ReSharper disable InconsistentNaming
 // ReSharper disable UnusedType.Global
-// ReSharper disable UnusedMember.Local
-
-#pragma warning disable IDE0051 // Remove unused private members
+// ReSharper disable UnusedMember.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Patches
 {
@@ -22,8 +18,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BlockStaticTranslocator), "OnEntityCollide")]
-        private static bool Patch_BlockStaticTranslocator_OnEntityCollide_Prefix(BlockStaticTranslocator __instance, Entity entity)
+        public static bool Patch_BlockStaticTranslocator_OnEntityCollide_Prefix(Entity entity)
         {
+            if (ApiEx.Side.IsServer()) return true; // Single-player race condition fix.
             if (!Settings.Translocators) return true;
             if (entity != ApiEx.Client.World.Player.Entity) return true;
             if (entity.Pos.AsBlockPos.WaypointExistsWithinRadius(1, 1)) return true;

@@ -2,7 +2,7 @@
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
-using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
+using ApacheTech.VintageMods.Core.Hosting.Configuration;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -39,19 +39,25 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         private void DefaultHandler(int groupId, CmdArgs args)
         {
             var blockSelection = _capi.World.Player.CurrentBlockSelection;
+            if (blockSelection is null) return;
             var position = blockSelection.Position;
             var block = _capi.World.BlockAccessor.GetBlock(position);
             var title = block.GetPlacedBlockName(_capi.World, position);
-            var waypoint = new WaypointInfoModel
+            
+            var template = ModSettings.World.
+                Feature<ManualWaypointsSettings>("ManualWaypoints")
+                .BlockSelectionWaypointTemplate;
+
+            var waypoint = new ManualWaypointTemplateModel
             {
-                // TODO: Allow user to customise the default waypoint.
-                Colour = NamedColour.Black,
-                Icon = WaypointIcon.Circle,
-                DefaultTitle = title,
-                HorizontalCoverageRadius = 10,
-                VerticalCoverageRadius = 10
+                Colour = template.Colour,
+                DisplayedIcon = template.DisplayedIcon,
+                ServerIcon = template.ServerIcon,
+                Title = title,
+                HorizontalCoverageRadius = template.HorizontalCoverageRadius,
+                VerticalCoverageRadius = template.VerticalCoverageRadius
             };
-            waypoint.AddToMap(position, pinned: false);
+            waypoint.AddToMap(position);
         }
     }
 }

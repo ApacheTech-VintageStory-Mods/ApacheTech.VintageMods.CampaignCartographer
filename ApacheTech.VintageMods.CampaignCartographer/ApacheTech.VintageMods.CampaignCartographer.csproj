@@ -40,18 +40,14 @@
 		<None Remove="LICENCE.md" />
 		<None Remove="ModInfoFileGenerator.exe" />
 		<None Remove="packager.exe" />
-		<None Remove="_EmbeddedResources\Global\default-waypoints.json" />
+		<None Remove="_EmbeddedResources\Global\default-waypoints.en.json" />
 		<None Remove="_EmbeddedResources\Global\settings-global-client.json" />
 		<None Remove="_EmbeddedResources\Global\version.data" />
-		<None Remove="_EmbeddedResources\World\custom-waypoints.json" />
 		<None Remove="_EmbeddedResources\World\settings-server.json" />
 		<None Remove="_EmbeddedResources\World\settings-world-client.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="_Includes\CREDITS.md">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
 		<Content Include="_Includes\LICENCE.md">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
@@ -60,10 +56,8 @@
 	<ItemGroup>
 		<EmbeddedResource Include="_EmbeddedResources\Global\version.data" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-client.json" />
-		<EmbeddedResource Include="_EmbeddedResources\Global\default-waypoints.json" />
 		<EmbeddedResource Include="_EmbeddedResources\World\settings-world-client.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-server.json" />
-		<EmbeddedResource Include="_EmbeddedResources\World\custom-waypoints.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -74,9 +68,6 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 		<None Update="_Includes\assets\campaigncartographer\lang\en.json">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</None>
-		<None Update="_Includes\assets\campaigncartographer\patches\.gitkeep">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 		<None Update="_Includes\UserStories.txt">
@@ -96,7 +87,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Include="..\README.md" Link="_Includes\README.md" />
 		<None Include="ApacheTech.VintageMods.CampaignCartographer.saproj">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
@@ -108,7 +98,6 @@
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="System.CodeDom" Version="6.0.0" />
 	</ItemGroup>
 
 	<!-- END -->

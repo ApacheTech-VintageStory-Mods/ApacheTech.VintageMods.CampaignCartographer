@@ -19,7 +19,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(WorldMapManager), "RegisterDefaultMapLayers")]
         public static void Patch_WorldMapManager_RegisterDefaultMapLayers_Postfix()
         {
-            if (ApiEx.Side.IsServer()) return;
+            if (ApiEx.Side.IsServer()) return; // Single-player race condition fix.
             ApiEx.Client.ModLoader
                 .GetModSystem<WorldMapManager>()
                 .RegisterMapLayer<PlayerPinsMapLayer>("players");

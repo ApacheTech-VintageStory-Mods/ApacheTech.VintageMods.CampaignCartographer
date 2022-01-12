@@ -1,12 +1,9 @@
-﻿using System;
-using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
-using ApacheTech.VintageMods.CampaignCartographer.Services.GUI;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Services;
+using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
-using Vintagestory.API.Server;
-using Vintagestory.GameContent;
 
 // ReSharper disable UnusedType.Global
 
@@ -22,32 +19,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
     ///      - Automatically add waypoints for Meteors, when the player punches a Meteoric Iron Block.
     ///      - Server: Send Teleporter information to clients, when creating Teleporter waypoints.
     /// </summary>
-    /// <seealso cref="Features.AutoWaypoints" />
-    /// <seealso cref="UniversalModSystem" />
-    public sealed class AutoWaypoints : UniversalModSystem
+    /// <seealso cref="ClientModSystem" />
+    public sealed class AutoWaypoints : ClientModSystem
     {
-        public event EventHandler<TeleporterLocation> TeleporterLocationReceived;
-
-        public override void StartServerSide(ICoreServerAPI api)
+        /// <summary>
+        ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
+        /// </summary>
+        /// <param name="capi">The client-side API.</param>
+        public override void StartClientSide(ICoreClientAPI capi)
         {
-            ModServices.Network.DefaultServerChannel
-                .RegisterMessageType<TeleporterLocation>();
-        }
-
-        public override void StartClientSide(ICoreClientAPI api)
-        {
-            Capi.Input.RegisterGuiDialogueHotKey<AutoWaypointsDialogue>(
-                LangEx.FeatureString("AutoWaypoints", "Title"),
-                GlKeys.F7, HotkeyType.GUIOrOtherControls, shiftPressed: true);
-
-            ModServices.Network.DefaultClientChannel
-                .RegisterMessageType<TeleporterLocation>()
-                .SetMessageHandler<TeleporterLocation>(OnReceiveTeleporterLocation);
-        }
-
-        private void OnReceiveTeleporterLocation(TeleporterLocation location)
-        {
-            TeleporterLocationReceived?.Invoke(this, location);
+            FluentChat.ClientCommand("wpAuto")
+                .RegisterWith(capi)
+                .HasDescription(LangEx.FeatureString("AutoWaypoints", "SettingsCommandDescription"))
+                .HasDefaultHandler((_, _) => ModServices.IOC.Resolve<AutoWaypointsDialogue>().TryOpen());
         }
     }
 }

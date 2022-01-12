@@ -20,6 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApacheTech.VintageMods.DotN
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BAC634E8-C3D1-4EB7-B193-113727CB76F3}"
 	ProjectSection(SolutionItems) = preProject
+		LICENCE.md = LICENCE.md
 		README.md = README.md
 	EndProjectSection
 EndProject

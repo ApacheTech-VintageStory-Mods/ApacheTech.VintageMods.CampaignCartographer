@@ -7,7 +7,6 @@ using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
-using Vintagestory.API.Config;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
@@ -46,7 +45,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
 
             FluentChat.ClientCommand("cm")
                 .RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("CentreMap", "Description"))
+                .HasDescription(LangEx.FeatureString("CentreMap", "SettingsCommandDescription"))
                 .HasDefaultHandler(OnSelfOption)
                 .HasSubCommand("self").WithHandler((_, id, args) => OnSelfOption(id, args))
                 .HasSubCommand("home").WithHandler(OnHomeOption)
@@ -78,7 +77,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         {   
             if (!_clientChannel.Connected)
             {
-                _capi.ShowChatMessage(Lang.Get("campaigncartographer:error-messages.mod-not-installed-on-server"));
+                _capi.ShowChatMessage(LangEx.Get("error-messages.mod-not-installed-on-server"));
                 return;
             }
             _clientChannel.SendPacket<PlayerSpawnPositionDto>();

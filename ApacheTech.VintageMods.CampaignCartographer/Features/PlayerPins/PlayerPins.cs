@@ -28,7 +28,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
         {
             FluentChat.ClientCommand("playerpins")
                 .RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("PlayerPins", "Description"))
+                .HasDescription(LangEx.FeatureString("PlayerPins", "SettingsCommandDescription"))
                 .HasDefaultHandler((_, _) => ModServices.IOC.Resolve<PlayerPinsDialogue>().TryOpen());
 
             FluentChat.ClientCommand("friend")

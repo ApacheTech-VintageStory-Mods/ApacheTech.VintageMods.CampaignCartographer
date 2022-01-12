@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
-using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Features.GPS.Packets;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
@@ -31,23 +31,25 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
     {
         private GpsSettings _settings;
 
+        private IClientNetworkChannel _clientChannel;
+
         private ICoreClientAPI _capi;
         private ICoreServerAPI _sapi;
-
+        
         /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
         /// </summary>
         /// <param name="capi">The core API implemented by the client. The main interface for accessing the client. Contains all sub-components, and some miscellaneous methods.</param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            ModServices.Network.DefaultClientChannel
+            _clientChannel = ModServices.Network.DefaultClientChannel?
                 .RegisterMessageType<WhisperPacket>()
                 .RegisterMessageType<GpsSettings>()
                 .SetMessageHandler<GpsSettings>(OnClientSetPropertyPacketReceived);
 
             FluentChat.ClientCommand("gps")
                 .RegisterWith(_capi = capi)
-                .HasDescription(Lang.Get("campaigncartographer:Features.GPS.Client.description"))
+                .HasDescription(LangEx.FeatureString("GPS.Client", "SettingsCommandDescription"))
                 .HasDefaultHandler(OnClientDefaultHandler)
                 .HasSubCommand("chat").WithHandler(OnClientSubCommandBroadcast)
                 .HasSubCommand("copy").WithHandler(OnClientSubCommandClipboard)
@@ -68,17 +70,31 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
                 .RegisterMessageType<GpsSettings>()
                 .SetMessageHandler<WhisperPacket>(OnServerWhisperPacketReceived);
             
+            // GUIs don't work, server side.
             FluentChat
                 .ServerCommand("gpsadmin")
-                .HasDefaultHandler(OnAdminCommand);
+                .RequiresPrivilege(Privilege.controlserver)
+                .HasDescription(LangEx.FeatureString("GPS.Server", "SettingsCommandDescription"))
+                .RegisterWith(sapi)
+                .HasSubCommand("enable-whispers").WithHandler(OnEnableWhispers)
+                .HasSubCommand("disable-whispers").WithHandler(OnDisableWhispers);
 
             sapi.Event.PlayerNowPlaying += OnServerPlayerJoin;
         }
 
-        private static void OnAdminCommand(IServerPlayer player, int groupId, CmdArgs args)
+        private void OnDisableWhispers(string subCommandName, IServerPlayer player, int groupId, CmdArgs args)
         {
-            ModServices.IOC.Resolve<GpsAdminDialogue>().TryOpen();
+            _settings.WhispersAllowed = false;
+            _sapi.Logger.Audit("[Campaign Cartographer] GPS Whispers Disabled.");
+            ModServices.Network.DefaultServerChannel.BroadcastPacket(_settings);
         }
+
+        private void OnEnableWhispers(string subCommandName, IServerPlayer player, int groupId, CmdArgs args)
+        {
+            _settings.WhispersAllowed = true;
+            _sapi.Logger.Audit("[Campaign Cartographer] GPS Whispers Enabled.");
+            ModServices.Network.DefaultServerChannel.BroadcastPacket(_settings);
+        }   
 
         #region Client Chat Commands
 
@@ -118,7 +134,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
             var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player);
             _capi.Forms.SetClipboardText($"{player.PlayerName}: {pos}");
-            _capi.ShowChatMessage(Lang.Get("campaigncartographer:Features.GPS.Client.location-copied-to-clipboard"));
+            _capi.ShowChatMessage(LangEx.FeatureString("GPS.Client", "location-copied-to-clipboard"));
         }
 
         /// <summary>
@@ -129,20 +145,20 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="args">The arguments sent along with the command.</param>
         private void OnClientSubCommandWhisper(string subCommandName, int groupId, CmdArgs args)
         {
-            if (!ModServices.Network.DefaultClientChannel.Connected)
+            if (_clientChannel is not null && !_clientChannel.Connected)
             {
-                _capi.ShowChatMessage(Lang.Get("campaigncartographer:error-messages.mod-not-installed-on-server"));
+                _capi.ShowChatMessage(LangEx.Get("error-messages.mod-not-installed-on-server"));
                 return;
             }
             if (!_settings.WhispersAllowed)
             {
-                _capi.ShowChatMessage(Lang.Get("campaigncartographer:error-messages.feature-disabled"));
+                _capi.ShowChatMessage(LangEx.Get("error-messages.feature-disabled"));
                 return;
             }
             var message = PlayerLocationMessage(_capi.World.Player);
             var recipient = args.PopWord();
 
-            ModServices.Network.DefaultClientChannel.SendPacket(new WhisperPacket
+            _clientChannel?.SendPacket(new WhisperPacket
             {
                 RecipientName = recipient,
                 GroupId = GlobalConstants.AllChatGroups,
@@ -183,14 +199,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
 
             if (toPlayer is null)
             {
-                _sapi.SendMessage(fromPlayer, packet.GroupId, Lang.Get("campaigncartographer:Features.GPS.Client.player-not-found", packet.RecipientName), EnumChatType.OwnMessage);
+                _sapi.SendMessage(fromPlayer, packet.GroupId, LangEx.FeatureString("GPS.Client", "player-not-found", packet.RecipientName), EnumChatType.OwnMessage);
                 return;
             }
 
-            var receivedMessage = Lang.Get("campaigncartographer:Features.GPS.Server.whisper-received", fromPlayer.PlayerName, packet.Message);
+            var receivedMessage = LangEx.FeatureString("GPS.Server", "whisper-received", fromPlayer.PlayerName, packet.Message);
             _sapi.SendMessage(toPlayer as IServerPlayer, packet.GroupId, receivedMessage, EnumChatType.OwnMessage);
 
-            var sentMessage = Lang.Get("campaigncartographer:Features.GPS.Server.whisper-sent", toPlayer.PlayerName, packet.Message);
+            var sentMessage = LangEx.FeatureString("GPS.Server", "whisper-sent", toPlayer.PlayerName, packet.Message);
             _sapi.SendMessage(fromPlayer, packet.GroupId, sentMessage, EnumChatType.OwnMessage);
         }
 

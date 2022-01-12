@@ -1,6 +1,11 @@
 ﻿using ApacheTech.Common.Extensions.System;
 using Vintagestory.API.Common;
 
+// ReSharper disable StringLiteralTypo
+// ReSharper disable UnusedType.Global
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
+
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Extensions
 {
     public static class BlockExtensions
@@ -14,7 +19,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Ext
         {
             return block.Code.Path.ContainsAny("-looseores-", "-loosestones-");
         }
-
         /// <summary>
         ///     Determines whether the specified block entity is a surface deposit of ore.
         /// </summary>

@@ -13,16 +13,17 @@ using Color = System.Drawing.Color;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-// TODO: Add tooltips, where needed.
-
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialogue
 {
+    /// <summary>
+    ///     GUI Window: Player Pins Settings.
+    /// </summary>
+    /// <seealso cref="FeatureSettingsDialogue{PlayerPinsSettings}" />
     public class PlayerPinsDialogue : FeatureSettingsDialogue<PlayerPinsSettings>
     {
         [SidedConstructor(EnumAppSide.Client)]
-        public PlayerPinsDialogue(ICoreClientAPI capi, PlayerPinsSettings settings) : base(capi, settings, "PlayerPins")
-        {
-        }
+        public PlayerPinsDialogue(ICoreClientAPI capi, PlayerPinsSettings settings) 
+            : base(capi, settings, "PlayerPins") { }
 
         protected override void RefreshValues()
         {
@@ -100,7 +101,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
 
             textBounds = textBounds.BelowCopy(fixedDeltaY: switchPadding);
             composer.AddButton(LangEx.FeatureString("PlayerPins", "Dialogue.Randomise"), OnRandomise,
-                textBounds.FlatCopy().WithFixedWidth(360).WithFixedHeight(GuiStyle.TitleBarHeight + 1.0));
+                textBounds.FlatCopy().WithFixedWidth(360).WithFixedHeight(GuiStyle.TitleBarHeight + 1.0), EnumButtonStyle.Small);
 
             SingleComposer = composer.EndChildElements().Compose();
         }
@@ -145,7 +146,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
             return true;
         }
 
-        private void OnPreviewPanelDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
+        private static void OnPreviewPanelDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
             var colour = PlayerPin.Colour.Normalise();
 
@@ -182,7 +183,5 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
         }
 
         #endregion
-
-        public override string ToggleKeyCombinationCode => "customisePlayerPins";
     }
 }

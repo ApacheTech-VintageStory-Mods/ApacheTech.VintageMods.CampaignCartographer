@@ -10,6 +10,7 @@ using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Server;
+using Vintagestory.GameContent;
 
 // ReSharper disable UnusedType.Global
 // ReSharper disable StringLiteralTypo
@@ -45,6 +46,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// <param name="services">The service collection.</param>
         protected override void ConfigureClientModServices(IServiceCollection services)
         {
+            services.RegisterSingleton<IWorldMapManager>(_ => ApiEx.Client.ModLoader.GetModSystem<WorldMapManager>());
+            services.RegisterSingleton(_ => ApiEx.Client.ModLoader.GetModSystem<WorldMapManager>());
             services.RegisterSingleton<IMefLabContractMediator>(sp => sp.Resolve<MefLabMediator>());
             services.RegisterSingleton<WaypointService>();
         }
@@ -114,11 +117,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer
             ApiEx.Run(DisposeClient, DisposeServer);
         }
 
+        /// <summary>
+        ///     Disposes the client.
+        /// </summary>
         private static void DisposeClient()
         {
             FluentChat.DisposeClientCommands();
         }
 
+        /// <summary>
+        ///     Disposes the server.
+        /// </summary>
         private static void DisposeServer()
         {
             FluentChat.DisposeServerCommands();

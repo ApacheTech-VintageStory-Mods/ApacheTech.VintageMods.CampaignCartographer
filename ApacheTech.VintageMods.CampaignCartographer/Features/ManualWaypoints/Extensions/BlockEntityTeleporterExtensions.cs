@@ -44,7 +44,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.E
             WaypointService.GetWaypointModel("tl")?
                 .With(p =>
                 {
-                    p.DefaultTitle = title;
+                    p.Title = title;
                     p.Colour = NamedColour.SpringGreen;
                 })
                 .AddToMap(sourcePos);

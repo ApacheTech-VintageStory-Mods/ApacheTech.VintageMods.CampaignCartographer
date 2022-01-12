@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ApacheTech.VintageMods.CampaignCartographer.Extensions;
+using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.System;
 using ApacheTech.VintageMods.Core.Services;
 using Cairo;
@@ -94,14 +94,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
 
         public override void Dispose()
         {
-            PlayerPins.Empty();
-            PlayerPinTextures.Empty();
+            PlayerPins.Purge();
+            PlayerPinTextures.Purge();
         }
 
         public override void OnMapOpenedClient()
         {
-            PlayerPinTextures.Empty();
-            PlayerPins.Empty();
+            PlayerPinTextures.Purge();
+            PlayerPins.Purge();
             PlayerPinTextures["Self"] = LoadTexture(_settings.SelfColour, _settings.SelfScale);
             PlayerPinTextures["Friend"] = LoadTexture(_settings.FriendColour, _settings.FriendScale);
             PlayerPinTextures["Others"] = LoadTexture(_settings.OthersColour, _settings.OthersScale);

@@ -2,6 +2,8 @@
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Abstractions
 {
+    // DEV NOTE: Might use eventually to strategise the various waypoint POCOs and DTOs that are used. Could be turned into a much more streamlined WaypointFactory.
+
     /// <summary>
     ///     Represents a waypoint that can be added to the world map.
     /// </summary>
@@ -14,10 +16,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Abstrac
         string Title { get; set; }
 
         /// <summary>
+        ///     Gets or sets the icon that will be saved to the server.
+        /// </summary>
+        /// <value>The icon that will be saved to the server.</value>
+        string ServerIcon { get; set; }
+
+        /// <summary>
         ///     Gets or sets the icon that will be displayed on the map.
         /// </summary>
         /// <value>The icon that will be displayed on the map.</value>
-        string Icon { get; set; }
+        string DisplayedIcon { get; set; }
 
         /// <summary>
         ///     Gets or sets the colour of the icon to be displayed.

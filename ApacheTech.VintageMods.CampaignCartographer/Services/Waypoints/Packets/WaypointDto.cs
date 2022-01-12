@@ -10,6 +10,12 @@ using Vintagestory.GameContent;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
 {
+    /// <summary>
+    ///     Represents a waypoint that can be exported, or imported into the game.
+    /// </summary>
+    /// <seealso cref="IWaypoint" />
+    /// <seealso cref="IEquatable{WaypointDto}" />
+    /// <seealso cref="IEquatable{Waypoint}" />
     [JsonObject]
     [ProtoContract]
     public sealed class WaypointDto : IWaypoint, IEquatable<WaypointDto>, IEquatable<Waypoint>
@@ -23,19 +29,34 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         public string Title { get; set; }
 
         /// <summary>
+        ///     Gets or sets the subtitle of the waypoint.
+        /// </summary>
+        /// <value>The subtitle of the waypoint.</value>
+        [ProtoMember(2)]
+        public string DetailText { get; set; }
+
+        /// <summary>
+        ///     Gets or sets the icon that will be saved tot he server.
+        /// </summary>
+        /// <value>The icon that will be saved to the server.</value>
+        [JsonRequired]
+        [ProtoMember(3)]
+        public string ServerIcon { get; set; }
+
+        /// <summary>
         ///     Gets or sets the icon that will be displayed on the map.
         /// </summary>
         /// <value>The icon that will be displayed on the map.</value>
         [JsonRequired]
-        [ProtoMember(2)]
-        public string Icon { get; set; }
+        [ProtoMember(4)]
+        public string DisplayedIcon { get; set; }
 
         /// <summary>
         ///     Gets or sets the colour of the icon to be displayed.
         /// </summary>
         /// <value>The colour of the icon to be displayed.</value>
         [JsonRequired]
-        [ProtoMember(3)]
+        [ProtoMember(5)]
         public string Colour { get; set; }
 
         /// <summary>
@@ -43,7 +64,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         /// </summary>
         /// <value>The <see cref="BlockPos" /> position on the world map to display the waypoint.</value>
         [JsonRequired]
-        [ProtoMember(4)]
+        [ProtoMember(6)]
         public BlockPos Position { get; set; }
 
         /// <summary>
@@ -52,7 +73,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         /// </summary>
         /// <value><c>true</c> if pinned; otherwise, <c>false</c>.</value>
         [JsonRequired]
-        [ProtoMember(5)]
+        [ProtoMember(7)]
         public bool Pinned { get; set; }
 
         /// <summary>
@@ -61,13 +82,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         [JsonIgnore]
         [ProtoIgnore]
         public static WaypointDto Default => new()
-            {
-                Icon = WaypointIcon.Circle,
-                Position = new BlockPos(),
-                Pinned = false,
-                Colour = NamedColour.Black,
-                Title = "New Waypoint"
-            };
+        {
+            DisplayedIcon = WaypointIcon.Circle,
+            ServerIcon = WaypointIcon.Circle,
+            Position = new BlockPos(),
+            Pinned = false,
+            Colour = NamedColour.Black,
+            Title = "New Waypoint",
+            DetailText = ""
+        };
 
         /// <summary>
         ///     Converts a native <see cref="Waypoint"/> object into a <see cref="WaypointDto"/>.
@@ -76,18 +99,20 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         /// <returns>An instance of <see cref="WaypointDto"/>, with the same values as the original native <see cref="Waypoint"/>.</returns>
         public static WaypointDto FromWaypoint(Waypoint waypoint)
         {
-            var colour = Color.FromArgb(255, 
-                ColorUtil.ColorR(waypoint.Color), 
+            var colour = Color.FromArgb(255,
+                ColorUtil.ColorR(waypoint.Color),
                 ColorUtil.ColorG(waypoint.Color),
                 ColorUtil.ColorB(waypoint.Color));
 
             return new WaypointDto
             {
-                Icon = waypoint.Icon,
+                ServerIcon = waypoint.Icon,
+                DisplayedIcon = waypoint.Icon,
                 Position = waypoint.Position.AsBlockPos,
                 Pinned = waypoint.Pinned,
                 Colour = colour.ToArgbHexString(),
-                Title = waypoint.Title
+                Title = waypoint.Title,
+                DetailText = waypoint.Text
             };
         }
 
@@ -99,11 +124,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         {
             return new Waypoint
             {
-                Icon = Icon,
+                Icon = ServerIcon,
                 Position = Position.ToVec3d(),
                 Pinned = Pinned,
                 Color = Colour.ColourValue(),
-                Title = Title
+                Title = Title,
+                Text = DetailText
             };
         }
 
@@ -114,11 +140,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
         public bool Equals(WaypointDto other)
         {
-            var sameTitle = Title.Equals(other?.Title, StringComparison.InvariantCultureIgnoreCase);
-            var sameIcon = Icon.Equals(other?.Icon, StringComparison.InvariantCultureIgnoreCase);
+            var sameIcon = DisplayedIcon.Equals(other?.DisplayedIcon, StringComparison.InvariantCultureIgnoreCase);
             var sameColour = Colour.Equals(other?.Colour, StringComparison.InvariantCultureIgnoreCase);
             var samePosition = Position.Equals(other?.Position);
-            return sameTitle && sameIcon && sameColour  && samePosition;
+            return sameIcon && sameColour && samePosition;
         }
 
         /// <summary>
@@ -128,11 +153,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         /// <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
         public bool Equals(Waypoint other)
         {
-            var sameTitle = Title.Equals(other?.Title, StringComparison.InvariantCultureIgnoreCase);
-            var sameIcon = Icon.Equals(other?.Icon, StringComparison.InvariantCultureIgnoreCase);
+            var sameIcon = ServerIcon.Equals(other?.Icon, StringComparison.InvariantCultureIgnoreCase);
             var sameColour = Colour.ColourValue().Equals(other?.Color);
             var samePosition = Position.Equals(other?.Position.AsBlockPos);
-            return sameTitle && sameIcon && sameColour && samePosition;
+            return sameIcon && sameColour && samePosition;
         }
     }
 }
