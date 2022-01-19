@@ -8,7 +8,6 @@ using ApacheTech.VintageMods.Core.Services.FileSystem.Enums;
 using ApacheTech.VintageMods.Core.Services.MefLab;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
-using Vintagestory.API.Common;
 using Vintagestory.API.Server;
 using Vintagestory.GameContent;
 
@@ -84,19 +83,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         }
 
         /// <summary>
-        ///     Side agnostic Start method, called after all mods received a call to StartPre().
-        /// </summary>
-        /// <param name="api">
-        ///     Common API Components that are available on the server and the client.
-        ///     Cast to ICoreServerAPI or ICoreClientAPI to access side specific features.
-        /// </param>
-        public override void Start(ICoreAPI api)
-        {
-            base.Start(api);
-            ModServices.Harmony.UseHarmony();
-        }
-
-        /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
         /// </summary>
         /// <param name="capi">
@@ -106,7 +92,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// </param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            //capi.EnableAsyncTasks();
+                ModServices.Harmony.UseHarmony();
         }
 
         /// <summary>

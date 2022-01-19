@@ -2,7 +2,7 @@
   "Features": {
 
     "GPS": {
-      "WhispersAllowed": true
+      "WhispersAllowed": false
     }
   } 
 }

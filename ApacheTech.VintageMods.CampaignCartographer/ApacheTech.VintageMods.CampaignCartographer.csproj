@@ -48,12 +48,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="_Includes\LICENCE.md">
-			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
 		<EmbeddedResource Include="_EmbeddedResources\Global\version.data" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\settings-global-client.json" />
 		<EmbeddedResource Include="_EmbeddedResources\World\settings-world-client.json" />
@@ -79,10 +73,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Features\PublicLocations\Dialogue\" />
-		<Folder Include="Features\PublicLocations\Packets\" />
-		<Folder Include="Features\HomeLocations\Dialogue\" />
-		<Folder Include="Features\HomeLocations\Packets\" />
+		<Folder Include="Features\PlayerPins\Extensions\" />
 		<Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 

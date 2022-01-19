@@ -68,7 +68,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 }
                 TitleTextBox.SetValue(_waypoint.Title);
                 DetailsTextBox.SetValue(_waypoint.DetailText);
-                ColourComboBox.SetSelectedValue(_waypoint.Colour);
+                ColourComboBox.SetSelectedValue(_waypoint.Colour.ToLowerInvariant());
                 ColourPreviewBox.Redraw();
                 IconComboBox.SetSelectedValue(_waypoint.DisplayedIcon);
                 HorizontalRadiusTextBox.SetValue(_waypoint.HorizontalCoverageRadius);
@@ -247,16 +247,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             _waypoint.ServerIcon = icon;
         }
 
-        private static int ParseRadiusValue(string input)
+        private static int ParseValue(string input, int defaultValue)
         {
-            if (string.IsNullOrWhiteSpace(input)) return 10;
+            if (string.IsNullOrWhiteSpace(input)) return defaultValue;
             return int.TryParse(input.GetNumbers(), out var value)
-                ? value : 10;
+                ? value : defaultValue;
         }
 
         private void OnHorizontalRadiusChanged(string input)
         {
-            var radius = ParseRadiusValue(input);
+            var radius = ParseValue(input, 10);
             _waypoint.HorizontalCoverageRadius = GameMath.Clamp(radius, 0, 50);
 
             if (!input.OnlyContainsNumbers() || radius is > 50 or < 0 || string.IsNullOrWhiteSpace(input))
@@ -267,7 +267,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private void OnVerticalRadiusChanged(string input)
         {
-            var radius = ParseRadiusValue(input);
+            var radius = ParseValue(input, 10);
             _waypoint.VerticalCoverageRadius = GameMath.Clamp(radius, 0, 50);
 
             if (!input.OnlyContainsNumbers() || radius is > 50 or < 0 || string.IsNullOrWhiteSpace(input))
@@ -322,7 +322,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             var title = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Title");
             var message = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Message");
             MessageBox.Show(title, message, ButtonLayout.OkCancel,
-                () => {
+                () =>
+                {
                     OnDeleteAction?.Invoke(_waypoint);
                     TryClose();
                 });

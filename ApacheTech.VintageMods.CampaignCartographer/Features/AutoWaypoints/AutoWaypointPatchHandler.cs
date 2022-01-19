@@ -7,9 +7,11 @@ using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Extensions.System;
-using ApacheTech.VintageMods.Core.Services;
+using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
+
+// ReSharper disable ClassNeverInstantiated.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 {
@@ -27,9 +29,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
         /// <summary>
         /// 	Initialises a new instance of the <see cref="AutoWaypointPatchHandler"/> class.
         /// </summary>
-        public AutoWaypointPatchHandler()
+        [SidedConstructor(EnumAppSide.Client)]
+        public AutoWaypointPatchHandler(WaypointService waypointService)
         {
-            _service = ModServices.IOC.Resolve<WaypointService>();
+            _service = waypointService;
         }
 
         /// <summary>
@@ -120,7 +123,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
                 return false;
             }
 
-            waypoint?
+            waypoint
                 .With(p => p.Title = title)
                 .AddToMap(position);
             return true;

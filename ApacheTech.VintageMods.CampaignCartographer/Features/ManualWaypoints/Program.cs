@@ -24,7 +24,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         {
             services.RegisterSingleton(sp => sp.CreateInstance<Commands.ManualWaypointsChatCommand>());
             services.RegisterTransient<ManualWaypointsMenuScreen>();
-            services.RegisterTransient<FirstRunDialogue>();
             services.RegisterTransient<PredefinedWaypointsDialogue>();
         }
 

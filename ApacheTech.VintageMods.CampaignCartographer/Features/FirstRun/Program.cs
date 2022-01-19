@@ -1,16 +1,15 @@
 ﻿using ApacheTech.Common.DependencyInjection.Abstractions;
-using ApacheTech.VintageMods.Core.Hosting.Configuration;
+using ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun.Dialogue;
 using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Registration;
-
 // ReSharper disable UnusedType.Global
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun
 {
     /// <summary>
-    ///     Feature: Auto Waypoints
+    ///     Registers types for the FirstRun feature with the IOC container.
     /// </summary>
     /// <seealso cref="ClientFeatureRegistrar" />
-    public class Program : ClientFeatureRegistrar
+    public sealed class Program : ClientFeatureRegistrar
     {
         /// <summary>
         ///     Allows a mod to include Singleton, or Transient services to the IOC Container.
@@ -18,9 +17,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
         /// <param name="services">The service collection.</param>
         public override void ConfigureClientModServices(IServiceCollection services)
         {
-            services.RegisterSingleton(_ => ModSettings.World.Feature<AutoWaypointsSettings>("AutoWaypoints"));
-            services.RegisterSingleton<Dialogue.AutoWaypointsDialogue>();
-            services.RegisterSingleton<AutoWaypointPatchHandler>();
+            services.RegisterTransient<FirstRunDialogue>();
         }
     }
 }

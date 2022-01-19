@@ -1,6 +1,6 @@
 # Campaign Cartographer
 
-Adds multiple Cartography related features to the game, such as custom waypoint icons, GPS, auto waypoint markers, and more.
+Adds multiple Cartography related features to the game, such as custom player pins, GPS, auto waypoint markers, and more.
 
 This mod can be installed as a client-side only mod, which will allow you access to most of the features of the mod. If the mod is also installed on the server, extra features will be available to you. These features have been highlighted below.
 
@@ -83,54 +83,10 @@ This mod can be installed as a client-side only mod, which will allow you access
      - Purge all waypoints with a specified colour. ***`(.wpUtil purge-colour)`***
      - Purge all waypoints where the title starts with a specified string. ***`(.wpUtil purge-title)`***
      - Toggle the Waypoint Export window. ***`(.wpUtil export)`***
-         - Choose a location to save the file to.
-         - Choose a file name.
+         - Choose which waypoints to export.
          - Export waypoints to file.
      - Toggle the Waypoint Imports window. ***`(.wpUtil import)`***
-         - Choose a file to import waypoints from.
-         - Choose import type (purge/replace/append).
-         - Import waypoints from file.
-
-## Planned Future Features:
-
-These are features that have not yet been implemented, but are planned for release within future updates of the Mod, and are in active development. Please give any feedback, and potential feature requests at the <a href="https://github.com/ApacheTechSolutions/ApacheTech.VintageMods.CampaignCartographer/issues" target="_blank">Official Issue Tracker</a>.
-
- - ### **"Home Location" Waypoints *`(/wpHome)`*** **(Requires Server Installation)**
- 
-    Each player can set one location on the server as their home. This location will be saved to the server, and a waypoint will be made at that position. This waypoint will then be shared with other clients, automatically, or by request.
- 
-     - **Client:** Toggle the Home Location Management GUI. ***`(/wpHome)`***
-     - **Client:** Add a "Home Location" waypoint. ***`(/wpHome add)`***
-     - **Client:** Remove a "Home Location" waypoint. ***`(/wpHome remove)`***
-     - **Client:** Request the "Home Location" of another player. ***`(/wpHome get)`***
-     - **Client:** Request all "Home Locations" from the server. ***`(/wpHome get-all)`***
-     - **Client:** Change the template for Home Locations. ***`(/wpHome template)`***
-     - **Client:** Enable automatic updates from the server. ***`(/wpHome enable)`***
-     - **Client:** Disable automatic updates from the server. ***`(/wpHome disable)`***
-     - **Admin:** Toggle the Home Location Administration GUI. ***`(/wpHomeAdmin)`***
-     - **Console:** Add a "Home Location" waypoint to a player. ***`(/wpHomeAdmin add)`***
-     - **Console:** Remove a "Home Location" waypoint from a player. ***`(/wpHomeAdmin remove)`***
-     - **Console:** Manually send Home Locations to a client. ***`(/wpHomeAdmin send)`***
-     - **Console:** Manually broadcast updated list to all clients. ***`(/wpHomeAdmin broadcast)`***
-     - **Console:** Change the default template for Home Locations. ***`(/wpHomeAdmin template)`***
-
- - ### **"Public Location" Waypoints *`(/wpPublic)`*** **(Requires Server Installation)**
- 
-    Public locations are places such as *World Spawn*, *New Player Areas*, *Public Forge*, *Shopping Districts*, *Portal Nexus*, or other server-wide points of interest that an Admin can add to a list of waypoints that can be broadcast to players as they log in.
- 
-     - **Client:** Toggle the Public Location Management GUI. ***`(/wpPublic)`***
-     - **Client:** Enable automatic updates from the server. ***`(/wpPublic enable)`***
-     - **Client:** Disable automatic updates from the server. ***`(/wpPublic disable)`***
-     - **Client:** Request an updated list of "Public Locations". ***`(/wpPublic update)`***
-     - **Admin:** Toggle the Public Location Administration GUI. ***`(/wpPublicAdmin)`***
-     - **Console:** Add a "Public Location" waypoint. ***`(/wpPublicAdmin add)`***
-     - **Console:** Remove a "Public Location" waypoint. ***`(/wpPublicAdmin remove)`***
-     - **Console:** Manually send updated list to client. ***`(/wpPublicAdmin send)`***
-     - **Console:** Manually broadcast updated list to all clients. ***`(/wpPublicAdmin broadcast)`***
-
- - ### **New Waypoint Icons**
-
-     - Adds many new waypoint icons that can be used to mark locations on the map.
+         - Import waypoints from file(s).
 
 ## Client-Side Commands:
 
@@ -140,6 +96,7 @@ These are features that have not yet been implemented, but are planned for relea
 | **.wptl**             | Adds a waypoint to a translocator, within five blocks of the player. |
 | **.wptp**             | Adds a waypoint to a teleporter block, within five blocks of the player. |
 | **.wpt**              | Adds a waypoint to a trader, within five blocks of the player. |
+| **.wps**              | Adds a waypoint to the block the player is currently targetting. |
 | **.wpUtil**           | Various utilities for managing waypoints, en-masse. |
 | **.wpSettings**       | Toggle the Manual Waypoints settings window. |
 | **.wpAuto**           | Toggle the Auto Waypoints settings window. |
@@ -153,10 +110,6 @@ These are features that have not yet been implemented, but are planned for relea
 | Command               | Description |
 | ---                   | --- |
 | **/gpsAdmin**         | Change GPS settings for the server. |
-| **/wpHome**           | Synchronise player home location waypoints with the server. |
-| **/wpHomeAdmin**      | Toggle the Home Locations Admin settings window. |
-| **/wpPublic**         | Synchronise server-wide public location waypoints with the server. |
-| **/wpPublicAdmin**    | Toggle the Public Locations Admin settings window. |
 
 ## Acknowledgements:
 
@@ -165,6 +118,7 @@ Thank you to the following people:
  - **Doombox:** Original creator of the Customisable Player Pins feature.
  - **egocarib:** Huge inspiration for much of the Auto Waypoints feature.
  - **Melchior:** For assistance with ProtoBuf, and overwriting vanilla classes.
- - **Craluminum2413:** For assistance with JSON patching.
- - **Novocain:** Original creator of some of the back-end reflection helpers.
+ - **Craluminum2413:** Translation into Russian, and Ukrainian.
+ - **Aledark:** Translation into French.
+ - **Novocain:** Original creator of some of the back-end reflection helpers, and ClientSideEverywhere hack.
  - **Tyron:** For refactoring some of the API to make this mod easier to make.

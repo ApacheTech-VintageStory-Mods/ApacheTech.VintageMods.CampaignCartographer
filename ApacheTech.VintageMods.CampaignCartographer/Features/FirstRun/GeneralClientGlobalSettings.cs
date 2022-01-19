@@ -1,4 +1,4 @@
-﻿namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
+﻿namespace ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun
 {
     /// <summary>
     ///     General Global Settings for the Client.

@@ -1,0 +1,267 @@
+{
+  // ReSharper disable CommentTypo
+  // ReSharper disable StringLiteralTypo
+  // ==================================================================================
+  //  Campaign Cartographer - Language File
+  // ==================================================================================
+  //
+  //    Language: Français
+  //    Language Code: fr
+  //    Translated By: Aledark
+  //    Mod Version: 2.0.0
+  //    
+  // ==================================================================================
+
+  // ==================================================================================
+  //  Mod Specific
+  // ==================================================================================
+
+  "ModTitle": "Campaign Cartographer",
+  "ModDescription": "Ajoute de multiples caractéristiques et fonctions de catégorisations pour cartographier votre monde. Par exemple, vous pouvez personallisez vos marqueurs, épingles de joueurs et icônes, utilisez vos données GPS, auto-marquez les points d'intérêt de votre carte et bien davantage",
+
+  // ==================================================================================
+  //  Errors and Exceptions
+  // ==================================================================================
+
+  "error-messages.feature-not-available-client-side": "Cette fonction n'est pas disponible sur l'interface client, utilisez plutôt la commande du serveur.",
+  "error-messages.mod-not-installed-on-server": "Le mod Campaign Cartographer n'est pas installé sur votre serveur. Demandez à votre administrateur d'installer Campaign Cartographer afin d'avoir accès à toutes les fonctionalitées possibles.",
+  "error-messages.feature-disabled": "L'administrateur du serveur a choisi de désactiver cette fonction.",
+  "error-messages.invalid-command": "Cette commande n'est pas valide, vérifiez la syntaxe et réessayez à nouveau.",
+
+  // ==================================================================================
+  //  Feature: Automatic Waypoints
+  // ==================================================================================
+
+  "Features.AutoWaypoints.SettingsCommandDescription": "Modifier mes Marqueurs de carte Automatiquement",
+
+  // GUI Dialogue Window:
+  "Features.AutoWaypoints.Dialogue.Title": "Marqueurs Automatiques",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators": "Translocators:",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators.HoverText": "Ajoute automatiquement des marqueurs pour les Translocators lorsque vous les utilisez.",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters": "Blocs Téléporteurs",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters.HoverText": "Ajoute automatiquement des marqueurs pour les Téléporteurs lorsque vous les utilisez.",
+  "Features.AutoWaypoints.Dialogue.lblTraders": "Marchands:",
+  "Features.AutoWaypoints.Dialogue.lblTraders.HoverText": "Ajoute automatiquement des marqueurs pour les marchands lorsque vous interagissez avec eux.",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits": "Dépôts de minerai en surface:",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "Ajoute automatiquement des marqueurs pour les différents types de métaux rocheux en surface quand vous les prenez.",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones": "Pierres en Surface:",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "Ajoute automatiquement des marqueurs pour les différents pierres en surface lorsque vous les prenez.",
+  "Features.AutoWaypoints.Dialogue.lblOrganics": "Matières Organiques:",
+  "Features.AutoWaypoints.Dialogue.lblOrganics.HoverText": "Ajoute automatiquement des marqueurs pour les arbustes à fruits, les champignons, la résine quand vous les récoltez.",
+
+  // ==================================================================================
+  //  Feature: Centre Map
+  // ==================================================================================
+
+  "Features.CentreMap.SettingsCommandDescription": "Recentrer votre map sur une position spécifique ou sur celle d'un joueur.",
+  "Features.CentreMap.CentreMapOnPlayer": "Recentrer votre map sur votre position actuelle: {0} ({1}, {2}, {3})",
+  "Features.CentreMap.CentreMapOnPlayerSpawn": "Recentrer votre map sur l'endroit où vous renaîssez: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnPosition": "Recentrer votre carte à cet endroit spécifique: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWorldSpawn": "Recentrer votre carte sur le point de départ du monde: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWaypoint": "Recentrer votre carte sur ce marqueur précisément{0}: {1} ({2}, {3})",
+
+  // ==================================================================================
+  //  Feature: GPS
+  // ==================================================================================
+
+  "Features.GPS.Client.SettingsCommandDescription": "Afficher les informations concernant la position actuelle du joueur.",
+  "Features.GPS.Server.SettingsCommandDescription": "Modifier les options GPS du serveur",
+  "Features.GPS.Client.location-copied-to-clipboard": "La position du jouer a été copié sur votre presse-papier.",
+  "Features.GPS.Client.player-not-found": "Aucun joueur avec ce nom `{0}` a été trouvé sur le serveur.",
+  "Features.GPS.Server.invalid-command-syntax": "La syntaxe de votre command n'est pas valide. Essayez à nouveau.",
+  "Features.GPS.Server.whisper-received": "[De {0}]: {1}",
+  "Features.GPS.Server.whisper-sent": "[À {0}]: {1}",
+  "Features.GPS.Dialogue.Title": "GPS Admin",
+  "Features.GPS.Dialogue.lblWhispers": "Messages privés permis:",
+  "Features.GPS.Dialogue.lblWhispers.HoverText": "Détermines si un joueur peut ou non partager ses coordonnées GPS avec un autre joueur via message privé.",
+
+  // ==================================================================================
+  //  Feature: Home Locations
+  // ==================================================================================
+
+  "Features.HomeLocations.SettingsCommandDescription": "Activer/Désactiver la fenêtre des marqueurs pour la localisation des bases/maison du serveur",
+
+  // ==================================================================================
+  //  Feature: Manual Waypoints
+  // ==================================================================================
+
+  "Features.ManualWaypoints.SettingsCommandDescription": "Activer/Désactiver la fenêtre des contrôles pour les marqueurs manuels.",
+  "Features.ManualWaypoints.InvalidSyntax": "Aucun marqueur de ce type n'a été trouvé avec cette syntaxe `{0}`. Vous pouvez en ajoutez un nouveau en utilisant la commande :`.wpSettings`",
+
+  // Manual Waypoints. (.wp)
+  "Features.ManualWaypoints.ManualWaypoints.Description": "Rapidement et aisément, vous pouvez ajoutez des marqueurs à votre position.",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage": "[épinglé (Optionel)] [type] [titre (Optionel)]",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage_Full": "[épinglé (Optionel)] [{0}] [titre (Optionel)]",
+
+  // Manual Translocator Waypoints. (.wptl)
+  "Features.ManualWaypoints.TranslocatorWaypoints.Description": "Ajoute un marqueur à un translocator qui se retrouve à moins de 5 blocs du joueur.",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorNotFound": "Aucun translocator n'a été trouvé à cette distance du joueur.",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorWaypointTitle": "Translocator vers ({0}, {1}, {2})",
+  "Features.ManualWaypoints.TranslocatorWaypoints.BrokenTranslocatorTitle": "Translocator brisé",
+  "Features.ManualWaypoints.TranslocatorWaypoints.WaypointAlreadyExists": "Un marqueur pour ce translocator existe déjà.",
+
+  // Manual Teleporters Waypoints. (.wptp)
+  "Features.ManualWaypoints.TeleporterWaypoints.Description": "Ajoute un marqueur à un téléporteur qui se retrouve à moins de 5 blocs du joueur.",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterNotFound": "Aucun téléporteur n'a été trouvé à cette distance du joueur.",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterWaypointTitle": "Téléporteur {0} vers: {1}",
+  "Features.ManualWaypoints.TeleporterWaypoints.WaypointAlreadyExists": "Un marqueur pour ce téléporteur existe déjà.",
+
+  // Manual Trader Waypoints. (.wpt)
+  "Features.ManualWaypoints.TraderWaypoints.Description": "Ajoute un marqueur sur un marchand qui se retrouve à moins de 5 blocs du joueur.",
+  "Features.ManualWaypoints.TraderWaypoints.TraderNotFound": "Aucun marchand n'a été trouvé à cette distance du joueur",
+  "Features.ManualWaypoints.TraderWaypoints.WaypointAlreadyExists": "Un marqueur pour ce marchand existe déjà.",
+
+  // Block Selection Waypoints. (.wps)
+  "Features.ManualWaypoints.BlockSelectionWaypoints.Description": "Ajoute un marqueur dépendamment du bloc que le joueur vise.",
+
+  // Waypoint Template Information
+  "Features.ManualWaypoints.WaypointTemplate.DefaultTitle": "Nouveau Marqueur",
+
+  // Menu Screen Dialogue Window
+  "Features.ManualWaypoints.Dialogue.MenuScreen.Title": "Campaign Cartographer",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Modifier la sélection des blocs pour les marqueurs",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Modifier vos marqueurs prédéfinis et personalisables",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Faites un don à l'auteur de ce Mod",
+
+  // First Run Dialogue Window
+  "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Première utilisation",
+  "Features.ManualWaypoints.Dialogue.FirstRun.AutoWaypointsButton": "Modifie les Paramètres des Marqueurs Automatiques",
+  "Features.ManualWaypoints.Dialogue.FirstRun.PlayerPinsButton": "Modifie les Épingles des Joueurs sur la Carte",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph1": "Ceci est la première fois que vous utilisez le mod Campaign Cartographer. Aimeriez-vous avoir une liste par défaut de différents types de marqueurs de carte à utilisé avec la commande`.wp`",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph2": "Même si ces marqueurs de carte sont en anglais, ils peuvent tous être modifié(s) en utilisant la commande `.wpSettings`.",
+  "Features.ManualWaypoints.Dialogue.FirstRun.RememberPreference": "Me souvenir de ces paramètres pour toutes vos parties?",
+  "Features.ManualWaypoints.Dialogue.FirstRun.CancelMessage": "Êtes-vous certain que vous ne souhaitez pas ajouter des marqueurs de carte prédéfinis maintenant? Vous pouvez les ajouter ou les modifier dans les paramètres plus tard.",
+  "Features.ManualWaypoints.Dialogue.FirstRun.ConfirmMessage": "Êtes-vous certain d'ajouter/modifier ces marqueurs de carte prédéfinis? Vous pouvez les ajouter ou les modifier dans les paramètres plus tard.",
+
+  // Block Selection Dialogue Window
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Title": "Modifier le Modèle du Marqueur",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour": "Couleur:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour.HoverText": "Le couleur associée à ce marqueur.",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon": "Icône/Symbole:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon.HoverText": "Le type d'icône/symbole à utiliser pour ce marqueur.",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage": "Couverture Horizontale:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage.HoverText": "es marqueurs du même type ne seront pas placés en deça de cette valeur sur le plan horizontal",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage": "Couverture Verticale:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage.HoverText": "Les marqueurs du même type ne seront pas placés en deça de cette valeur sur le plan vertical",
+
+  // Add/Edit Waypoint Type Dialogue Window
+  "Features.ManualWaypoints.Dialogue.WaypointType.AddNew": "Ajouter un Nouveau Type de Marqueur",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Edit": "Modifier le Type du Marqueur",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Mot-clé:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "Le mot-clé identifie le type de waypoint qui y est associé, comme par exemple: .wp [mot-clé].",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "Le mot-clé ne peut être qu'un seul mot.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle": "Titre:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle.HoverText": "Le titre par défaut de ce marqueur.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText": "Information supplémentaire:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText.HoverText": "Toute information que vous aimeriez montrez sur le marqueur de carte.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour": "Couleur:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour.HoverText": "Le couleur associée à ce marqueur.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon": "Icône/Symbole:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon.HoverText": "Le type d'icône/symbole à utiliser pour ce marqueur.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage": "Couverture Horizontale:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage.HoverText": "Les marqueurs du même type ne seront pas placés en deça de cette valeur sur le plan horizontal",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Coverage.Validation": "Le Rayon de Couverture choisi devrait être 0 ou un nb plus élevé.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage": "Couverture Verticale:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage.HoverText": "Les marqueurs du même type ne seront pas placés en deça de cette valeur sur le plan vertical",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned": "Épinglé:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned.HoverText": "Épinglé ou non ce type de marqueur sur votre carte par défaut.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Title": "Confirmer la Suppression de ce Type de Marqueur.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Message": "Êtes-vous certain de supprimer ce type de marqueur?",
+
+  // Pre-Defined Waypoints Dialogue Window
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Title": "Marqueurs Prédéfinis",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Error": "Validation des Erreurs",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault": "Charger les différents Types de Marqueurs par Défaut.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault.Confirmation": "Êtes-vous certain d'importer les marqueurs de carte par défaut? Les titres par défaut sont en Anglais.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew": "Ajouter un Nouveau Type de Marqueur",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew.Validation": "Un marqueur avec la même syntaxe `{0}` existe déjà.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit": "Modifier ce Type de Marqueur",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit.Validation": "Aucun marqueur de ce type avec cette syntaxe `{0}` n'existe dans la liste.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Titre: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Rayon de Couverture: ({0}x{1})",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Épinglé: {0}",
+
+  // ==================================================================================
+  //  Feature: Player Pins
+  // ==================================================================================
+
+  "Features.PlayerPins.SettingsCommandDescription": "Personalisation des Épingles pour les Joueurs sur votre Carte",
+
+  // Chat Command: .friends
+  "Features.PlayerPins.Friends.Description": "Ajouter/Retirer des joueurs depuis votre liste d'amis. Vos amis pourront avoir une apparence différente sur votre map que les autres joueurs.",
+  "Features.PlayerPins.Friends.FriendsList": "Liste de mes amis:",
+  "Features.PlayerPins.Friends.YouHaveNoFriends": "Vous n'avez pas d'amis actuellement.",
+  "Features.PlayerPins.Friends.NoPlayerNameGiven": "Veuillez spécifiez le nom du joueur.",
+  "Features.PlayerPins.Friends.PlayerNotFound": "Aucun joueur avec ce nom `{0}` n'a été trouvé.",
+  "Features.PlayerPins.Friends.MultiplePlayersFound": "Il y a plusieurs joueurs comme `{0}` qui ont été trouvé.",
+  "Features.PlayerPins.Friends.PlayerAlreadyAdded": "{0} a déjà été ajouté à votre liste d'amis.",
+  "Features.PlayerPins.Friends.PlayerAdded": "{0} a été ajouté à votre liste d'amis.",
+  "Features.PlayerPins.Friends.PlayerRemoved": "{0} a été retiré de votre liste d'amis.",
+
+  // GUI
+  "Features.PlayerPins.Dialogue.Title": "Personalisation des Épingles des Joueurs",
+  "Features.PlayerPins.Dialogue.Self": "Votre Épingle",
+  "Features.PlayerPins.Dialogue.Friend": "L'Épingle de vos Amis",
+  "Features.PlayerPins.Dialogue.Others": "L'Épingle des autres Joueurs sur le Serveur",
+  "Features.PlayerPins.Dialogue.Randomise": "Générez Aléatoirement une Couleur et une Grandeur",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch": "Mon épinglette",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch.HoverText": "L'épinglette de mes amis",
+  "Features.PlayerPins.Dialogue.btnToggleSwitch": "{0} Autres joueurs",
+  "Features.PlayerPins.Dialogue.lblRed": "Rouge:",
+  "Features.PlayerPins.Dialogue.lblRed.HoverText": "Le niveau de saturation de couleur rouge pour l'épingle.",
+  "Features.PlayerPins.Dialogue.lblGreen": "Vert:",
+  "Features.PlayerPins.Dialogue.lblGreen.HoverText": "Le niveau de saturation de couleur verte pour l'épingle.",
+  "Features.PlayerPins.Dialogue.lblBlue": "Bleu:",
+  "Features.PlayerPins.Dialogue.lblBlue.HoverText": "Le niveau de saturation de couleur bleuté pour l'épingle.",
+  "Features.PlayerPins.Dialogue.lblOpacity": "Transparence:",
+  "Features.PlayerPins.Dialogue.lblOpacity.HoverText": "Le niveau de transparence de l'épingle.",
+  "Features.PlayerPins.Dialogue.lblScale": "Facteur de mise à l'échelle:",
+  "Features.PlayerPins.Dialogue.lblScale.HoverText": "Appliquez un facteur d'agrandissement ou rétrécissement à cette épingle.",
+
+  // ==================================================================================
+  //  Feature: Public Locations
+  // ==================================================================================
+
+  "Features.PublicLocations.SettingsCommandDescription": "Activer/Désactiver la Fenêtre de Localisation des marqueurs Publiques",
+
+  // ==================================================================================
+  //  Feature: Waypoint Utilities
+  // ==================================================================================
+
+  "Features.WaypointUtil.SettingsCommandDescription": "Commandes utilitaires pour faciliter grandement la création et gestion de vos marqueurs sur votre carte.",
+  "Features.WaypointUtil.Confirm": "confirmer", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
+  "Features.WaypointUtil.ConfirmationMessage": "Écrivez `.wpUtil {0}` pour confirmer votre choix.",
+
+  // Waypoint Import Window
+  "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des waypoints",
+  "Features.WaypointUtil.Dialogue.Imports.File-singular": "fichier",
+  "Features.WaypointUtil.Dialogue.Imports.File-plural": "fichiers",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-singular": "marqueur",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-plural": "marqueurs",
+  "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} marqueurs sélectionés, de {1} {2}.",
+  "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Ouvrier le Dossier d'Importation",
+  "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Importer les Marqueurs",
+  "Features.WaypointUtil.Dialogue.Imports.ConfirmationTitle": "Confirmation des Marqueurs Importés",
+  "Features.WaypointUtil.Dialogue.Imports.ConfirmationMessage": "Vous êtes sur le point d'importer {0} marqueurs de {1} {2}.",
+  "Features.WaypointUtil.Dialogue.Imports.FileText": "Fichier: {0}",
+  "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Date d'enregitrement: {0:G}",
+  "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Export Window
+  "Features.WaypointUtil.Dialogue.Exports.Title": "Exportation des Marqueurs Waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0} marqueurs sélectionnés.",
+  "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "Ouvrir le Dossier d'Exportation",
+  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Exporter les Marqueurs sélectionnés",
+
+  // Waypoint Export Confirmation Window
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationTitle": "Confirmation de l'Exportation des Marqueurs",
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationMessage": "Vous êtes sur le point d'exporter {0} marqueurs.",
+  "Features.WaypointUtil.Dialogue.Exports.Name": "Nom:",
+  "Features.WaypointUtil.Dialogue.Exports.Name.HoverText": "Un nom unique pour identifier les marqueurs exportés.",
+  "Features.WaypointUtil.Dialogue.Exports.World": "Monde:",
+  "Features.WaypointUtil.Dialogue.Exports.World.HoverText": "Le monde depuis lequel ces marqueurs sont exportés.",
+  "Features.WaypointUtil.Dialogue.Exports.FileName": "Nom du Fichier:",
+  "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "Nommez le nom du fichier d'exportation.",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Marqueurs exportés",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Partie en solo"
+}

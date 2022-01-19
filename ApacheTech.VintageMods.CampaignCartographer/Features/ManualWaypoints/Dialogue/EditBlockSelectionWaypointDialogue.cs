@@ -63,7 +63,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             ApiEx.ClientMain.EnqueueMainThreadTask(() =>
             {
-                ColourComboBox.SetSelectedValue(_waypoint.Colour);
+                ColourComboBox.SetSelectedValue(_waypoint.Colour.ToLowerInvariant());
                 ColourPreviewBox.Redraw();
                 IconComboBox.SetSelectedValue(_waypoint.DisplayedIcon);
                 HorizontalRadiusTextBox.SetValue(_waypoint.HorizontalCoverageRadius);

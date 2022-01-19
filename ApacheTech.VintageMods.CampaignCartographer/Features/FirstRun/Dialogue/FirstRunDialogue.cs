@@ -1,14 +1,17 @@
 ﻿using System;
 using ApacheTech.Common.Extensions.Harmony;
+using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
+using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialogue;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.GameContent.GUI;
+using ApacheTech.VintageMods.Core.Services;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun.Dialogue
 {
     public sealed class FirstRunDialogue : GenericDialogue
     {
@@ -25,6 +28,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             ShowTitleBar = false;
             OnReturnAction = onReturnAction;
         }
+
+        public override bool DisableMouseGrab => true;
 
         /// <summary>
         ///     Fires when the GUI is opened.
@@ -44,26 +49,28 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "AutoWaypointsButton"), OnOpenAutoWaypoints, ButtonBounds(0.5f, 400, height))
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "PlayerPinsButton"), OnOpenPlayerPins, ButtonBounds(1.0f, 400, height))
                 .AddStaticText(
                     LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "Paragraph1"),
                     CairoFont
                         .WhiteDetailText()
                         .WithOrientation(EnumTextOrientation.Center),
-                    ButtonBounds(0.5f, width, height)
+                    ButtonBounds(1.7f, width, height)
                         .FlatCopy()
                         .WithAlignment(EnumDialogArea.CenterFixed))
                 .AddStaticText(
                     LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "Paragraph2"),
                     CairoFont.WhiteDetailText()
                         .WithOrientation(EnumTextOrientation.Center),
-                    ButtonBounds(1.5f, width, height).FlatCopy().WithAlignment(EnumDialogArea.CenterFixed))
+                    ButtonBounds(2.7f, width, height).FlatCopy().WithAlignment(EnumDialogArea.CenterFixed))
                 .AddStaticText(
                     LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "RememberPreference"),
                     CairoFont.WhiteDetailText().WithOrientation(EnumTextOrientation.Right),
-                    ButtonBounds(2.5f, width - 45, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed).WithFixedOffset(45, 5))
-                .AddSwitch(OnRememberSettingsChanged, ButtonBounds(2.5f, 30, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed).WithFixedOffset(5, 0))
-                .AddSmallButton(LangEx.GetCore("confirmation-no"), OnNo, ButtonBounds(3.2f, 150, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed))
-                .AddSmallButton(LangEx.GetCore("confirmation-yes"), OnYes, ButtonBounds(3.2f, 150, height).FlatCopy().WithAlignment(EnumDialogArea.RightFixed));
+                    ButtonBounds(3.7f, width - 45, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed).WithFixedOffset(45, 5))
+                .AddSwitch(OnRememberSettingsChanged, ButtonBounds(3.7f, 30, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed).WithFixedOffset(5, 0))
+                .AddSmallButton(LangEx.GetCore("confirmation-no"), OnNo, ButtonBounds(4.4f, 150, height).FlatCopy().WithAlignment(EnumDialogArea.LeftFixed))
+                .AddSmallButton(LangEx.GetCore("confirmation-yes"), OnYes, ButtonBounds(4.4f, 150, height).FlatCopy().WithAlignment(EnumDialogArea.RightFixed));
         }
 
         private void OnRememberSettingsChanged(bool state)
@@ -81,20 +88,30 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private Action<bool, bool> OnReturnAction { get; }
 
+        private bool OnOpenAutoWaypoints()
+        {
+            var dialogue = ModServices.IOC.Resolve<AutoWaypointsDialogue>();
+            dialogue.Toggle();
+            return true;
+        }
+
+        private bool OnOpenPlayerPins()
+        {
+            var dialogue = ModServices.IOC.Resolve<PlayerPinsDialogue>();
+            dialogue.Toggle();
+            return true;
+        }
+
         private bool OnNo()
         {
-            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "Title");
-            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "CancelMessage");
-            MessageBox.Show(title, message, ButtonLayout.OkCancel, () => OnReturnAction(false, _rememberSettings));
-            return TryClose();
+            ConfirmAndExit(false);
+            return true;
         }
 
         private bool OnYes()
         {
-            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "Title");
-            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "ConfirmMessage");
-            MessageBox.Show(title, message, ButtonLayout.OkCancel, () => OnReturnAction(true, _rememberSettings));
-            return TryClose();
+            ConfirmAndExit(true);
+            return true;
         }
 
         /// <summary>
@@ -106,6 +123,24 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             if (!capi.IsSinglePlayer || ApiEx.ClientMain.GetField<bool>("OpenedToLan")) return base.TryClose();
             ApiEx.ClientMain.PauseGame(false);
             return base.TryClose();
+        }
+
+        private void ConfirmAndExit(bool loadWaypoints)
+        {
+            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "Title");
+            var suffix = loadWaypoints ? "ConfirmMessage" : "CancelMessage";
+            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", suffix);
+            MessageBox.Show(title, message, ButtonLayout.OkCancel, () =>
+            {
+                OnReturnAction(loadWaypoints, _rememberSettings);
+                TryClose();
+            });
+        }
+
+        public override bool OnEscapePressed()
+        {
+            ConfirmAndExit(false);
+            return false;
         }
     }
 }

@@ -96,7 +96,7 @@
   "Features.ManualWaypoints.TranslocatorWaypoints.Description": "Adds a waypoint to a translocator, within five blocks of the player.",
   "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorNotFound": "No translocators have been found within range of the player.",
   "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorWaypointTitle": "Translocator to ({0}, {1}, {2})",
-  "Features.ManualWaypoints.TranslocatorWaypoints.BrokenTranslocatorTitle": "Broken Translocator",  
+  "Features.ManualWaypoints.TranslocatorWaypoints.BrokenTranslocatorTitle": "Broken Translocator",
   "Features.ManualWaypoints.TranslocatorWaypoints.WaypointAlreadyExists": "A waypoint for this translocator already exists.",
 
   // Manual Teleporters Waypoints. (.wptp)
@@ -124,6 +124,8 @@
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "First Run",
+  "Features.ManualWaypoints.Dialogue.FirstRun.AutoWaypointsButton": "Change Automatic Waypoint Settings",
+  "Features.ManualWaypoints.Dialogue.FirstRun.PlayerPinsButton": "Change Player Map Pin Settings",
   "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph1": "This is the first time you have run Campaign Cartographer. Would you like to load a default list of waypoint types to use with the `.wp` command?",
   "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph2": "While these default waypoint types will be in English, they can be edited in the settings, by using the `.wpSettings` command.",
   "Features.ManualWaypoints.Dialogue.FirstRun.RememberPreference": "Remember this setting for all servers?",
@@ -144,9 +146,9 @@
   // Add/Edit Waypoint Type Dialogue Window
   "Features.ManualWaypoints.Dialogue.WaypointType.AddNew": "Add New Waypoint Type",
   "Features.ManualWaypoints.Dialogue.WaypointType.Edit": "Edit Waypoint Type",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Syntax:",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "The word you have to type in ",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "The syntax can only be a single word.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Key Word:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "The keyword used to identify the waypoint type. Used with the command, `.wp [keyword]`.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "The key word can only be a single word.",
   "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle": "Title:",
   "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle.HoverText": "The default title to give the waypoint.",
   "Features.ManualWaypoints.Dialogue.WaypointType.DetailText": "Detail Text:",

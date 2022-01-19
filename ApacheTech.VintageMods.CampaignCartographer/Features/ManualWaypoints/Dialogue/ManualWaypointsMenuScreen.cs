@@ -27,6 +27,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             ShowTitleBar = false;
         }
 
+        public override bool DisableMouseGrab => true;
+
         /// <summary>
         ///     Fires when the GUI is opened.
         /// </summary>
