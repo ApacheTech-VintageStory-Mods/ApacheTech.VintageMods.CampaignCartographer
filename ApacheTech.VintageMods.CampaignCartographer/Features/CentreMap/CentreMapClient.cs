@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using ApacheTech.Common.Extensions.Harmony;
 using ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap.Packets;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
@@ -39,6 +40,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
             _capi = capi;
             _worldMap = capi.ModLoader.GetModSystem<WorldMapManager>();
 
+            _capi.Event.PlayerEntitySpawn += OnPlayerSpawn;
+            _capi.Event.PlayerEntityDespawn += OnPlayerDespawn;
+
             _clientChannel = _capi.Network.RegisterChannel("centreMap")
                 .RegisterMessageType<PlayerSpawnPositionDto>()
                 .SetMessageHandler<PlayerSpawnPositionDto>(OnClientSpawnPointResponsePacketReceived);
@@ -55,6 +59,22 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
                 .HasSubCommand("pos").WithHandler(OnPositionOption)
                 .HasSubCommand("spawn").WithHandler(OnSpawnOption)
                 .HasSubCommand("waypoint").WithHandler(OnWaypointOption);
+        }
+
+        private void OnPlayerSpawn(IClientPlayer byPlayer)
+        {
+            _capi.Event.EnqueueMainThreadTask(() =>
+                _capi.Event.RegisterCallback(_ =>
+                    _worldMap.GetField<IClientNetworkChannel>("clientChannel")
+                        .SendPacket(new OnViewChangedPacket()), 500), "");
+        }
+
+        private void OnPlayerDespawn(IClientPlayer byPlayer)
+        {
+            _capi.Event.EnqueueMainThreadTask(() =>
+                _capi.Event.RegisterCallback(_ =>
+                    _worldMap.GetField<IClientNetworkChannel>("clientChannel")
+                        .SendPacket(new OnViewChangedPacket()), 500), "");
         }
 
         #region Command Handlers
@@ -91,17 +111,24 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
             var player = _capi.World.Player;
             var targetName = args.PopWord(player.PlayerName);
 
-            var playerList = _capi.World.AllOnlinePlayers
+            var allPlayers = _capi.World.AllPlayers;
+            var playerList = allPlayers
                 .Where(p => p.PlayerName
                     .StartsWith(targetName, StringComparison.InvariantCultureIgnoreCase))
-                .ToList();
+                .ToList(); 
 
             if (!playerList.Any()) return;
             var target = (IClientPlayer)playerList.FirstOrDefault() ?? player;
 
+            if (target.Entity is null)
+            {
+                _capi.EnqueueShowChatMessage(LangEx.FeatureString("CentreMap", "CannotCentreMapOnPlayer", target.PlayerName));
+                return;
+            }
+
             var displayPos = target.Entity.Pos.AsBlockPos.RelativeToSpawn(_capi.World);
             var message = LangEx.FeatureString("CentreMap", "CentreMapOnPlayer", target.PlayerName, displayPos.X, displayPos.Y, displayPos.Z);
-            RecentreAndProvideFeedback(player.Entity.Pos.XYZ, message);
+            RecentreAndProvideFeedback(target.Entity.Pos.XYZ, message);
 
         }
 

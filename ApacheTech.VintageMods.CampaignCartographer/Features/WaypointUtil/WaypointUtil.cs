@@ -14,6 +14,10 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.MathTools;
 
+// ReSharper disable UnusedParameter.Local
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedVariable
+// ReSharper disable RedundantUsingDirective
 // ReSharper disable StringLiteralTypo
 // ReSharper disable UnusedType.Global
 
@@ -46,7 +50,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
             _capi = capi;
             _service = ModServices.IOC.Resolve<WaypointService>();
 
-            FluentChat.ClientCommand("wputil")
+            var command = FluentChat.ClientCommand("wputil")
                 .RegisterWith(capi)
                 .HasDescription(LangEx.FeatureString("WaypointUtil", "SettingsCommandDescription"))
                 .HasSubCommand("export").WithHandler(OnExport)
@@ -57,9 +61,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
                 .HasSubCommand("purge-colour").WithHandler(OnPurgeByColour)
                 .HasSubCommand("purge-title").WithHandler(OnPurgeByTitle)
                 .HasSubCommand(Confirm).WithHandler(OnConfirmation)
-                .HasSubCommand("cancel").WithHandler(OnCancel)
-                // TODO: Remove before official release.
-                .HasSubCommand("stress-test").WithHandler(OnStressTest);
+                .HasSubCommand("cancel").WithHandler(OnCancel);
+#if DEBUG
+            command.HasSubCommand("stress-test").WithHandler(OnStressTest);
+#else
+#pragma warning disable IDE0051 // Remove unused private members
+#pragma warning disable IDE0060 // Remove unused parameter
+#endif
         }
 
         private static void OnStressTest(string subCommandName, int groupId, CmdArgs args)
@@ -107,7 +115,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// </summary>
         private void OnPurgeAll(string subCommandName, int groupId, CmdArgs args)
         {
-            _cachedAction = () => _service.PurgeAll();
+            _cachedAction = () => _service.Purge.All();
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 
@@ -117,7 +125,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         private void OnPurgeNearby(string subCommandName, int groupId, CmdArgs args)
         {
             var radius = args.PopFloat().GetValueOrDefault(10f);
-            _cachedAction = () => _service.PurgeWaypointsNearby(radius);
+            _cachedAction = () => _service.Purge.NearPlayer(radius);
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 
@@ -127,7 +135,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         private void OnPurgeByIcon(string subCommandName, int groupId, CmdArgs args)
         {
             var icon = args.PopWord();
-            _cachedAction = () => _service.PurgeWaypointsByIcon(icon);
+            _cachedAction = () => _service.Purge.ByIcon(icon);
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 
@@ -137,7 +145,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         private void OnPurgeByColour(string subCommandName, int groupId, CmdArgs args)
         {
             var colour = args.PopWord();
-            _cachedAction = () => _service.PurgeWaypointsByColour(colour);
+            _cachedAction = () => _service.Purge.ByColour(colour);
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 
@@ -147,7 +155,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         private void OnPurgeByTitle(string subCommandName, int groupId, CmdArgs args)
         {
             var partialTitle = args.PopWord();
-            _cachedAction = () => _service.PurgeWaypointsByTitle(partialTitle);
+            _cachedAction = () => _service.Purge.ByTitle(partialTitle);
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 

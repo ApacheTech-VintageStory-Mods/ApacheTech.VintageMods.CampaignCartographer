@@ -11,12 +11,12 @@ using Vintagestory.API.Common;
     "campaigncartographer",
     Description = "Adds multiple map related features to the game, custom marker pins, GPS, automatic waypoint markers, and more.",
     Side = "Universal",
-    Version = "2.0.0-pre.2",
+    Version = "2.0.0",
     RequiredOnClient = false,
     RequiredOnServer = false,
     NetworkVersion = "1.0.0",
     Website = "https://apachetech.co.uk",
-    Contributors = new[] { "ApacheTech Solutions", "Doombox", "Melchior", "Novocain", "egocarib" },
+    Contributors = new[] { "ApacheTech Solutions", "Doombox", "Melchior", "Novocain", "egocarib", "Craluminum2413", "Aledark" },
     Authors = new []{ "ApacheTech Solutions" })]
 
 [assembly: VintageModInfo(

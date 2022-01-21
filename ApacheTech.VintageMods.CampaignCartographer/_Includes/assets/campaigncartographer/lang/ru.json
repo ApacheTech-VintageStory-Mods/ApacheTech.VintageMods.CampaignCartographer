@@ -54,6 +54,7 @@
   // ==================================================================================
 
   "Features.CentreMap.SettingsCommandDescription": "Центрирует карту на заданном месте или игроке.",
+  "Features.CentreMap.CannotCentreMapOnPlayer": "Не удается найти игрока `{0}` в данный момент. Возможно, он находится вне зоны действия. Переподключение отобразит их на карте.",
   "Features.CentreMap.CentreMapOnPlayer": "Центрирование карты на игроке: {0} ({1}, {2}, {3})",
   "Features.CentreMap.CentreMapOnPlayerSpawn": "Центрирование карты на точке появления игрока: ({0}, {1})",
   "Features.CentreMap.CentreMapOnPosition": "Wентрирование карты на позиции: ({0}, {1})",
@@ -74,12 +75,6 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Шепот разрешен:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Определяет, могут ли игроки шепотом сообщать друг другу GPS-координаты.",
-
-  // ==================================================================================
-  //  Feature: Home Locations
-  // ==================================================================================
-
-  "Features.HomeLocations.SettingsCommandDescription": "Переключение окна настроек домашнего местоположения.",
 
   // ==================================================================================
   //  Feature: Manual Waypoints
@@ -125,6 +120,8 @@
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Первый запуск",
+  "Features.ManualWaypoints.Dialogue.FirstRun.AutoWaypointsButton": "Изменение автоматических настроек путевых точек",
+  "Features.ManualWaypoints.Dialogue.FirstRun.PlayerPinsButton": "Изменение настроек закреплений на карте игрока",
   "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph1": "Вы впервые запускаете Campaign Cartographer. Не желаете ли вы загрузить список типов путевых точек по умолчанию, чтобы использовать его вместе с командой `.wp`?",
   "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph2": "Хотя эти типы путевых точек по умолчанию будут на английском языке, их можно изменить в настройках, используя команду `.wpSettings`.",
   "Features.ManualWaypoints.Dialogue.FirstRun.RememberPreference": "Запомнить эту настройку для всех серверов?",
@@ -145,9 +142,9 @@
   // Add/Edit Waypoint Type Dialogue Window
   "Features.ManualWaypoints.Dialogue.WaypointType.AddNew": "Добавить новый тип путевой точки",
   "Features.ManualWaypoints.Dialogue.WaypointType.Edit": "Редактировать тип путевой точки",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Синтаксис:",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "Слово, которое вы должны ввести в ",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "Синтаксис может состоять только из одного слова.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Ключевое слово:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "Ключевое слово, используемое для идентификации типа путевой точки. Используется с командой `.wp [ключевое слово]`.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "Ключевое слово может быть только одним словом.",
   "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle": "Название:",
   "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle.HoverText": "Название по умолчанию, которое будет присвоено путевой точке.",
   "Features.ManualWaypoints.Dialogue.WaypointType.DetailText": "Подробный текст:",
@@ -217,18 +214,14 @@
   "Features.PlayerPins.Dialogue.lblScale.HoverText": "Настройка масштаба для применения к масштабе значка.",
 
   // ==================================================================================
-  //  Feature: Public Locations
-  // ==================================================================================
-
-  "Features.PublicLocations.SettingsCommandDescription": "Переключение окна настроек публичного местоположения.",
-
-  // ==================================================================================
   //  Feature: Waypoint Utilities
   // ==================================================================================
 
   "Features.WaypointUtil.SettingsCommandDescription": "Набор команд, облегчающих работу с путевыми точками.",
   "Features.WaypointUtil.Confirm": "confirm", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
   "Features.WaypointUtil.ConfirmationMessage": "Введите `.wpUtil {0}`, чтобы подтвердить свой выбор.",
+  "Features.WaypointUtil.PurgedWaypointCount": "{0} {1} удалено.",
+  "Features.WaypointUtil.AddedWaypointCount": "{0} {1} добавлено.",
 
   // Waypoint Import Window
   "Features.WaypointUtil.Dialogue.Imports.Title": "Импорт путевых точек",

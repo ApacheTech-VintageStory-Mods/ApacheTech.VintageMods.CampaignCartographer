@@ -115,7 +115,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
             if (pos is null) return;
             if (!allowDuplicates)
             {
-                if (pos.WaypointExistsAtPos(p => p.Icon == icon && p.Title == title)) return;
+                if (pos.WaypointExistsAtPos(p => p.Icon == icon)) return;
             }
             pos = pos.RelativeToSpawn();
             ApiEx.Client.SendChatMessage($"/waypoint addati {icon} {pos.X} {pos.Y} {pos.Z} {(pinned ? "true" : "false")} {colour} {title}");

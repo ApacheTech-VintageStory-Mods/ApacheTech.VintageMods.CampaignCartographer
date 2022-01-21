@@ -54,6 +54,7 @@
   // ==================================================================================
 
   "Features.CentreMap.SettingsCommandDescription": "Recentrer votre map sur une position spécifique ou sur celle d'un joueur.",
+  "Features.CentreMap.CannotCentreMapOnPlayer": "Actuellement, il est impossible de localiser le joueur {0}.Il est probable qu'il soit hors de portée. En vous reconnectant à nouveau sur le serveur, il sera de nouveau visible sur votre carte.",
   "Features.CentreMap.CentreMapOnPlayer": "Recentrer votre map sur votre position actuelle: {0} ({1}, {2}, {3})",
   "Features.CentreMap.CentreMapOnPlayerSpawn": "Recentrer votre map sur l'endroit où vous renaîssez: ({0}, {1})",
   "Features.CentreMap.CentreMapOnPosition": "Recentrer votre carte à cet endroit spécifique: ({0}, {1})",
@@ -74,12 +75,6 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Messages privés permis:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Détermines si un joueur peut ou non partager ses coordonnées GPS avec un autre joueur via message privé.",
-
-  // ==================================================================================
-  //  Feature: Home Locations
-  // ==================================================================================
-
-  "Features.HomeLocations.SettingsCommandDescription": "Activer/Désactiver la fenêtre des marqueurs pour la localisation des bases/maison du serveur",
 
   // ==================================================================================
   //  Feature: Manual Waypoints
@@ -219,18 +214,14 @@
   "Features.PlayerPins.Dialogue.lblScale.HoverText": "Appliquez un facteur d'agrandissement ou rétrécissement à cette épingle.",
 
   // ==================================================================================
-  //  Feature: Public Locations
-  // ==================================================================================
-
-  "Features.PublicLocations.SettingsCommandDescription": "Activer/Désactiver la Fenêtre de Localisation des marqueurs Publiques",
-
-  // ==================================================================================
   //  Feature: Waypoint Utilities
   // ==================================================================================
 
   "Features.WaypointUtil.SettingsCommandDescription": "Commandes utilitaires pour faciliter grandement la création et gestion de vos marqueurs sur votre carte.",
   "Features.WaypointUtil.Confirm": "confirmer", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
   "Features.WaypointUtil.ConfirmationMessage": "Écrivez `.wpUtil {0}` pour confirmer votre choix.",
+  "Features.WaypointUtil.PurgedWaypointCount": "{0} {1} ont été supprimés.", // Par exemple: "1 marqueurs a été supprimé." OU "2 marqueurs ont été supprimés."
+  "Features.WaypointUtil.AddedWaypointCount": "{0} {1} ont été ajoutés.", // Par exemple: "1 marqueurs a été ajoutés." OU "2 marqueurs ont été ajoutés."
 
   // Waypoint Import Window
   "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des waypoints",

@@ -53,6 +53,7 @@
   // ==================================================================================
 
   "Features.CentreMap.SettingsCommandDescription": "Re-centres the map on the given location or player.",
+  "Features.CentreMap.CannotCentreMapOnPlayer": "Cannot find player `{0}` at this time. They may be out of range. Re-logging will display them on the map.",
   "Features.CentreMap.CentreMapOnPlayer": "Re-centred map on player: {0} ({1}, {2}, {3})",
   "Features.CentreMap.CentreMapOnPlayerSpawn": "Re-centred map on player spawn point: ({0}, {1})",
   "Features.CentreMap.CentreMapOnPosition": "Re-centred map on position: ({0}, {1})",
@@ -73,12 +74,6 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Whispers Allowed:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Determines whether or not players can whisper GPS coordinates to each other.",
-
-  // ==================================================================================
-  //  Feature: Home Locations
-  // ==================================================================================
-
-  "Features.HomeLocations.SettingsCommandDescription": "Toggle the Home Location Settings window.",
 
   // ==================================================================================
   //  Feature: Manual Waypoints
@@ -218,18 +213,14 @@
   "Features.PlayerPins.Dialogue.lblScale.HoverText": "The scale adjustment to apply to the pin scale.",
 
   // ==================================================================================
-  //  Feature: Public Locations
-  // ==================================================================================
-
-  "Features.PublicLocations.SettingsCommandDescription": "Toggle the Public Location Settings window.",
-
-  // ==================================================================================
   //  Feature: Waypoint Utilities
   // ==================================================================================
 
   "Features.WaypointUtil.SettingsCommandDescription": "A selection of utility commands that makes working with waypoints a lot easier.",
   "Features.WaypointUtil.Confirm": "confirm", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
   "Features.WaypointUtil.ConfirmationMessage": "Type `.wpUtil {0}` to confirm your choice.",
+  "Features.WaypointUtil.PurgedWaypointCount": "{0} {1} deleted.", // Example: "1 waypoint deleted." OR "2 waypoints deleted."
+  "Features.WaypointUtil.AddedWaypointCount": "{0} {1} added.", // Example: "1 waypoint added." OR "2 waypoints added."
 
   // Waypoint Import Window
   "Features.WaypointUtil.Dialogue.Imports.Title": "Import Waypoints",

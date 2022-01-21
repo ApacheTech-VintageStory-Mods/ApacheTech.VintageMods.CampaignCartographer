@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ApacheTech.Common.Extensions.Harmony;
 using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun;
 using ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun.Dialogue;
@@ -35,9 +34,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
         // DEV NOTE:    What started off as a service with noble intentions, has now become a homunculus.
 
         private readonly ICoreClientAPI _capi;
+        public WorldMapManager WorldMap { get; }
 
         private readonly List<ManualWaypointTemplateModel> _defaultWaypoints;
-        public WorldMapManager WorldMap { get; }
 
         public SortedDictionary<string, ManualWaypointTemplateModel> WaypointTypes { get; } = new();
 
@@ -144,37 +143,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                 .FirstOrNull();
         }
 
-        public void PurgeWaypointsNearby(float radius)
-        {
-            var playerPos = _capi.World.Player.Entity.Pos.AsBlockPos;
-            PurgeWaypoints(p => p.IsInHorizontalRangeOf(playerPos, radius));
-        }
-
-        public void PurgeWaypointsByIcon(string icon)
-        {
-            PurgeWaypoints(p => p.Title.Equals(icon, StringComparison.InvariantCultureIgnoreCase));
-        }
-
-        public void PurgeAll()
-        {
-            PurgeWaypoints(null);
-        }
-
-        public void PurgeWaypointsByColour(string colour)
-        {
-            PurgeWaypoints(p => p.Color == colour.ColourValue());
-        }
-
-        public void PurgeWaypointsByTitle(string partialTitle)
-        {
-            PurgeWaypoints(p => p.Title.StartsWith(partialTitle, StringComparison.InvariantCultureIgnoreCase));
-        }
-
-        public void PurgeWaypointsAtPos(BlockPos position)
-        {
-            PurgeWaypoints(p => p.Position.AsBlockPos.Equals(position));
-        }
-
         /// <summary>
         ///     Returns a list of all waypoints at a given position.
         /// </summary>
@@ -220,23 +188,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
             return list;
         }
 
-        private void PurgeWaypoints(Func<Waypoint, bool> predicate)
-        {
-            Task.Factory.StartNew(() =>
-            {
-                var waypoints = GetWaypoints(predicate);
-                foreach (var waypoint in waypoints)
-                {
-                    _capi.SendChatMessage($"/waypoint remove {waypoint.Key}");
-                    Thread.Sleep(50);
-                }
-                _capi.Event.EnqueueMainThreadTask(() =>
-                    _capi.Event.RegisterCallback(_ =>
-                        WorldMap.GetField<IClientNetworkChannel>("clientChannel")
-                            .SendPacket(new OnViewChangedPacket()), 500), "");
-            });
-        }
-
         public void AddWaypoints(IEnumerable<WaypointDto> waypoints)
         {
             Task.Factory.StartNew(() =>
@@ -248,5 +199,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                 }
             });
         }
+
+        public WaypointPurger Purge => new(_capi, WorldMap);
     }
 }

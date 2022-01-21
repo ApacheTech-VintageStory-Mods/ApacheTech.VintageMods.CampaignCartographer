@@ -4,7 +4,6 @@ using System.Linq;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
-using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.System;
 using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
 using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
@@ -52,8 +51,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         private GuiElementDropDown ColourComboBox => SingleComposer.GetDropDown("cbxColour");
         private GuiElementCustomDraw ColourPreviewBox => SingleComposer.GetCustomDraw("pbxColour");
         private GuiElementDropDown IconComboBox => SingleComposer.GetDropDown("cbxIcon");
-        private GuiElementNumberInput HorizontalRadiusTextBox => SingleComposer.GetNumberInput("txtHorizontalRadius");
-        private GuiElementNumberInput VerticalRadiusTextBox => SingleComposer.GetNumberInput("txtVerticalRadius");
+        private GuiElementSlider HorizontalRadiusTextBox => SingleComposer.GetSlider("txtHorizontalRadius");
+        private GuiElementSlider VerticalRadiusTextBox => SingleComposer.GetSlider("txtVerticalRadius");
 
         public Action<BlockSelectionWaypointTemplate> OnOkAction { get; set; }
 
@@ -66,8 +65,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 ColourComboBox.SetSelectedValue(_waypoint.Colour.ToLowerInvariant());
                 ColourPreviewBox.Redraw();
                 IconComboBox.SetSelectedValue(_waypoint.DisplayedIcon);
-                HorizontalRadiusTextBox.SetValue(_waypoint.HorizontalCoverageRadius);
-                VerticalRadiusTextBox.SetValue(_waypoint.VerticalCoverageRadius);
+                HorizontalRadiusTextBox.SetValues(_waypoint.HorizontalCoverageRadius, 0, 50, 1);
+                VerticalRadiusTextBox.SetValues(_waypoint.VerticalCoverageRadius, 0, 50, 1);
             }, "");
         }
 
@@ -117,7 +116,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "HCoverage"), labelFont, EnumTextOrientation.Right, left, "lblHorizontalRadius")
                 .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "HCoverage.HoverText"), textInputFont, 260, left)
-                .AddNumberInput(right, OnHorizontalRadiusChanged, textInputFont, "txtHorizontalRadius");
+                .AddSlider(OnHorizontalRadiusChanged, right.FlatCopy().WithFixedHeight(20), "txtHorizontalRadius");
 
             //
             // Vertical Radius
@@ -129,7 +128,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "VCoverage"), labelFont, EnumTextOrientation.Right, left, "lblVerticalRadius")
                 .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "VCoverage.HoverText"), textInputFont, 260, left)
-                .AddNumberInput(right, OnVerticalRadiusChanged, textInputFont, "txtVerticalRadius");
+                .AddSlider(OnVerticalRadiusChanged, right.FlatCopy().WithFixedHeight(20), "txtVerticalRadius");
 
             //
             // Buttons
@@ -169,33 +168,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             _waypoint.ServerIcon = icon;
         }
 
-        private static int ParseRadiusValue(string input)
+        private bool OnHorizontalRadiusChanged(int radius)
         {
-            if (string.IsNullOrWhiteSpace(input)) return 10;
-            return int.TryParse(input.GetNumbers(), out var value)
-                ? value : 10;
+            _waypoint.HorizontalCoverageRadius = radius;
+            return true;
         }
 
-        private void OnHorizontalRadiusChanged(string input)
+        private bool OnVerticalRadiusChanged(int radius)
         {
-            var radius = ParseRadiusValue(input);
-            _waypoint.HorizontalCoverageRadius = GameMath.Clamp(radius, 0, 50);
-
-            if (!input.OnlyContainsNumbers() || radius is > 50 or < 0 || string.IsNullOrWhiteSpace(input))
-            {
-                HorizontalRadiusTextBox.SetValue(GameMath.Clamp(radius, 0, 50));
-            }
-        }
-
-        private void OnVerticalRadiusChanged(string input)
-        {
-            var radius = ParseRadiusValue(input);
-            _waypoint.VerticalCoverageRadius = GameMath.Clamp(radius, 0, 50);
-
-            if (!input.OnlyContainsNumbers() || radius is > 50 or < 0 || string.IsNullOrWhiteSpace(input))
-            {
-                VerticalRadiusTextBox.SetValue(GameMath.Clamp(radius, 0, 50));
-            }
+            _waypoint.VerticalCoverageRadius = radius;
+            return true;
         }
 
         private bool OnCancelButtonPressed()
