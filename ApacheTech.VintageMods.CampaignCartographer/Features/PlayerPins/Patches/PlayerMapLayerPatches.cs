@@ -135,17 +135,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             var rgba = colour.Normalise();
             var outline = new[] { 0d, 0d, 0d, rgba[3] };
 
-            imageSurface = new ImageSurface(Format.Argb32, scale, scale);
-            context = new Context(imageSurface);
+            using var imageSurface = new ImageSurface(Format.Argb32, scale, scale);
+            using var context = new Context(imageSurface);
 
             context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
             context.Paint();
             _capi.Gui.Icons.DrawMapPlayer(context, 0, 0, scale, scale, outline, rgba);
 
             var texture = _capi.Gui.LoadCairoTexture(imageSurface, false);
-
-            context.Dispose();
-            imageSurface.Dispose();
 
             return new LoadedTexture(_capi, texture, scale, scale);
         }
