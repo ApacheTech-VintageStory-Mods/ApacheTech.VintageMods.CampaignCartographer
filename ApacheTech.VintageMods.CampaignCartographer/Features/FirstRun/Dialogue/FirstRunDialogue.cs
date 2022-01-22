@@ -48,7 +48,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun.Dialogue
             var squareBounds = ElementBounds.FixedSize(EnumDialogArea.CenterTop, width, height).WithFixedOffset(0, 30);
 
             composer
-                //.AddImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
+                .AddStaticImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "AutoWaypointsButton"), OnOpenAutoWaypoints, ButtonBounds(0.5f, 400, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.FirstRun", "PlayerPinsButton"), OnOpenPlayerPins, ButtonBounds(1.0f, 400, height))
                 .AddStaticText(
