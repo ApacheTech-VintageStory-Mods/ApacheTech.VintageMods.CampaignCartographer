@@ -100,8 +100,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
             composer.AddDynamicCustomDraw(textBounds.FlatCopy().WithFixedWidth(textBounds.fixedWidth + sliderWidth + 10), OnPreviewPanelDraw, "pnlPreview");
 
             textBounds = textBounds.BelowCopy(fixedDeltaY: switchPadding);
-            composer.AddButton(LangEx.FeatureString("PlayerPins", "Dialogue.Randomise"), OnRandomise,
-                textBounds.FlatCopy().WithFixedWidth(360).WithFixedHeight(GuiStyle.TitleBarHeight + 1.0), EnumButtonStyle.Small);
+            composer.AddSmallButton(LangEx.FeatureString("PlayerPins", "Dialogue.Randomise"), OnRandomise,
+                textBounds.FlatCopy().WithFixedWidth(360).WithFixedHeight(GuiStyle.TitleBarHeight + 1.0));
 
             SingleComposer = composer.EndChildElements().Compose();
         }

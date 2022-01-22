@@ -26,6 +26,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static IDictionary<IPlayer, EntityMapComponent> PlayerPins { get; set; }
         private static Dictionary<string, LoadedTexture> PlayerPinTextures { get; set; }
 
+        private static ImageSurface _imageSurface;
+        private static Context _context;
+
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
@@ -102,15 +105,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             return false;
         }
 
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(PlayerMapLayer), "Dispose")]
-        public static bool Patch_PlayerMapLayer_Dispose_Prefix()
-        {
-            PlayerPins.Purge();
-            PlayerPinTextures.Purge();
-            return true;
-        }
-
         private static void OnPlayerDespawn(IPlayer player)
         {
             if (!PlayerPins.TryGetValue(player, out var entityMapComponent)) return;
@@ -137,25 +131,33 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             PlayerPins.Add(player, comp);
         }
 
-        private static ImageSurface GetTexture(Color colour, int scale)
-        {
-            scale += 16;
-            var rgba = colour.Normalise();
-            var outline = new[] { 0d, 0d, 0d, rgba[3] };
-            var surface = new ImageSurface(Format.Argb32, scale, scale);
-            var ctx = new Context(surface);
-            ctx.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
-            ctx.Paint();
-            _capi.Gui.Icons.DrawMapPlayer(ctx, 0, 0, scale, scale, outline, rgba);
-            return surface;
-        }
-
         private static LoadedTexture LoadTexture(Color colour, int scale)
         {
-            var surface = GetTexture(colour, scale);
-            var texture = _capi.Gui.LoadCairoTexture(surface, false);
             scale += 16;
+
+            var rgba = colour.Normalise();
+            var outline = new[] { 0d, 0d, 0d, rgba[3] };
+
+            _imageSurface = new ImageSurface(Format.Argb32, scale, scale);
+            _context = new Context(_imageSurface);
+
+            _context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
+            _context.Paint();
+            _capi.Gui.Icons.DrawMapPlayer(_context, 0, 0, scale, scale, outline, rgba);
+
+            var texture = _capi.Gui.LoadCairoTexture(_imageSurface, false);
             return new LoadedTexture(_capi, texture, scale, scale);
+        }
+
+        [HarmonyPrefix]
+        [HarmonyPatch(typeof(PlayerMapLayer), "Dispose")]
+        public static bool Patch_PlayerMapLayer_Dispose_Prefix()
+        {
+            PlayerPins.Purge();
+            PlayerPinTextures.Purge();
+            _context.Dispose();
+            _imageSurface.Dispose();
+            return true;
         }
     }
 }

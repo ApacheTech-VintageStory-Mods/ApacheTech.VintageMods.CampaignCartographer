@@ -9,6 +9,9 @@
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release;Package</Configurations>
+		<Version>2.0.1.0</Version>
+		<AssemblyVersion>$(Version)</AssemblyVersion>
+		<FileVersion>$(Version)</FileVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -101,9 +104,6 @@
 
 	<ItemGroup>
 		<!-- Vintage Story Game Libraries -->
-		<Reference Include="Microsoft.CSharp">
-		  <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll</HintPath>
-		</Reference>
 		<Reference Include="Vintagestory">
 			<HintPath>$(VINTAGE_STORY)\Vintagestory.exe</HintPath>
 			<Private>false</Private>
