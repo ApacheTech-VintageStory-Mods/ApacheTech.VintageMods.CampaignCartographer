@@ -22,6 +22,7 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Package|AnyCPU'">
 	  <Optimize>true</Optimize>
+	  <DefineConstants>TRACE</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>

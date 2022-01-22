@@ -26,9 +26,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static IDictionary<IPlayer, EntityMapComponent> PlayerPins { get; set; }
         private static Dictionary<string, LoadedTexture> PlayerPinTextures { get; set; }
 
-        private static ImageSurface _imageSurface;
-        private static Context _context;
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
@@ -138,15 +135,20 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             var rgba = colour.Normalise();
             var outline = new[] { 0d, 0d, 0d, rgba[3] };
 
-            _imageSurface = new ImageSurface(Format.Argb32, scale, scale);
-            _context = new Context(_imageSurface);
+            var imageSurface = new ImageSurface(Format.Argb32, scale, scale);
+            var context = new Context(imageSurface);
 
-            _context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
-            _context.Paint();
-            _capi.Gui.Icons.DrawMapPlayer(_context, 0, 0, scale, scale, outline, rgba);
+            context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
+            context.Paint();
+            _capi.Gui.Icons.DrawMapPlayer(context, 0, 0, scale, scale, outline, rgba);
+            var texture = _capi.Gui.LoadCairoTexture(imageSurface, false);
+            var loadedTexture = new LoadedTexture(_capi, texture, scale, scale);
 
-            var texture = _capi.Gui.LoadCairoTexture(_imageSurface, false);
-            return new LoadedTexture(_capi, texture, scale, scale);
+            // Explicitly disposing the context and surface, after each use.
+            context.Dispose();
+            imageSurface.Dispose();
+
+            return loadedTexture;
         }
 
         [HarmonyPrefix]
@@ -155,8 +157,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         {
             PlayerPins.Purge();
             PlayerPinTextures.Purge();
-            _context.Dispose();
-            _imageSurface.Dispose();
             return true;
         }
     }

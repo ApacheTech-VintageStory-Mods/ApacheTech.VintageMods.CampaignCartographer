@@ -86,8 +86,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             context.Paint();
 
             // Icon
-            var squareSize = 50;
-            var outerBounds = squareSize + 15;
+            const int squareSize = 50;
+            const int outerBounds = squareSize + 15;
             PaintIcon(context, Bounds.absPaddingX + 5, Bounds.absPaddingY + 5, squareSize);
 
             // Main Title.

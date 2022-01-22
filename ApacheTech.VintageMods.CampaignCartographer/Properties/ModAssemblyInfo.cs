@@ -11,7 +11,7 @@ using Vintagestory.API.Common;
     "campaigncartographer",
     Description = "Adds multiple map related features to the game, custom marker pins, GPS, automatic waypoint markers, and more.",
     Side = "Universal",
-    Version = "2.0.1",
+    Version = "2.0.2-pre.1",
     RequiredOnClient = false,
     RequiredOnServer = false,
     NetworkVersion = "1.0.0",
@@ -25,4 +25,4 @@ using Vintagestory.API.Common;
     ModName = "Campaign Cartographer",
     RootDirectoryName = "CampaignCartographer",
     NetworkVersion = "1.0.0",
-    Version = "2.0.1")]
+    Version = "2.0.2")]

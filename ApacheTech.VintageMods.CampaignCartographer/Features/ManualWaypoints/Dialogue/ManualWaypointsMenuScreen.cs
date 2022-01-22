@@ -49,7 +49,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             
             
             composer
-                .AddImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
+                //.AddImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(0.5f, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(1.0f, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "DonateToModAuthor"), OnDonateButtonPressed, ButtonBounds(2.0f, width, height))
