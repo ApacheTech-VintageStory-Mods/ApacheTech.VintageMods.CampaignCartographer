@@ -52,6 +52,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             RoundRectangle(context, 0.0, 0.0, size, size, 2.0);
             fillWithPattern(api, context, waterTextureName);
             generateTexture(imageSurface, ref _switchOnTextureId);
+            context.Dispose();
+            imageSurface.Dispose();
         }
 
         private void Compose()
@@ -100,6 +102,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             context.Fill();
             EmbossRoundRectangleElement(context, x, y, scaledSwitchSize, scaledSwitchSize, true, 1, 2);
             generateTexture(imageSurface, ref _cellTexture);
+            context.Dispose();
+            imageSurface.Dispose();
         }
 
         private void ComposeHover(bool left, ref int textureId)

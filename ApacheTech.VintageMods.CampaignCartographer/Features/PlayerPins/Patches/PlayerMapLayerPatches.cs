@@ -26,9 +26,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static IDictionary<IPlayer, EntityMapComponent> PlayerPins { get; set; }
         private static Dictionary<string, LoadedTexture> PlayerPinTextures { get; set; }
 
-        private static ImageSurface _imageSurface;
-        private static Context _context;
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
@@ -138,14 +135,18 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             var rgba = colour.Normalise();
             var outline = new[] { 0d, 0d, 0d, rgba[3] };
 
-            _imageSurface = new ImageSurface(Format.Argb32, scale, scale);
-            _context = new Context(_imageSurface);
+            surface = new ImageSurface(Format.Argb32, scale, scale);
+            context = new Context(surface);
 
-            _context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
-            _context.Paint();
-            _capi.Gui.Icons.DrawMapPlayer(_context, 0, 0, scale, scale, outline, rgba);
+            context.SetSourceRGBA(0.0, 0.0, 0.0, 0.0);
+            context.Paint();
+            _capi.Gui.Icons.DrawMapPlayer(context, 0, 0, scale, scale, outline, rgba);
 
-            var texture = _capi.Gui.LoadCairoTexture(_imageSurface, false);
+            var texture = _capi.Gui.LoadCairoTexture(surface, false);
+
+            context.Dispose();
+            surface.Dispose();
+
             return new LoadedTexture(_capi, texture, scale, scale);
         }
 
@@ -155,8 +156,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         {
             PlayerPins.Purge();
             PlayerPinTextures.Purge();
-            _context.Dispose();
-            _imageSurface.Dispose();
             return true;
         }
     }

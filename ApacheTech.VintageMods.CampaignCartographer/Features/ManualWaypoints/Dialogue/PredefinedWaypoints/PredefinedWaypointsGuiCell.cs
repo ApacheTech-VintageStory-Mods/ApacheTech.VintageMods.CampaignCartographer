@@ -56,6 +56,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             RoundRectangle(context, 0.0, 0.0, size, size, 2.0);
             fillWithPattern(api, context, waterTextureName);
             generateTexture(imageSurface, ref _switchOnTextureId);
+            context.Dispose();
+            imageSurface.Dispose();
         }
 
         private void PaintIcon(Context context, double x, double y, double squareSize)
@@ -120,6 +122,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             context.Fill();
             EmbossRoundRectangleElement(context, x, y, scaledSwitchSize, scaledSwitchSize, true, 1, 2);
             generateTexture(imageSurface, ref _cellTexture);
+            context.Dispose();
+            imageSurface.Dispose();
         }
 
         private void ComposeHover(bool left, ref int textureId)
