@@ -45,8 +45,12 @@
   "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "Automatically add waypoints for different metal types, as you collect surface deposits.",
   "Features.AutoWaypoints.Dialogue.lblLooseStones": "Loose Stones:",
   "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "Automatically add waypoints for different rock types, as you collect surface deposits.",
-  "Features.AutoWaypoints.Dialogue.lblOrganics": "Organic Matter:",
-  "Features.AutoWaypoints.Dialogue.lblOrganics.HoverText": "Automatically add waypoints for berry bushes, mushrooms, and resin, as you forage.",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms": "Mushrooms:",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms.HoverText": "Automatically add waypoints for mushrooms, as you forage.",
+  "Features.AutoWaypoints.Dialogue.lblResin": "Resin:",
+  "Features.AutoWaypoints.Dialogue.lblResin.HoverText": "Automatically add waypoints for resin, as you forage.",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes": "Berry Bushes:",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes.HoverText": "Automatically add waypoints for berry bushes, as you forage.",
 
   // ==================================================================================
   //  Feature: Centre Map
@@ -74,6 +78,7 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Whispers Allowed:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Determines whether or not players can whisper GPS coordinates to each other.",
+  "Features.GPS.ShowOnMap": "Show On Map",
 
   // ==================================================================================
   //  Feature: Manual Waypoints

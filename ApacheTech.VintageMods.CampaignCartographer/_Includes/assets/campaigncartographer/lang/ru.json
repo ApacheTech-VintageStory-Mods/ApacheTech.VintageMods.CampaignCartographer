@@ -46,8 +46,12 @@
   "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "Автоматическое добавление путевых точек для различных типов металлов по мере сбора поверхностных залежей.",
   "Features.AutoWaypoints.Dialogue.lblLooseStones": "Свободно лежащие камни:",
   "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "Автоматическое добавление путевых точек для различных типов пород по мере сбора поверхностных отложений.",
-  "Features.AutoWaypoints.Dialogue.lblOrganics": "Органическая материя:",
-  "Features.AutoWaypoints.Dialogue.lblOrganics.HoverText": "Автоматически добавляйте путевые точки для ягодных кустов, грибов и смолы, по мере того как занимаетесь собирательством.",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms": "Грибы:",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms.HoverText": "Автоматически добавлять путевые точки для грибов, по мере того как вы добываете корм.",
+  "Features.AutoWaypoints.Dialogue.lblResin": "Смола:",
+  "Features.AutoWaypoints.Dialogue.lblResin.HoverText": "Автоматическое добавление путевых точек для смолы по мере того как вы добываете корм.",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes": "Ягодные кусты:",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes.HoverText": "Автоматическое добавление путевых точек для ягодных кустов по мере того как вы добываете корм.",
 
   // ==================================================================================
   //  Feature: Centre Map
@@ -75,6 +79,7 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Шепот разрешен:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Определяет, могут ли игроки шепотом сообщать друг другу GPS-координаты.",
+  "Features.GPS.ShowOnMap": "Показать на карте",
 
   // ==================================================================================
   //  Feature: Manual Waypoints
