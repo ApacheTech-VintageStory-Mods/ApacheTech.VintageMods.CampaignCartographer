@@ -9,7 +9,7 @@
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release;Package</Configurations>
-		<Version>2.0.1.0</Version>
+		<Version>2.0.2.0</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 	</PropertyGroup>
@@ -18,11 +18,16 @@
 		<ModPackagerDir>C:\Users\Apache\source\repos\ModPackager\ModPackager\bin\Release\net6.0\publish\win-x64\</ModPackagerDir>
 		<ModPackagerName>ModPackager.exe</ModPackagerName>
 		<ModPackagerPath>$(ModPackagerDir)$(ModPackagerName)</ModPackagerPath>
+
+		<ModInfoGeneratorDir>C:\Users\Apache\source\repos\Utils\ModInfoGenerator\</ModInfoGeneratorDir>
+		<ModInfoGeneratorName>ModInfoGenerator.exe</ModInfoGeneratorName>
+		<ModInfoGeneratorPath>$(ModInfoGeneratorDir)$(ModInfoGeneratorName)</ModInfoGeneratorPath>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Package|AnyCPU'">
 	  <Optimize>true</Optimize>
 	  <DefineConstants>TRACE</DefineConstants>
+	  <DocumentationFile></DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -79,6 +84,7 @@
 	<ItemGroup>
 		<Folder Include="Features\PlayerPins\Extensions\" />
 		<Folder Include="Properties\PublishProfiles\" />
+		<Folder Include="Services\GUI\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -169,9 +175,7 @@
 	</Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="if $(Configuration) == Debug (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;xcopy &quot;$(TargetDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if $(Configuration) == Package (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)_Includes\&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;:: Package the mod. ::&#xD;&#xA;cd &quot;$(ModPackagerDir)&quot;&#xD;&#xA;&quot;$(ModPackagerPath)&quot; -a &quot;$(TargetPath)&quot;&#xD;&#xA;&#xD;&#xA;:: Copy mod package to releases directory. ::&#xD;&#xA;copy /y &quot;$(TargetDir)release\*.zip&quot; &quot;$(SolutionDir).releases&quot;&#xD;&#xA;&#xD;&#xA;)" />
+	  <Exec Command="if $(Configuration) == Debug (&#xD;&#xA;&#xD;&#xA;:: Generator Mod Info file. ::&#xD;&#xA;cd &quot;$(ModInfoGeneratorDir)&quot;&#xD;&#xA;&quot;$(ModInfoGeneratorPath)&quot; -a &quot;$(TargetPath)&quot; -o $(TargetDir)&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;xcopy &quot;$(TargetDir)_Includes\&quot; &quot;$(TargetDir)&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if $(Configuration) == Package (&#xD;&#xA;&#xD;&#xA;:: Copy all other relevant files to target directory. ::&#xD;&#xA;xcopy &quot;$(ProjectDir)_Includes\&quot; &quot;$(TargetDir)_Includes\&quot; /y /e /s&#xD;&#xA;&#xD;&#xA;:: Package the mod. ::&#xD;&#xA;cd &quot;$(ModPackagerDir)&quot;&#xD;&#xA;&quot;$(ModPackagerPath)&quot; -a &quot;$(TargetPath)&quot;&#xD;&#xA;&#xD;&#xA;:: Copy mod package to releases directory. ::&#xD;&#xA;copy /y &quot;$(TargetDir)release\*.zip&quot; &quot;$(SolutionDir).releases&quot;&#xD;&#xA;&#xD;&#xA;)" />
 	</Target>
-
-	<ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

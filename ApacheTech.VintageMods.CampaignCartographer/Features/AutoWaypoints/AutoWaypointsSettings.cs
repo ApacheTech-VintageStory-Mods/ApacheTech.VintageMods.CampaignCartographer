@@ -1,5 +1,6 @@
 ﻿using ProtoBuf;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable UnusedMember.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
@@ -36,8 +37,18 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
         public bool LooseStones { get; set; }
 
         /// <summary>
-        ///     Determines whether Mushrooms, Resin, and Berry Bushes should be automatically waypointed.
+        ///     Determines whether Mushrooms should be automatically waypointed.
         /// </summary>
-        public bool Organics { get; set; }
+        public bool Mushrooms { get; set; }
+
+        /// <summary>
+        ///     Determines whether Resin should be automatically waypointed.
+        /// </summary>
+        public bool Resin { get; set; }
+
+        /// <summary>
+        ///     Determines whether Berry Bushes should be automatically waypointed.
+        /// </summary>
+        public bool BerryBushes { get; set; }
     }
 }
