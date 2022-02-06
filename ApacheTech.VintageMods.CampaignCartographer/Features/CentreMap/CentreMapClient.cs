@@ -126,7 +126,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
                 return;
             }
 
-            var displayPos = target.Entity.Pos.AsBlockPos.RelativeToSpawn(_capi.World);
+            var displayPos = target.Entity.Pos.AsBlockPos.RelativeToSpawn();
             var message = LangEx.FeatureString("CentreMap", "CentreMapOnPlayer", target.PlayerName, displayPos.X, displayPos.Y, displayPos.Z);
             RecentreAndProvideFeedback(target.Entity.Pos.XYZ, message);
 
@@ -153,7 +153,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         private void OnSpawnOption(string subCommandName, int groupId, CmdArgs args)
         {
             var pos = _capi.World.DefaultSpawnPosition.AsBlockPos;
-            var displayPos = pos.RelativeToSpawn(_capi.World);
+            var displayPos = pos.RelativeToSpawn() ?? pos;
             var message = LangEx.FeatureString("CentreMap", "CentreMapOnWorldSpawn", displayPos.X, displayPos.Z);
             RecentreAndProvideFeedback(pos.ToVec3d(), message);
         }
@@ -167,7 +167,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
             var target = _worldMap.WaypointMapLayer().ownWaypoints[waypointId];
 
             var pos = target.Position.AsBlockPos;
-            var displayPos = pos.RelativeToSpawn(_capi.World);
+            var displayPos = pos.RelativeToSpawn() ?? pos;
             var message = LangEx.FeatureString("CentreMap", "CentreMapOnWaypoint", waypointId, target.Title, displayPos.X, displayPos.Z);
             RecentreAndProvideFeedback(pos.ToVec3d(), message);
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Abstractions;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
 using Newtonsoft.Json;
 using ProtoBuf;

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.Extensions.System;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
