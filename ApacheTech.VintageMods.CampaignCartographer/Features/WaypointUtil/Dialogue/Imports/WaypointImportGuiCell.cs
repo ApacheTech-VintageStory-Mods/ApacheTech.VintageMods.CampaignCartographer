@@ -79,7 +79,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             textUtil.AutobreakAndDrawMultilineTextAt(context, Font, Cell.DetailText, Bounds.absPaddingX + 25, Bounds.absPaddingY + _titleTextHeight + Bounds.absPaddingY + 5, Bounds.InnerWidth);
 
             // Top Right Text: Location of Waypoint, relative to spawn.
-            var textExtents = Font.GetTextExtents(Cell.RightTopText);
+            var textExtents = Font.GetTextExtents(Cell.RightTopText ?? "");
             textUtil.AutobreakAndDrawMultilineTextAt(context, Font, Cell.RightTopText,
                 Bounds.absPaddingX + Bounds.InnerWidth - textExtents.Width - num - scaled(10.0), Bounds.absPaddingY + scaled(Cell.RightTopOffY), textExtents.Width + 1.0, EnumTextOrientation.Right);
 

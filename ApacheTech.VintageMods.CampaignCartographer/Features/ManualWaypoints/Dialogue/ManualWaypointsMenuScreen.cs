@@ -1,7 +1,8 @@
-﻿using ApacheTech.Common.Extensions.Harmony;
-using ApacheTech.Common.Extensions.System;
+﻿using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue.PredefinedWaypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Exports;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Imports;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.GameContent.GUI;
@@ -11,6 +12,7 @@ using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.API.Config;
 
+// ReSharper disable AccessToModifiedClosure
 // ReSharper disable ClassNeverInstantiated.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue
@@ -26,19 +28,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             Title = LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "Title");
             Alignment = EnumDialogArea.CenterMiddle;
             ShowTitleBar = false;
-        }
-
-        public override bool DisableMouseGrab => true;
-
-        /// <summary>
-        ///     Fires when the GUI is opened.
-        /// </summary>
-        public override void OnGuiOpened()
-        {
-            if (capi.IsSinglePlayer && !ApiEx.ClientMain.GetField<bool>("OpenedToLan"))
-            {
-                ApiEx.ClientMain.PauseGame(true);
-            }
+            Modal = true;
+            ModalTransparency = 0f;
         }
 
         protected override void ComposeBody(GuiComposer composer)
@@ -46,20 +37,41 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             const double width = 400.0;
             const double height = 200.0;
             
-            var squareBounds = ElementBounds.FixedSize(EnumDialogArea.CenterTop, width, height).WithFixedOffset(0, 30); 
-            
+            var squareBounds = ElementBounds.FixedSize(EnumDialogArea.CenterTop, width, height).WithFixedOffset(0, 30);
+            var row = 0f;
+
             composer
                 .AddStaticImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
-                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(0.5f, width, height))
-                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(1.0f, width, height))
-                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "DonateToModAuthor"), OnDonateButtonPressed, ButtonBounds(2.0f, width, height))
-                .AddSmallButton(Lang.Get("pause-back2game"), TryClose, ButtonBounds(2.5f, width, height));
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "Title"), OnExportWaypointButtonPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "Title"), OnImportWaypointButtonPressed, ButtonBounds(ref row, width, height))
+                .Execute(() => row += 0.5f)
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "DonateToModAuthor"), OnDonateButtonPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(Lang.Get("pause-back2game"), TryClose, ButtonBounds(ref row, width, height));
         }
 
-        private static ElementBounds ButtonBounds(float offset, double width, double height)
+        private static bool OnImportWaypointButtonPressed()
         {
+            var dialogue = ModServices.IOC.Resolve<WaypointImportDialogue>();
+            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
+                dialogue.TryClose();
+            return dialogue.TryOpen();
+        }
+
+        private static bool OnExportWaypointButtonPressed()
+        {
+            var dialogue = ModServices.IOC.Resolve<WaypointExportDialogue>();
+            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
+                dialogue.TryClose();
+            return dialogue.TryOpen();
+        }
+
+        private static ElementBounds ButtonBounds(ref float row, double width, double height)
+        {
+            row += 0.5f;
             return ElementStdBounds
-                .MenuButton(offset)
+                .MenuButton(row)
                 .WithFixedOffset(0, height)
                 .WithFixedSize(width, 30);
         }
@@ -93,19 +105,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             });
             dialogue.TryOpen();
             return true;
-        }
-
-        /// <summary>
-        ///     Attempts to close this dialogue- triggering the OnCloseDialogue event.
-        /// </summary>
-        /// <returns>Was this dialogue successfully closed?</returns>
-        public override bool TryClose()
-        {
-            if (capi.IsSinglePlayer && !ApiEx.ClientMain.GetField<bool>("OpenedToLan"))
-            {
-                ApiEx.ClientMain.PauseGame(false);
-            }
-            return base.TryClose();
         }
     }
 }

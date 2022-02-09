@@ -2,6 +2,7 @@
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
@@ -22,6 +23,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         public override void StartClientSide(ICoreClientAPI capi)
         {
             capi.RegisterCommand(ModServices.IOC.Resolve<ManualWaypointsChatCommand>());
+
+            capi.Input.RegisterTransientGuiDialogueHotKey<ManualWaypointsMenuScreen>(LangEx.ModTitle(), GlKeys.F7);
 
             FluentChat.ClientCommand("wpsettings")
                 .RegisterWith(capi)

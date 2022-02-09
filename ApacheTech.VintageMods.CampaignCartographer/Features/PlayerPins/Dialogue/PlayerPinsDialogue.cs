@@ -22,8 +22,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
     public class PlayerPinsDialogue : FeatureSettingsDialogue<PlayerPinsSettings>
     {
         [SidedConstructor(EnumAppSide.Client)]
-        public PlayerPinsDialogue(ICoreClientAPI capi, PlayerPinsSettings settings) 
-            : base(capi, settings, "PlayerPins") { }
+        public PlayerPinsDialogue(ICoreClientAPI capi, PlayerPinsSettings settings)
+            : base(capi, settings, "PlayerPins")
+        {
+            Movable = true;
+        }
 
         protected override void RefreshValues()
         {

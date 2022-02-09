@@ -237,11 +237,19 @@
   "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} путевых точек выбрано, из {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Открыть папку для Импорта",
   "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Импортировать выбранные путевые точки",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationTitle": "Подтверждение импорта путевых точек",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationMessage": "Вы собираетесь импортировать {0} путевых точек из {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.FileText": "Файл: {0}",
   "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Создано: {0:G}",
   "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "Импортировать путевые точки",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "Назад",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "Импортировать выбранные путевые точки",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "Подтверждение импорта путевых точек",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "Вы собираетесь импортировать {0} путевых точек",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "Подтверждение удаления путевой точки",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "Вы уверены, что хотите удалить эту путевую точку из списка импорта?",
+
 
   // Waypoint Export Window
   "Features.WaypointUtil.Dialogue.Exports.Title": "Экспорт путевых точек",

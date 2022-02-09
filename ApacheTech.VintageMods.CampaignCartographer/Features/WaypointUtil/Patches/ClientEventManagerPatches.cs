@@ -14,8 +14,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Patc
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(ClientEventManager), "TriggerNewServerChatLine")]
+        [HarmonyPriority(Priority.First)]
         public static bool Patch_ClientEventManger_TriggerNewServerChatLine_Prefix(string message)
         {
+            if (string.IsNullOrWhiteSpace(message)) return true;
+
             var waypointAddedText = Lang.Get("Ok, waypoint nr. {0} added", 0);
             var isWaypointAddedMessage = message.StartsWith(waypointAddedText.Substring(0, 11));
 

@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using ApacheTech.Common.Extensions.Harmony;
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Model;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
+using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions;
-using ApacheTech.VintageMods.Core.GameContent.GUI;
 using Newtonsoft.Json;
 using Vintagestory.API.Client;
 using Vintagestory.API.Util;
@@ -25,8 +24,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
     /// <seealso cref="GenericDialogue" />
     public class WaypointImportDialogue : GenericDialogue
     {
-        private readonly WaypointService _service;
-
         private readonly FileSystemWatcher _watcher;
         private int _watcherLock;
 
@@ -44,10 +41,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         /// 	Initialises a new instance of the <see cref="WaypointImportDialogue" /> class.
         /// </summary>
         /// <param name="capi">Client API pass-through</param>
-        /// <param name="service">IOC Injected Waypoint Service.</param>
-        public WaypointImportDialogue(ICoreClientAPI capi, WaypointService service) : base(capi)
+        public WaypointImportDialogue(ICoreClientAPI capi) : base(capi)
         {
-            _service = service;
             Title = LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "Title");
             Alignment = EnumDialogArea.CenterMiddle;
 
@@ -271,6 +266,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         private bool OnImportSelectedWaypointsButtonPressed()
         {
             // TODO: O/C and SRP issues.
+            // Code-behind is still a part of the APL, and should not touch the BLL, only its end-points.
             var files = _filesList.elementCells
                 .Cast<WaypointImportGuiCell>()
                 .Where(p => p.On)
@@ -278,22 +274,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
                 .ToList();
 
             if (!files.Any()) return false;
-            var code = LangEx.FeatureCode("WaypointUtil.Dialogue.Imports", "File");
-            var pluralisedFile = LangEx.Pluralise(code, files.Count);
-            var totalCount = files.Sum(p => p.Model.Waypoints.Count);
 
-            var title = LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "ConfirmationTitle");
-            var message = LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "ConfirmationMessage", 
-                totalCount.FormatLargeNumber(), files.Count.FormatLargeNumber(), pluralisedFile);
-
-            MessageBox.Show(title, message, ButtonLayout.OkCancel, () =>
+            var list = new List<WaypointDto>();
+            foreach (var file in files)
             {
-                foreach (var file in files)
-                {
-                    _service.AddWaypoints(file.Model.Waypoints);
-                }
-            });
-            return true;
+                list.AddRange(file.Model.Waypoints);
+            }
+            var dialogue = WaypointImportConfirmationDialogue.Create(list);
+            dialogue.TryOpen();
+            return TryClose();
         }
 
         #endregion

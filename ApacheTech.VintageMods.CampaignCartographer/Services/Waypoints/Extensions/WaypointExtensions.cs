@@ -9,6 +9,7 @@ using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
+// ReSharper disable CompareOfFloatsByEqualityOperator
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
@@ -188,6 +189,31 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
         public static Task<bool> WaypointExistsAtPosAsync(this BlockPos pos, Func<Waypoint, bool> filter = null)
         {
             return Task<bool>.Factory.StartNew(() => pos.WaypointExistsAtPos(filter));
+        }
+
+        /// <summary>
+        ///     The game does not implement any way of uniquely identifying waypoints, nor does it set waypoint objects as ValueTypes.
+        ///     So this is a memberwise equality checker, to see if one waypoint is the same as another waypoint, when jumping through the numerous hoops required.
+        ///     This method should not be needed... but here we are.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        /// <param name="target">The target.</param>
+        /// <returns>System.Boolean.</returns>
+        public static bool IsSameAs(this Waypoint source, Waypoint target)
+        {
+            if (source.Color != target.Color) return false;
+            if (source.OwningPlayerGroupId != target.OwningPlayerGroupId) return false;
+            if (source.Icon != target.Icon) return false;
+            if (source.Position.X != target.Position.X) return false;
+            if (source.Position.Y != target.Position.Y) return false;
+            if (source.Position.Z != target.Position.Z) return false;
+            if (source.Text != target.Text) return false;
+            if (source.OwningPlayerUid != target.OwningPlayerUid) return false;
+            if (source.Pinned != target.Pinned) return false;
+            if (source.ShowInWorld != target.ShowInWorld) return false;
+            if (source.Temporary != target.Temporary) return false;
+            if (source.Title != target.Title) return false;
+            return true;
         }
     }
 }

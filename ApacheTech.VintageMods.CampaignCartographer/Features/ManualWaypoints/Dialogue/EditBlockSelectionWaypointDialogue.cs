@@ -34,6 +34,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         private EditBlockSelectionWaypointDialogue(BlockSelectionWaypointTemplate waypoint) : base(ApiEx.Client)
         {
             Title = LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "Title");
+            ModalTransparency = 0.4f;
             Alignment = EnumDialogArea.CenterMiddle;
             _waypoint = waypoint;
             _icons = WaypointIconModel.GetVanillaIcons();

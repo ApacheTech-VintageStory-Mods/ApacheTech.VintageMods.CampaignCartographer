@@ -77,6 +77,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets
         public bool Pinned { get; set; }
 
         /// <summary>
+        ///     Gets or sets a value indicating whether this waypoint is currently enabled within the imports/exports list.
+        /// </summary>
+        /// <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
+        [JsonIgnore]
+        [ProtoIgnore]
+        public bool Enabled { get; set; } = true;
+
+        /// <summary>
         ///     Creates an instance of <see cref="WaypointDto"/> with generic default settings.
         /// </summary>
         [JsonIgnore]

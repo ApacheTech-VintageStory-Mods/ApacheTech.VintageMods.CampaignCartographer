@@ -31,6 +31,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         public WaypointExportConfirmationDialogue(ICoreClientAPI capi, List<WaypointDto> waypoints) : base(capi)
         {
             Title = LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "ConfirmationTitle");
+            Alignment = EnumDialogArea.CenterMiddle;
+            Modal = true;
             _model = new WaypointFileModel
             {
                 Waypoints = waypoints,
@@ -44,7 +46,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         }
 
         #region Form Composition
-        
+
         protected override void ComposeBody(GuiComposer composer)
         {
             var titleFont = CairoFont.WhiteSmallishText();

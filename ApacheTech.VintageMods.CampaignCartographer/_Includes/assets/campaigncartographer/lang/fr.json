@@ -229,7 +229,7 @@
   "Features.WaypointUtil.AddedWaypointCount": "{0} {1} ont été ajoutés.", // Par exemple: "1 marqueurs a été ajoutés." OU "2 marqueurs ont été ajoutés."
 
   // Waypoint Import Window
-  "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des waypoints",
+  "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des marqueurs",
   "Features.WaypointUtil.Dialogue.Imports.File-singular": "fichier",
   "Features.WaypointUtil.Dialogue.Imports.File-plural": "fichiers",
   "Features.WaypointUtil.Dialogue.Imports.Waypoint-singular": "marqueur",
@@ -237,11 +237,18 @@
   "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} marqueurs sélectionés, de {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Ouvrier le Dossier d'Importation",
   "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Importer les Marqueurs",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationTitle": "Confirmation des Marqueurs Importés",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationMessage": "Vous êtes sur le point d'importer {0} marqueurs de {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.FileText": "Fichier: {0}",
   "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Date d'enregitrement: {0:G}",
   "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "Importer des marqueurs",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "Retourner",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "Importer sélectionnés marqueurs",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "Confirmation des Marqueurs Importés",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "Vous êtes sur le point d'importer {0} marqueurs.",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "Confirmation des Marqueur Suppression",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "Êtes-vous sûr de vouloir supprimer ce marqueur de la liste d'importation?",
 
   // Waypoint Export Window
   "Features.WaypointUtil.Dialogue.Exports.Title": "Exportation des Marqueurs Waypoints",

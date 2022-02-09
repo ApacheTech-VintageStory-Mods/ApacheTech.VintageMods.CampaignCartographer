@@ -84,7 +84,7 @@
   //  Feature: Manual Waypoints
   // ==================================================================================
 
-  "Features.ManualWaypoints.SettingsCommandDescription": "Toggle the Manual Waypoint Settings window.",
+  "Features.ManualWaypoints.SettingsCommandDescription": "Toggle the Waypoint Settings.",
   "Features.ManualWaypoints.InvalidSyntax": "No waypoint type has been found with the syntax `{0}`. You can add new waypoint types by using the command `.wpSettings`",
 
   // Manual Waypoints. (.wp)
@@ -236,11 +236,18 @@
   "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} waypoints selected, from {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Open Imports Folder",
   "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Import Selected Waypoints",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationTitle": "Import Waypoints Confirmation",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationMessage": "You are about to import {0} waypoints from {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.FileText": "File: {0}",
   "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Created: {0:G}",
   "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "Import Waypoints",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "Back",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "Import Selected",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "Import Waypoints Confirmation",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "You are about to import {0} waypoints.",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "Confirm Waypoint Removal",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "Are you sure you want to remove this waypoint from the import list?",
 
   // Waypoint Export Window
   "Features.WaypointUtil.Dialogue.Exports.Title": "Export Waypoints",
@@ -258,5 +265,16 @@
   "Features.WaypointUtil.Dialogue.Exports.FileName": "File Name:",
   "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "The name to give the export file.",
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Exported Waypoints",
-  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Single-player World"
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Single-player World",
+
+  // ==================================================================================
+  //  Feature: Waypoint Manager
+  // ==================================================================================
+
+  // Waypoint Export Window
+  "Features.WaypointManager.Dialogue.Title": "Waypoint Manager",
+  "Features.WaypointManager.Dialogue.ExportWaypoints": "Export Waypoints",
+  "Features.WaypointManager.Dialogue.ImportWaypoints": "Import Waypoints",
+  "Features.WaypointManager.Dialogue.AddNew": "Add New Waypoint",
+  "Features.WaypointManager.Dialogue.Edit": "Edit Existing Waypoint"
 }
