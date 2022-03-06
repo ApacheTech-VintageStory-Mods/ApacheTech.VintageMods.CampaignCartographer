@@ -46,8 +46,12 @@
   "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "Ajoute automatiquement des marqueurs pour les différents types de métaux rocheux en surface quand vous les prenez.",
   "Features.AutoWaypoints.Dialogue.lblLooseStones": "Pierres en Surface:",
   "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "Ajoute automatiquement des marqueurs pour les différents pierres en surface lorsque vous les prenez.",
-  "Features.AutoWaypoints.Dialogue.lblOrganics": "Matières Organiques:",
-  "Features.AutoWaypoints.Dialogue.lblOrganics.HoverText": "Ajoute automatiquement des marqueurs pour les arbustes à fruits, les champignons, la résine quand vous les récoltez.",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms": "Champignons:",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms.HoverText": "Ajoute automatiquement des marqueurs pour les champignons, quand vous les récoltez.",
+  "Features.AutoWaypoints.Dialogue.lblResin": "Résine:",
+  "Features.AutoWaypoints.Dialogue.lblResin.HoverText": "Ajoute automatiquement des marqueurs pour la résine, quand vous les récoltez.",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes": "Arbustes à Fruits:",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes.HoverText": "Ajoute automatiquement des marqueurs pour les arbustes à fruits, quand vous les récoltez.",
 
   // ==================================================================================
   //  Feature: Centre Map
@@ -75,6 +79,7 @@
   "Features.GPS.Dialogue.Title": "GPS Admin",
   "Features.GPS.Dialogue.lblWhispers": "Messages privés permis:",
   "Features.GPS.Dialogue.lblWhispers.HoverText": "Détermines si un joueur peut ou non partager ses coordonnées GPS avec un autre joueur via message privé.",
+  "Features.GPS.ShowOnMap": "Montrer sur la carte",
 
   // ==================================================================================
   //  Feature: Manual Waypoints
@@ -224,7 +229,7 @@
   "Features.WaypointUtil.AddedWaypointCount": "{0} {1} ont été ajoutés.", // Par exemple: "1 marqueurs a été ajoutés." OU "2 marqueurs ont été ajoutés."
 
   // Waypoint Import Window
-  "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des waypoints",
+  "Features.WaypointUtil.Dialogue.Imports.Title": "Importer des marqueurs",
   "Features.WaypointUtil.Dialogue.Imports.File-singular": "fichier",
   "Features.WaypointUtil.Dialogue.Imports.File-plural": "fichiers",
   "Features.WaypointUtil.Dialogue.Imports.Waypoint-singular": "marqueur",
@@ -232,14 +237,21 @@
   "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} marqueurs sélectionés, de {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Ouvrier le Dossier d'Importation",
   "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Importer les Marqueurs",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationTitle": "Confirmation des Marqueurs Importés",
-  "Features.WaypointUtil.Dialogue.Imports.ConfirmationMessage": "Vous êtes sur le point d'importer {0} marqueurs de {1} {2}.",
   "Features.WaypointUtil.Dialogue.Imports.FileText": "Fichier: {0}",
   "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Date d'enregitrement: {0:G}",
   "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
 
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "Importer des marqueurs",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "Menu précédent",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "Importer les marqueurs sélectionnés",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "Confirmation de l'Importation des Marqueurs",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "Vous êtes sur le point d'importer {0} marqueurs.",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "Confirmation de la Supression des Marqueurs",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "Êtes-vous sûr de vouloir supprimer ce marqueur de la liste d'importation?",
+
   // Waypoint Export Window
-  "Features.WaypointUtil.Dialogue.Exports.Title": "Exportation des Marqueurs Waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.Title": "Exportation des Marqueurs",
   "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0} marqueurs sélectionnés.",
   "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "Ouvrir le Dossier d'Exportation",
   "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Exporter les Marqueurs sélectionnés",

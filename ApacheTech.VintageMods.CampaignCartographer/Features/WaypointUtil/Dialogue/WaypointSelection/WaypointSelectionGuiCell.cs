@@ -1,6 +1,6 @@
 ﻿using System;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using Cairo;
 using Vintagestory.API.Client;
 using Vintagestory.API.Config;
@@ -8,16 +8,16 @@ using Vintagestory.API.Util;
 
 // ReSharper disable StringLiteralTypo
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Exports
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.WaypointSelection
 {
     /// <summary>
-    ///     A cell displayed within the cell list on the <see cref="WaypointExportDialogue"/> screen.
+    ///     A cell displayed within the cell list on the <see cref="WaypointSelectionDialogue"/> screen.
     /// </summary>
     /// <seealso cref="GuiElementTextBase" />
     /// <seealso cref="IGuiElementCell" />
-    public class WaypointExportGuiCell : GuiElementTextBase, IGuiElementCell
+    public class WaypointSelectionGuiCell : GuiElementTextBase, IGuiElementCell
     {
-        private readonly WaypointExportCellEntry _cell;
+        private readonly WaypointSelectionCellEntry _cell;
 
         private LoadedTexture _cellTexture;
         private int _switchOnTextureId;
@@ -30,12 +30,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         private const double UnscaledRightBoxWidth = 40.0;
 
         /// <summary>
-        /// 	Initialises a new instance of the <see cref="WaypointExportGuiCell" /> class.
+        /// 	Initialises a new instance of the <see cref="WaypointSelectionGuiCell" /> class.
         /// </summary>
         /// <param name="capi">The capi.</param>
         /// <param name="cell">The cell.</param>
         /// <param name="bounds">The bounds.</param>
-        public WaypointExportGuiCell(ICoreClientAPI capi, WaypointExportCellEntry cell, ElementBounds bounds) : base(capi, "", null, bounds)
+        public WaypointSelectionGuiCell(ICoreClientAPI capi, WaypointSelectionCellEntry cell, ElementBounds bounds) : base(capi, "", null, bounds)
         {
             _cell = cell;
             Bounds = bounds;
@@ -221,19 +221,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             api.Gui.PlaySound("menubutton_press");
             if (vec2d.X > Bounds.InnerWidth - scaled(GuiElementMainMenuCell.unscaledRightBoxWidth))
             {
-                OnMouseDownOnCellRight?.Invoke(elementIndex);
+                OnMouseDownOnCellRight?.Invoke(args, elementIndex);
                 args.Handled = true;
                 return;
             }
-            OnMouseDownOnCellLeft?.Invoke(elementIndex);
+            OnMouseDownOnCellLeft?.Invoke(args, elementIndex);
             args.Handled = true;
         }
 
         public new ElementBounds Bounds { get; }
 
-        public Action<int> OnMouseDownOnCellLeft { private get; init; }
+        public Action<MouseEvent, int> OnMouseDownOnCellLeft { private get; init; }
 
-        public Action<int> OnMouseDownOnCellRight { private get; init; }
+        public Action<MouseEvent, int> OnMouseDownOnCellRight { private get; init; }
 
         public bool On { get; set; } = true;
 

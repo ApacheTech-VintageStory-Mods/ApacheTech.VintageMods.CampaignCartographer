@@ -5,7 +5,7 @@ using System.Text;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
 using ApacheTech.VintageMods.Core.GameContent.GUI;
 using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
@@ -41,11 +41,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             var titlePrefix = _mode == WaypointTypeMode.Add ? "AddNew" : "Edit";
             Title = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", titlePrefix);
             Alignment = EnumDialogArea.CenterMiddle;
+            Modal = true;
+            ModalTransparency = .4f;
         }
 
         private GuiElementTextInput SyntaxTextBox => SingleComposer.GetTextInput("txtSyntax");
         private GuiElementTextInput TitleTextBox => SingleComposer.GetTextInput("txtTitle");
-        private GuiElementTextInput DetailsTextBox => SingleComposer.GetTextInput("txtDetailText");
         private GuiElementDropDown ColourComboBox => SingleComposer.GetDropDown("cbxColour");
         private GuiElementCustomDraw ColourPreviewBox => SingleComposer.GetCustomDraw("pbxColour");
         private GuiElementDropDown IconComboBox => SingleComposer.GetDropDown("cbxIcon");
@@ -66,10 +67,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                     SyntaxTextBox.SetValue(_waypoint.Syntax);
                 }
                 TitleTextBox.SetValue(_waypoint.Title);
-                DetailsTextBox.SetValue(_waypoint.DetailText);
                 ColourComboBox.SetSelectedValue(_waypoint.Colour.ToLowerInvariant());
                 ColourPreviewBox.Redraw();
-                IconComboBox.SetSelectedValue(_waypoint.DisplayedIcon);
+                IconComboBox.SetSelectedValue(_waypoint.DisplayedIcon.ToLowerInvariant());
                 HorizontalRadiusTextBox.SetValues(_waypoint.HorizontalCoverageRadius, 0, 50, 1);
                 VerticalRadiusTextBox.SetValues(_waypoint.VerticalCoverageRadius, 0, 50, 1);
                 PinnedSwitch.SetValue(_waypoint.Pinned);
@@ -91,7 +91,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Syntax"), labelFont, EnumTextOrientation.Right, left.WithFixedOffset(0, 5), "lblSyntax")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Syntax.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Syntax.HoverText"), textInputFont, 260, left)
                 .AddIf(_mode == WaypointTypeMode.Add)
                 .AddTextInput(right, OnSyntaxChanged, textInputFont, "txtSyntax")
                 .EndIf()
@@ -108,20 +108,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "WaypointTitle"), labelFont, EnumTextOrientation.Right, left, "lblTitle")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "WaypointTitle.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "WaypointTitle.HoverText"), textInputFont, 260, left)
                 .AddTextInput(right, OnTitleChanged, textInputFont, "txtTitle");
-
-            //
-            // Detail Text
-            //
-
-            left = ElementBounds.FixedSize(100, 30).FixedUnder(left, 10);
-            right = ElementBounds.FixedSize(270, 30).FixedUnder(right, 10).FixedRightOf(left, 10);
-
-            composer
-                .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "DetailText"), labelFont, EnumTextOrientation.Right, left, "lblDetailText")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "DetailText.HoverText"), textInputFont, 260, left)
-                .AddTextInput(right, OnDetailTextChanged, textInputFont, "txtDetailText");
 
             //
             // Colour
@@ -134,7 +122,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Colour"), labelFont, EnumTextOrientation.Right, left, "lblColour")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Colour.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Colour.HoverText"), textInputFont, 260, left)
                 .AddDropDown(NamedColour.ValuesList(), NamedColour.NamesList(), 0,
                     OnColourValueChanged, cbxColourBounds, textInputFont, "cbxColour")
                 .AddDynamicCustomDraw(pbxColourBounds, OnDrawColour, "pbxColour");
@@ -148,7 +136,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Icon"), labelFont, EnumTextOrientation.Right, left, "lblIcon")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Icon.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Icon.HoverText"), textInputFont, 260, left)
                 .AddDropDown(_icons.Select(p => p.Name).ToArray(), _icons.Select(p => p.Glyph).ToArray(), 0, OnIconChanged, right,
                     textInputFont, "cbxIcon");
 
@@ -161,7 +149,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "HCoverage"), labelFont, EnumTextOrientation.Right, left, "lblHorizontalRadius")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "HCoverage.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "HCoverage.HoverText"), textInputFont, 260, left)
                 .AddSlider(OnHorizontalRadiusChanged, right.FlatCopy().WithFixedHeight(20), "txtHorizontalRadius");
 
             //
@@ -173,7 +161,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "VCoverage"), labelFont, EnumTextOrientation.Right, left, "lblVerticalRadius")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "VCoverage.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "VCoverage.HoverText"), textInputFont, 260, left)
                 .AddSlider(OnVerticalRadiusChanged, right.FlatCopy().WithFixedHeight(20), "txtVerticalRadius");
 
             //
@@ -185,7 +173,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Pinned"), labelFont, EnumTextOrientation.Right, left, "lblPinned")
-                .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Pinned.HoverText"), textInputFont, 260, left)
+                .AddAutoSizeHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Pinned.HoverText"), textInputFont, 260, left)
                 .AddSwitch(OnPinnedChanged, right, "btnPinned");
 
             //
@@ -217,11 +205,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         private void OnTitleChanged(string title)
         {
             _waypoint.Title = title;
-        }
-
-        private void OnDetailTextChanged(string detailText)
-        {
-            _waypoint.DetailText = detailText;
         }
 
         private void OnColourValueChanged(string colour, bool selected)
@@ -301,15 +284,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private bool OnDeleteButtonPressed()
         {
-            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Title");
-            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Message");
-            MessageBox.Show(title, message, ButtonLayout.OkCancel,
-                () =>
-                {
-                    OnDeleteAction?.Invoke(_waypoint);
-                    TryClose();
-                });
-            return true;
+            OnDeleteAction?.Invoke(_waypoint);
+            return TryClose();
         }
 
         #endregion

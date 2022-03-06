@@ -8,7 +8,7 @@ using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.GameContent.GUI;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.Core.Services.FileSystem.Abstractions.Contracts;
@@ -219,15 +219,21 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private void DeleteWaypointType(ManualWaypointTemplateModel model)
         {
-            if (!_waypointTypes.ContainsKey(model.Syntax))
-            {
-                MessageBox.Show(GetText("Error"), GetText("Edit.Validation", model.Syntax));
-                return;
-            }
-            _waypointTypes.Remove(model.Syntax);
-            _file.SaveFrom(_waypointTypes.Values);
-            _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
-            RefreshValues();
+            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Title");
+            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Message");
+            MessageBox.Show(title, message, ButtonLayout.OkCancel,
+                () =>
+                {
+                    if (!_waypointTypes.ContainsKey(model.Syntax))
+                    {
+                        MessageBox.Show(GetText("Error"), GetText("Edit.Validation", model.Syntax));
+                        return;
+                    }
+                    _waypointTypes.Remove(model.Syntax);
+                    _file.SaveFrom(_waypointTypes.Values);
+                    _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
+                    RefreshValues();
+                });
         }
 
         private void EditWaypointType(ManualWaypointTemplateModel model)

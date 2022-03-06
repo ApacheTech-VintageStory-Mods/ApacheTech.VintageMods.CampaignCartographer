@@ -5,7 +5,6 @@ using ApacheTech.VintageMods.Core.Hosting;
 using ApacheTech.VintageMods.Core.Hosting.Configuration.Extensions;
 using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.Core.Services.FileSystem.Enums;
-using ApacheTech.VintageMods.Core.Services.MefLab;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Server;
@@ -36,7 +35,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// <param name="services">The service collection.</param>
         protected override void ConfigureServerModServices(IServiceCollection services)
         {
-            services.RegisterSingleton<IMefLabContractMediator>(sp => sp.Resolve<MefLabMediator>());
         }
 
         /// <summary>
@@ -47,7 +45,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         {
             services.RegisterSingleton<IWorldMapManager>(_ => ApiEx.Client.ModLoader.GetModSystem<WorldMapManager>());
             services.RegisterSingleton(_ => ApiEx.Client.ModLoader.GetModSystem<WorldMapManager>());
-            services.RegisterSingleton<IMefLabContractMediator>(sp => sp.Resolve<MefLabMediator>());
             services.RegisterSingleton<WaypointService>();
         }
 
@@ -92,7 +89,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// </param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-                ModServices.Harmony.UseHarmony();
+            ModServices.Harmony.UseHarmony();
         }
 
         /// <summary>

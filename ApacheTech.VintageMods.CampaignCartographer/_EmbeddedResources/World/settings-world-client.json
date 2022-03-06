@@ -9,7 +9,9 @@
       "Traders": false,
       "SurfaceDeposits": false,
       "LooseStones": false,
-      "Organics": false
+      "Mushrooms": false,
+      "Resin": false,
+      "BerryBushes": false
     },
     "ManualWaypoints": {
       "BlockSelectionWaypointTemplate": {

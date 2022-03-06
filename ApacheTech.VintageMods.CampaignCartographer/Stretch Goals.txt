@@ -1,0 +1,6 @@
+Stretch Goals:
+~~~~~~~~~~~~~~
+
+ • Fully Client-Side, 3NF Waypoint Management System
+ • Core: Robust Exception and Error Handling System to help with bug-tracking in production code.
+ • Core: Full featured GUI framework, with Modal Forms, and MVVM.

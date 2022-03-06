@@ -54,6 +54,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
                 .HasSubCommand("chat").WithHandler(OnClientSubCommandBroadcast)
                 .HasSubCommand("copy").WithHandler(OnClientSubCommandClipboard)
                 .HasSubCommand("to").WithHandler(OnClientSubCommandWhisper);
+
+            capi.RegisterLinkProtocol("gps", OnLinkClicked);
         }
 
         /// <summary>
@@ -65,7 +67,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
             _sapi = sapi;
             _settings = ModServices.IOC.Resolve<GpsSettings>();
 
-            ModServices.Network.DefaultServerChannel
+            ModServices.Network.DefaultServerChannel?
                 .RegisterMessageType<WhisperPacket>()
                 .RegisterMessageType<GpsSettings>()
                 .SetMessageHandler<WhisperPacket>(OnServerWhisperPacketReceived);
@@ -106,7 +108,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         private void OnClientDefaultHandler(int groupId, CmdArgs args)
         {
             var player = _capi.World.Player;
-            var pos = PlayerLocationMessage(player);
+            var pos = PlayerLocationMessage(player, true);
             _capi.ShowChatMessage(pos);
         }
 
@@ -119,7 +121,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         private void OnClientSubCommandBroadcast(string subCommandName, int groupId, CmdArgs args)
         {
             var player = _capi.World.Player;
-            var pos = PlayerLocationMessage(player);
+            var pos = PlayerLocationMessage(player, false);
             _capi.SendChatMessage(pos);
         }
 
@@ -132,7 +134,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         private void OnClientSubCommandClipboard(string subCommandName, int groupId, CmdArgs args)
         {
             var player = _capi.World.Player;
-            var pos = PlayerLocationMessage(player);
+            var pos = PlayerLocationMessage(player, false);
             _capi.Forms.SetClipboardText($"{player.PlayerName}: {pos}");
             _capi.ShowChatMessage(LangEx.FeatureString("GPS.Client", "location-copied-to-clipboard"));
         }
@@ -150,12 +152,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
                 _capi.ShowChatMessage(LangEx.Get("error-messages.mod-not-installed-on-server"));
                 return;
             }
-            if (!_settings.WhispersAllowed)
+            if (!_settings?.WhispersAllowed ?? false)
             {
                 _capi.ShowChatMessage(LangEx.Get("error-messages.feature-disabled"));
                 return;
             }
-            var message = PlayerLocationMessage(_capi.World.Player);
+            var message = PlayerLocationMessage(_capi.World.Player, true);
             var recipient = args.PopWord();
 
             _clientChannel?.SendPacket(new WhisperPacket
@@ -183,7 +185,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <param name="joiningPlayer">The player that is joining the server.</param>
         private void OnServerPlayerJoin(IServerPlayer joiningPlayer)
         {
-            ModServices.Network.DefaultServerChannel.SendPacket(_settings, joiningPlayer);
+            ModServices.Network.DefaultServerChannel?.SendPacket(_settings, joiningPlayer);
         }
 
         /// <summary>
@@ -214,11 +216,26 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         ///     Retrieves the player's current location. 
         /// </summary>
         /// <param name="player">The player to find the location of.</param>
+        /// <param name="includeHyperlink">Determines whether or not to add a hyperlink to the message.</param>
         /// <returns>A string representation of the XYZ coordinates of the player.</returns>
-        private static string PlayerLocationMessage(IPlayer player)
+        private static string PlayerLocationMessage(IPlayer player, bool includeHyperlink)
         {
-            var pos = player.Entity.Pos.AsBlockPos.RelativeToSpawn();
-            return $"X = {pos.X}, Y = {pos.Y}, Z = {pos.Z}.";
+            var pos = player.Entity.Pos.AsBlockPos;
+            var displayPos = pos.RelativeToSpawn();
+            var message = $"X = {displayPos.X}, Y = {displayPos.Y}, Z = {displayPos.Z}.";
+            if (!includeHyperlink) return message;
+            var link = new GpsHyperLink(pos);
+            message += $" ({link.ToHyperlink()})";
+            return message;
+        }
+
+        /// <summary>
+        ///     Called when a GPS hyperlink is clicked.
+        /// </summary>
+        /// <param name="link">The <see cref="LinkTextComponent"/> link.</param>
+        private static void OnLinkClicked(LinkTextComponent link)
+        {
+            GpsHyperLink.Execute(link);
         }
     }
 }

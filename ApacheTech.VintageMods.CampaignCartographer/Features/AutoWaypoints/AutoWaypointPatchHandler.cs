@@ -5,8 +5,8 @@ using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.Extensions.System;
 using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Annotation;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
@@ -50,14 +50,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
                 case BlockLooseStones:
                     HandleLooseStones(block);
                     break;
-                case BlockMushroom or BlockBerryBush or BlockLog:
-                    HandleOrganics(block);
+                case BlockMushroom:
+                    HandleMushrooms(block);
+                    break;
+                case BlockBerryBush:
+                    HandleBerries(block);
                     break;
                 default:
                     // For some reason, the resin log is not of type BlockLog.
                     if (!block.Variant.ContainsKey("type")) break;
                     if (block.Variant["type"].StartsWith("resin"))
-                        HandleOrganics(block);
+                        HandleResin(block);
                     break;
             }
         }
@@ -67,9 +70,21 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
             if (!HandleLooseOres(block)) HandleLooseStones(block);
         }
 
-        private void HandleOrganics(Block block)
+        private void HandleMushrooms(Block block)
         {
-            if (!Settings.Organics) return;
+            if (!Settings.Mushrooms) return;
+            AddWaypointFor(block, MapOrganicMaterial(block.Code.Path));
+        }
+
+        private void HandleBerries(Block block)
+        {
+            if (!Settings.BerryBushes) return;
+            AddWaypointFor(block, MapOrganicMaterial(block.Code.Path));
+        }
+
+        private void HandleResin(Block block)
+        {
+            if (!Settings.Resin) return;
             AddWaypointFor(block, MapOrganicMaterial(block.Code.Path));
         }
 

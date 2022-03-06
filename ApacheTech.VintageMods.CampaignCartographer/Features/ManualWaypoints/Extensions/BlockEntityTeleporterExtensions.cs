@@ -3,6 +3,7 @@ using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
 using ApacheTech.VintageMods.Core.Services;
 using Vintagestory.API.Config;

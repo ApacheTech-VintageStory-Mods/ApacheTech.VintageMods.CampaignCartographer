@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Enums;
 using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Extensions;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.Services.HarmonyPatching.Annotations;
 using Cairo;
 using HarmonyLib;
@@ -12,6 +14,8 @@ using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Color = System.Drawing.Color;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMethodReturnValue.Global
 // ReSharper disable IdentifierTypo
 // ReSharper disable UnusedType.Global
 // ReSharper disable UnusedMember.Global
@@ -24,16 +28,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static ICoreClientAPI _capi;
         private static IWorldMapManager _mapSink;
         private static IDictionary<IPlayer, EntityMapComponent> PlayerPins { get; set; }
-        private static Dictionary<string, LoadedTexture> PlayerPinTextures { get; set; }
 
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
         {
-            _capi = api as ICoreClientAPI;
+            _capi = (ICoreClientAPI)api;
             _mapSink = mapsink;
             PlayerPins = new Dictionary<IPlayer, EntityMapComponent>();
-            PlayerPinTextures = new Dictionary<string, LoadedTexture>();
+            _capi.Event.LeaveWorld += DisposeComponents;
         }
 
         [HarmonyPrefix]
@@ -50,11 +53,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "OnMapOpenedClient")]
         public static bool Patch_PlayerMapLayer_OnMapOpenedClient_Prefix()
         {
-            PlayerPinTextures.Purge();
             PlayerPins.Purge();
-            PlayerPinTextures["Self"] = LoadTexture(Settings.SelfColour, Settings.SelfScale);
-            PlayerPinTextures["Friend"] = LoadTexture(Settings.FriendColour, Settings.FriendScale);
-            PlayerPinTextures["Others"] = LoadTexture(Settings.OthersColour, Settings.OthersScale);
             foreach (var player in _capi.World.AllOnlinePlayers)
             {
                 if (player.Entity == null)
@@ -121,10 +120,18 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static void AddPlayerToMap(IPlayer player)
         {
             var textureType = player.PlayerUID == _capi.World.Player.PlayerUID
-                ? "Self"
-                : Settings.Friends.Values.Contains(player.PlayerUID) ? "Friend" : "Others";
+                ? TextureType.Self
+                : Settings.Friends.Values.Contains(player.PlayerUID) ? TextureType.Friends : TextureType.Others;
+            
+            var texture = textureType switch
+            {
+                TextureType.Self => LoadTexture(Settings.SelfColour, Settings.SelfScale),
+                TextureType.Friends => LoadTexture(Settings.FriendColour, Settings.FriendScale),
+                TextureType.Others => LoadTexture(Settings.OthersColour, Settings.OthersScale),
+                _ => throw new ArgumentOutOfRangeException(nameof(textureType), textureType, "Cannot add player to map.")
+            };
 
-            var comp = new EntityMapComponent(_capi, PlayerPinTextures[textureType], player.Entity);
+            var comp = new EntityMapComponent(_capi, texture, player.Entity);
             PlayerPins.Add(player, comp);
         }
 
@@ -155,9 +162,22 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "Dispose")]
         public static bool Patch_PlayerMapLayer_Dispose_Prefix()
         {
-            PlayerPins.Purge();
-            PlayerPinTextures.Purge();
+            DisposeComponents();
             return true;
+        }
+
+        private static void DisposeComponents()
+        {
+            foreach (var comp in PlayerPins.Values)
+            {
+                comp.Texture.Dispose();
+            }
+            PlayerPins.Purge();
+        }
+
+        ~PlayerMapLayerPatches()
+        {
+            DisposeComponents();
         }
     }
 }

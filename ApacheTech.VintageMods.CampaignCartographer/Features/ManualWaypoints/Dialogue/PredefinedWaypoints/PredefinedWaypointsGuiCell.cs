@@ -1,6 +1,6 @@
 ﻿using System;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
-using ApacheTech.VintageMods.Core.Extensions.System;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using Cairo;
 using Vintagestory.API.Client;
 using Vintagestory.API.Config;
