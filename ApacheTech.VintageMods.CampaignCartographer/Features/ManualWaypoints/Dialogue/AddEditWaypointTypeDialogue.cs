@@ -284,15 +284,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private bool OnDeleteButtonPressed()
         {
-            var title = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Title");
-            var message = LangEx.FeatureString("ManualWaypoints.Dialogue.WaypointType", "Delete.Message");
-            MessageBox.Show(title, message, ButtonLayout.OkCancel,
-                () =>
-                {
-                    OnDeleteAction?.Invoke(_waypoint);
-                    TryClose();
-                });
-            return true;
+            OnDeleteAction?.Invoke(_waypoint);
+            return TryClose();
         }
 
         #endregion

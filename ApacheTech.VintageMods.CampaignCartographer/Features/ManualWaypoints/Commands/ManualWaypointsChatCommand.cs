@@ -55,8 +55,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.C
                 pin = true;
                 option = args.PopWord("");
             }
-
-            var pos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
+            
             var syntax = option.ToLowerInvariant();
             var waypoint = _waypointService.GetWaypointModel(syntax);
 
@@ -67,8 +66,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.C
             }
 
             waypoint
-                .With(p => p.Title = args.PopAll().IfNullOrWhitespace(p.Title))
-                .AddToMap(pos, pin);
+                .With(p =>
+                {
+                    p.Title = args.PopAll().IfNullOrWhitespace(p.Title);
+                    p.Pinned |= pin;
+                })
+                .AddToMap();
         }
 
         /// <summary>

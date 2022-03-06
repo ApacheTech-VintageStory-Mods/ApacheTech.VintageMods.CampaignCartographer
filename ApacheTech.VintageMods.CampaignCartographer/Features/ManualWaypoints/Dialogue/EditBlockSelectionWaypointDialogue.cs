@@ -87,10 +87,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             var cbxColourBounds = right.FlatCopy().WithFixedWidth(230);
             var pbxColourBounds = right.FlatCopy().WithFixedWidth(30).FixedRightOf(cbxColourBounds, 10);
 
+            var colourValues = NamedColour.ValuesList();
+            var colourNames = NamedColour.NamesList();
+
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "Colour"), labelFont, EnumTextOrientation.Right, left, "lblColour")
                 .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "Colour.HoverText"), textInputFont, 260, left)
-                .AddDropDown(NamedColour.ValuesList(), NamedColour.NamesList(), 0,
+                .AddDropDown(colourValues, colourNames, 0,
                     OnColourValueChanged, cbxColourBounds, textInputFont, "cbxColour")
                 .AddDynamicCustomDraw(pbxColourBounds, OnDrawColour, "pbxColour");
 
@@ -101,10 +104,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             left = ElementBounds.FixedSize(100, 30).FixedUnder(left, 10);
             right = ElementBounds.FixedSize(270, 30).FixedUnder(right, 10).FixedRightOf(left, 10);
 
+            var iconValues = _icons.Select(p => p.Name).ToArray();
+            var iconNames = _icons.Select(p => p.Glyph).ToArray();
+
             composer
                 .AddStaticText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "Icon"), labelFont, EnumTextOrientation.Right, left, "lblIcon")
                 .AddHoverText(LangEx.FeatureString("ManualWaypoints.Dialogue.BlockSelection", "Icon.HoverText"), textInputFont, 260, left)
-                .AddDropDown(_icons.Select(p => p.Name).ToArray(), _icons.Select(p => p.Glyph).ToArray(), 0, OnIconChanged, right,
+                .AddDropDown(iconValues, iconNames, 0, OnIconChanged, right,
                     textInputFont, "cbxIcon");
 
             //

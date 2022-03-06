@@ -1,0 +1,281 @@
+{
+  // ReSharper disable CommentTypo
+  // ReSharper disable StringLiteralTypo
+  // ==================================================================================
+  //  Campaign Cartographer - Language File
+  // ==================================================================================
+  //
+  //    Language: Spanish (Español)
+  //    Language Code: es
+  //    Translated By: DeepL Auto-Translation
+  //    Mod Version: 2.1.0
+  //    
+  // ==================================================================================
+
+  // ==================================================================================
+  //  Mod Specific
+  // ==================================================================================
+
+  "ModTitle": "Cartografo de Campaña",
+  "ModDescription": "Añade al juego múltiples características relacionadas con la Cartografía, como iconos de waypoints personalizados, GPS, marcadores de waypoints automáticos, etc.",
+
+  // ==================================================================================
+  //  Errors and Exceptions
+  // ==================================================================================
+
+  "error-messages.feature-not-available-client-side": "Esta característica no está disponible desde el cliente. Por favor, utilice el comando equivalente del servidor en su lugar",
+  "error-messages.mod-not-installed-on-server": "Campaign Cartographer no está instalado en el servidor. Por favor, pida al administrador del servidor que instale Campaign Cartographer en el servidor, para una mayor funcionalidad.",
+  "error-messages.feature-disabled": "El administrador del servidor ha deshabilitado esta función",
+  "error-messages.invalid-command": "Comando no válido. Por favor, inténtelo de nuevo",
+
+  // ==================================================================================
+  //  Feature: Automatic Waypoints
+  // ==================================================================================
+
+  "Features.AutoWaypoints.SettingsCommandDescription": "Cambiar configuración de waypoints automáticos",
+
+  // GUI Dialogue Window:
+  "Features.AutoWaypoints.Dialogue.Title": "Waypoints Automáticos",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators": "Translocadores estáticos:",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators.HoverText": "Añade automáticamente puntos de ruta para los translocadores, a medida que viajas entre ellos",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters": "Bloques de teletransportadores:",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters.HoverText": "Añade automáticamente puntos de ruta para los teletransportadores, mientras viajas entre ellos",
+  "Features.AutoWaypoints.Dialogue.lblTraders": "Comerciantes:",
+  "Features.AutoWaypoints.Dialogue.lblTraders.HoverText": "Añade automáticamente puntos de ruta para los comerciantes, a medida que interactúas con ellos",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits": "Depósitos de superficie:",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "Añade automáticamente puntos de ruta para diferentes tipos de metal, a medida que recoges depósitos superficiales",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones": "Piedras sueltas:",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "Añade automáticamente puntos de ruta para diferentes tipos de roca, a medida que recoges depósitos en la superficie",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms": "Setas:",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms.HoverText": "Añade automáticamente puntos de ruta para las setas, a medida que vas forrajeando",
+  "Features.AutoWaypoints.Dialogue.lblResin": "Resina:",
+  "Features.AutoWaypoints.Dialogue.lblResin.HoverText": "Añade automáticamente puntos de ruta para la resina, mientras forrajeas",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes": "Arbustos de bayas:",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes.HoverText": "Añade automáticamente puntos de ruta para arbustos de bayas, a medida que forrajeas",
+
+  // ==================================================================================
+  //  Feature: Centre Map
+  // ==================================================================================
+
+  "Features.CentreMap.SettingsCommandDescription": "Vuelve a centrar el mapa en la ubicación o el jugador dados",
+  "Features.CentreMap.CannotCentreMapOnPlayer": "No se puede encontrar al jugador `{0}` en este momento. Es posible que esté fuera de alcance. Si se vuelve a registrar, aparecerá en el mapa",
+  "Features.CentreMap.CentreMapOnPlayer": "Mapa centrado en el jugador: {0} ({1}, {2}, {3})",
+  "Features.CentreMap.CentreMapOnPlayerSpawn": "Mapa centrado en el punto de aparición del jugador: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnPosition": "Mapa recentrado en posición: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWorldSpawn": "Re-centrado del mapa en el spawn del mundo: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWaypoint": "Mapa centrado en el punto de ruta {0}: {1} ({2}, {3})",
+
+  // ==================================================================================
+  //  Feature: GPS
+  // ==================================================================================
+
+  "Features.GPS.Client.SettingsCommandDescription": "Muestra información sobre la ubicación actual del jugador",
+  "Features.GPS.Server.SettingsCommandDescription": "Cambia la configuración del GPS para el servidor",
+  "Features.GPS.Client.location-copied-to-clipboard": "Ubicación del jugador copiada al portapapeles",
+  "Features.GPS.Client.player-not-found": "No se ha encontrado ningún jugador con el nombre `{0}` en el servidor",
+  "Features.GPS.Server.invalid-command-syntax": "Sintaxis no válida. Por favor, inténtelo de nuevo",
+  "Features.GPS.Server.whisper-received": "[De {0}]: {1}",
+  "Features.GPS.Server.whisper-sent": "[A {0}]: {1}",
+  "Features.GPS.Dialogue.Title": "Administración del GPS",
+  "Features.GPS.Dialogue.lblWhispers": "Susurros Permitidos:",
+  "Features.GPS.Dialogue.lblWhispers.HoverText": "Determina si los jugadores pueden susurrarse las coordenadas GPS",
+  "Features.GPS.ShowOnMap": "Mostrar en el mapa",
+
+  // ==================================================================================
+  //  Feature: Manual Waypoints
+  // ==================================================================================
+
+  "Features.ManualWaypoints.SettingsCommandDescription": "Alternar la configuración del Waypoint",
+  "Features.ManualWaypoints.InvalidSyntax": "No se ha encontrado ningún tipo de waypoint con la sintaxis `{0}`. Puede añadir nuevos tipos de waypoints utilizando el comando `.wpSettings`",
+
+  // Manual Waypoints. (.wp)
+  "Features.ManualWaypoints.ManualWaypoints.Description": "Añade rápida y fácilmente waypoints en tu ubicación actual",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage": "[pin (Opcional)] [type] [title (Opcional)]",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage_Full": "[pin (Opcional)] [{0}] [título (Opcional)]",
+
+  // Manual Translocator Waypoints. (.wptl)
+  "Features.ManualWaypoints.TranslocatorWaypoints.Description": "Añade un waypoint a un translocador, a menos de cinco manzanas del jugador",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorNotFound": "No se ha encontrado ningún translocador dentro del alcance del jugador",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorWaypointTitle": "Translocador a ({0}, {1}, {2})",
+  "Features.ManualWaypoints.TranslocatorWaypoints.BrokenTranslocatorTitle": "Translocador Roto",
+  "Features.ManualWaypoints.TranslocatorWaypoints.WaypointAlreadyExists": "Ya existe un waypoint para este translocador",
+
+  // Manual Teleporters Waypoints. (.wptp)
+  "Features.ManualWaypoints.TeleporterWaypoints.Description": "Añade un waypoint a un bloque de teletransporte, en un radio de cinco bloques del jugador",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterNotFound": "No se ha encontrado ningún teletransportador dentro del alcance del jugador",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterWaypointTitle": "Teletransportador {0} a: {1}",
+  "Features.ManualWaypoints.TeleporterWaypoints.WaypointAlreadyExists": "Ya existe un waypoint para este teletransportador",
+
+  // Manual Trader Waypoints. (.wpt)
+  "Features.ManualWaypoints.TraderWaypoints.Description": "Añade un waypoint a un comerciante, a menos de cinco manzanas del jugador",
+  "Features.ManualWaypoints.TraderWaypoints.TraderNotFound": "No se ha encontrado ningún comerciante dentro del alcance del jugador",
+  "Features.ManualWaypoints.TraderWaypoints.WaypointAlreadyExists": "Ya existe un waypoint para este comerciante",
+
+  // Block Selection Waypoints. (.wps)
+  "Features.ManualWaypoints.BlockSelectionWaypoints.Description": "Añade un waypoint para el bloque al que el jugador está apuntando actualmente",
+
+  // Waypoint Template Information
+  "Features.ManualWaypoints.WaypointTemplate.DefaultTitle": "Nuevo Waypoint",
+
+  // Menu Screen Dialogue Window
+  "Features.ManualWaypoints.Dialogue.MenuScreen.Title": "Cartografo de Campaña",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Editar marcador de punto de ruta de selección de bloques",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Editar balizas predefinidas",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Donar al autor del Mod",
+
+  // First Run Dialogue Window
+  "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Primer Funcionamiento",
+  "Features.ManualWaypoints.Dialogue.FirstRun.AutoWaypointsButton": "Cambiar configuración de waypoints automáticos",
+  "Features.ManualWaypoints.Dialogue.FirstRun.PlayerPinsButton": "Cambiar la configuración de las balizas del mapa del jugador",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph1": "Esta es la primera vez que ejecuta Campaign Cartographer. ¿Le gustaría cargar una lista por defecto de tipos de waypoints para usar con el comando `.wp`?",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph2": "Aunque estos tipos de waypoints por defecto estarán en inglés, se pueden editar en los ajustes, utilizando el comando `.wpSettings`",
+  "Features.ManualWaypoints.Dialogue.FirstRun.RememberPreference": "¿Recordar esta configuración para todos los servidores?",
+  "Features.ManualWaypoints.Dialogue.FirstRun.CancelMessage": "¿Estás seguro de que no quieres añadir puntos de ruta predefinidos ahora? Puedes añadirlos desde la configuración del mod más adelante",
+  "Features.ManualWaypoints.Dialogue.FirstRun.ConfirmMessage": "¿Estás seguro de que quieres añadir waypoints predefinidos ahora? Puedes añadirlos desde los ajustes del mod más tarde",
+
+  // Block Selection Dialogue Window
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Title": "Editar plantilla de Waypoint",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour": "Color:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour.HoverText": "El color del icono del waypoint",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon": "Ícono:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon.HoverText": "El tipo de icono a utilizar para el waypoint",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage": "Cobertura H:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage.HoverText": "Los waypoints del mismo tipo no se colocarán más juntos que esto, horizontalmente",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage": "Cobertura V:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage.HoverText": "Los waypoints del mismo tipo no se colocarán más juntos que esto, verticalmente",
+
+  // Add/Edit Waypoint Type Dialogue Window
+  "Features.ManualWaypoints.Dialogue.WaypointType.AddNew": "Añadir nuevo tipo de waypoint",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Edit": "Editar tipo de baliza",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "Palabra clave:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "La palabra clave utilizada para identificar el tipo de waypoint. Se utiliza con el comando `.wp [palabra clave]`",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "La palabra clave sólo puede ser una única palabra",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle": "Título:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle.HoverText": "El título por defecto que se le da al waypoint",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText": "Texto de detalle:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText.HoverText": "Any extra information you would like to show on the waypoint marker.",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour": "Color:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour.HoverText": "El color del icono del waypoint",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon": "Ícono:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon.HoverText": "El tipo de icono que se utilizará para el waypoint",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage": "Cobertura H:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage.HoverText": "Los waypoints del mismo tipo no se colocarán más juntos que esto, horizontalmente",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Coverage.Validation": "El radio de cobertura debe ser 0 o superior",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage": "V Cobertura:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage.HoverText": "Los waypoints del mismo tipo no se colocarán más juntos que esto, verticalmente",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned": "Fijado:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned.HoverText": "Si se fija o no este waypoint en el mapa, por defecto",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Title": "Confirmar eliminación de tipo de waypoint",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Message": "¿Está seguro de que quiere eliminar este tipo de waypoint?",
+
+  // Pre-Defined Waypoints Dialogue Window
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Title": "Waypoints predefinidos",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Error": "Errores de validación",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault": "Cargar tipos de waypoints predefinidos",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault.Confirmation": "¿Está seguro de que desea importar los tipos de waypoints predeterminados. Los títulos de estos predeterminados están en inglés",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew": "Añadir nuevo tipo de waypoint",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew.Validation": "Un tipo de waypoint con sintaxis `{0}` ya existe",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit": "Editar tipo de waypoint",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit.Validation": "No existe ningún tipo de waypoint con sintaxis `{0}` dentro de la lista",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Título: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Radio de cobertura: ({0}x{1})",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Fijado: {0}",
+
+  // ==================================================================================
+  //  Feature: Player Pins
+  // ==================================================================================
+
+  "Features.PlayerPins.SettingsCommandDescription": "Personalizar pines del mapa del jugador",
+
+  // Chat Command: .friends
+  "Features.PlayerPins.Friends.Description": "Añadir/eliminar jugadores de tu lista de amigos. Los amigos aparecen resaltados en el mapa del mundo",
+  "Features.PlayerPins.Friends.FriendsList": "Lista de amigos:",
+  "Features.PlayerPins.Friends.YouHaveNoFriends": "No tienes amigos",
+  "Features.PlayerPins.Friends.NoPlayerNameGiven": "Por favor, especifica el nombre de un jugador",
+  "Features.PlayerPins.Friends.PlayerNotFound": "No se ha encontrado ningún jugador con el nombre `{0}`",
+  "Features.PlayerPins.Friends.MultiplePlayersFound": "Se han encontrado varios jugadores con el nombre `{0}`",
+  "Features.PlayerPins.Friends.PlayerAlreadyAdded": "{0} ya ha sido añadido a tu lista de amigos",
+  "Features.PlayerPins.Friends.PlayerAdded": "{0} ha sido añadido a tu lista de amigos",
+  "Features.PlayerPins.Friends.PlayerRemoved": "{0} ha sido eliminado de tu lista de amigos",
+
+  // GUI
+  "Features.PlayerPins.Diálogo.Título": "Personalizar pines del jugador",
+  "Features.PlayerPins.Dialogue.Self": "Tú",
+  "Features.PlayerPins.Dialogue.Friend": "Tus amigos",
+  "Features.PlayerPins.Dialogue.Others": "Otras personas en el servidor",
+  "Features.PlayerPins.Dialogue.Randomise": "Aleatorizar el color y la escala",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch": "Pines del Jugador:",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch.HoverText": "Si quieres cambiar tu propio pin de jugador, o el pin que se muestra para otros miembros del servidor",
+  "Features.PlayerPins.Dialogue.btnToggleSwitch": "{0} Jugador",
+  "Features.PlayerPins.Dialogue.lblRed": "Rojo:",
+  "Features.PlayerPins.Dialogue.lblRed.HoverText": "El canal rojo del color del pin",
+  "Features.PlayerPins.Dialogue.lblGreen": "Verde:",
+  "Features.PlayerPins.Dialogue.lblGreen.HoverText": "El canal verde del color del pin",
+  "Features.PlayerPins.Dialogue.lblBlue": "Azul:",
+  "Features.PlayerPins.Dialogue.lblBlue.HoverText": "El canal azul del color del pin",
+  "Features.PlayerPins.Dialogue.lblOpacity": "Opacidad:",
+  "Features.PlayerPins.Dialogue.lblOpacity.HoverText": "La opacidad del color del pin",
+  "Features.PlayerPins.Dialogue.lblScale": "Escala:",
+  "Features.PlayerPins.Dialogue.lblScale.HoverText": "El ajuste de escala que se aplicará a la escala del pin",
+
+  // ==================================================================================
+  //  Feature: Waypoint Utilities
+  // ==================================================================================
+
+  "Features.WaypointUtil.SettingsCommandDescription": "Una selección de comandos de utilidad que facilita el trabajo con los waypoints.",
+  "Features.WaypointUtil.Confirm": "confirmar", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
+  "Features.WaypointUtil.ConfirmationMessage": "Escriba `.wpUtil {0}` para confirmar su elección.",
+  "Features.WaypointUtil.PurgedWaypointCount": "{0} {1} borrado.", // Example: "1 waypoint deleted." OR "2 waypoints deleted."
+  "Features.WaypointUtil.AddedWaypointCount": "{0} {1} añadido.", // Example: "1 waypoint added." OR "2 waypoints added."
+
+  // Waypoint Import Window
+  "Features.WaypointUtil.Dialogue.Imports.Title": "Importar Waypoints",
+  "Features.WaypointUtil.Dialogue.Imports.File-singular": "archivo",
+  "Features.WaypointUtil.Dialogue.Imports.File-plural": "archivos",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-singular": "waypoint",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-plural": "waypoints",
+  "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{0} waypoints seleccionados, de {1} {2}.",
+  "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "Abrir carpeta de importaciones",
+  "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "Importar Waypoints Seleccionados",
+  "Features.WaypointUtil.Dialogue.Imports.FileText": "Archivo: {0}",
+  "Features.WaypointUtil.Dialogue.Imports.CreatedText": "Creado: {0:G}",
+  "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "Importar Waypoints",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "Volver al menú",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "Importación seleccionada",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "Confirmación de importación de waypoints",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "Está a punto de importar {0} waypoints",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "Confirmar eliminación de waypoints",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "¿Está seguro de que quiere eliminar este waypoint de la lista de importación?",
+
+  // Waypoint Export Window
+  "Features.WaypointUtil.Dialogue.Exports.Title": "Exportar Waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0} waypoints seleccionados",
+  "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "Abrir carpeta de exportaciones",
+  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Exportar Waypoints Seleccionados",
+
+  // Waypoint Export Confirmation Window
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationTitle": "Confirmación de exportación de waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationMessage": "Está a punto de exportar {0} waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.Name": "Nombre:",
+  "Features.WaypointUtil.Dialogue.Exports.Name.HoverText": "Un nombre único para identificar los waypoints exportados",
+  "Features.WaypointUtil.Dialogue.Exports.World": "Mundo:",
+  "Features.WaypointUtil.Dialogue.Exports.World.HoverText": "El mundo desde el que se están exportando estos waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.FileName": "Nombre del archivo:",
+  "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "El nombre que se le da al archivo de exportación",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Waypoints exportados",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Mundo de un jugador",
+
+  // ==================================================================================
+  //  Feature: Waypoint Manager
+  // ==================================================================================
+
+  // Waypoint Export Window
+  "Features.WaypointManager.Dialogue.Title": "Waypoint Gestión",
+  "Features.WaypointManager.Dialogue.ExportWaypoints": "Exportar Waypoints",
+  "Features.WaypointManager.Dialogue.ImportWaypoints": "Importar Waypoints",
+  "Features.WaypointManager.Dialogue.AddNew": "Añadir nuevo waypoint",
+  "Features.WaypointManager.Dialogue.Edit": "Editar Waypoint existente"
+}

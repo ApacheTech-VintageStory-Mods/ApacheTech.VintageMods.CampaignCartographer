@@ -5,7 +5,7 @@ using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Imports;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
-using ApacheTech.VintageMods.Core.GameContent.GUI;
+using ApacheTech.VintageMods.Core.GameContent.GUI.Helpers;
 using ApacheTech.VintageMods.Core.Hosting.Configuration;
 using ApacheTech.VintageMods.Core.Services;
 using Vintagestory.API.Client;
@@ -41,7 +41,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             var row = 0f;
 
             composer
-                .AddStaticImage(squareBounds, AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"))
+                .AddStaticImage(AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"), squareBounds)
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "Title"), OnExportWaypointButtonPressed, ButtonBounds(ref row, width, height))

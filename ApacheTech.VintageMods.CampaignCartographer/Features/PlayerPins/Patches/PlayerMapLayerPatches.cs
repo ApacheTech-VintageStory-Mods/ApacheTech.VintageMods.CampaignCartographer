@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Enums;
 using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.DotNet;
@@ -13,6 +14,8 @@ using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 using Color = System.Drawing.Color;
 
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMethodReturnValue.Global
 // ReSharper disable IdentifierTypo
 // ReSharper disable UnusedType.Global
 // ReSharper disable UnusedMember.Global
@@ -26,14 +29,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static IWorldMapManager _mapSink;
         private static IDictionary<IPlayer, EntityMapComponent> PlayerPins { get; set; }
 
-
         [HarmonyPostfix]
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
         {
-            _capi = api as ICoreClientAPI;
+            _capi = (ICoreClientAPI)api;
             _mapSink = mapsink;
             PlayerPins = new Dictionary<IPlayer, EntityMapComponent>();
+            _capi.Event.LeaveWorld += DisposeComponents;
         }
 
         [HarmonyPrefix]
@@ -159,15 +162,22 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "Dispose")]
         public static bool Patch_PlayerMapLayer_Dispose_Prefix()
         {
-            PlayerPins.Purge();
+            DisposeComponents();
             return true;
         }
-    }
 
-    public enum TextureType
-    {
-        Self,
-        Friends,
-        Others
+        private static void DisposeComponents()
+        {
+            foreach (var comp in PlayerPins.Values)
+            {
+                comp.Texture.Dispose();
+            }
+            PlayerPins.Purge();
+        }
+
+        ~PlayerMapLayerPatches()
+        {
+            DisposeComponents();
+        }
     }
 }

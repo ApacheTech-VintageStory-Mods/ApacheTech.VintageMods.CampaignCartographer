@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Services.HarmonyPatching.Annotations;
 using HarmonyLib;
 using Vintagestory.API.Common;

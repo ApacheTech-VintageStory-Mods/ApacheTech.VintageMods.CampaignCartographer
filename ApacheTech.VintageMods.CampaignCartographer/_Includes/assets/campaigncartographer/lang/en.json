@@ -1,5 +1,6 @@
 {
   // ReSharper disable CommentTypo
+  // ReSharper disable StringLiteralTypo
   // ==================================================================================
   //  Campaign Cartographer - Language File
   // ==================================================================================
@@ -7,7 +8,7 @@
   //    Language: English
   //    Language Code: en
   //    Translated By: Apache
-  //    Mod Version: 2.0.0
+  //    Mod Version: 2.1.0
   //    
   // ==================================================================================
 
@@ -164,7 +165,7 @@
   "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage.HoverText": "Waypoints of the same type will not be placed any closer together than this, vertically.",
   "Features.ManualWaypoints.Dialogue.WaypointType.Pinned": "Pinned:",
   "Features.ManualWaypoints.Dialogue.WaypointType.Pinned.HoverText": "Whether or not to pin this waypoint to the map, by default.",
-  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Title": "Confirm Waypoint Type Deletion",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Title": "Confirm Waypoint Type Removal",
   "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Message": "Are you sure you want to delete this waypoint type?",
 
   // Pre-Defined Waypoints Dialogue Window
