@@ -10,8 +10,10 @@ using HarmonyLib;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
+using Vintagestory.Server;
 using Color = System.Drawing.Color;
 
+// ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMethodReturnValue.Global
 // ReSharper disable IdentifierTypo
@@ -30,6 +32,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), MethodType.Constructor, typeof(ICoreAPI), typeof(IWorldMapManager))]
         public static void Patch_PlayerMapLayer_Constructor_Postfix(ICoreAPI api, IWorldMapManager mapsink)
         {
+            if (api is ServerCoreAPI) return;
             _capi = (ICoreClientAPI)api;
             _mapSink = mapsink;
             PlayerPins = new Dictionary<IPlayer, EntityMapComponent>();
@@ -40,7 +43,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "OnLoaded")]
         public static bool Patch_PlayerMapLayer_Event_OnLoaded_Prefix()
         {
-            if (_capi is null) return false;
+            if (_capi is null) return true;
             _capi.Event.PlayerEntitySpawn += OnPlayerSpawn;
             _capi.Event.PlayerEntityDespawn += OnPlayerDespawn;
             return false;
@@ -50,6 +53,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "OnMapOpenedClient")]
         public static bool Patch_PlayerMapLayer_OnMapOpenedClient_Prefix()
         {
+            if (_capi is null) return true;
             PlayerPins.Purge();
             foreach (var player in _capi.World.AllOnlinePlayers)
             {
@@ -69,6 +73,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "Render")]
         public static bool Patch_PlayerMapLayer_Render_Prefix(GuiElementMap mapElem, float dt)
         {
+            if (_capi is null) return true;
             foreach (var pin in PlayerPins)
             {
                 pin.Value.Render(mapElem, dt);
@@ -80,6 +85,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "OnMouseMoveClient")]
         public static bool Patch_PlayerMapLayer_OnMouseMoveClient_Prefix(MouseEvent args, GuiElementMap mapElem, StringBuilder hoverText)
         {
+            if (_capi is null) return true;
             foreach (var pin in PlayerPins)
             {
                 pin.Value.OnMouseMove(args, mapElem, hoverText);
@@ -91,6 +97,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         [HarmonyPatch(typeof(PlayerMapLayer), "OnMouseUpClient")]
         public static bool Patch_PlayerMapLayer_OnMouseUpClient_Prefix(MouseEvent args, GuiElementMap mapElem)
         {
+            if (_capi is null) return true;
             foreach (var pin in PlayerPins)
             {
                 pin.Value.OnMouseUpOnElement(args, mapElem);
