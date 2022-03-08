@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using ApacheTech.VintageMods.Core.Abstractions.Features;
 using Newtonsoft.Json;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
@@ -8,7 +9,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
     ///     A strongly-typed representation of the settings in the JSON file for the PlayerPins feature. This class cannot be inherited.
     /// </summary>
     [JsonObject]
-    public sealed class PlayerPinsSettings
+    public sealed class PlayerPinsSettings : FeatureSettings
     {
         /// <summary>
         ///     Gets or sets the colour of the player's own pin.

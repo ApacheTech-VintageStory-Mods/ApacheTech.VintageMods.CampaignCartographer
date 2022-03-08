@@ -1,7 +1,5 @@
-﻿using ApacheTech.VintageMods.Core.Abstractions.Features;
-using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+﻿using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.Services.HarmonyPatching.Annotations;
 using HarmonyLib;
 using Vintagestory.API.Common;
 using Vintagestory.API.Common.Entities;
@@ -13,8 +11,7 @@ using Vintagestory.GameContent;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Patches
 {
-    [HarmonySidedPatch(EnumAppSide.Client)]
-    public class BlockEntityStaticTranslocatorPatches : WorldSettingsConsumer<AutoWaypointsSettings>
+    public partial class AutoWaypointsPatches
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BlockStaticTranslocator), "OnEntityCollide")]

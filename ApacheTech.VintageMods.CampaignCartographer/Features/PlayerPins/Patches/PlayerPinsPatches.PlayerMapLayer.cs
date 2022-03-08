@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Enums;
-using ApacheTech.VintageMods.Core.Abstractions.Features;
 using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.DotNet;
-using ApacheTech.VintageMods.Core.Services.HarmonyPatching.Annotations;
 using Cairo;
 using HarmonyLib;
 using Vintagestory.API.Client;
@@ -22,8 +20,7 @@ using Color = System.Drawing.Color;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patches
 {
-    [HarmonySidedPatch(EnumAppSide.Client)]
-    public class PlayerMapLayerPatches : WorldSettingsConsumer<PlayerPinsSettings>
+    public partial class PlayerPinsPatches
     {
         private static ICoreClientAPI _capi;
         private static IWorldMapManager _mapSink;
@@ -173,11 +170,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
                 comp.Texture.Dispose();
             }
             PlayerPins.Purge();
-        }
-
-        ~PlayerMapLayerPatches()
-        {
-            DisposeComponents();
         }
     }
 }

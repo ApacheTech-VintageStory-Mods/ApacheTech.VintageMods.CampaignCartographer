@@ -9,7 +9,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
     /// <summary>
     ///     A helper class that eases the retrieval and setting of pin values, based on an entity's relationship to the current client player.
      /// </summary>
-    public sealed class PlayerPin : WorldSettingsConsumer<PlayerPinsSettings>
+    public sealed class PlayerPinHelper : WorldSettingsConsumer<PlayerPinsSettings>
     {
         /// <summary>
         ///     Gets or sets the relation.

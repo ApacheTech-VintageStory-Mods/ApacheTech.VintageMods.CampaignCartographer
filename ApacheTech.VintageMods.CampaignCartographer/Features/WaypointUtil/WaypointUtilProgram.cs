@@ -11,7 +11,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
     ///     Feature: Waypoint Utilities
     /// </summary>
     /// <seealso cref="ClientFeatureRegistrar" />
-    public class Program : ClientFeatureRegistrar
+    public class WaypointUtilProgram : ClientFeatureRegistrar
     {
         /// <summary>
         ///     Allows a mod to include Singleton, or Transient services to the IOC Container.

@@ -1,6 +1,4 @@
-﻿using ApacheTech.VintageMods.Core.Services.HarmonyPatching.Annotations;
-using HarmonyLib;
-using Vintagestory.API.Common;
+﻿using HarmonyLib;
 using Vintagestory.API.Config;
 using Vintagestory.Client.NoObf;
 
@@ -9,8 +7,8 @@ using Vintagestory.Client.NoObf;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Patches
 {
-    [HarmonySidedPatch(EnumAppSide.Client)]
-    public class ClientEventManagerPatches
+
+    public partial class WaypointUtilPatches
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(ClientEventManager), "TriggerNewServerChatLine")]
@@ -24,7 +22,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Patc
 
             var waypointDeletedText = Lang.Get("Ok, deleted waypoint.");
             var isWaypointDeletedMessage = message.StartsWith(waypointDeletedText.Substring(0, 11));
-            
+
             return !(isWaypointAddedMessage || isWaypointDeletedMessage);
         }
     }

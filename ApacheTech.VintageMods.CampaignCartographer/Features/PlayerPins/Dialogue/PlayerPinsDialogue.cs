@@ -32,12 +32,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
         {
             if (!IsOpened()) return;
 
-            SetPlayerPinSwitch("btnTogglePlayerPins", (int)PlayerPin.Relation);
-            SetColourSliderValue("sliderR", PlayerPin.Colour.R);
-            SetColourSliderValue("sliderG", PlayerPin.Colour.G);
-            SetColourSliderValue("sliderB", PlayerPin.Colour.B);
-            SetColourSliderValue("sliderA", PlayerPin.Colour.A);
-            SetScaleSliderValue("sliderScale", PlayerPin.Scale);
+            SetPlayerPinSwitch("btnTogglePlayerPins", (int)PlayerPinHelper.Relation);
+            SetColourSliderValue("sliderR", PlayerPinHelper.Colour.R);
+            SetColourSliderValue("sliderG", PlayerPinHelper.Colour.G);
+            SetColourSliderValue("sliderB", PlayerPinHelper.Colour.B);
+            SetColourSliderValue("sliderA", PlayerPinHelper.Colour.A);
+            SetScaleSliderValue("sliderScale", PlayerPinHelper.Scale);
             SetPreviewColour("pnlPreview");
 
             capi.ModLoader
@@ -111,7 +111,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
 
         private void OnSelectionChanged(string code, bool selected)
         {
-            PlayerPin.Relation = Enum.TryParse(code, out PlayerRelation relation) ? relation : PlayerRelation.Self;
+            PlayerPinHelper.Relation = Enum.TryParse(code, out PlayerRelation relation) ? relation : PlayerRelation.Self;
             RefreshValues();
         }
 
@@ -143,15 +143,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
         private bool OnRandomise()
         {
             var rng = new Random(DateTime.Now.Millisecond);
-            PlayerPin.Colour = Color.FromArgb(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
-            PlayerPin.Scale = rng.Next(-5, 21);
+            PlayerPinHelper.Colour = Color.FromArgb(rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256), rng.Next(0, 256));
+            PlayerPinHelper.Scale = rng.Next(-5, 21);
             RefreshValues();
             return true;
         }
 
         private static void OnPreviewPanelDraw(Context ctx, ImageSurface surface, ElementBounds currentBounds)
         {
-            var colour = PlayerPin.Colour.Normalise();
+            var colour = PlayerPinHelper.Colour.Normalise();
 
             ctx.SetSourceRGBA(0, 0, 0, 1);
             ctx.LineWidth = 5.0;
@@ -173,14 +173,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
 
         private bool OnColourChanged(ColourChannel channel, int value)
         {
-            PlayerPin.Colour = PlayerPin.Colour.UpdateColourChannel(channel, value);
+            PlayerPinHelper.Colour = PlayerPinHelper.Colour.UpdateColourChannel(channel, value);
             RefreshValues();
             return true;
         }
 
         private bool OnScaleChanged(int s)
         {
-            PlayerPin.Scale = s;
+            PlayerPinHelper.Scale = s;
             RefreshValues();
             return true;
         }

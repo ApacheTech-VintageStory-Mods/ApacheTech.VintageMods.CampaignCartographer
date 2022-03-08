@@ -11,7 +11,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
     ///     Feature: Player Pins
     /// </summary>
     /// <seealso cref="ClientFeatureRegistrar" />
-    public class Program : ClientFeatureRegistrar
+    public class PlayerPinsProgram : ClientFeatureRegistrar
     {
         /// <summary>
         ///     Allows a mod to include Singleton, or Transient services to the IOC Container.
@@ -33,6 +33,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
         /// </param>
         public override void StartPreClientSide(ICoreClientAPI capi)
         {
+            Patches.PlayerPinsPatches.Initialise();
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public override void Dispose()
+        {
+            Patches.PlayerPinsPatches.Dispose();
+            base.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ProtoBuf;
+﻿using ApacheTech.VintageMods.Core.Abstractions.Features;
+using ProtoBuf;
 
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 // ReSharper disable UnusedMember.Global
@@ -9,7 +10,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
     ///     Contains client managed, per world settings for the Auto Waypoints feature. 
     /// </summary>
     [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    public class AutoWaypointsSettings
+    public class AutoWaypointsSettings : FeatureSettings
     {
         /// <summary>
         ///     Determines whether translocators should be automatically waypointed.

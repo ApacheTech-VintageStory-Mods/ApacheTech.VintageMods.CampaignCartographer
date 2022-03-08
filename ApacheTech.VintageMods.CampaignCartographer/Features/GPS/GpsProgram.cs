@@ -10,7 +10,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
     ///     Feature: GPS
     /// </summary>
     /// <seealso cref="ServerFeatureRegistrar" />
-    public class Program : ServerFeatureRegistrar
+    public class GpsProgram : ServerFeatureRegistrar
     {
         /// <summary>
         ///     Allows a mod to include Singleton, or Transient services to the IOC Container.

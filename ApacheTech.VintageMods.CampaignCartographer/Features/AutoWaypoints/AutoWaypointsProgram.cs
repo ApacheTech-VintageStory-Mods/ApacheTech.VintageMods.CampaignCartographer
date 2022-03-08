@@ -1,20 +1,17 @@
 ﻿using ApacheTech.Common.DependencyInjection.Abstractions;
-using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue;
-using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue.PredefinedWaypoints;
+using ApacheTech.VintageMods.Core.Hosting.Configuration;
 using ApacheTech.VintageMods.Core.Hosting.DependencyInjection.Registration;
-using ApacheTech.VintageMods.Core.Services;
-using ApacheTech.VintageMods.Core.Services.FileSystem.Enums;
 using Vintagestory.API.Client;
 
 // ReSharper disable UnusedType.Global
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 {
     /// <summary>
-    ///     Feature: Manual Waypoints
+    ///     Feature: Auto Waypoints
     /// </summary>
     /// <seealso cref="ClientFeatureRegistrar" />
-    public class Program : ClientFeatureRegistrar
+    public class AutoWaypointsProgram : ClientFeatureRegistrar
     {
         /// <summary>
         ///     Allows a mod to include Singleton, or Transient services to the IOC Container.
@@ -22,9 +19,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         /// <param name="services">The service collection.</param>
         public override void ConfigureClientModServices(IServiceCollection services)
         {
-            services.RegisterSingleton(sp => sp.CreateInstance<Commands.ManualWaypointsChatCommand>());
-            services.RegisterTransient<ManualWaypointsMenuScreen>();
-            services.RegisterTransient<PredefinedWaypointsDialogue>();
+            services.RegisterSingleton(_ => ModSettings.World.Feature<AutoWaypointsSettings>("AutoWaypoints"));
+            services.RegisterSingleton<Dialogue.AutoWaypointsDialogue>();
+            services.RegisterSingleton<AutoWaypointPatchHandler>();
         }
 
         /// <summary>
@@ -37,9 +34,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         /// </param>
         public override void StartPreClientSide(ICoreClientAPI capi)
         {
-            ModServices.FileSystem
-                .RegisterFile("waypoint-types.json", FileScope.World)
-                .RegisterFile("default-waypoints.json", FileScope.Local);
+            Patches.AutoWaypointsPatches.Initialise();
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public override void Dispose()
+        {
+            Patches.AutoWaypointsPatches.Dispose();
+            base.Dispose();
         }
     }
 }

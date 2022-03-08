@@ -1,6 +1,8 @@
 ﻿using ApacheTech.Common.Extensions.System;
+using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue.PredefinedWaypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
+using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Exports;
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Imports;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
@@ -42,29 +44,39 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
             composer
                 .AddStaticImage(AssetLocation.Create("campaigncartographer:textures/dialogue/menu-logo.png"), squareBounds)
+                .AddSmallButton(LangEx.FeatureString("AutoWaypoints.Dialogue", "Title"), OnAutomaticWaypointsButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "Title"), OnExportWaypointButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "Title"), OnImportWaypointButtonPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(LangEx.FeatureString("PlayerPins.Dialogue", "Title"), OnPlayerPinsButtonPressed, ButtonBounds(ref row, width, height))
                 .Execute(() => row += 0.5f)
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "DonateToModAuthor"), OnDonateButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(Lang.Get("pause-back2game"), TryClose, ButtonBounds(ref row, width, height));
         }
 
+        private static bool OnPlayerPinsButtonPressed()
+        {
+            ModServices.IOC.Resolve<PlayerPinsDialogue>().Toggle();
+            return true;
+        }
+
+        private static bool OnAutomaticWaypointsButtonPressed()
+        {
+            ModServices.IOC.Resolve<AutoWaypointsDialogue>().Toggle();
+            return true;
+        }
+
         private static bool OnImportWaypointButtonPressed()
         {
-            var dialogue = ModServices.IOC.Resolve<WaypointImportDialogue>();
-            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
-                dialogue.TryClose();
-            return dialogue.TryOpen();
+            ModServices.IOC.Resolve<WaypointImportDialogue>().Toggle();
+            return true;
         }
 
         private static bool OnExportWaypointButtonPressed()
         {
-            var dialogue = ModServices.IOC.Resolve<WaypointExportDialogue>();
-            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
-                dialogue.TryClose();
-            return dialogue.TryOpen();
+            ModServices.IOC.Resolve<WaypointExportDialogue>().Toggle();
+            return true;
         }
 
         private static ElementBounds ButtonBounds(ref float row, double width, double height)
@@ -76,18 +88,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 .WithFixedSize(width, 30);
         }
 
-        private bool OnDonateButtonPressed()
+        private static bool OnDonateButtonPressed()
         {
-            capi.Gui.OpenLink("https://bit.ly/APGDonate");
+            CrossPlatform.OpenBrowser("https://bit.ly/APGDonate");
             return true;
         }
 
         private static bool OnEditPreDefinedWaypointsPressed()
         {
-            var dialogue = ModServices.IOC.Resolve<PredefinedWaypointsDialogue>();
-            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
-                dialogue.TryClose();
-            dialogue.TryOpen();
+            ModServices.IOC.Resolve<PredefinedWaypointsDialogue>().Toggle();
             return true;
         }
 
