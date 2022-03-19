@@ -37,6 +37,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
         public WorldMapManager WorldMap { get; }
 
         private readonly List<ManualWaypointTemplateModel> _defaultWaypoints;
+        private readonly GeneralClientWorldSettings _worldSettings;
+        private readonly GeneralClientGlobalSettings _globalSettings;
 
         public SortedDictionary<string, ManualWaypointTemplateModel> WaypointTypes { get; } = new();
 
@@ -52,41 +54,56 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                 .ToList();
 
             WorldMap = (_capi = capi).ModLoader.GetModSystem<WorldMapManager>();
-            var worldSettings = ModSettings.World.Feature<GeneralClientWorldSettings>("General");
-            var globalSettings = ModSettings.Global.Feature<GeneralClientGlobalSettings>("General");
+            _worldSettings = ModSettings.World.Feature<GeneralClientWorldSettings>("General");
+            _globalSettings = ModSettings.Global.Feature<GeneralClientGlobalSettings>("General");
 
-            if (worldSettings.FirstRun)
+            if (_worldSettings.FirstRun)
             {
-                HandleFirstRun(globalSettings, worldSettings);
+                HandleFirstRun();
             }
             LoadWaypoints();
         }
 
-        private void HandleFirstRun(GeneralClientGlobalSettings globalSettings, GeneralClientWorldSettings worldSettings)
+        public void ResetToFactorySettings()
         {
-            if (globalSettings.AlwaysLoadDefaultWaypoints)
+            _worldSettings.FirstRun = true;
+
+            _globalSettings.NeverLoadDefaultWaypoints = false;
+            _globalSettings.AlwaysLoadDefaultWaypoints = false;
+
+            ModServices.FileSystem
+                .GetJsonFile("waypoint-types.json")
+                .AsFileInfo()
+                .Delete();
+
+            HandleFirstRun();
+        }
+
+        private void HandleFirstRun()
+        {
+            if (_globalSettings.AlwaysLoadDefaultWaypoints)
             {
                 ModServices.FileSystem
                     .GetJsonFile("waypoint-types.json")
                     .SaveFrom(_defaultWaypoints);
             }
-            else if (!globalSettings.NeverLoadDefaultWaypoints)
+            else if (!_globalSettings.NeverLoadDefaultWaypoints)
             {
-                OpenFirstRunDialogue(globalSettings);
+                OpenFirstRunDialogue();
             }
 
-            worldSettings.FirstRun = false;
-            ModSettings.World.Save("General", worldSettings);
+            _worldSettings.FirstRun = false;
+            ModSettings.World.Save("General", _worldSettings);
         }
 
-        public void OpenFirstRunDialogue(GeneralClientGlobalSettings globalSettings)
+        public void OpenFirstRunDialogue()
         {
-            ModServices.IOC.CreateInstance<FirstRunDialogue>(new Action<bool, bool>((state, rememberSetting) =>
+            ModServices.IOC.CreateInstance<FirstRunDialogue>(new Action<bool, bool>((loadWaypoints, rememberSetting) =>
             {
-                if (!state)
+                if (!loadWaypoints)
                 {
-                    globalSettings.NeverLoadDefaultWaypoints = rememberSetting;
-                    ModSettings.Global.Save("General", globalSettings);
+                    _globalSettings.NeverLoadDefaultWaypoints = rememberSetting;
+                    ModSettings.Global.Save("General", _globalSettings);
                     return;
                 }
 
@@ -94,8 +111,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                     .GetJsonFile("waypoint-types.json")
                     .SaveFrom(_defaultWaypoints);
 
-                globalSettings.AlwaysLoadDefaultWaypoints = rememberSetting;
-                ModSettings.Global.Save("General", globalSettings);
+                _globalSettings.AlwaysLoadDefaultWaypoints = rememberSetting;
+                ModSettings.Global.Save("General", _globalSettings);
                 LoadWaypoints();
             })).TryOpen();
         }

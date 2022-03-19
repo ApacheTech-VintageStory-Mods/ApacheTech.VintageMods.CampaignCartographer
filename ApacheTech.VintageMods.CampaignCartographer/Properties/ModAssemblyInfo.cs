@@ -11,13 +11,13 @@ using Vintagestory.API.Common;
     "campaigncartographer",
     Description = "Adds multiple map related features to the game, custom marker pins, GPS, automatic waypoint markers, and more.",
     Side = "Universal",
-    Version = "2.1.2",
+    Version = "2.1.3",
     RequiredOnClient = false,
     RequiredOnServer = false,
     NetworkVersion = "1.0.0",
     Website = "https://apachetech.co.uk",
     Contributors = new[] { "Apache", "Doombox", "Melchior", "Novocain", "egocarib", "Craluminum2413", "Aledark", "Th3Dilly" },
-    Authors = new []{ "Apache", "Doombox", "Novocain", "egocarib" })]
+    Authors = new []{ "Apache" })]
 
 [assembly: VintageModInfo(
     Side = EnumAppSide.Universal,
@@ -25,4 +25,4 @@ using Vintagestory.API.Common;
     ModName = "Campaign Cartographer",
     RootDirectoryName = "CampaignCartographer",
     NetworkVersion = "1.0.0",
-    Version = "2.1.2")]
+    Version = "2.1.3")]

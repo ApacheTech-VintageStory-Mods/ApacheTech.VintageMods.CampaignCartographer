@@ -61,7 +61,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
                 .HasSubCommand("purge-colour").WithHandler(OnPurgeByColour)
                 .HasSubCommand("purge-title").WithHandler(OnPurgeByTitle)
                 .HasSubCommand(Confirm).WithHandler(OnConfirmation)
-                .HasSubCommand("cancel").WithHandler(OnCancel);
+                .HasSubCommand("cancel").WithHandler(OnCancel)
+                .HasSubCommand("reset").WithHandler(OnFactoryReset);
 #if DEBUG
             command.HasSubCommand("stress-test").WithHandler(OnStressTest);
 #else
@@ -86,6 +87,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
                     Thread.Sleep(50);
                 }
             });
+        }
+
+
+        /// <summary>
+        ///      • Reset mod to factory settings.
+        /// </summary>
+        private void OnFactoryReset(string subCommandName, int groupId, CmdArgs args)
+        {
+            _cachedAction = () =>
+            {
+                ModServices.IOC.Resolve<WaypointService>().ResetToFactorySettings();
+            };
+            _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
         }
 
         /// <summary>
