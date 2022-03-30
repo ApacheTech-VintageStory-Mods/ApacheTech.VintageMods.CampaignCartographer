@@ -49,6 +49,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             ModalTransparency = 0f;
             LeftButtonText = LangEx.FeatureString("WaypointUtil.Dialogue.ImportConfirmation", "LeftButtonText");
             RightButtonText = LangEx.FeatureString("WaypointUtil.Dialogue.ImportConfirmation", "RightButtonText");
+            ShowTopRightButton = false;
 
             ClientSettings.Inst.AddWatcher<float>("guiScale", _ =>
             {

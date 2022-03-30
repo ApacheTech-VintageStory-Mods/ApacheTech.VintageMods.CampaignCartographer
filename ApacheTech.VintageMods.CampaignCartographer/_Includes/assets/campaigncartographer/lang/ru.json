@@ -122,6 +122,7 @@
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Редактирование выбора блока маркера путевой точки",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Редактирование предопределенных путевых точек",
   "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Пожертвовать автору мода",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Менеджер путевых точек", 
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Первый запуск",
@@ -180,6 +181,8 @@
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Название: {0}",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Радиус покрытия: ({0}x{1})",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Закреплено: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblSearch.HoverText": "Фильтр типов путевых точек по названию и имени",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblDisabledOnly": "Показывать только отключенные типы путевых точек:",
 
   // ==================================================================================
   //  Feature: Player Pins

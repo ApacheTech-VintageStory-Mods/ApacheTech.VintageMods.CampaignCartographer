@@ -1,0 +1,284 @@
+{
+  // ReSharper disable CommentTypo
+  // ReSharper disable StringLiteralTypo
+  // ==================================================================================
+  //  Campaign Cartographer - Language File
+  // ==================================================================================
+  //
+  //    Language: Japanese
+  //    Language Code: ja
+  //    Translated By: Macoto Hino
+  //    Mod Version: 2.1.3
+  //    
+  // ==================================================================================
+
+  // ==================================================================================
+  //  Mod Specific
+  // ==================================================================================
+
+  "ModTitle": "Campaign Cartographer(地図作り大作戦)",
+  "ModDescription": "カスタムウェイポイントアイコン、GPS、自動ウェイポイントマーカーなど、地図作りに関連する複数の機能をゲームに追加します。",
+
+  // ==================================================================================
+  //  Errors and Exceptions
+  // ==================================================================================
+
+  "error-messages.feature-not-available-client-side": "この機能は、クライアントからは利用出来ません。代わりに同等のサーバーコマンドを使用して下さい。",
+  "error-messages.mod-not-installed-on-server": "サーバーにCampaign Cartographerがインストールされていません。サーバー管理者に依頼して、Campaign Cartographerをサーバーにインストールし、機能を追加して下さい。",
+  "error-messages.feature-disabled": "サーバー管理者がこの機能を無効にしています。",
+  "error-messages.invalid-command": "コマンドが無効です。再試行して下さい。",
+
+  // ==================================================================================
+  //  Feature: Automatic Waypoints
+  // ==================================================================================
+
+  "Features.AutoWaypoints.SettingsCommandDescription": "自動ウェイポイントの設定変更",
+
+  // GUI Dialogue Window:
+  "Features.AutoWaypoints.Dialogue.Title": "自動ウェイポイント",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators": "静止しているトランスロケーター:",
+  "Features.AutoWaypoints.Dialogue.lblTranslocators.HoverText": "トランスロケーター間を移動すると、自動的にウェイポイントが追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters": "テレポーターブロック:",
+  "Features.AutoWaypoints.Dialogue.lblTeleporters.HoverText": "テレポーター間を移動すると、自動的にウェイポイントが追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblTraders": "商人:",
+  "Features.AutoWaypoints.Dialogue.lblTraders.HoverText": "商人に話しかけると、自動的にウェイポイントが追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits": "地表の堆積物:",
+  "Features.AutoWaypoints.Dialogue.lblSurfaceDeposits.HoverText": "地表の堆積物を拾うと、金属の種類に応じたウェイポイントが自動的に追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones": "浮き石:",
+  "Features.AutoWaypoints.Dialogue.lblLooseStones.HoverText": "地表の堆積物を拾うと、岩石の種類に応じたウェイポイントが自動的に追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms": "キノコ:",
+  "Features.AutoWaypoints.Dialogue.lblMushrooms.HoverText": "キノコを採取すると、自動的にウェイポイントが追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblResin": "樹脂:",
+  "Features.AutoWaypoints.Dialogue.lblResin.HoverText": "樹脂を採取すると、自動的にウェイポイントが追加されます。",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes": "ベリーの茂み:",
+  "Features.AutoWaypoints.Dialogue.lblBerryBushes.HoverText": "ベリーの茂みを採取すると、自動的にウェイポイントが追加されます。",
+
+  // ==================================================================================
+  //  Feature: Centre Map
+  // ==================================================================================
+
+  "Features.CentreMap.SettingsCommandDescription": "マップの中心を指定された場所、またはプレイヤーに合わせます。",
+  "Features.CentreMap.CannotCentreMapOnPlayer": "現在、プレイヤー「{0}」が見付かりません。範囲外にいる可能性があります。再ログインすると、マップに表示されます。",
+  "Features.CentreMap.CentreMapOnPlayer": "マップの中心をプレイヤーに合わせる: {0} ({1}, {2}, {3})",
+  "Features.CentreMap.CentreMapOnPlayerSpawn": "マップの中心をプレイヤーのスポーンポイントに合わせる: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnPosition": "マップの位置を中心に合わせる: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWorldSpawn": "マップの中心をワールドスポーンに合わせる: ({0}, {1})",
+  "Features.CentreMap.CentreMapOnWaypoint": "マップの中心をウェイポイント{0}に合わせる: {1} ({2}, {3})",
+
+  // ==================================================================================
+  //  Feature: GPS
+  // ==================================================================================
+
+  "Features.GPS.Client.SettingsCommandDescription": "プレイヤーの現在地情報を表示します。",
+  "Features.GPS.Server.SettingsCommandDescription": "サーバーのGPS設定を変更します。",
+  "Features.GPS.Client.location-copied-to-clipboard": "プレーヤーの位置情報をクリップボードにコピーしました。",
+  "Features.GPS.Client.player-not-found": "サーバーに「{0}」という名前のプレイヤーがいません。",
+  "Features.GPS.Server.invalid-command-syntax": "無効な構文です。もう一度やり直して下さい。",
+  "Features.GPS.Server.whisper-received": "[{0}から]: {1}",
+  "Features.GPS.Server.whisper-sent": "[{0}へ]: {1}",
+  "Features.GPS.Dialogue.Title": "GPS管理者",
+  "Features.GPS.Dialogue.lblWhispers": "囁きの許可:",
+  "Features.GPS.Dialogue.lblWhispers.HoverText": "プレイヤー同士がGPS座標を囁くことが出来るかどうかを決定します。",
+  "Features.GPS.ShowOnMap": "地図上に表示する",
+
+  // ==================================================================================
+  //  Feature: Manual Waypoints
+  // ==================================================================================
+
+  "Features.ManualWaypoints.SettingsCommandDescription": "ウェイポイント設定を切り替えます。",
+  "Features.ManualWaypoints.InvalidSyntax": "構文「{0}」のウェイポイントタイプは見付かりませんでした。新しいウェイポイントタイプを追加するには、コマンド `.wpSettings` を使用します。",
+
+  // Manual Waypoints. (.wp)
+  "Features.ManualWaypoints.ManualWaypoints.Description": "現在地から素早く簡単にウェイポイントを追加することが出来ます。",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage": "[pin (Optional)] [type] [title (Optional)]",
+  "Features.ManualWaypoints.ManualWaypoints.SyntaxMessage_Full": "[pin (Optional)] [{0}] [title (Optional)]",
+
+  // Manual Translocator Waypoints. (.wptl)
+  "Features.ManualWaypoints.TranslocatorWaypoints.Description": "プレイヤーから5ブロック以内にあるトランスロケーターに、ウェイポイントを追加します。",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorNotFound": "プレイヤーの範囲内にトランスロケーターは発見されていません。",
+  "Features.ManualWaypoints.TranslocatorWaypoints.TranslocatorWaypointTitle": "Translocator to ({0}, {1}, {2})",
+  "Features.ManualWaypoints.TranslocatorWaypoints.BrokenTranslocatorTitle": "壊れたトランスロケーター",
+  "Features.ManualWaypoints.TranslocatorWaypoints.WaypointAlreadyExists": "このトランスロケーターのウェイポイントは既に存在します。",
+
+  // Manual Teleporters Waypoints. (.wptp)
+  "Features.ManualWaypoints.TeleporterWaypoints.Description": "プレイヤーから5ブロック以内にあるテレポーターブロックに、ウェイポイントを追加します。",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterNotFound": "プレイヤーの範囲内にテレポーターは発見されていません。",
+  "Features.ManualWaypoints.TeleporterWaypoints.TeleporterWaypointTitle": "Teleporter {0} to: {1}",
+  "Features.ManualWaypoints.TeleporterWaypoints.WaypointAlreadyExists": "このテレポーターのウェイポイントは既に存在します。",
+
+  // Manual Trader Waypoints. (.wpt)
+  "Features.ManualWaypoints.TraderWaypoints.Description": "プレイヤーから5ブロック以内にある商人に、ウェイポイントを追加します。",
+  "Features.ManualWaypoints.TraderWaypoints.TraderNotFound": "プレイヤーの範囲内に商人が見当たりません。",
+  "Features.ManualWaypoints.TraderWaypoints.WaypointAlreadyExists": "この商人のウェイポイントは既に存在します。",
+
+  // Block Selection Waypoints. (.wps)
+  "Features.ManualWaypoints.BlockSelectionWaypoints.Description": "プレイヤーが現在ターゲットにしているブロックのウェイポイントを追加します。",
+
+  // Waypoint Template Information
+  "Features.ManualWaypoints.WaypointTemplate.DefaultTitle": "新規ウェイポイント",
+
+  // Menu Screen Dialogue Window
+  "Features.ManualWaypoints.Dialogue.MenuScreen.Title": "Campaign Cartographer(地図作り大作戦)",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "ブロックセレクションウェイポイントマーカーの編集",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "既存ウェイポイントの編集",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "MOD作者への寄付",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "ウェイポイントマネージャー",
+
+  // First Run Dialogue Window
+  "Features.ManualWaypoints.Dialogue.FirstRun.Title": "封切り",
+  "Features.ManualWaypoints.Dialogue.FirstRun.AutoWaypointsButton": "自動ウェイポイントの設定を変更する",
+  "Features.ManualWaypoints.Dialogue.FirstRun.PlayerPinsButton": "プレイヤーマップピンの設定を変更する",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph1": "Campaign Cartographer(地図作り大作戦)を初めて起動しました。「.wp」コマンドで使用するウェイポイントタイプのデフォルトリストをロードしますか？",
+  "Features.ManualWaypoints.Dialogue.FirstRun.Paragraph2": "デフォルトのウェイポイントタイプは英語ですが、｢.wpSettings｣コマンドを使用すると、設定で編集が可能です。",
+  "Features.ManualWaypoints.Dialogue.FirstRun.RememberPreference": "この設定を全サーバーで共有しますか？",
+  "Features.ManualWaypoints.Dialogue.FirstRun.CancelMessage": "既存ウェイポイントを追加しなくて本当にいいですか？後でMODの設定から追加出来ます。",
+  "Features.ManualWaypoints.Dialogue.FirstRun.ConfirmMessage": "既存ウェイポイントを追加しなくて本当にいいですか？後でMODの設定から追加出来ます。",
+
+  // Block Selection Dialogue Window
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Title": "ウェイポイントテンプレートを編集する",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour": "カラー:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Colour.HoverText": "ウェイポイントアイコンの色です。",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon": "アイコン:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.Icon.HoverText": "ウェイポイントアイコンの種類です。",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage": "H 有効範囲:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.HCoverage.HoverText": "同種のウェイポイントは、水平方向にこれ以上接近して配置されることはありません。",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage": "V 有効範囲:",
+  "Features.ManualWaypoints.Dialogue.BlockSelection.VCoverage.HoverText": "同種のウェイポイントは、垂直方向にこれ以上接近して配置されることはありません。",
+
+  // Add/Edit Waypoint Type Dialogue Window
+  "Features.ManualWaypoints.Dialogue.WaypointType.AddNew": "新規ウェイポイントタイプを追加する",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Edit": "ウェイポイントタイプを編集する",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax": "キーワード:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.HoverText": "ウェイポイントタイプの特定に使用されるのがキーワードです。コマンド｢.wp [keyword]｣ と共に使用します。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Syntax.Validation": "キーワードは1語のみです。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle": "タイトル:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.WaypointTitle.HoverText": "ウェイポイントのデフォルトタイトルです。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText": "詳細テキスト:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.DetailText.HoverText": "ウェイポイントマーカーに表示したい追加情報です。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour": "カラー:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Colour.HoverText": "ウェイポイントアイコンの色です。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon": "アイコン:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Icon.HoverText": "ウェイポイントアイコンの種類です。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage": "H 有効範囲:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.HCoverage.HoverText": "同種のウェイポイントは、水平方向にこれ以上接近して配置されることはありません。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Coverage.Validation": "有効範囲の半径は0以上を推奨します。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage": "V 有効範囲:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.VCoverage.HoverText": "同種のウェイポイントは、垂直方向にこれ以上接近して配置されることはありません。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned": "ピン留め:",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Pinned.HoverText": "ウェイポイントをマップにピン留めするかどうか、デフォルトで設定されています。",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Title": "ウェイポイントタイプの削除を確認する",
+  "Features.ManualWaypoints.Dialogue.WaypointType.Delete.Message": "このウェイポイントタイプを本当に削除しますか？",
+
+  // Pre-Defined Waypoints Dialogue Window
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Title": "既存ウェイポイント",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Error": "有効化エラー",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault": "デフォルトのウェイポイントタイプをロードする",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.LoadDefault.Confirmation": "デフォルトのウェイポイントタイプを本当にインポートしますか？デフォルトのタイトルは英語です。",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew": "新規ウェイポイントタイプを追加する",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.AddNew.Validation": "構文｢{0}｣のウェイポイントタイプは既に存在します。",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit": "ウェイポイントタイプを編集する",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.Edit.Validation": "リスト内に構文｢{0}｣のウェイポイントタイプが存在しません。",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "タイトル: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "有効範囲の半径: ({0}x{1})",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "ピン留め: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblSearch.HoverText": "ウェイポイントの種類をタイトルと名前で絞り込む",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblDisabledOnly": "無効化されているタイプのみ表示する:",
+
+  // ==================================================================================
+  //  Feature: Player Pins
+  // ==================================================================================
+
+  "Features.PlayerPins.SettingsCommandDescription": "プレイヤーのマップピンをカスタマイズする",
+
+  // Chat Command: .friends
+  "Features.PlayerPins.Friends.Description": "フレンドリストへの追加・削除。ワールドマップ上では、フレンドがハイライト表示されます。",
+  "Features.PlayerPins.Friends.FriendsList": "フレンドリスト:",
+  "Features.PlayerPins.Friends.YouHaveNoFriends": "フレンドがいません",
+  "Features.PlayerPins.Friends.NoPlayerNameGiven": "プレイヤー名を指定して下さい。'",
+  "Features.PlayerPins.Friends.PlayerNotFound": "名前「{0}」のプレイヤーは見付かりませんでした。",
+  "Features.PlayerPins.Friends.MultiplePlayersFound": "「{0}」という名前のプレーヤーが複数見付かりました。",
+  "Features.PlayerPins.Friends.PlayerAlreadyAdded": "{0}は既にフレンドリストに追加されています。",
+  "Features.PlayerPins.Friends.PlayerAdded": "{0}がフレンドリストに追加されました。",
+  "Features.PlayerPins.Friends.PlayerRemoved": "{0}がフレンドリストから削除されました。",
+
+  // GUI
+  "Features.PlayerPins.Dialogue.Title": "プレイヤーピンをカスタマイズする",
+  "Features.PlayerPins.Dialogue.Self": "あなた自身",
+  "Features.PlayerPins.Dialogue.Friend": "あなたのフレンド",
+  "Features.PlayerPins.Dialogue.Others": "サーバー上の他の人",
+  "Features.PlayerPins.Dialogue.Randomise": "カラーとスケールのランダム表示",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch": "プレイヤーピン:",
+  "Features.PlayerPins.Dialogue.lblToggleSwitch.HoverText": "自分のピンを変更するか、他のサーバーのメンバーに表示されるピンを変更するか。",
+  "Features.PlayerPins.Dialogue.btnToggleSwitch": "{0} プレイヤー",
+  "Features.PlayerPins.Dialogue.lblRed": "Red:",
+  "Features.PlayerPins.Dialogue.lblRed.HoverText": "ピンカラーのレッドチャンネルです。",
+  "Features.PlayerPins.Dialogue.lblGreen": "Green:",
+  "Features.PlayerPins.Dialogue.lblGreen.HoverText": "ピンカラーのグリーンチャンネルです。",
+  "Features.PlayerPins.Dialogue.lblBlue": "Blue:",
+  "Features.PlayerPins.Dialogue.lblBlue.HoverText": "ピンカラーのブルーチャンネルです。",
+  "Features.PlayerPins.Dialogue.lblOpacity": "不透明度:",
+  "Features.PlayerPins.Dialogue.lblOpacity.HoverText": "ピンカラーの不透明度。",
+  "Features.PlayerPins.Dialogue.lblScale": "スケール:",
+  "Features.PlayerPins.Dialogue.lblScale.HoverText": "ピンスケールに適用するスケール調整です。",
+
+  // ==================================================================================
+  //  Feature: Waypoint Utilities
+  // ==================================================================================
+
+  "Features.WaypointUtil.SettingsCommandDescription": "ウェイポイントの操作を簡単にするユーティリティコマンド。",
+  "Features.WaypointUtil.Confirm": "confirm", // TRANSLATOR NOTE: This can be kept as `confirm`, if it's easier. This is a command name, used below.
+  "Features.WaypointUtil.ConfirmationMessage": "｢.wpUtil {0}」と入力して確定します。",
+  "Features.WaypointUtil.PurgedWaypointCount": "{0} {1}のウェイポイントを削除しました。", // Example: "1 waypoint deleted." OR "2 waypoints deleted."
+  "Features.WaypointUtil.AddedWaypointCount": "{0} {1}のウェイポイントを追加しました。", // Example: "1 waypoint added." OR "2 waypoints added."
+
+  // Waypoint Import Window
+  "Features.WaypointUtil.Dialogue.Imports.Title": "ウェイポイントのインポート",
+  "Features.WaypointUtil.Dialogue.Imports.File-singular": "ファイル",
+  "Features.WaypointUtil.Dialogue.Imports.File-plural": "ファイル",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-singular": "ウェイポイント",
+  "Features.WaypointUtil.Dialogue.Imports.Waypoint-plural": "ウェイポイント",
+  "Features.WaypointUtil.Dialogue.Imports.SelectedWaypoints": "{1}{2}から{0}個のウェイポイントが選択されました。",
+  "Features.WaypointUtil.Dialogue.Imports.OpenImportsFolder": "インポートフォルダを開く",
+  "Features.WaypointUtil.Dialogue.Imports.ImportSelectedWaypoints": "選択したウェイポイントのインポート",
+  "Features.WaypointUtil.Dialogue.Imports.FileText": "ファイル: {0}",
+  "Features.WaypointUtil.Dialogue.Imports.CreatedText": "作成: {0:G}",
+  "Features.WaypointUtil.Dialogue.Imports.NumberOfWaypoints": "{0} {1}",
+
+  // Waypoint Import Selection Window
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Title": "ウェイポイントのインポート",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.LeftButtonText": "戻る",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.RightButtonText": "選択されたインポート",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationTitle": "インポートウェイポイントの確認",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.ConfirmationMessage": "{0}個のウェイポイントをインポートしようとしています。",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Title": "ウェイポイントの削除を確認する",
+  "Features.WaypointUtil.Dialogue.ImportConfirmation.Delete.Message": "インポートリストからウェイポイントを削除してよろしいですか？",
+
+  // Waypoint Export Window
+  "Features.WaypointUtil.Dialogue.Exports.Title": "ウェイポイントのエクスポート",
+  "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0}のウェイポイントが選択されています。",
+  "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "エクスポートフォルダを開く",
+  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "選択したウェイポイントをエクスポートする",
+
+  // Waypoint Export Confirmation Window
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationTitle": "エクスポートウェイポイントの確認",
+  "Features.WaypointUtil.Dialogue.Exports.ConfirmationMessage": "{0}個のウェイポイントをエクスポートしようとしています。",
+  "Features.WaypointUtil.Dialogue.Exports.Name": "名前:",
+  "Features.WaypointUtil.Dialogue.Exports.Name.HoverText": "エクスポートされたウェイポイントを識別するための名前です。",
+  "Features.WaypointUtil.Dialogue.Exports.World": "ワールド:",
+  "Features.WaypointUtil.Dialogue.Exports.World.HoverText": "ウェイポイントがエクスポートされるワールドです。",
+  "Features.WaypointUtil.Dialogue.Exports.FileName": "ファイル名前:",
+  "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "エクスポートファイルの名前を指定します。",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultName": "エクスポートされたウェイポイント",
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "シングルプレイヤーワールド",
+
+  // ==================================================================================
+  //  Feature: Waypoint Manager
+  // ==================================================================================
+
+  // Waypoint Export Window
+  "Features.WaypointManager.Dialogue.Title": "ウェイポイントマネージャー",
+  "Features.WaypointManager.Dialogue.ExportWaypoints": "ウェイポイントのエクスポート",
+  "Features.WaypointManager.Dialogue.ImportWaypoints": "ウェイポイントのインポート",
+  "Features.WaypointManager.Dialogue.AddNew": "新規ウェイポイントの追加",
+  "Features.WaypointManager.Dialogue.Edit": "既存ウェイポイントの編集"
+}

@@ -121,6 +121,7 @@
   "Features.ManualWaypoints.Dialogue.MenuScreen.Title": "Campaign Cartographer",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Edit Block Selection Waypoint Marker",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Edit Pre-Defined Waypoints",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Waypoint Manager",
   "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Donate to Mod Author",
 
   // First Run Dialogue Window
@@ -180,6 +181,8 @@
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Title: {0}",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Coverage Radius: ({0}x{1})",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Pinned: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblSearch.HoverText": "Filter waypoint types, by title and name.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblDisabledOnly": "Only Show Disabled Waypoint Types:",
 
   // ==================================================================================
   //  Feature: Player Pins
@@ -254,7 +257,7 @@
   "Features.WaypointUtil.Dialogue.Exports.Title": "Export Waypoints",
   "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0} waypoints selected.",
   "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "Open Exports Folder",
-  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Export Selected Waypoints",
+  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Export Selected Waypoints",  
 
   // Waypoint Export Confirmation Window
   "Features.WaypointUtil.Dialogue.Exports.ConfirmationTitle": "Export Waypoints Confirmation",

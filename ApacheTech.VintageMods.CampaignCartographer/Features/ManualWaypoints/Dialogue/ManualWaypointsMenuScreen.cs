@@ -4,7 +4,6 @@ using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialo
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Exports;
-using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.Imports;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.GameContent.GUI.Helpers;
@@ -47,8 +46,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 .AddSmallButton(LangEx.FeatureString("AutoWaypoints.Dialogue", "Title"), OnAutomaticWaypointsButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditBlockSelectionWaypointMarker"), OnEditBlockSelectionMarkerButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "EditPreDefinedWaypoints"), OnEditPreDefinedWaypointsPressed, ButtonBounds(ref row, width, height))
-                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "Title"), OnExportWaypointButtonPressed, ButtonBounds(ref row, width, height))
-                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "Title"), OnImportWaypointButtonPressed, ButtonBounds(ref row, width, height))
+                .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "WaypointManager"), OnWaypointManagerButtonPressed, ButtonBounds(ref row, width, height))
                 .AddSmallButton(LangEx.FeatureString("PlayerPins.Dialogue", "Title"), OnPlayerPinsButtonPressed, ButtonBounds(ref row, width, height))
                 .Execute(() => row += 0.5f)
                 .AddSmallButton(LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "DonateToModAuthor"), OnDonateButtonPressed, ButtonBounds(ref row, width, height))
@@ -67,13 +65,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             return true;
         }
 
-        private static bool OnImportWaypointButtonPressed()
-        {
-            ModServices.IOC.Resolve<WaypointImportDialogue>().Toggle();
-            return true;
-        }
-
-        private static bool OnExportWaypointButtonPressed()
+        private static bool OnWaypointManagerButtonPressed()
         {
             ModServices.IOC.Resolve<WaypointExportDialogue>().Toggle();
             return true;
@@ -109,7 +101,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 p.OnOkAction = waypointTemplate =>
                 {
                     settings.BlockSelectionWaypointTemplate = waypointTemplate;
-                    ModSettings.World.Save("ManualWaypoints", settings);
+                    ModSettings.World.Save(settings);
                 };
             });
             dialogue.TryOpen();

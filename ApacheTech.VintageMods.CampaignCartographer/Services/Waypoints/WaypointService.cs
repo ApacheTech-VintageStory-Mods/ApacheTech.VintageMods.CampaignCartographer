@@ -93,7 +93,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
             }
 
             _worldSettings.FirstRun = false;
-            ModSettings.World.Save("General", _worldSettings);
+            ModSettings.World.Save(_worldSettings, "General");
         }
 
         public void OpenFirstRunDialogue()
@@ -103,7 +103,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                 if (!loadWaypoints)
                 {
                     _globalSettings.NeverLoadDefaultWaypoints = rememberSetting;
-                    ModSettings.Global.Save("General", _globalSettings);
+                    ModSettings.Global.Save(_globalSettings, "General");
                     return;
                 }
 
@@ -112,7 +112,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                     .SaveFrom(_defaultWaypoints);
 
                 _globalSettings.AlwaysLoadDefaultWaypoints = rememberSetting;
-                ModSettings.Global.Save("General", _globalSettings);
+                ModSettings.Global.Save(_globalSettings, "General");
                 LoadWaypoints();
             })).TryOpen();
         }

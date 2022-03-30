@@ -17,7 +17,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
     /// <seealso cref="IGuiElementCell" />
     public class PredefinedWaypointsGuiCell : GuiElementTextBase, IGuiElementCell
     {
-        private readonly PredefinedWaypointsCellEntry _cell;
+        public PredefinedWaypointsCellEntry Cell { get; }
 
         private LoadedTexture _cellTexture;
         private int _switchOnTextureId;
@@ -37,16 +37,18 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         /// <param name="bounds">The bounds.</param>
         public PredefinedWaypointsGuiCell(ICoreClientAPI capi, PredefinedWaypointsCellEntry cell, ElementBounds bounds) : base(capi, "", null, bounds)
         {
-            _cell = cell;
-            Bounds = bounds;
+            Cell = cell;
+            Bounds = bounds.WithFixedHeight(30);
             _cellTexture = new LoadedTexture(capi);
-            _cell.TitleFont ??= CairoFont.WhiteSmallishText();
-            if (_cell.DetailTextFont != null) return;
-            _cell.DetailTextFont = CairoFont.WhiteSmallText();
-            _cell.DetailTextFont.Color[3] *= 0.6;
+            Cell.TitleFont ??= CairoFont.WhiteSmallishText();
+            Cell.RightTopOffY = 3f;
+
+            if (Cell.DetailTextFont != null) return;
+            Cell.DetailTextFont = CairoFont.WhiteSmallText();
+            Cell.DetailTextFont.Color[3] *= 0.6;
         }
 
-        public ManualWaypointTemplateModel Model => _cell.Model;
+        public ManualWaypointTemplateModel Model => Cell.Model;
 
         private void GenerateEnabledTexture()
         {
@@ -86,22 +88,22 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             context.Paint();
 
             // Icon
-            const int squareSize = 50;
+            const int squareSize = 30;
             const int outerBounds = squareSize + 15;
             PaintIcon(context, Bounds.absPaddingX + 5, Bounds.absPaddingY + 5, squareSize);
 
             // Main Title.
-            Font = _cell.TitleFont;
-            _titleTextHeight = textUtil.AutobreakAndDrawMultilineTextAt(context, Font, _cell.Model.Syntax, Bounds.absPaddingX + outerBounds, Bounds.absPaddingY, Bounds.InnerWidth - outerBounds);
+            Font = Cell.TitleFont;
+            _titleTextHeight = textUtil.AutobreakAndDrawMultilineTextAt(context, Font, Cell.Title, Bounds.absPaddingX + outerBounds, Bounds.absPaddingY + scaled(Cell.RightTopOffY * 2), Bounds.InnerWidth - outerBounds);
 
             // Detail Text.
-            Font = _cell.DetailTextFont.WithLineHeightMultiplier(1.5);
-            textUtil.AutobreakAndDrawMultilineTextAt(context, Font, _cell.DetailText, Bounds.absPaddingX + squareSize + 10, Bounds.absPaddingY + _titleTextHeight + Bounds.absPaddingY + 5, Bounds.InnerWidth);
+            Font = Cell.DetailTextFont.WithLineHeightMultiplier(1.5);
+            textUtil.AutobreakAndDrawMultilineTextAt(context, Font, Cell.DetailText, Bounds.absPaddingX + squareSize + 10, Bounds.absPaddingY + _titleTextHeight + Bounds.absPaddingY + 5, Bounds.InnerWidth);
 
             // Top Right Text:
-            var textExtents = Font.GetTextExtents(_cell.RightTopText);
-            textUtil.AutobreakAndDrawMultilineTextAt(context, Font, _cell.RightTopText,
-                Bounds.absPaddingX + Bounds.InnerWidth - textExtents.Width - num - scaled(10.0), Bounds.absPaddingY + scaled(_cell.RightTopOffY), textExtents.Width + 1.0, EnumTextOrientation.Right);
+            var textExtents = Font.GetTextExtents(Cell.RightTopText);
+            textUtil.AutobreakAndDrawMultilineTextAt(context, Font, Cell.RightTopText,
+                Bounds.absPaddingX + Bounds.InnerWidth - textExtents.Width - num - scaled(10.0), Bounds.absPaddingY + scaled(Cell.RightTopOffY), textExtents.Width + 1.0, EnumTextOrientation.Right);
 
             context.Operator = Operator.Add;
             EmbossRoundRectangleElement(context, 0.0, 0.0, Bounds.OuterWidth, Bounds.OuterHeight, false, 4, 0);
@@ -192,16 +194,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             var innerWidth = (int)(Bounds.InnerHeight - Bounds.absPaddingY * 2.0 - 10.0);
             width -= innerWidth + 10;
 
-            Font = _cell.TitleFont;
-            text = _cell.Title;
+            Font = Cell.TitleFont;
+            text = Cell.Title;
 
-            _titleTextHeight = textUtil.GetMultilineTextHeight(Font, _cell.Title, width) / RuntimeEnv.GUIScale;
-            Font = _cell.DetailTextFont;
-            text = _cell.DetailText;
-            var num4 = textUtil.GetMultilineTextHeight(Font, _cell.DetailText, width) / RuntimeEnv.GUIScale;
+            _titleTextHeight = textUtil.GetMultilineTextHeight(Font, Cell.Title, width) / RuntimeEnv.GUIScale;
+            Font = Cell.DetailTextFont;
+            text = Cell.DetailText;
+            var num4 = textUtil.GetMultilineTextHeight(Font, Cell.DetailText, width) / RuntimeEnv.GUIScale;
 
             Bounds.fixedHeight = paddingY + _titleTextHeight + paddingY + num4 + paddingY;
-            if (Bounds.fixedHeight < 50.0)
+            if (Bounds.fixedHeight > 50.0)
             {
                 Bounds.fixedHeight = 50.0;
             }

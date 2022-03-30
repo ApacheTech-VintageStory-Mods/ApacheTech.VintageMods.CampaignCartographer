@@ -74,7 +74,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
             }
 
             _settings.Friends.Add(player.PlayerName, player.PlayerUID);
-            ModSettings.World.Save("PlayerPins", _settings);
+            ModSettings.World.Save(_settings);
             UserFeedback("PlayerAdded", player.PlayerName);
         }
 
@@ -111,7 +111,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
 
             var player = players.First();
             _settings.Friends.Remove(player);
-            ModSettings.World.Save("PlayerPins", _settings);
+            ModSettings.World.Save(_settings);
             UserFeedback("PlayerRemoved", player);
         }
 

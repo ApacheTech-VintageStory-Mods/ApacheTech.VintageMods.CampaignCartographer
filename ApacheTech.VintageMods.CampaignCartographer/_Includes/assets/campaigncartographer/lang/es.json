@@ -122,6 +122,7 @@
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Editar marcador de punto de ruta de selección de bloques",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Editar balizas predefinidas",
   "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Donar al autor del Mod",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Gestor de puntos de ruta",
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Primer Funcionamiento",
@@ -180,6 +181,9 @@
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Título: {0}",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Radio de cobertura: ({0}x{1})",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Fijado: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblSearch.HoverText": "Filtrar tipos de puntos de ruta, por título y nombre",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblDisabledOnly": "Mostrar sólo los tipos de puntos de ruta deshabilitados:",
+
 
   // ==================================================================================
   //  Feature: Player Pins

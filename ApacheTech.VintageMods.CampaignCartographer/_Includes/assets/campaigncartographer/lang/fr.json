@@ -122,6 +122,7 @@
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Modifier la sélection des blocs pour les marqueurs",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Modifier vos marqueurs prédéfinis et personalisables",
   "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Faites un don à l'auteur de ce Mod",
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Gestionnaire des marqueurs",
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Première utilisation",
@@ -180,6 +181,8 @@
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellTitle": "Titre: {0}",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellRadius": "Rayon de Couverture: ({0}x{1})",
   "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.CellPinned": "Épinglé: {0}",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblSearch.HoverText": "Filtrer les types de marqueurs, par titre et par nom.",
+  "Features.ManualWaypoints.Dialogue.PreDefinedWaypoints.lblDisabledOnly": "Afficher uniquement les types de marqueurs désactivés:",
 
   // ==================================================================================
   //  Feature: Player Pins

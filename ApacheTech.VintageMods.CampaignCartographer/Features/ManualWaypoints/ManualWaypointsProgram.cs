@@ -38,7 +38,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         public override void StartPreClientSide(ICoreClientAPI capi)
         {
             ModServices.FileSystem
-                .RegisterFile("waypoint-types.json", FileScope.World)
+                .RegisterFile("waypoint-types.json", FileScope.Global)
                 .RegisterFile("default-waypoints.json", FileScope.Local);
         }
     }

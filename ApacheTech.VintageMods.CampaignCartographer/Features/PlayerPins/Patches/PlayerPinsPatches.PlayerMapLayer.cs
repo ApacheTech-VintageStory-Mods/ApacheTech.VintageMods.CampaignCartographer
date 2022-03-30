@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Enums;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using Cairo;
@@ -76,6 +77,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             if (_capi is null) return true;
             foreach (var pin in PlayerPins)
             {
+                if (ApiEx.IsModEnabled("th3rp") && !pin.Value.entity.WatchedAttributes.GetBool("maptag", true)) continue;
                 pin.Value.Render(mapElem, dt);
             }
             return false;

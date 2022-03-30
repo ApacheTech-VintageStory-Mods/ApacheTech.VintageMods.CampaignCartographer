@@ -18,8 +18,8 @@ using Vintagestory.API.Common;
 using Vintagestory.Client.NoObf;
 using Vintagestory.GameContent;
 
+// ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
-
 // ReSharper disable ClassNeverInstantiated.Global
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.WaypointSelection
@@ -36,10 +36,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         private ElementBounds _cellListBounds;
         private GuiElementDynamicText _lblSelectedCount;
         private static WaypointSelectionDialogue _instance;
+        private string _filterString;
 
         protected List<WaypointSelectionCellEntry> Waypoints { get; set; } = new();
 
         protected GuiElementCellList<WaypointSelectionCellEntry> WaypointsList { get; private set; }
+
+        protected bool ShowTopRightButton { private get; init; }
 
         protected string LeftButtonText { private get; init; }
 
@@ -117,7 +120,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         {
             var platform = capi.World.GetField<ClientPlatformAbstract>("Platform");
             var scaledWidth = Math.Max(600, platform.WindowSize.Width * 0.5) / ClientSettings.GUIScale;
-            var scaledHeight = Math.Max(600, (platform.WindowSize.Height - 65) * 0.85) / ClientSettings.GUIScale;
+            var scaledHeight = Math.Min(600, (platform.WindowSize.Height - 65) * 0.85) / ClientSettings.GUIScale;
 
             var buttonRowBoundsRightFixed = ElementBounds
                 .FixedSize(60, 30)
@@ -135,6 +138,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             var outerBounds = ElementBounds
                 .Fixed(EnumDialogArea.LeftTop, 0, 0, scaledWidth, 35);
 
+            AddSearchBox(composer, ref outerBounds);
+
             var insetBounds = outerBounds
                 .BelowCopy(0, 3)
                 .WithFixedSize(scaledWidth, scaledHeight);
@@ -147,7 +152,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
                 .WithFixedPadding(10.0);
 
             WaypointsList = new GuiElementCellList<WaypointSelectionCellEntry>(capi, _cellListBounds, CellCreator, Waypoints);
-
 
             composer
                 .AddInset(insetBounds)
@@ -167,6 +171,68 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
                         textBounds.FlatCopy().FixedUnder(insetBounds, 10.0)), "lblSelectedCount");
 
             composer.AddSmallButton(RightButtonText, OnRightButtonPressed, buttonRowBoundsRightFixed.FlatCopy().FixedUnder(insetBounds, 10.0));
+        }
+
+        private void AddSearchBox(GuiComposer composer, ref ElementBounds bounds)
+        {
+            const int switchSize = 30;
+            const int gapBetweenRows = 20;
+            var font = CairoFont.WhiteSmallText();
+            var lblSearchText = $"{LangEx.CommonPhrase("search")}:";
+
+            var lblSearchTextLength = font.GetTextExtents(lblSearchText).Width + 10;
+
+            var left = ElementBounds.Fixed(0, 5, lblSearchTextLength, switchSize).FixedUnder(bounds, 3);
+            var right = ElementBounds.Fixed(lblSearchTextLength + 10, 0, 200, switchSize).FixedUnder(bounds, 3);
+
+            composer.AddStaticText(lblSearchText, font, EnumTextOrientation.Left, left);
+            composer.AddAutoSizeHoverText(LangEntry("lblSearch.HoverText"), font, 160, left);
+            composer.AddTextInput(right, OnFilterTextChanged);
+
+            if (ShowTopRightButton)
+            {
+                right = ElementBounds
+                    .FixedSize(60, 30)
+                    .WithFixedPadding(10, 2)
+                    .WithAlignment(EnumDialogArea.RightFixed)
+                    .FixedUnder(bounds);
+
+                composer.AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "Title"), OnImportButtonClicked, right, EnumButtonStyle.Normal, EnumTextOrientation.Center, "btnOpenImports");
+            }
+            
+            bounds = bounds.BelowCopy(fixedDeltaY: gapBetweenRows);
+        }
+
+        private static bool OnImportButtonClicked()
+        {
+            ModServices.IOC.Resolve<Imports.WaypointImportDialogue>().ToggleGui();
+            return true;
+        }
+
+        protected static string LangEntry(string text, params object[] args)
+        {
+            return LangEx.FeatureString("WaypointUtil.Dialogue.Exports", text, args);
+        }
+
+        private void OnFilterTextChanged(string filterString)
+        {
+            _filterString = filterString;
+            FilterCells();
+            RefreshValues();
+        }
+
+        private void FilterCells()
+        {
+            bool Filter(IGuiElementCell cell)
+            {
+                var c = (WaypointSelectionGuiCell)cell;
+                var model = c.Waypoint;
+                var state = string.IsNullOrWhiteSpace(_filterString) ||
+                            model.Title.ToLowerInvariant().Contains(_filterString.ToLowerInvariant());
+                return state;
+            }
+
+            WaypointsList.CallMethod("FilterCells", (System.Func<IGuiElementCell, bool>)Filter);
         }
 
         #endregion

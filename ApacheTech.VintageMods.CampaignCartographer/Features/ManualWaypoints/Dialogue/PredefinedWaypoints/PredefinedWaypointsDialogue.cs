@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using ApacheTech.Common.Extensions.Harmony;
 using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
@@ -30,7 +29,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         private readonly IJsonModFile _file;
         private ElementBounds _clippedBounds;
         private ElementBounds _cellListBounds;
-        private GuiElementCellList<PredefinedWaypointsCellEntry> _waypointsList;
+        private GuiElementCellList<PredefinedWaypointsCellEntry> _cellList;
+        private string _filterString;
+        private bool _disabledTypesOnly;
 
         /// <summary>
         /// 	Initialises a new instance of the <see cref="PredefinedWaypointsDialogue" /> class.
@@ -40,8 +41,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             _file = ModServices.FileSystem.GetJsonFile("waypoint-types.json");
             _waypointTypes.AddOrUpdateRange(_file.ParseAsMany<ManualWaypointTemplateModel>(), w => w.Syntax);
+            
             _waypointCells = GetCellEntries();
-            Title = GetText("Title");
+            Title = LangEntry("Title");
             Alignment = EnumDialogArea.CenterMiddle;
 
             ClientSettings.Inst.AddWatcher<float>("guiScale", _ =>
@@ -51,7 +53,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             });
         }
 
-        private static string GetText(string text, params object[] args)
+        private static string LangEntry(string text, params object[] args)
         {
             return LangEx.FeatureString("ManualWaypoints.Dialogue.PreDefinedWaypoints", text, args);
         }
@@ -77,16 +79,18 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             var platform = capi.World.GetField<ClientPlatformAbstract>("Platform");
             var scaledWidth = Math.Max(600, platform.WindowSize.Width * 0.5) / ClientSettings.GUIScale;
-            var scaledHeight = Math.Max(600, (platform.WindowSize.Height - 65) * 0.85) / ClientSettings.GUIScale;
+            var scaledHeight = Math.Min(600, (platform.WindowSize.Height - 65) * 0.85) / ClientSettings.GUIScale;
 
             var outerBounds = ElementBounds
                 .Fixed(EnumDialogArea.LeftTop, 0, 0, scaledWidth, 35);
+
+            AddSearchBox(composer, ref outerBounds);
 
             var insetBounds = outerBounds
                 .BelowCopy(0, 3)
                 .WithFixedSize(scaledWidth, scaledHeight);
 
-            var buttonRowBoundsLeftFixed = ElementBounds
+            var buttonRowBoundsLeftFixed = ElementBounds 
                 .FixedSize(150, 30)
                 .WithFixedPadding(10, 2)
                 .WithAlignment(EnumDialogArea.LeftFixed)
@@ -105,28 +109,88 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 .ForkContainingChild(0.0, 0.0, 0.0, -3.0)
                 .WithFixedPadding(10.0);
 
-            _waypointsList = new GuiElementCellList<PredefinedWaypointsCellEntry>(capi, _cellListBounds, CellCreator, _waypointCells);
+            _cellList = new GuiElementCellList<PredefinedWaypointsCellEntry>(capi, _cellListBounds, CellCreator, _waypointCells);
 
             composer
                 .AddInset(insetBounds)
                 .AddVerticalScrollbar(OnScroll, ElementStdBounds.VerticalScrollbar(insetBounds), "scrollbar")
                 .BeginClip(_clippedBounds)
-                .AddInteractiveElement(_waypointsList, "waypointsList")
+                .AddInteractiveElement(_cellList, "waypointsList")
                 .EndClip()
-                .AddSmallButton(GetText("LoadDefault"), OnLoadDefaultWaypointTypes, buttonRowBoundsLeftFixed)
-                .AddSmallButton(GetText("AddNew"), OnAddNewWaypointTypeButtonPressed, buttonRowBoundsRightFixed);
+                .AddSmallButton(LangEntry("LoadDefault"), OnLoadDefaultWaypointTypes, buttonRowBoundsLeftFixed)
+                .AddSmallButton(LangEntry("AddNew"), OnAddNewWaypointTypeButtonPressed, buttonRowBoundsRightFixed);
+        }
+
+        private void AddSearchBox(GuiComposer composer, ref ElementBounds bounds)
+        {
+            const int switchSize = 30;
+            const int gapBetweenRows = 20;
+            var font = CairoFont.WhiteSmallText();
+            var lblSearchText = $"{LangEx.CommonPhrase("search")}:";
+            var lblDisabledOnlyText = LangEntry("lblDisabledOnly");
+
+            var lblSearchTextLength = font.GetTextExtents(lblSearchText).Width + 10;
+            var lblDisabledOnlyTextLength = font.GetTextExtents(lblDisabledOnlyText).Width + 10;
+
+            var left = ElementBounds.Fixed(0, 5, lblSearchTextLength, switchSize).FixedUnder(bounds, 3);
+            var right = ElementBounds.Fixed(lblSearchTextLength + 10, 0, 200, switchSize).FixedUnder(bounds, 3);
+
+            composer.AddStaticText(lblSearchText, font, EnumTextOrientation.Left, left);
+            composer.AddAutoSizeHoverText(LangEntry("lblSearch.HoverText"), font, 160, left);
+            composer.AddTextInput(right, OnFilterTextChanged);
+
+            right = ElementBounds.FixedSize(EnumDialogArea.RightFixed, switchSize, switchSize).FixedUnder(bounds, 3);
+            left = ElementBounds.FixedSize(EnumDialogArea.RightFixed, lblDisabledOnlyTextLength, switchSize).FixedUnder(bounds, 8).WithFixedOffset(-40, 0);
+
+            composer.AddStaticText(lblDisabledOnlyText, font, EnumTextOrientation.Left, left);
+            composer.AddSwitch(OnCurrentlyPlayingToggle, right);
+
+            bounds = bounds.BelowCopy(fixedDeltaY: gapBetweenRows);
+        }
+
+        private void OnCurrentlyPlayingToggle(bool state)
+        {
+            _disabledTypesOnly = state;
+            FilterCells();
+            RefreshValues();
+        }
+
+        private void OnFilterTextChanged(string filterString)
+        {
+            _filterString = filterString;
+            FilterCells();
+            RefreshValues();
+        }
+
+        private void FilterCells()
+        {
+            bool Filter(IGuiElementCell cell)
+            {
+                var c = (PredefinedWaypointsGuiCell)cell;
+                var model = c.Model;
+                var state = string.IsNullOrWhiteSpace(_filterString) || 
+                            model.Title.ToLowerInvariant().Contains(_filterString.ToLowerInvariant()) || 
+                            model.Syntax.ToLowerInvariant().Contains(_filterString.ToLowerInvariant());
+
+                if (_disabledTypesOnly && c.On) state = false;
+
+                return state;
+            }
+
+            _cellList.CallMethod("FilterCells", (Func<IGuiElementCell, bool>)Filter);
         }
 
         private bool OnLoadDefaultWaypointTypes()
         {
-            MessageBox.Show(GetText("LoadDefault"), GetText("LoadDefault.Confirmation"),
+            MessageBox.Show(LangEntry("LoadDefault"), LangEntry("LoadDefault.Confirmation"),
                 ButtonLayout.OkCancel,
                 () =>
                 {
                     var waypointTypes = ModServices.FileSystem.GetJsonFile("default-waypoints.json").ParseAsMany<ManualWaypointTemplateModel>();
                     _waypointTypes.AddOrUpdateRange(waypointTypes, w => w.Syntax);
                     _file.SaveFrom(_waypointTypes.Values);
-                    _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
+                    _cellList.ReloadCells(_waypointCells = GetCellEntries());
+                    FilterCells();
                     RefreshValues();
                 });
             return true;
@@ -136,7 +200,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             var dialogue = ModServices.IOC.CreateInstance<AddEditWaypointTypeDialogue>(new ManualWaypointTemplateModel(), WaypointTypeMode.Add).With(p =>
             {
-                p.Title = GetText("AddNew");
+                p.Title = LangEntry("AddNew");
                 p.OnOkAction = AddNewWaypointType;
             });
             dialogue.TryOpen();
@@ -147,12 +211,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             if (_waypointTypes.ContainsKey(model.Syntax))
             {
-                MessageBox.Show(GetText("Error"), GetText("AddNew.Validation", model.Syntax));
+                MessageBox.Show(LangEntry("Error"), LangEntry("AddNew.Validation", model.Syntax));
                 return;
             }
             _waypointTypes.Add(model.Syntax, model);
             _file.SaveFrom(_waypointTypes.Values);
-            _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
+            _cellList.ReloadCells(_waypointCells = GetCellEntries());
+            FilterCells();
             RefreshValues();
         }
 
@@ -176,17 +241,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
             return _waypointTypes.Select(kvp =>
             {
                 var dto = kvp.Value;
-                var detailText = new StringBuilder();
-                detailText.AppendLine(GetText("CellTitle", dto.Title));
-                detailText.AppendLine(GetText("CellRadius", dto.HorizontalCoverageRadius, dto.VerticalCoverageRadius));
-                detailText.AppendLine(GetText("CellPinned", dto.Pinned));
-
                 return new PredefinedWaypointsCellEntry
                 {
-                    Title = dto.Syntax,
-                    DetailText = detailText.ToString(),
+                    Title = dto.Title,
+                    DetailText = string.Empty,
                     Enabled = true,
-                    RightTopText = string.Empty,
+                    RightTopText = dto.Syntax,
                     RightTopOffY = 3f,
                     DetailTextFont = CairoFont.WhiteDetailText().WithFontSize((float)GuiStyle.SmallFontSize),
                     Model = dto
@@ -207,10 +267,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
 
         private void OnCellClickLeftSide(int val)
         {
-            var cell = _waypointsList.elementCells.Cast<PredefinedWaypointsGuiCell>().ToList()[val];
+            var cell = _cellList.elementCells.Cast<PredefinedWaypointsGuiCell>().ToList()[val];
             var dialogue = ModServices.IOC.CreateInstance<AddEditWaypointTypeDialogue>(cell.Model, WaypointTypeMode.Edit).With(p =>
             {
-                p.Title = GetText("Edit");
+                p.Title = LangEntry("Edit");
                 p.OnOkAction = EditWaypointType;
                 p.OnDeleteAction = DeleteWaypointType;
             });
@@ -226,12 +286,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
                 {
                     if (!_waypointTypes.ContainsKey(model.Syntax))
                     {
-                        MessageBox.Show(GetText("Error"), GetText("Edit.Validation", model.Syntax));
+                        MessageBox.Show(LangEntry("Error"), LangEntry("Edit.Validation", model.Syntax));
                         return;
                     }
                     _waypointTypes.Remove(model.Syntax);
                     _file.SaveFrom(_waypointTypes.Values);
-                    _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
+                    _cellList.ReloadCells(_waypointCells = GetCellEntries());
+                    FilterCells();
                     RefreshValues();
                 });
         }
@@ -240,18 +301,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.D
         {
             if (!_waypointTypes.ContainsKey(model.Syntax))
             {
-                MessageBox.Show(GetText("Error"), GetText("Edit.Validation", model.Syntax));
+                MessageBox.Show(LangEntry("Error"), LangEntry("Edit.Validation", model.Syntax));
                 return;
             }
             _waypointTypes[model.Syntax] = model;
             _file.SaveFrom(_waypointTypes.Values);
-            _waypointsList.ReloadCells(_waypointCells = GetCellEntries());
+            _cellList.ReloadCells(_waypointCells = GetCellEntries());
+            FilterCells();
             RefreshValues();
         }
 
         private void OnCellClickRightSide(int val)
         {
-            var cell = _waypointsList.elementCells.Cast<PredefinedWaypointsGuiCell>().ToList()[val];
+            var cell = _cellList.elementCells.Cast<PredefinedWaypointsGuiCell>().ToList()[val];
             cell.On = !cell.On;
             cell.Enabled = cell.On;
             cell.Model.Enabled = cell.On;

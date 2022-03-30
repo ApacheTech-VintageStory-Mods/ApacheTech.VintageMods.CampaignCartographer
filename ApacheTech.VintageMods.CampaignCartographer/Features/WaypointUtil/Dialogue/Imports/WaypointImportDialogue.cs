@@ -35,7 +35,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         private GuiElementCellList<WaypointImportCellEntry> _filesList;
         private GuiElementDynamicText _lblSelectedCount;
 
-        private readonly string _importsDirectory = ModPaths.CreateDirectory(Path.Combine(ModPaths.ModDataWorldPath, "Imports"));
+        private readonly string _importsDirectory = ModPaths.CreateDirectory(Path.Combine(ModPaths.ModDataWorldPath, "Saves"));
 
         /// <summary>
         /// 	Initialises a new instance of the <see cref="WaypointImportDialogue" /> class.
@@ -195,7 +195,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
                 .AddInteractiveElement(_filesList)
                 .EndClip()
                 
-                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Imports", "OpenImportsFolder"), OnOpenImportsFolderButtonPressed,
+                .AddSmallButton(LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "OpenExportsFolder"), OnOpenImportsFolderButtonPressed,
                     buttonRowBounds.FlatCopy().FixedUnder(insetBounds, 10.0))
 
                 .AddInteractiveElement(_lblSelectedCount)

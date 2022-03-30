@@ -38,7 +38,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         public WaypointSelectionGuiCell(ICoreClientAPI capi, WaypointSelectionCellEntry cell, ElementBounds bounds) : base(capi, "", null, bounds)
         {
             _cell = cell;
-            Bounds = bounds;
+            Bounds = bounds.WithFixedHeight(30);
             _cellTexture = new LoadedTexture(capi);
             _cell.TitleFont ??= CairoFont.WhiteSmallishText();
             if (_cell.DetailTextFont != null) return;
@@ -84,13 +84,16 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             context.Paint();
 
             // Icon
-            var squareSize = (Bounds.InnerHeight - Bounds.absPaddingY * 2.0 - 10.0);
+            var squareSize = scaled(30 - _cell.RightTopOffY);
             var outerBounds = squareSize + 15;
             PaintIcon(context, Bounds.absPaddingX + 5, Bounds.absPaddingY + 5, squareSize);
 
             // Main Title.
             Font = _cell.TitleFont;
-            _titleTextHeight = textUtil.AutobreakAndDrawMultilineTextAt(context, Font, _cell.Title, Bounds.absPaddingX + outerBounds, Bounds.absPaddingY, Bounds.InnerWidth - outerBounds);
+            _titleTextHeight = textUtil.AutobreakAndDrawMultilineTextAt(context, Font, _cell.Title, 
+                Bounds.absPaddingX + outerBounds, 
+                Bounds.absPaddingY + scaled(_cell.RightTopOffY * 2), 
+                Bounds.InnerWidth - outerBounds);
 
             // Detail Text.
             Font = _cell.DetailTextFont;
@@ -199,7 +202,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             var num4 = textUtil.GetMultilineTextHeight(Font, _cell.DetailText, width) / RuntimeEnv.GUIScale;
 
             Bounds.fixedHeight = paddingY + _titleTextHeight + paddingY + num4 + paddingY;
-            if (Bounds.fixedHeight < 50.0)
+            if (Bounds.fixedHeight > 50.0)
             {
                 Bounds.fixedHeight = 50.0;
             }

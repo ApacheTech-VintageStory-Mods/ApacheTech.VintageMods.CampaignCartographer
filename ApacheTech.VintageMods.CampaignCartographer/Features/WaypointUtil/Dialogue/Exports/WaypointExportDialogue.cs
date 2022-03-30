@@ -32,7 +32,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         private readonly WaypointService _service;
 
         private readonly string _exportsDirectory =
-            ModPaths.CreateDirectory(Path.Combine(ModPaths.ModDataWorldPath, "Exports"));
+            ModPaths.CreateDirectory(Path.Combine(ModPaths.ModDataWorldPath, "Saves"));
 
         /// <summary>
         /// 	Initialises a new instance of the <see cref="WaypointExportDialogue" /> class.
@@ -42,12 +42,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
         public WaypointExportDialogue(ICoreClientAPI capi, WaypointService service) : base(capi, service)
         {
             _service = service;
-            Title = LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "Title");
+            Title = LangEx.FeatureString("ManualWaypoints.Dialogue.MenuScreen", "WaypointManager");
             Alignment = EnumDialogArea.CenterMiddle;
             Modal = true;
             ModalTransparency = 0f;
-            LeftButtonText = LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "OpenExportsFolder");
-            RightButtonText = LangEx.FeatureString("WaypointUtil.Dialogue.Exports", "ExportSelectedWaypoints");
+            LeftButtonText = LangEntry("OpenExportsFolder");
+            RightButtonText = LangEntry("ExportSelectedWaypoints");
+            ShowTopRightButton = true;
 
             ClientSettings.Inst.AddWatcher<float>("guiScale", _ =>
             {

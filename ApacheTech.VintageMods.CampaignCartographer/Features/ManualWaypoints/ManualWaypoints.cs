@@ -1,12 +1,16 @@
-﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Commands;
+﻿using System.Collections.Generic;
+using System.IO;
+using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Commands;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialogue;
+using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions.DotNet;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.Services;
+using ApacheTech.VintageMods.Core.Services.FileSystem.Extensions;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
-using Vintagestory.API.Common;
 
 // ReSharper disable All
 
@@ -29,15 +33,24 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
             FluentChat.ClientCommand("wpsettings")
                 .RegisterWith(capi)
                 .HasDescription(LangEx.FeatureString("ManualWaypoints", "SettingsCommandDescription"))
-                .HasDefaultHandler(OnClientDefaultHandler);
+                .HasDefaultHandler((_, _) => ModServices.IOC.Resolve<ManualWaypointsMenuScreen>().ToggleGui());
+
+            UpdateWaypointTypesFromWorldFile();
         }
 
-        private void OnClientDefaultHandler(int groupId, CmdArgs args)
+        private void UpdateWaypointTypesFromWorldFile()
         {
-            var dialogue = ModServices.IOC.Resolve<ManualWaypointsMenuScreen>();
-            while (dialogue.IsOpened(dialogue.ToggleKeyCombinationCode))
-                dialogue.TryClose();
-            dialogue.TryOpen();
+            var oldFile = new FileInfo(Path.Combine(ModPaths.ModDataWorldPath, "waypoint-types.json"));
+            if (!oldFile.Exists) return;
+            
+            var newFile = ModServices.FileSystem.GetJsonFile("waypoint-types.json");
+            var waypointTypes = new SortedDictionary<string, ManualWaypointTemplateModel>();
+            
+            waypointTypes.AddOrUpdateRange(newFile.ParseAsMany<ManualWaypointTemplateModel>(), w => w.Syntax);
+            waypointTypes.AddOrUpdateRange(oldFile.ParseAsMany<ManualWaypointTemplateModel>(), w => w.Syntax);
+
+            newFile.SaveFrom(waypointTypes.Values);
+            oldFile.Delete();
         }
     }
 }
