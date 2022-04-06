@@ -1,10 +1,13 @@
-﻿using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using HarmonyLib;
-using Vintagestory.API.Common;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common.Entities;
+using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
 
+// ReSharper disable InconsistentNaming
+// ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable StringLiteralTypo
 // ReSharper disable UnusedType.Global
 // ReSharper disable UnusedMember.Global
@@ -15,17 +18,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BlockStaticTranslocator), "OnEntityCollide")]
-        public static bool Patch_BlockStaticTranslocator_OnEntityCollide_Prefix(Entity entity)
+        public static void Patch_BlockStaticTranslocator_OnEntityCollide_Postfix(BlockStaticTranslocator __instance, Entity entity, BlockPos pos, ICoreClientAPI ___capi)
         {
-            if (ApiEx.Side.IsServer()) return true; // Single-player race condition fix.
-            if (!Settings.Translocators) return true;
-            if (entity != ApiEx.Client.World.Player.Entity) return true;
-            if (entity.Pos.AsBlockPos.WaypointExistsWithinRadius(1, 1)) return true;
-            ApiEx.ClientMain.EnqueueMainThreadTask(() =>
-            {
-                ApiEx.Client.TriggerChatMessage(".wptl");
-            }, "");
-            return true;
+            if (___capi is null) return; // Single-player race condition fix.
+            if (++_timesRunBlock > 1) return;
+            ___capi.RegisterDelayedCallback(_ => _timesRunBlock = 0, 1000 * 3);
+            if (!Settings.Translocators) return;
+            if (entity != ___capi.World.Player.Entity) return;
+            __instance.ProcessWaypoints(pos);
         }
     }
 }

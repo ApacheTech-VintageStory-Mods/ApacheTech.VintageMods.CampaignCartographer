@@ -37,7 +37,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
             _capi = (ICoreClientAPI)api;
             _mapSink = mapsink;
             PlayerPins = new Dictionary<IPlayer, EntityMapComponent>();
-            _capi.Event.LeaveWorld += DisposeComponents;
         }
 
         [HarmonyPrefix]
@@ -45,6 +44,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         public static bool Patch_PlayerMapLayer_Event_OnLoaded_Prefix()
         {
             if (_capi is null) return true;
+            _capi.Event.LeaveWorld += DisposeComponents;
             _capi.Event.PlayerEntitySpawn += OnPlayerSpawn;
             _capi.Event.PlayerEntityDespawn += OnPlayerDespawn;
             return false;
@@ -110,6 +110,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
         private static void OnPlayerDespawn(IPlayer player)
         {
             if (!PlayerPins.TryGetValue(player, out var entityMapComponent)) return;
+            entityMapComponent.Texture.Dispose();
             entityMapComponent.Dispose();
             PlayerPins.Remove(player);
         }

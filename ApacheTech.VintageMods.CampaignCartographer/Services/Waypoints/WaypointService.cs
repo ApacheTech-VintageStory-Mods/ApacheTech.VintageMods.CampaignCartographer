@@ -197,10 +197,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
             var list = new SortedDictionary<int, Waypoint>(comparer);
             for (var i = 0; i < waypoints.Count; i++)
             {
-                if (predicate is null || predicate(waypoints[i]))
-                {
-                    list.Add(i, waypoints[i]);
-                }
+                if (predicate is not null && !predicate(waypoints[i])) continue;
+                list.Add(i, waypoints[i]);
             }
             return list;
         }

@@ -23,7 +23,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
         /// </summary>
         /// <param name="waypoint">The waypoint.</param>
         /// <param name="position">The position.</param>
-        public static void AddToMap(this ManualWaypointTemplateModel waypoint, BlockPos position = null)
+        /// <param name="force"></param>
+        public static void AddToMap(this ManualWaypointTemplateModel waypoint, BlockPos position = null, bool force = false)
         {
             // DEV NOTE:    This method looks needlessly complicated because of race conditions when running in single-player mode.
             //              In these cases, it's possible for this method to be run multiple times, resulting in multiple waypoints
@@ -36,7 +37,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensi
             PositionsBeingHandled.Add(position);
             try
             {
-                if (position.WaypointExistsWithinRadius(waypoint.HorizontalCoverageRadius, waypoint.VerticalCoverageRadius,
+                if (!force && position.WaypointExistsWithinRadius(waypoint.HorizontalCoverageRadius, waypoint.VerticalCoverageRadius,
                         p =>
                         {
                             var sameIcons = p.Icon.EndsWith(waypoint.DisplayedIcon, StringComparison.InvariantCultureIgnoreCase);

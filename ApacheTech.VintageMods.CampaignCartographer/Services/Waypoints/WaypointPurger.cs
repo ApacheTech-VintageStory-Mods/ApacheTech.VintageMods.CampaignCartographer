@@ -94,13 +94,24 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
         /// Ats the position.
         /// </summary>
         /// <param name="position">The position.</param>
-        public void AtPosition(BlockPos position)
+        /// <param name="silent">Whether or not to notify the user about the purge, through the chat console.</param>
+        public void AtPosition(BlockPos position, bool silent = false)
         {
             Task.Factory.StartNew(() =>
-                PurgeWaypointsAsync(p => p.Position.AsBlockPos.Equals(position)));
+                PurgeWaypointsAsync(p => p.Position.AsBlockPos.Equals(position), silent));
         }
 
-        private async Task PurgeWaypointsAsync(Func<Waypoint, bool> predicate)
+        /// <summary>
+        /// Ats the position.
+        /// </summary>
+        /// <param name="position">The position.</param>
+        /// <param name="silent">Whether or not to notify the user about the purge, through the chat console.</param>
+        public async Task AtPositionAsync(BlockPos position, bool silent = false)
+        {
+            await PurgeWaypointsAsync(p => p.Position.AsBlockPos.Equals(position), silent);
+        }
+
+        private async Task PurgeWaypointsAsync(Func<Waypoint, bool> predicate, bool silent = false)
         {
             var purgedCount = 0;
             var i = _worldMap.WaypointMapLayer().ownWaypoints.Count - 1;
@@ -112,10 +123,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
                 {
                     purgedCount++;
                     _capi.SendChatMessage($"/waypoint remove {i}");
-                    Thread.Sleep(0);
+                    Thread.Sleep(20);
                 }
                 i--;
             }
+
+            if (silent) return;
             var waypointCode = LangEx.FeatureCode("WaypointUtil.Dialogue.Imports", "Waypoint");
             _capi.EnqueueShowChatMessage(
                 LangEx.FeatureString("WaypointUtil", "PurgedWaypointCount", 

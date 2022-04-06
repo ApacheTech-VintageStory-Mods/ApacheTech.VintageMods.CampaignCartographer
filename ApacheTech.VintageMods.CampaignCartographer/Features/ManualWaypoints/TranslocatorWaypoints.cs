@@ -1,12 +1,7 @@
-﻿using ApacheTech.Common.Extensions.System;
-using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
 using ApacheTech.VintageMods.Core.Abstractions.ModSystems;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
-using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
-using ApacheTech.VintageMods.Core.Services;
 using ApacheTech.VintageMods.FluentChatCommands;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -26,7 +21,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
     public sealed class TranslocatorWaypoints : ClientModSystem
     {
         private ICoreClientAPI _capi;
-        private WaypointService _waypointService;
 
         /// <summary>
         ///     Minor convenience method to save yourself the check for/cast to ICoreClientAPI in Start()
@@ -34,7 +28,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
         /// <param name="capi">The core API implemented by the client. The main interface for accessing the client. Contains all sub-components, and some miscellaneous methods.</param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            _waypointService = ModServices.IOC.Resolve<WaypointService>();
             FluentChat.ClientCommand("wptl")
                 .RegisterWith(_capi = capi)
                 .HasDescription(LangEx.FeatureString("ManualWaypoints.TranslocatorWaypoints", "Description"))
@@ -52,30 +45,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints
                 _capi.ShowChatMessage(translocatorNotFoundMessage);
                 return;
             }
-
-            if (!block.Repaired)
-            {
-                var message = LangEx.FeatureString("ManualWaypoints.TranslocatorWaypoints", "BrokenTranslocatorTitle");
-                var displayPos = blockPos.RelativeToSpawn();
-                if (blockPos.WaypointExistsAtPos(p => p.Icon == WaypointIcon.Spiral)) return;
-
-                _waypointService.GetWaypointModel("tl")?
-                    .With(p =>
-                    {
-                        p.Title = message;
-                        p.Colour = NamedColour.Red;
-                    })
-                    .AddToMap(blockPos);
-
-                ApiEx.Client.Logger.VerboseDebug($"Added Waypoint: Broken Translocator at ({displayPos.X}, {displayPos.Y}, {displayPos.Z})");
-                return;
-            }
-
-            var translocator = (BlockEntityStaticTranslocator)_capi.World.GetBlockAccessorPrefetch(false, false).GetBlockEntity(blockPos);
-            if (!translocator.FullyRepaired) return;
-
-            var titleTemplate = LangEx.FeatureCode("ManualWaypoints.TranslocatorWaypoints", "TranslocatorWaypointTitle");
-            translocator.AddWaypointsForEndpoints(titleTemplate);
+            block.ProcessWaypoints(blockPos);
         }
     }
 }
