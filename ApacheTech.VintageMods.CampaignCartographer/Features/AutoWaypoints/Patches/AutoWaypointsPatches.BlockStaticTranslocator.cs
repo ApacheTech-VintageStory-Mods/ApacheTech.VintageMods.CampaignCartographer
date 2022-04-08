@@ -1,7 +1,7 @@
 ﻿using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Extensions;
+using ApacheTech.VintageMods.Core.Common.StaticHelpers;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using HarmonyLib;
-using Vintagestory.API.Client;
 using Vintagestory.API.Common.Entities;
 using Vintagestory.API.MathTools;
 using Vintagestory.GameContent;
@@ -18,13 +18,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
     {
         [HarmonyPrefix]
         [HarmonyPatch(typeof(BlockStaticTranslocator), "OnEntityCollide")]
-        public static void Patch_BlockStaticTranslocator_OnEntityCollide_Postfix(BlockStaticTranslocator __instance, Entity entity, BlockPos pos, ICoreClientAPI ___capi)
+        public static void Patch_BlockStaticTranslocator_OnEntityCollide_Postfix(BlockStaticTranslocator __instance, Entity entity, BlockPos pos)
         {
-            if (___capi is null) return; // Single-player race condition fix.
+            var capi = ApiEx.Client;
+            if (capi is null) return; // Single-player race condition fix.
             if (++_timesRunBlock > 1) return;
-            ___capi.RegisterDelayedCallback(_ => _timesRunBlock = 0, 1000 * 3);
+            capi.RegisterDelayedCallback(_ => _timesRunBlock = 0, 1000 * 3);
             if (!Settings.Translocators) return;
-            if (entity != ___capi.World.Player.Entity) return;
+            if (entity != capi.World.Player.Entity) return;
             __instance.ProcessWaypoints(pos);
         }
     }

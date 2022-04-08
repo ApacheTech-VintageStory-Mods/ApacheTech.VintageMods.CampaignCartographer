@@ -271,6 +271,16 @@
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "エクスポートされたウェイポイント",
   "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "シングルプレイヤーワールド",
 
+  // Sort Order Enum
+  "Features.WaypointUtil.Dialogue.Exports.IndexAscending": "インデックス順 (昇順)",
+  "Features.WaypointUtil.Dialogue.Exports.IndexDescending": "インデックス順 (降順)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourAscending": "色で並べ替える (昇順)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourDescending": "色で並べ替える (降順)",
+  "Features.WaypointUtil.Dialogue.Exports.NameAscending": "名前順 (昇順)",
+  "Features.WaypointUtil.Dialogue.Exports.NameDescending": "名前順 (降順)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceAscending": "距離順 (昇順)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceDescending": "距離で並べ替える (降順)",
+
   // ==================================================================================
   //  Feature: Waypoint Manager
   // ==================================================================================

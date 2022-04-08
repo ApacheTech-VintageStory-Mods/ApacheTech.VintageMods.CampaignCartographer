@@ -77,11 +77,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
 
         private List<WaypointSelectionCellEntry> GetWaypointExportCellEntries()
         {
-            return _waypoints.Select(dto => new WaypointSelectionCellEntry
+            var playerPos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
+            var waypoints = _service.SortWaypoints(_waypoints, SortOrder);
+            return waypoints.Select(dto => new WaypointSelectionCellEntry
             {
                 Title = dto.Title,
                 DetailText = dto.DetailText,
-                RightTopText = dto.Position.RelativeToSpawn().ToString(),
+                RightTopText = $"{dto.Position.RelativeToSpawn()} ({dto.Position.HorizontalManhattenDistance(playerPos).FormatLargeNumber()}m)",
                 RightTopOffY = 3f,
                 DetailTextFont = CairoFont.WhiteDetailText().WithFontSize((float)GuiStyle.SmallFontSize),
                 Waypoint = dto

@@ -269,5 +269,26 @@
   "Features.WaypointUtil.Dialogue.Exports.FileName": "Nom du Fichier:",
   "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "Nommez le nom du fichier d'exportation.",
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Marqueurs exportés",
-  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Partie en solo"
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Partie en solo",
+
+  // Sort Order Enum
+  "Features.WaypointUtil.Dialogue.Exports.IndexAscending": "Trier par index (croissant)",
+  "Features.WaypointUtil.Dialogue.Exports.IndexDescending": "Trier par indice (décroissant)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourAscending": "Trier par couleur (croissant)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourDescending": "Trier par couleur (décroissant)",
+  "Features.WaypointUtil.Dialogue.Exports.NameAscending": "Trier par nom (croissant)",
+  "Features.WaypointUtil.Dialogue.Exports.NameDescending": "Trier par nom (décroissant)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceAscending": "Trier par distance (croissant)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceDescending": "Trier par distance (décroissant)",
+
+  // ==================================================================================
+  //  Feature: Waypoint Manager
+  // ==================================================================================
+
+  // Waypoint Export Window
+  "Features.WaypointManager.Dialogue.Title": "Gestionnaire de Marqueurs",
+  "Features.WaypointManager.Dialogue.ExportWaypoints": "Export Marqueurs",
+  "Features.WaypointManager.Dialogue.ImportWaypoints": "Exporter les marquages",
+  "Features.WaypointManager.Dialogue.AddNew": "Ajouter de nouveaux marqueurs",
+  "Features.WaypointManager.Dialogue.Edit": "Editer les Marqueurs Existants"
 }

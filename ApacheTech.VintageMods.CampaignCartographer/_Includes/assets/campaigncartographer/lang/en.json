@@ -257,7 +257,7 @@
   "Features.WaypointUtil.Dialogue.Exports.Title": "Export Waypoints",
   "Features.WaypointUtil.Dialogue.Exports.SelectedWaypoints": "{0} waypoints selected.",
   "Features.WaypointUtil.Dialogue.Exports.OpenExportsFolder": "Open Exports Folder",
-  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Export Selected Waypoints",  
+  "Features.WaypointUtil.Dialogue.Exports.ExportSelectedWaypoints": "Export Selected Waypoints",
 
   // Waypoint Export Confirmation Window
   "Features.WaypointUtil.Dialogue.Exports.ConfirmationTitle": "Export Waypoints Confirmation",
@@ -270,6 +270,16 @@
   "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "The name to give the export file.",
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Exported Waypoints",
   "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Single-player World",
+
+  // Sort Order Enum
+  "Features.WaypointUtil.Dialogue.Exports.IndexAscending": "Sort by Index (Ascending)",
+  "Features.WaypointUtil.Dialogue.Exports.IndexDescending": "Sort by Index (Descending)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourAscending": "Sort by Colour (Ascending)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourDescending": "Sort by Colour (Descending)",
+  "Features.WaypointUtil.Dialogue.Exports.NameAscending": "Sort by Name (Ascending)",
+  "Features.WaypointUtil.Dialogue.Exports.NameDescending": "Sort by Name (Descending)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceAscending": "Sort by Distance (Ascending)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceDescending": "Sort by Distance (Descending)",
 
   // ==================================================================================
   //  Feature: Waypoint Manager

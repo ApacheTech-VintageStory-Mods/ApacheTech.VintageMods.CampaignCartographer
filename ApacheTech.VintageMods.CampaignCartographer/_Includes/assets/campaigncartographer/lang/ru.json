@@ -122,7 +122,7 @@
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditBlockSelectionWaypointMarker": "Редактирование выбора блока маркера путевой точки",
   "Features.ManualWaypoints.Dialogue.MenuScreen.EditPreDefinedWaypoints": "Редактирование предопределенных путевых точек",
   "Features.ManualWaypoints.Dialogue.MenuScreen.DonateToModAuthor": "Пожертвовать автору мода",
-  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Менеджер путевых точек", 
+  "Features.ManualWaypoints.Dialogue.MenuScreen.WaypointManager": "Менеджер путевых точек",
 
   // First Run Dialogue Window
   "Features.ManualWaypoints.Dialogue.FirstRun.Title": "Первый запуск",
@@ -270,5 +270,26 @@
   "Features.WaypointUtil.Dialogue.Exports.FileName": "Имя файла:",
   "Features.WaypointUtil.Dialogue.Exports.FileName.HoverText": "Имя, которое будет присвоено экспортированному файлу.",
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Экспортированные путевые точки",
-  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Одиночный мир"
+  "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Одиночный мир",
+
+  // Sort Order Enum
+  "Features.WaypointUtil.Dialogue.Exports.IndexAscending": "Сортировать по индексу (по возрастанию)",
+  "Features.WaypointUtil.Dialogue.Exports.IndexDescending": "Сортировать по индексу (по убыванию)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourAscending": "Сортировать по цвету (по возрастанию)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourDescending": "Сортировать по цвету (по убыванию)",
+  "Features.WaypointUtil.Dialogue.Exports.NameAscending": "Сортировать по имени (по возрастанию)",
+  "Features.WaypointUtil.Dialogue.Exports.NameDescending": "Сортировать по имени (по убыванию)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceAscending": "Сортировать по расстоянию (по возрастанию)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceDescending": "Сортировать по расстоянию (по убыванию)",
+
+  // ==================================================================================
+  //  Feature: Waypoint Manager
+  // ==================================================================================
+
+  // Waypoint Export Window
+  "Features.WaypointManager.Dialogue.Title": "Менеджер путевых точек",
+  "Features.WaypointManager.Dialogue.ExportWaypoints": "Экспортировать путевые точки",
+  "Features.WaypointManager.Dialogue.ImportWaypoints": "Импорт путевых точек",
+  "Features.WaypointManager.Dialogue.AddNew": "Добавить новую точку",
+  "Features.WaypointManager.Dialogue.Edit": "Редактировать существующую точку"
 }

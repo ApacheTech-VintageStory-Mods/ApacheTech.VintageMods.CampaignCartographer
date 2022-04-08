@@ -6,9 +6,9 @@ using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Dialo
 using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.WaypointSelection;
 using ApacheTech.VintageMods.CampaignCartographer.Infrastructure.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints;
-using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
 using ApacheTech.VintageMods.Core.Abstractions.GUI;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
+using ApacheTech.VintageMods.Core.Extensions;
 using ApacheTech.VintageMods.Core.Extensions.Game;
 using ApacheTech.VintageMods.Core.GameContent.AssetEnum;
 using ApacheTech.VintageMods.Core.Services;
@@ -71,10 +71,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
 
         private List<WaypointSelectionCellEntry> GetWaypointExportCellEntries()
         {
-            var waypoints = _service.GetWaypoints().Reverse().ToList();
+            var playerPos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
+            var waypoints = _service.GetSortedWaypoints(SortOrder);
             return waypoints.Select(w =>
             {
-                var dto = WaypointDto.FromWaypoint(w.Value);
+                var dto = w.Value;
                 var current = Waypoints.FirstOrDefault(p => p.Waypoint.Equals(w.Value));
                 dto.Enabled = current?.Waypoint.Enabled ?? true;
 
@@ -82,7 +83,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
                 {
                     Title = dto.Title,
                     DetailText = dto.DetailText,
-                    RightTopText = dto.Position.RelativeToSpawn().ToString(),
+                    RightTopText = $"{dto.Position.RelativeToSpawn()} ({dto.Position.HorizontalManhattenDistance(playerPos).FormatLargeNumber()}m)",
                     RightTopOffY = 3f,
                     DetailTextFont = CairoFont.WhiteDetailText().WithFontSize((float)GuiStyle.SmallFontSize),
                     Waypoint = dto

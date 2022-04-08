@@ -176,7 +176,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             {
                 _fileName += ".json";
             }
-            var file = new JsonModFile(Path.Combine(ModPaths.ModDataWorldPath, "Exports", _fileName));
+            var file = new JsonModFile(Path.Combine(ModPaths.ModDataWorldPath, "Saves", _fileName));
             _model.Name = _model.Name.IfNullOrWhitespace(_defaultName);
             _model.DateCreated = DateTime.Now;
             var json = JsonConvert.SerializeObject(_model, Formatting.Indented);

@@ -7,6 +7,7 @@ using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun;
 using ApacheTech.VintageMods.CampaignCartographer.Features.FirstRun.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Features.ManualWaypoints.Model;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dialogue.WaypointSelection;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Extensions;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints.Packets;
 using ApacheTech.VintageMods.Core.Common.StaticHelpers;
@@ -168,6 +169,47 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.Waypoints
         public SortedDictionary<int, Waypoint> GetWaypointsAtPos(BlockPos position)
         {
             return GetWaypoints(p => p.Position.AsBlockPos.Equals(position));
+        }
+
+        public IEnumerable<KeyValuePair<int, WaypointDto>> GetSortedWaypoints(WaypointSortType sortOrder)
+        {
+            var playerPos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
+            var waypoints = GetWaypoints()
+                .Select(p => new KeyValuePair<int, WaypointDto>(p.Key, WaypointDto.FromWaypoint(p.Value)));
+
+            return sortOrder switch
+            {
+                WaypointSortType.IndexAscending => waypoints.Reverse(),
+                WaypointSortType.IndexDescending => waypoints,
+                WaypointSortType.ColourAscending => waypoints.OrderBy(p => p.Value.Colour),
+                WaypointSortType.ColourDescending => waypoints.OrderByDescending(p => p.Value.Colour),
+                WaypointSortType.NameAscending => waypoints.OrderBy(p => p.Value.Title),
+                WaypointSortType.NameDescending => waypoints.OrderByDescending(p => p.Value.Title),
+                WaypointSortType.DistanceAscending => waypoints.OrderBy(p =>
+                    p.Value.Position.HorizontalManhattenDistance(playerPos)),
+                WaypointSortType.DistanceDescending => waypoints.OrderByDescending(p =>
+                    p.Value.Position.HorizontalManhattenDistance(playerPos)),
+                _ => waypoints
+            };
+        }
+        
+        public IEnumerable<WaypointDto> SortWaypoints(IEnumerable<WaypointDto> waypoints, WaypointSortType sortOrder)
+        {
+            var playerPos = ApiEx.Client.World.Player.Entity.Pos.AsBlockPos;
+            return sortOrder switch
+            {
+                WaypointSortType.IndexAscending => waypoints.Reverse(),
+                WaypointSortType.IndexDescending => waypoints,
+                WaypointSortType.ColourAscending => waypoints.OrderBy(p => p.Colour),
+                WaypointSortType.ColourDescending => waypoints.OrderByDescending(p => p.Colour),
+                WaypointSortType.NameAscending => waypoints.OrderBy(p => p.Title),
+                WaypointSortType.NameDescending => waypoints.OrderByDescending(p => p.Title),
+                WaypointSortType.DistanceAscending => waypoints.OrderBy(p =>
+                    p.Position.HorizontalManhattenDistance(playerPos)),
+                WaypointSortType.DistanceDescending => waypoints.OrderByDescending(p =>
+                    p.Position.HorizontalManhattenDistance(playerPos)),
+                _ => waypoints
+            };
         }
 
         public SortedDictionary<int, Waypoint> GetWaypoints(Func<Waypoint, bool> predicate = null)

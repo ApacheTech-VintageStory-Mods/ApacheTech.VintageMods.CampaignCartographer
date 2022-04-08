@@ -42,6 +42,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
 
         protected GuiElementCellList<WaypointSelectionCellEntry> WaypointsList { get; private set; }
 
+        protected WaypointSortType SortOrder { get; private set; } = WaypointSortType.IndexAscending;
+
         protected bool ShowTopRightButton { private get; init; }
 
         protected string LeftButtonText { private get; init; }
@@ -178,16 +180,20 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             const int switchSize = 30;
             const int gapBetweenRows = 20;
             var font = CairoFont.WhiteSmallText();
-            var lblSearchText = $"{LangEx.CommonPhrase("search")}:";
+            var lblSearchText = $"{LangEx.CommonPhrase("search")}...";
+            
+            var left = ElementBounds.Fixed(0, 0, 200, switchSize).FixedUnder(bounds, 3);
+            var right = ElementBounds.Fixed(210, 0, 300, switchSize).FixedUnder(bounds, 3);
+            
+            var txtSearchBox = new GuiElementTextInput(ApiEx.Client, left, OnFilterTextChanged, CairoFont.TextInput());
+            txtSearchBox.SetPlaceHolderText(lblSearchText);
+            composer.AddInteractiveElement(txtSearchBox, "txtSearchBox");
 
-            var lblSearchTextLength = font.GetTextExtents(lblSearchText).Width + 10;
-
-            var left = ElementBounds.Fixed(0, 5, lblSearchTextLength, switchSize).FixedUnder(bounds, 3);
-            var right = ElementBounds.Fixed(lblSearchTextLength + 10, 0, 200, switchSize).FixedUnder(bounds, 3);
-
-            composer.AddStaticText(lblSearchText, font, EnumTextOrientation.Left, left);
-            composer.AddAutoSizeHoverText(LangEntry("lblSearch.HoverText"), font, 160, left);
-            composer.AddTextInput(right, OnFilterTextChanged);
+            var keys = Enum.GetNames(typeof(WaypointSortType));
+            var values = keys.Select(p => LangEntry(p)).ToArray();
+            
+            var cbxSortType = new GuiElementDropDown(ApiEx.Client, keys, values, 0, OnSortOrderChanged, right, font, false);
+            composer.AddInteractiveElement(cbxSortType, "cbxSortType");
 
             if (ShowTopRightButton)
             {
@@ -201,6 +207,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Dial
             }
             
             bounds = bounds.BelowCopy(fixedDeltaY: gapBetweenRows);
+        }
+
+        private void OnSortOrderChanged(string code, bool selected)
+        {
+            if (Enum.TryParse(code, false, out WaypointSortType type)) SortOrder = type;
+            PopulateCellList();
+            FilterCells();
+            RefreshValues();
         }
 
         private static bool OnImportButtonClicked()

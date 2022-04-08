@@ -272,6 +272,16 @@
   "Features.WaypointUtil.Dialogue.Exports.DefaultName": "Waypoints exportados",
   "Features.WaypointUtil.Dialogue.Exports.DefaultWorldName": "Mundo de un jugador",
 
+  // Sort Order Enum
+  "Features.WaypointUtil.Dialogue.Exports.IndexAscending": "Ordenar por índice (ascendente)",
+  "Features.WaypointUtil.Dialogue.Exports.IndexDescending": "Ordenar por índice (descendente)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourAscending": "Ordenar por color (ascendente)",
+  "Features.WaypointUtil.Dialogue.Exports.ColourDescending": "Ordenar por color (descendente)",
+  "Features.WaypointUtil.Dialogue.Exports.NameAscending": "Ordenar por nombre (ascendente)",
+  "Features.WaypointUtil.Dialogue.Exports.NameDescending": "Ordenar por nombre (descendente)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceAscending": "Ordenar por distancia (ascendente)",
+  "Features.WaypointUtil.Dialogue.Exports.DistanceDescending": "Ordenar por distancia (descendente)",
+
   // ==================================================================================
   //  Feature: Waypoint Manager
   // ==================================================================================
