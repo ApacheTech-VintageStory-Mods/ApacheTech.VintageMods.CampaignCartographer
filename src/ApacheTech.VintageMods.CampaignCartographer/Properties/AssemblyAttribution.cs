@@ -2,8 +2,8 @@
 
 // ReSharper disable StringLiteralTypo
 
-[assembly: ModDependency("game", "1.17.1")]
-[assembly: ModDependency("survival", "1.17.1")]
+[assembly: ModDependency("game", "1.17.2")]
+[assembly: ModDependency("survival", "1.17.2")]
 
 [assembly:ModInfo(
     "Campaign Cartographer",
