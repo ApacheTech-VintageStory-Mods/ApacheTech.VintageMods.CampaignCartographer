@@ -1,0 +1,1762 @@
+[
+  {
+    // =====================================================================
+    //  A
+    // =====================================================================
+
+    "Key": "almondmushroom",
+    "Title": "Almond Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "andesite",
+    "Title": "Andesite",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "steelblue",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "anthracite",
+    "Title": "Anthracite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SlateGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  B
+  // =====================================================================
+  {
+    "Key": "basalt",
+    "Title": "Basalt",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bauxite",
+    "Title": "Bauxite",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "orange",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bclay",
+    "Title": "Blue Clay",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SteelBlue",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "beardedtooth",
+    "Title": "Bearded Tooth Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "beehive",
+    "Title": "Bees",
+    "DetailText": "",
+    "ServerIcon": "Bee",
+    "DisplayedIcon": "Bee",
+    "Colour": "Yellow",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bees",
+    "Title": "Bees",
+    "DetailText": "",
+    "ServerIcon": "Bee",
+    "DisplayedIcon": "Bee",
+    "Colour": "Yellow",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "berries",
+    "Title": "Berry Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "berry",
+    "Title": "Berry Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bismuth",
+    "Title": "Bismuth",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "MediumSeaGreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bismuthinite",
+    "Title": "Bismuth",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "MediumSeaGreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bitterbolete",
+    "Title": "Bitter Bolete Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "black-coal",
+    "Title": "Black Coal",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "blackcurrant",
+    "Title": "Blackcurrant Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "blacktrumpet",
+    "Title": "Black Trumpet Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "blcoal",
+    "Title": "Black Coal",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "blueberry",
+    "Title": "Blueberry Bush",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "blue-clay",
+    "Title": "Blue Clay",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SteelBlue",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "borax",
+    "Title": "Borax",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Coral",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "brcoal",
+    "Title": "Brown Coal",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "maroon",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "brown-coal",
+    "Title": "Brown Coal",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Brown",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "bush",
+    "Title": "Berry Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // C
+  // =====================================================================
+  {
+    "Key": "cassiterite",
+    "Title": "Tin",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Gainsboro",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "cave",
+    "Title": "Cave",
+    "DetailText": "",
+    "ServerIcon": "Cave",
+    "DisplayedIcon": "Cave",
+    "Colour": "Navy",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chalk",
+    "Title": "Chaulk",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "whitesmoke",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chanterelle",
+    "Title": "Chanterelle Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chaulk",
+    "Title": "Chaulk",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "whitesmoke",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chert",
+    "Title": "Chert",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "darkred",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chickenofthewoods",
+    "Title": "Chicken of the Woods Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chromite",
+    "Title": "Chromium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "WhiteSmoke",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "chromium",
+    "Title": "Chromium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "WhiteSmoke",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "cinnabar",
+    "Title": "Cinnabar",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "claystone",
+    "Title": "Claystone",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "burlywood",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "commonmorel",
+    "Title": "Common Morel Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "conglomerate",
+    "Title": "Conglomerate",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "gray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "copper",
+    "Title": "Copper",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Orange",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "corundum",
+    "Title": "Corundum",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "cranberry",
+    "Title": "Cranberry Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // D
+  // =====================================================================
+  {
+    "Key": "deathcap",
+    "Title": "Death Cap Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "deerear",
+    "Title": "Deer Ear Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "devilbolete",
+    "Title": "Devil Bolet Mushroome",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "devilstooth",
+    "Title": "Devil's Tooth Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "diamond",
+    "Title": "Diamond",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Cyan",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "dryadsaddle",
+    "Title": "Dryad Saddle Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // E
+  // =====================================================================
+  {
+    "Key": "earthball",
+    "Title": "Earth Ball Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "elfinsaddle",
+    "Title": "Elfin Saddle Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "emerald",
+    "Title": "Emerald",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Green",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // F
+  // =====================================================================
+  {
+    "Key": "fclay",
+    "Title": "Fire Clay",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SandyBrown",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "fieldmushroom",
+    "Title": "Field Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "fire-clay",
+    "Title": "Fire Clay",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SandyBrown",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "fluorite",
+    "Title": "Fluorite",
+    "DetailText": "",
+    "ServerIcon": "pick",
+    "DisplayedIcon": "pick",
+    "Colour": "olive",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "flyagaric",
+    "Title": "Fly Agaric Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "funeralbell",
+    "Title": "Funeral Bell Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "fungi",
+    "Title": "Mushrooms",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Linen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // G
+  // =====================================================================
+  {
+    "Key": "galena",
+    "Title": "Lead",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SlateGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "gold",
+    "Title": "Gold",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Gold",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "golddropmilkcap",
+    "Title": "Gold Drop Milkcap Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "granite",
+    "Title": "Granite",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "darkgray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "graphite",
+    "Title": "Graphite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "greencrackedrussula",
+    "Title": "Green Cracked Russula Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "greenmarble",
+    "Title": "Green Marble",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "green",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // H
+  // =====================================================================
+  {
+    "Key": "halite",
+    "Title": "Halite (Salt)",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Pink",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "hematite",
+    "Title": "Iron",
+    "DetailText": "",
+    "ServerIcon": "pick",
+    "DisplayedIcon": "pick",
+    "Colour": "crimson",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "home",
+    "Title": "Home",
+    "DetailText": "",
+    "ServerIcon": "Home",
+    "DisplayedIcon": "Home",
+    "Colour": "Chartreuse",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // I
+  // =====================================================================
+  {
+    "Key": "ilmenite",
+    "Title": "Titanium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "AntiqueWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "indigomilkcap",
+    "Title": "Indigo Milkcap Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "iron",
+    "Title": "Iron",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "DimGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  J
+  // =====================================================================
+  {
+    "Key": "jackolantern",
+    "Title": "Jack o' Lantern Mushroom (Poisonous)",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  K
+  // =====================================================================
+  {
+    "Key": "kernite",
+    "Title": "Kernite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "kimberlite",
+    "Title": "Kimberlite",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "palegreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "kingbolete",
+    "Title": "King Bolete Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // L
+  // =====================================================================
+  {
+    "Key": "lapis",
+    "Title": "Lapis Lazuli",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Blue",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "lead",
+    "Title": "Lead",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SlateGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "limestone",
+    "Title": "Limestone",
+    "DetailText": "",
+    "ServerIcon": "pick",
+    "DisplayedIcon": "pick",
+    "Colour": "antiquewhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "limonite",
+    "Title": "Iron",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "DimGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "livermushroom",
+    "Title": "Liver Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "lobster",
+    "Title": "Lobster Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // M
+  // =====================================================================
+  {
+    "Key": "magnetite",
+    "Title": "Iron",
+    "DetailText": "",
+    "ServerIcon": "pick",
+    "DisplayedIcon": "pick",
+    "Colour": "purple",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "malachite",
+    "Title": "Malachite (Copper)",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "DarkGreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "meteor",
+    "Title": "Meteor",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Gray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "mush",
+    "Title": "mushroom",
+    "DetailText": "anymushroom",
+    "ServerIcon": "circle",
+    "DisplayedIcon": "circle",
+    "Colour": "beige",
+    "HorizontalCoverageRadius": 1,
+    "VerticalCoverageRadius": 1,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "mushroom",
+    "Title": "Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // N
+  // =====================================================================
+
+  // =====================================================================
+  // O
+  // =====================================================================
+  {
+    "Key": "obsidian",
+    "Title": "Obsidian",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "darkorchid",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "olivine",
+    "Title": "Olivine",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SeaGreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "orangeoakbolete",
+    "Title": "Orange Oak Bolete Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // P
+  // =====================================================================
+  {
+    "Key": "paddystraw",
+    "Title": "Paddy Straw Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "peat",
+    "Title": "Peat",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Sienna",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "pentlandite",
+    "Title": "Pentlandite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "SeaGreen",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "peridotite",
+    "Title": "Peridotite",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "darkkhaki",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "phosphorite",
+    "Title": "Phosphorite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "phyllite",
+    "Title": "Phyllite",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "lightsalmon",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "pinkbonnet",
+    "Title": "Pink Bonnet Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "pinkoyster",
+    "Title": "Pink Oyster Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "platinum",
+    "Title": "Platinum",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "GhostWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "poi",
+    "Title": "Point Of Interest",
+    "DetailText": "",
+    "ServerIcon": "Star1",
+    "DisplayedIcon": "Star1",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "puffball",
+    "Title": "Puffball Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // Q
+  // =====================================================================
+  {
+    "Key": "quartz",
+    "Title": "Quartz",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Seashell",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // R
+  // =====================================================================
+  {
+    "Key": "redcurrant",
+    "Title": "Redcurrant Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "redmarble",
+    "Title": "Rose Marble",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "lightpink",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "redwinecap",
+    "Title": "Red Wine Cap Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "reishi",
+    "Title": "Reishi Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "resin",
+    "Title": "Resin",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "Peru",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "rhodium",
+    "Title": "Rhodium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Maroon",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "rhodochrosite",
+    "Title": "Rhodium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Maroon",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "ruins",
+    "Title": "Ruins",
+    "DetailText": "",
+    "ServerIcon": "Ruins",
+    "DisplayedIcon": "Ruins",
+    "Colour": "LightGray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // S
+  // =====================================================================
+  {
+    "Key": "saffronmilkcap",
+    "Title": "Saffron Milkcap Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "salt",
+    "Title": "Halite (Salt)",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Pink",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "saltpeter",
+    "Title": "Saltpeter",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "FloralWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "sandstone",
+    "Title": "Sandstone",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "peachpuff",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "scoria",
+    "Title": "Scoria",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "shale",
+    "Title": "Shale",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "dimgray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "shiitake",
+    "Title": "Shiitake Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "silver",
+    "Title": "Silver",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Silver",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "slate",
+    "Title": "Slate",
+    "DetailText": "",
+    "ServerIcon": "rocks",
+    "DisplayedIcon": "rocks",
+    "Colour": "slategray",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "spawn",
+    "Title": "Spawn Point",
+    "DetailText": "",
+    "ServerIcon": "Spiral",
+    "DisplayedIcon": "Spiral",
+    "Colour": "Yellow",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": true,
+    "Enabled": true
+  },
+  {
+    "Key": "sphalerite",
+    "Title": "Zinc",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "NavajoWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "stibnite",
+    "Title": "Stibnite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "suevite",
+    "Title": "Suevite",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "Silver",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "sulfur",
+    "Title": "Sulphur",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "GoldenRod",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "sulphur",
+    "Title": "Sulphur",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "GoldenRod",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // T
+  // =====================================================================
+  {
+    "Key": "tin",
+    "Title": "Tin",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Gainsboro",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "tinderhoof",
+    "Title": "Tinderhoof Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "titanium",
+    "Title": "Titanium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "AntiqueWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "tl",
+    "Title": "Translocator",
+    "DetailText": "",
+    "ServerIcon": "Spiral",
+    "DisplayedIcon": "Spiral",
+    "Colour": "Fuchsia",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "tlb",
+    "Title": "Broken Translocator",
+    "DetailText": "",
+    "ServerIcon": "Spiral",
+    "DisplayedIcon": "Spiral",
+    "Colour": "Red",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "trader",
+    "Title": "Trader",
+    "DetailText": "",
+    "ServerIcon": "Trader",
+    "DisplayedIcon": "Trader",
+    "Colour": "Aqua",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "translocator",
+    "Title": "Translocator",
+    "DetailText": "",
+    "ServerIcon": "Spiral",
+    "DisplayedIcon": "Spiral",
+    "Colour": "Fuchsia",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "tuff",
+    "Title": "Tuff",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  // U
+  // =====================================================================
+  {
+    "Key": "uranium",
+    "Title": "Uranium",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "DarkCyan",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  V
+  // =====================================================================
+  {
+    "Key": "violetwebcap",
+    "Title": "Violet Web Cap Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  W
+  // =====================================================================
+  {
+    "Key": "whitecurrant",
+    "Title": "Whitecurrant Bush",
+    "DetailText": "",
+    "ServerIcon": "Star2",
+    "DisplayedIcon": "Star2",
+    "Colour": "antiquewhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "whitemarble",
+    "Title": "White Marble",
+    "DetailText": "",
+    "ServerIcon": "Rocks",
+    "DisplayedIcon": "Rocks",
+    "Colour": "snow",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "whiteoyster",
+    "Title": "White Oyster Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "witchhat",
+    "Title": "Witch Hat Mushroom",
+    "DetailText": "",
+    "ServerIcon": "Circle",
+    "DisplayedIcon": "Circle",
+    "Colour": "White",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+  {
+    "Key": "wolframite",
+    "Title": "Wolframite",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "Black",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  },
+
+  // =====================================================================
+  //  X
+  // =====================================================================
+
+  // =====================================================================
+  //  Y
+  // =====================================================================
+
+  // =====================================================================
+  // Z
+  // =====================================================================
+  {
+    "Key": "zinc",
+    "Title": "Zinc",
+    "DetailText": "",
+    "ServerIcon": "Pick",
+    "DisplayedIcon": "Pick",
+    "Colour": "NavajoWhite",
+    "HorizontalCoverageRadius": 10,
+    "VerticalCoverageRadius": 10,
+    "Pinned": false,
+    "Enabled": true
+  }
+]

@@ -1,8 +1,0 @@
-{
-  "Features": {
-    "General": {
-      "AlwaysLoadDefaultWaypoints": false,
-      "NeverLoadDefaultWaypoints": false
-    }
-  }
-}

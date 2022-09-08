@@ -1,0 +1,5 @@
+Scenario: Death Waypoints
+
+Given a user has Death Waypoints enabled,
+When they die,
+Then a waypoint should be added to the map at their exact position.

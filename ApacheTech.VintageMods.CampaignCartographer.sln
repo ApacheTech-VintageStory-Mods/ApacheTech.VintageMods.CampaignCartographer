@@ -1,28 +1,24 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31727.386
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.CampaignCartographer", "ApacheTech.VintageMods.CampaignCartographer\ApacheTech.VintageMods.CampaignCartographer.csproj", "{46248F78-5AE9-4A59-8670-D98B74AE0E15}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.Core", "..\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core\ApacheTech.VintageMods.Core.csproj", "{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{C75312BB-E327-4D17-8290-79303D4613F5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mod", "Mod", "{D48746BB-6446-4A9C-8834-06EB7D23FBF3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D48746BB-6446-4A9C-8834-06EB7D23FBF3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{314D353D-BE52-4726-AA67-84BF52306622}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApacheTech.VintageMods.DotNetFrameworkLauncher", "..\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher.csproj", "{EBC0233E-F9F2-4B60-B145-143CD650A63B}"
 	ProjectSection(ProjectDependencies) = postProject
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15} = {46248F78-5AE9-4A59-8670-D98B74AE0E15}
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23} = {D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BAC634E8-C3D1-4EB7-B193-113727CB76F3}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{11B74FF7-0B5A-4E8C-9B96-1E7EB685597A}"
 	ProjectSection(SolutionItems) = preProject
-		LICENCE.md = LICENCE.md
-		README.md = README.md
+		docs\LICENCE.md = docs\LICENCE.md
+		docs\README.md = docs\README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.CampaignCartographer", "src\ApacheTech.VintageMods.CampaignCartographer\ApacheTech.VintageMods.CampaignCartographer.csproj", "{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,33 +27,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Package|Any CPU.ActiveCfg = Package|Any CPU
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Package|Any CPU.Build.0 = Package|Any CPU
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Package|Any CPU.ActiveCfg = Package|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Package|Any CPU.Build.0 = Package|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.ActiveCfg = Package|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.Build.0 = Package|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Package|Any CPU.Build.0 = Package|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{46248F78-5AE9-4A59-8670-D98B74AE0E15} = {D48746BB-6446-4A9C-8834-06EB7D23FBF3}
-		{206FACBD-9239-4C6B-BA79-7D1BCF57EDFE} = {C75312BB-E327-4D17-8290-79303D4613F5}
-		{314D353D-BE52-4726-AA67-84BF52306622} = {C75312BB-E327-4D17-8290-79303D4613F5}
 		{EBC0233E-F9F2-4B60-B145-143CD650A63B} = {314D353D-BE52-4726-AA67-84BF52306622}
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23} = {D48746BB-6446-4A9C-8834-06EB7D23FBF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01CD805C-7D3A-4E45-AE8B-9D591FAB2366}
