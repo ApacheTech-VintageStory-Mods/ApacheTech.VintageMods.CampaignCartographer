@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ApacheTech.Common.DependencyInjection.Abstractions;
 using ApacheTech.Common.DependencyInjection.Abstractions.Extensions;
 using ApacheTech.VintageMods.CampaignCartographer.Services.ModMenu.Dialogue;
+using ApacheTech.VintageMods.FluentChatCommands;
 using Gantry.Core;
 using Gantry.Core.DependencyInjection;
 using Gantry.Core.DependencyInjection.Registration;
@@ -10,6 +11,8 @@ using Gantry.Core.Extensions.GameContent.Gui;
 using Gantry.Core.ModSystems;
 using JetBrains.Annotations;
 using Vintagestory.API.Client;
+
+// ReSharper disable StringLiteralTypo
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Services.ModMenu
 {
@@ -38,6 +41,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.ModMenu
         {
             api.Input.RegisterTransientGuiDialogueHotKey(
                 () => IOC.Services.Resolve<ModMenuDialogue>(), LangEx.ModTitle(), GlKeys.F7);
+            
+            FluentChat.ClientCommand("wpsettings")
+                .RegisterWith(api)
+                .HasDescription(LangEx.FeatureString("ManualWaypoints", "SettingsCommandDescription"))
+                .HasDefaultHandler((_, _) => IOC.Services.Resolve<ModMenuDialogue>().ToggleGui());
         }
 
         /// <summary>

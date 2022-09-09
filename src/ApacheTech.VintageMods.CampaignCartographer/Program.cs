@@ -38,6 +38,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer
             services.AddFileSystemService(o => o.RegisterSettingsFiles = true);
             services.AddHarmonyPatchingService(o => o.AutoPatchModAssembly = true);
             services.AddNetworkService();
+#if DEBUG
+            HarmonyLib.Harmony.DEBUG = true;
+#endif
         }
 
         /// <summary>

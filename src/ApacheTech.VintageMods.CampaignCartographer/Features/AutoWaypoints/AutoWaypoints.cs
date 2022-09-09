@@ -2,8 +2,11 @@
 using ApacheTech.Common.DependencyInjection.Abstractions.Extensions;
 using ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Dialogue;
 using ApacheTech.VintageMods.CampaignCartographer.Services.ModMenu.Extensions;
+using ApacheTech.VintageMods.FluentChatCommands;
+using Gantry.Core;
 using Gantry.Core.DependencyInjection;
 using Gantry.Core.DependencyInjection.Registration;
+using Gantry.Core.Extensions.GameContent.Gui;
 using Gantry.Core.ModSystems;
 using Gantry.Services.FileSystem.Abstractions.Contracts;
 using Gantry.Services.FileSystem.DependencyInjection;
@@ -55,8 +58,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
         /// <param name="capi">The client-side API.</param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
+            capi.Event.LevelFinalize += () =>
+            {
+                FluentChat.ClientCommand("wpAuto")
+                    .RegisterWith(capi)
+                    .HasDescription(LangEx.FeatureString("AutoWaypoints", "SettingsCommandDescription"))
+                    .HasDefaultHandler((_, _) => IOC.Services.Resolve<AutoWaypointsDialogue>().ToggleGui());
 
-            capi.AddModMenuDialogue<AutoWaypointsDialogue>("AutoWaypoints");
+                capi.AddModMenuDialogue<AutoWaypointsDialogue>("AutoWaypoints");
+            };
         }
     }
 }

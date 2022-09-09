@@ -115,7 +115,7 @@
 		</PackageReference>
 		<PackageReference Include="VintageStory.Gantry.Core" Version="0.2.1" />
 		<PackageReference Include="VintageStory.Gantry.Core.DependencyInjection" Version="0.2.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.2.3" />
+		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.2.4" />
 		<PackageReference Include="VintageStory.Gantry.Services.FileSystem.DependencyInjection" Version="0.2.0" />
 		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches" Version="0.2.0" />
 		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches.DependencyInjection" Version="0.2.0" />
