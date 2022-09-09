@@ -1,14 +1,12 @@
 ﻿using Gantry.Services.FileSystem.Features;
-using JetBrains.Annotations;
-using ProtoBuf;
+using Newtonsoft.Json;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
 {
     /// <summary>
     ///     Contains client managed, per world settings for the Auto Waypoints feature. 
     /// </summary>
-    [ProtoContract(ImplicitFields = ImplicitFields.AllPublic)]
-    [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    [JsonObject]
     public class AutoWaypointsSettings : FeatureSettings
     {
         /// <summary>

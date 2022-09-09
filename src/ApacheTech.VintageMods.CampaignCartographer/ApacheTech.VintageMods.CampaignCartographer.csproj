@@ -65,11 +65,13 @@
 		<None Remove="_EmbeddedResources\Global\crossmap.json" />
 		<None Remove="_EmbeddedResources\Global\default-waypoints.en.json" />
 		<None Remove="_EmbeddedResources\Global\default-waypoints.json" />
+		<None Remove="_EmbeddedResources\Global\trader-colours.json" />
 		<None Remove="_EmbeddedResources\Global\version.data" />
 		<None Remove="_EmbeddedResources\World\settings-server.json" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="_EmbeddedResources\Global\trader-colours.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\crossmap.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\default-waypoints.json" />
 		<EmbeddedResource Include="_EmbeddedResources\Global\version.data" />
@@ -97,7 +99,6 @@
 		<Folder Include="Features\AutoWaypoints\Patches\" />
 		<Folder Include="Features\PredefinedWaypoints\Model\" />
 		<Folder Include="Properties\PublishProfiles\" />
-		<Folder Include="_EmbeddedResources\World\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -114,7 +115,7 @@
 		</PackageReference>
 		<PackageReference Include="VintageStory.Gantry.Core" Version="0.2.1" />
 		<PackageReference Include="VintageStory.Gantry.Core.DependencyInjection" Version="0.2.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.2.2" />
+		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.2.3" />
 		<PackageReference Include="VintageStory.Gantry.Services.FileSystem.DependencyInjection" Version="0.2.0" />
 		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches" Version="0.2.0" />
 		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches.DependencyInjection" Version="0.2.0" />

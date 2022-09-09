@@ -1,0 +1,12 @@
+{
+  "default": "White",
+  "artisan": "Aqua",
+  "buildmaterials": "Red",
+  "clothing": "Green",
+  "commodities": "Grey",
+  "foods": "#C8C080",
+  "furniture": "Orange",
+  "luxuries": "Blue",
+  "survivalgoods": "Yellow",
+  "treasurehunter": "Purple"
+}

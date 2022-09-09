@@ -10,7 +10,7 @@
     "campaigncartographer",
     Description = "Adds multiple map related features to the game, custom marker pins, GPS, automatic waypoint markers, and more.",
     Side = "Universal",
-    Version = "3.0.0",
+    Version = "3.0.1",
     RequiredOnClient = false,
     RequiredOnServer = false,
     NetworkVersion = "1.0.0",

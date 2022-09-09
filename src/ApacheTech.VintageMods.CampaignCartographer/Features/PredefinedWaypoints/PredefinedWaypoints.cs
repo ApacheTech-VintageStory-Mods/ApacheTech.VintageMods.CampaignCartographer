@@ -54,6 +54,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         protected override void StartPreClientSide(ICoreClientAPI capi)
         {
             IOC.Services.Resolve<IFileSystemService>()
+                .RegisterFile("trader-colours.json", FileScope.Global)
                 .RegisterFile("waypoint-types.json", FileScope.Global);
         }
 
