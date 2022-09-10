@@ -96,8 +96,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Features\AutoWaypoints\Patches\" />
-		<Folder Include="Features\PredefinedWaypoints\Model\" />
+		<Folder Include="Features\" />
 		<Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 

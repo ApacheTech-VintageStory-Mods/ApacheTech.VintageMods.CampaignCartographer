@@ -5,6 +5,7 @@ using ApacheTech.Common.DependencyInjection.Abstractions.Extensions;
 using ApacheTech.Common.Extensions.Harmony;
 using ApacheTech.Common.Extensions.System;
 using ApacheTech.VintageMods.CampaignCartographer.Services.Repositories;
+using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.Extensions;
 using Gantry.Core;
 using Gantry.Core.DependencyInjection;

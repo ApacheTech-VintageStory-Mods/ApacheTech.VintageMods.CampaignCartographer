@@ -1,6 +1,6 @@
 ﻿using Vintagestory.API.Client;
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.Imports
+namespace ApacheTech.VintageMods.CampaignCartographer.Domain
 {
     /// <summary>
     ///     Defines the information stored within a single GUI Cell Element.

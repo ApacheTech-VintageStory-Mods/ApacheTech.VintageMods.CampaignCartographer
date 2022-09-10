@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.WaypointSelection;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.Extensions;
 using Gantry.Core;

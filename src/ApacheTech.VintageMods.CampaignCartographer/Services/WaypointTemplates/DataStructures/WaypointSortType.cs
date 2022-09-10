@@ -1,4 +1,4 @@
-﻿namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.WaypointSelection
+﻿namespace ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures
 {
     public enum WaypointSortType
     {

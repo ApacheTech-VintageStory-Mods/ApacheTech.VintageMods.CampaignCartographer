@@ -1,4 +1,5 @@
-﻿using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Model;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Domain;
+using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Model;
 using Vintagestory.API.Client;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.Imports

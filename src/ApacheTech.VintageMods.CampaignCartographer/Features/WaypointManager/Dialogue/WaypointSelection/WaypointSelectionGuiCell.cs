@@ -1,6 +1,5 @@
 ﻿using System;
 using ApacheTech.Common.Extensions.System;
-using ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Dialogue.PredefinedWaypoints;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures;
 using Cairo;
 using Vintagestory.API.Client;
@@ -12,7 +11,7 @@ using Vintagestory.API.Util;
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.WaypointSelection
 {
     /// <summary>
-    ///     A cell displayed within the cell list on the <see cref="PredefinedWaypointsDialogue"/> screen.
+    ///     A cell displayed within the cell list on the <see cref="WaypointSelectionCellEntry"/> screen.
     /// </summary>
     /// <seealso cref="GuiElementTextBase" />
     /// <seealso cref="IGuiElementCell" />
@@ -31,7 +30,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.D
         private const double UnscaledRightBoxWidth = 40.0;
 
         /// <summary>
-        /// 	Initialises a new instance of the <see cref="PredefinedWaypointsGuiCell" /> class.
+        /// 	Initialises a new instance of the <see cref="WaypointSelectionGuiCell" /> class.
         /// </summary>
         /// <param name="capi">The capi.</param>
         /// <param name="cell">The cell.</param>

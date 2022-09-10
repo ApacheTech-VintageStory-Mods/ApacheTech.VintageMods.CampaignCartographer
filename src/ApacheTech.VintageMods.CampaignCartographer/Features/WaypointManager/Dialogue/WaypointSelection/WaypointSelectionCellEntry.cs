@@ -1,12 +1,11 @@
-﻿using ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Dialogue.PredefinedWaypoints;
-using ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.Imports;
+﻿using ApacheTech.VintageMods.CampaignCartographer.Domain;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures;
 using Vintagestory.API.Client;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointManager.Dialogue.WaypointSelection
 {
     /// <summary>
-    ///     Cell information, displayed within a <see cref="PredefinedWaypointsGuiCell"/>, in the cell list on the <see cref="PredefinedWaypointsDialogue"/> screen.
+    ///     Cell information, displayed within a <see cref="WaypointSelectionCellEntry"/>, in the cell list on the <see cref="WaypointSelectionDialogue"/> screen.
     /// </summary>
     /// <seealso cref="SavegameCellEntry" />
     public class WaypointSelectionCellEntry : CellEntry<SelectableWaypointTemplate>
