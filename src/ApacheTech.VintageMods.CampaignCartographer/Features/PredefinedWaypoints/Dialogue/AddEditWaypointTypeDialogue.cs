@@ -34,7 +34,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         [SidedConstructor(EnumAppSide.Client)]
         public AddEditWaypointTypeDialogue(ICoreClientAPI capi, PredefinedWaypointTemplate waypoint, WaypointTypeMode mode) : base(capi)
         {
-            _waypoint = waypoint;
+            _waypoint = waypoint.Clone().To<PredefinedWaypointTemplate>();
             _mode = mode;
             _icons = WaypointIconModel.GetVanillaIcons();
 
@@ -45,6 +45,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
             ModalTransparency = .4f;
         }
 
+        public Action<PredefinedWaypointTemplate> OnOkAction { get; set; }
+        public Action<PredefinedWaypointTemplate> OnDeleteAction { get; set; }
+
         private GuiElementTextInput SyntaxTextBox => SingleComposer.GetTextInput("txtSyntax");
         private GuiElementTextInput TitleTextBox => SingleComposer.GetTextInput("txtTitle");
         private GuiElementDropDown ColourComboBox => SingleComposer.GetDropDown("cbxColour");
@@ -53,8 +56,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         private GuiElementSlider HorizontalRadiusTextBox => SingleComposer.GetSlider("txtHorizontalRadius");
         private GuiElementSlider VerticalRadiusTextBox => SingleComposer.GetSlider("txtVerticalRadius");
         private GuiElementSwitch PinnedSwitch => SingleComposer.GetSwitch("btnPinned");
-        public Action<PredefinedWaypointTemplate> OnOkAction { get; set; }
-        public Action<PredefinedWaypointTemplate> OnDeleteAction { get; set; }
 
         #region Form Composition
 
@@ -253,7 +254,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
 
         private bool OnOkButtonPressed()
         {
-            // ROADMAP: O/C issues with validation.
+            // ROADMAP: O/C issues with validation. FluentValidation???
             var validationErrors = false;
             var message = new StringBuilder();
 

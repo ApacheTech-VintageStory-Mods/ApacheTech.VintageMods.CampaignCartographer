@@ -51,6 +51,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         {
             services.AddProprietaryModSystem<WorldMapManager>();
             services.AddProprietaryModSystem<IWorldMapManager, WorldMapManager>();
+
             services.AddSingleton(ioc => ioc.Resolve<WorldMapManager>().WaypointMapLayer());
             
             services.AddSingleton<WaypointTemplateService>();

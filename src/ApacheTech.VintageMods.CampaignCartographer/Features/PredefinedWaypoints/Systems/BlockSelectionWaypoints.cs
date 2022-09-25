@@ -8,7 +8,7 @@ using JetBrains.Annotations;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Systems
 {
     /// <summary>
     ///     Feature: Manual Waypoint Addition
@@ -43,7 +43,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
             var position = blockSelection.Position;
             var block = _capi.World.BlockAccessor.GetBlock(position, BlockLayersAccess.Default);
             var title = block.GetPlacedBlockName(_capi.World, position);
-            
+
             var template = ModSettings.World.
                 Feature<PredefinedWaypointsSettings>()
                 .BlockSelectionWaypointTemplate;

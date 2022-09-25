@@ -10,7 +10,7 @@ using Vintagestory.GameContent;
 
 // ReSharper disable StringLiteralTypo
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Systems
 {
     /// <summary>
     ///     Feature: Manual Waypoint Addition
@@ -51,7 +51,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
                 _capi.ShowChatMessage(teleporterNotFoundMessage);
                 return;
             }
-            
+
             var titleTemplate = LangEx.FeatureCode("PredefinedWaypoints.TeleporterWaypoints", "TeleporterWaypointTitle");
             teleporter.AddWaypoint(titleTemplate);
         }

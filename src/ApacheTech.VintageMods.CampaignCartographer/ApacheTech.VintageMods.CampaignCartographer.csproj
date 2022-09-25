@@ -9,7 +9,7 @@
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release;Package</Configurations>
-		<Version>3.0.0.0</Version>
+		<Version>3.0.3.0</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 	</PropertyGroup>
@@ -96,7 +96,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Features\" />
 		<Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 

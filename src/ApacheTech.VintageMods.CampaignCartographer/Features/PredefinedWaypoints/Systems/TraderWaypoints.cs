@@ -15,7 +15,7 @@ using Vintagestory.GameContent;
 
 // ReSharper disable StringLiteralTypo
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Systems
 {
     /// <summary>
     ///     Feature: Manual Waypoint Addition

@@ -1,4 +1,0 @@
-Stretch Goals:
-~~~~~~~~~~~~~~
-
- • Fully Client-Side, 3NF Waypoint Management System (1.18, when GUIDs are added).

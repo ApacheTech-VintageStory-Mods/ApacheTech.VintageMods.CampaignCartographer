@@ -5,13 +5,6 @@ VisualStudioVersion = 17.4.32804.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{D48746BB-6446-4A9C-8834-06EB7D23FBF3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{314D353D-BE52-4726-AA67-84BF52306622}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApacheTech.VintageMods.DotNetFrameworkLauncher", "..\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher\ApacheTech.VintageMods.DotNetFrameworkLauncher.csproj", "{EBC0233E-F9F2-4B60-B145-143CD650A63B}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23} = {D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{11B74FF7-0B5A-4E8C-9B96-1E7EB685597A}"
 	ProjectSection(SolutionItems) = preProject
 		docs\LICENCE.md = docs\LICENCE.md
@@ -20,32 +13,55 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApacheTech.VintageMods.CampaignCartographer", "src\ApacheTech.VintageMods.CampaignCartographer\ApacheTech.VintageMods.CampaignCartographer.csproj", "{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Launcher", "Launcher", "{1D2930C3-4A8F-4EF5-95DA-5EFD5A043927}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientLauncher", "..\ApacheTech.VintageMods.DotNetFrameworkLauncher\src\Client\ClientLauncher.csproj", "{EBC0233E-F9F2-4B60-B145-143CD650A63B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23} = {D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerLauncher", "..\ApacheTech.VintageMods.DotNetFrameworkLauncher\src\Server\ServerLauncher.csproj", "{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Launch Server|Any CPU = Launch Server|Any CPU
 		Package|Any CPU = Package|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.ActiveCfg = Package|Any CPU
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.Build.0 = Package|Any CPU
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Launch Server|Any CPU.ActiveCfg = Release|Any CPU
+		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Launch Server|Any CPU.Build.0 = Release|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Package|Any CPU.ActiveCfg = Package|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Package|Any CPU.Build.0 = Package|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Launch Server|Any CPU.ActiveCfg = Launch Server|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Launch Server|Any CPU.Build.0 = Launch Server|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Package|Any CPU.Build.0 = Package|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Launch Server|Any CPU.ActiveCfg = Launch Server|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Launch Server|Any CPU.Build.0 = Launch Server|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Package|Any CPU.ActiveCfg = Package|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Package|Any CPU.Build.0 = Package|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EBC0233E-F9F2-4B60-B145-143CD650A63B} = {314D353D-BE52-4726-AA67-84BF52306622}
 		{D1BF1FA4-7505-4F30-A3B4-01BE7F637E23} = {D48746BB-6446-4A9C-8834-06EB7D23FBF3}
+		{EBC0233E-F9F2-4B60-B145-143CD650A63B} = {1D2930C3-4A8F-4EF5-95DA-5EFD5A043927}
+		{52DEBCC2-2ED0-4B21-8612-7E9CF7E3850D} = {1D2930C3-4A8F-4EF5-95DA-5EFD5A043927}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01CD805C-7D3A-4E45-AE8B-9D591FAB2366}

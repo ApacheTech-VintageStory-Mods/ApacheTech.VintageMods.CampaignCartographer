@@ -19,7 +19,7 @@ using Gantry.Services.FileSystem.Extensions;
 using JetBrains.Annotations;
 using Vintagestory.API.Client;
 
-namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints
+namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoints.Systems
 {
     /// <summary>
     ///     Feature: Manual Waypoint Addition
@@ -70,10 +70,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         {
             var oldFile = new FileInfo(Path.Combine(ModPaths.ModDataWorldPath, "waypoint-types.json"));
             if (!oldFile.Exists) return;
-            
+
             var newFile = IOC.Services.Resolve<IFileSystemService>().GetJsonFile("waypoint-types.json");
             var waypointTypes = new SortedDictionary<string, PredefinedWaypointTemplate>();
-            
+
             waypointTypes.AddOrUpdateRange(newFile.ParseAsMany<PredefinedWaypointTemplate>(), w => w.Key);
             waypointTypes.AddOrUpdateRange(oldFile.ParseAsMany<PredefinedWaypointTemplate>(), w => w.Key);
 

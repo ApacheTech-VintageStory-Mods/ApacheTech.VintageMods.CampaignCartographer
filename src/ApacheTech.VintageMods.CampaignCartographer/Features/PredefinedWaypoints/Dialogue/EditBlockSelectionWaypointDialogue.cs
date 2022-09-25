@@ -34,17 +34,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
             Title = LangEx.FeatureString("PredefinedWaypoints.Dialogue.BlockSelection", "Title");
             ModalTransparency = 0.4f;
             Alignment = EnumDialogArea.CenterMiddle;
-            _waypoint = settings.BlockSelectionWaypointTemplate;
+            _waypoint = settings.BlockSelectionWaypointTemplate.Clone().To<CoverageWaypointTemplate>();
             _icons = WaypointIconModel.GetVanillaIcons();
         }
-        
+
+        public Action<CoverageWaypointTemplate> OnOkAction { get; set; }
+
         private GuiElementDropDown ColourComboBox => SingleComposer.GetDropDown("cbxColour");
         private GuiElementCustomDraw ColourPreviewBox => SingleComposer.GetCustomDraw("pbxColour");
         private GuiElementDropDown IconComboBox => SingleComposer.GetDropDown("cbxIcon");
         private GuiElementSlider HorizontalRadiusTextBox => SingleComposer.GetSlider("txtHorizontalRadius");
         private GuiElementSlider VerticalRadiusTextBox => SingleComposer.GetSlider("txtVerticalRadius");
-
-        public Action<CoverageWaypointTemplate> OnOkAction { get; set; }
 
         #region Form Composition
 
