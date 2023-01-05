@@ -29,13 +29,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         /// <param name="capi">The core API implemented by the client. The main interface for accessing the client. Contains all sub-components, and some miscellaneous methods.</param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            FluentChat.ClientCommand("wptl")
-                .RegisterWith(_capi = capi)
-                .HasDescription(LangEx.FeatureString("PredefinedWaypoints.TranslocatorWaypoints", "Description"))
-                .HasDefaultHandler(DefaultHandler);
+            FluentChat.RegisterCommand("wptl", _capi = capi)!
+                .WithDescription(LangEx.FeatureString("PredefinedWaypoints.TranslocatorWaypoints", "Description"))
+                .WithHandler(DefaultHandler);
         }
 
-        private void DefaultHandler(int groupId, CmdArgs args)
+        private void DefaultHandler(IPlayer player, int groupId, CmdArgs args)
         {
             var pos = _capi.World.Player.Entity.Pos.AsBlockPos;
             var block = _capi.World.GetNearestBlock<BlockStaticTranslocator>(pos, 5f, 1f, out var blockPos);

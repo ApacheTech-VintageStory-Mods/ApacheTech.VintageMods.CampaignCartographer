@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using Gantry.Services.FileSystem.Features;
+using Gantry.Services.FileSystem.Configuration.Abstractions;
 using Newtonsoft.Json;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins

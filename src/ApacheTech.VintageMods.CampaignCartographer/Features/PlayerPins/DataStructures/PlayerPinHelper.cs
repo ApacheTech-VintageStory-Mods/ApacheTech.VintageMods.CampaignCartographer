@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Drawing;
-using Gantry.Services.FileSystem.Features;
+using Gantry.Services.FileSystem.Configuration.Consumers;
 using JetBrains.Annotations;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.DataStructures

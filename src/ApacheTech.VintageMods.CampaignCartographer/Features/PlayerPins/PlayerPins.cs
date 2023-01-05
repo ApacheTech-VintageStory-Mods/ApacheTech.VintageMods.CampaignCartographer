@@ -37,10 +37,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins
 
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            FluentChat.ClientCommand("playerpins")
-                .RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("PlayerPins", "SettingsCommandDescription"))
-                .HasDefaultHandler((_, _) => IOC.Services.Resolve<PlayerPinsDialogue>().ToggleGui());
+            FluentChat.RegisterCommand("playerpins", capi)!
+                .WithDescription(LangEx.FeatureString("PlayerPins", "SettingsCommandDescription"))
+                .WithHandler((_, _, _) => IOC.Services.Resolve<PlayerPinsDialogue>().ToggleGui());
 
             IOC.Services.Resolve<FriendClientChatCommand>().Register();
 

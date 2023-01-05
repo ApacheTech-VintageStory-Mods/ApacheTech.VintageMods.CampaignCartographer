@@ -62,13 +62,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
                 .RegisterMessageType<GpsSettings>()
                 .SetMessageHandler<GpsSettings>(OnClientSetPropertyPacketReceived);
 
-            FluentChat.ClientCommand("gps")
-                .RegisterWith(_capi = capi)
-                .HasDescription(LangEx.FeatureString("GPS.Client", "SettingsCommandDescription"))
-                .HasDefaultHandler(OnClientDefaultHandler)
-                .HasSubCommand("chat").WithHandler(OnClientSubCommandBroadcast)
-                .HasSubCommand("copy").WithHandler(OnClientSubCommandClipboard)
-                .HasSubCommand("to").WithHandler(OnClientSubCommandWhisper);
+            FluentChat.RegisterCommand("gps", _capi = capi)!
+                .WithDescription(LangEx.FeatureString("GPS.Client", "SettingsCommandDescription"))
+                .WithHandler(OnClientDefaultHandler)
+                .HasSubCommand("chat", s => s.WithHandler(OnClientSubCommandBroadcast).Build())
+                .HasSubCommand("copy", s => s.WithHandler(OnClientSubCommandClipboard).Build())
+                .HasSubCommand("to", s => s.WithHandler(OnClientSubCommandWhisper).Build());
 
             capi.RegisterLinkProtocol("gps", OnLinkClicked);
         }
@@ -89,24 +88,23 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
             
             // GUIs don't work, server side.
             FluentChat
-                .ServerCommand("gpsadmin")
+                .RegisterCommand("gpsadmin", sapi)!
                 .RequiresPrivilege(Privilege.controlserver)
-                .HasDescription(LangEx.FeatureString("GPS.Server", "SettingsCommandDescription"))
-                .RegisterWith(sapi)
-                .HasSubCommand("enable-whispers").WithHandler(OnEnableWhispers)
-                .HasSubCommand("disable-whispers").WithHandler(OnDisableWhispers);
+                .WithDescription(LangEx.FeatureString("GPS.Server", "SettingsCommandDescription"))
+                .HasSubCommand("enable-whispers", s => s.WithHandler(OnEnableWhispers).Build())
+                .HasSubCommand("disable-whispers", s => s.WithHandler(OnDisableWhispers).Build());
 
             sapi.Event.PlayerNowPlaying += OnServerPlayerJoin;
         }
 
-        private void OnDisableWhispers(string subCommandName, IServerPlayer player, int groupId, CmdArgs args)
+        private void OnDisableWhispers(IPlayer player, int groupId, CmdArgs args)
         {
             _settings.WhispersAllowed = false;
             _sapi.Logger.Audit("[Campaign Cartographer] GPS Whispers Disabled.");
             _serverChannel.BroadcastPacket(_settings);
         }
 
-        private void OnEnableWhispers(string subCommandName, IServerPlayer player, int groupId, CmdArgs args)
+        private void OnEnableWhispers(IPlayer player, int groupId, CmdArgs args)
         {
             _settings.WhispersAllowed = true;
             _sapi.Logger.Audit("[Campaign Cartographer] GPS Whispers Enabled.");
@@ -118,11 +116,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <summary>
         ///     Client Default Command Handler: .gps
         /// </summary>
+        /// <param name="player">The player that issued the command.</param>
         /// <param name="groupId">The ID of the chat group to send messages to.</param>
         /// <param name="args">The arguments sent along with the command.</param>
-        private void OnClientDefaultHandler(int groupId, CmdArgs args)
+        private void OnClientDefaultHandler(IPlayer player, int groupId, CmdArgs args)
         {
-            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player, true);
             _capi.ShowChatMessage(pos);
         }
@@ -130,12 +128,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <summary>
         ///     Client Sub-Command Handler: .gps chat
         /// </summary>
-        /// <param name="subCommandName">The name of the sub command.</param>
+        /// <param name="player">The player that issued the command.</param>
         /// <param name="groupId">The ID of the chat group to send messages to.</param>
         /// <param name="args">The arguments sent along with the command.</param>
-        private void OnClientSubCommandBroadcast(string subCommandName, int groupId, CmdArgs args)
+        private void OnClientSubCommandBroadcast(IPlayer player, int groupId, CmdArgs args)
         {
-            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player, false);
             _capi.SendChatMessage(pos);
         }
@@ -143,12 +140,11 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <summary>
         ///     Client Sub-Command Handler: .gps copy
         /// </summary>
-        /// <param name="subCommandName">The name of the sub command.</param>
+        /// <param name="player">The player that issued the command.</param>
         /// <param name="groupId">The ID of the chat group to send messages to.</param>
         /// <param name="args">The arguments sent along with the command.</param>
-        private void OnClientSubCommandClipboard(string subCommandName, int groupId, CmdArgs args)
+        private void OnClientSubCommandClipboard(IPlayer player, int groupId, CmdArgs args)
         {
-            var player = _capi.World.Player;
             var pos = PlayerLocationMessage(player, false);
             _capi.Forms.SetClipboardText($"{player.PlayerName}: {pos}");
             _capi.ShowChatMessage(LangEx.FeatureString("GPS.Client", "location-copied-to-clipboard"));
@@ -157,10 +153,10 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.GPS
         /// <summary>
         ///     Client Sub-Command Handler: .gps to [playerName]
         /// </summary>
-        /// <param name="subCommandName">The name of the sub command.</param>
+        /// <param name="player">The player that issued the command.</param>
         /// <param name="groupId">The ID of the chat group to send messages to.</param>
         /// <param name="args">The arguments sent along with the command.</param>
-        private void OnClientSubCommandWhisper(string subCommandName, int groupId, CmdArgs args)
+        private void OnClientSubCommandWhisper(IPlayer player, int groupId, CmdArgs args)
         {
             if (_clientChannel is not null && !_clientChannel.Connected)
             {

@@ -1,4 +1,4 @@
-﻿using Gantry.Services.FileSystem.Features;
+﻿using Gantry.Services.FileSystem.Configuration.Abstractions;
 using Newtonsoft.Json;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints

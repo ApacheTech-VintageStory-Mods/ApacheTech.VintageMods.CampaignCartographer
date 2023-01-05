@@ -49,18 +49,17 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
                 .RegisterMessageType<PlayerSpawnPositionDto>()
                 .SetMessageHandler<PlayerSpawnPositionDto>(OnClientSpawnPointResponsePacketReceived);
 
-            FluentChat.ClientCommand("cm")
-                .RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("CentreMap", "SettingsCommandDescription"))
-                .HasDefaultHandler(OnSelfOption)
-                .HasSubCommand("self").WithHandler((_, id, args) => OnSelfOption(id, args))
-                .HasSubCommand("home").WithHandler(OnHomeOption)
-                .HasSubCommand("player").WithHandler(OnPlayerOption)
-                .HasSubCommand("plr").WithHandler(OnPlayerOption)
-                .HasSubCommand("position").WithHandler(OnPositionOption)
-                .HasSubCommand("pos").WithHandler(OnPositionOption)
-                .HasSubCommand("spawn").WithHandler(OnSpawnOption)
-                .HasSubCommand("waypoint").WithHandler(OnWaypointOption);
+            FluentChat.RegisterCommand("cm", capi)!
+                .WithDescription(LangEx.FeatureString("CentreMap", "SettingsCommandDescription"))
+                .WithHandler(OnSelfOption)
+                .HasSubCommand("self", s => s.WithHandler(OnSelfOption).Build())
+                .HasSubCommand("home", s => s.WithHandler(OnHomeOption).Build())
+                .HasSubCommand("player", s => s.WithHandler(OnPlayerOption).Build())
+                .HasSubCommand("plr", s => s.WithHandler(OnPlayerOption).Build())
+                .HasSubCommand("position", s => s.WithHandler(OnPositionOption).Build())
+                .HasSubCommand("pos", s => s.WithHandler(OnPositionOption).Build())
+                .HasSubCommand("spawn", s => s.WithHandler(OnSpawnOption).Build())
+                .HasSubCommand("waypoint", s => s.WithHandler(OnWaypointOption).Build());
         }
 
         private void OnPlayerSpawn(IClientPlayer byPlayer)
@@ -84,9 +83,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on self.
         /// </summary>
-        private void OnSelfOption(int groupId, CmdArgs args)
+        private void OnSelfOption(IPlayer player, int groupId, CmdArgs args)
         {
-            var player = _capi.World.Player;
             var displayPos = player.Entity.Pos.AsBlockPos.RelativeToSpawn();
             var message = LangEx.FeatureString("CentreMap", "CentreMapOnPlayer", player.PlayerName, displayPos.X, displayPos.Y, displayPos.Z);
             RecentreAndProvideFeedback(player.Entity.Pos.XYZ, message);
@@ -95,7 +93,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on the player's own spawn point.
         /// </summary>
-        private void OnHomeOption(string subCommandName, int groupId, CmdArgs args)
+        private void OnHomeOption(IPlayer player, int groupId, CmdArgs args)
         {   
             if (!_clientChannel.Connected)
             {
@@ -108,9 +106,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on an online player.
         /// </summary>
-        private void OnPlayerOption(string subCommandName, int groupId, CmdArgs args)
+        private void OnPlayerOption(IPlayer player, int groupId, CmdArgs args)
         {
-            var player = _capi.World.Player;
             var targetName = args.PopWord(player.PlayerName);
 
             var allPlayers = _capi.World.AllPlayers;
@@ -137,9 +134,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on a specific X,Z location within the world.
         /// </summary>
-        private void OnPositionOption(string subCommandName, int groupId, CmdArgs args)
+        private void OnPositionOption(IPlayer player, int groupId, CmdArgs args)
         {
-            var playerPos = _capi.World.Player.Entity.Pos.AsBlockPos;
+            var playerPos = player.Entity.Pos.AsBlockPos;
             var x = args.PopInt().GetValueOrDefault(playerPos.X);
             var z = args.PopInt().GetValueOrDefault(playerPos.Z);
 
@@ -154,7 +151,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on World Spawn.
         /// </summary>
-        private void OnSpawnOption(string subCommandName, int groupId, CmdArgs args)
+        private void OnSpawnOption(IPlayer player, int groupId, CmdArgs args)
         {
             var pos = _capi.World.DefaultSpawnPosition.AsBlockPos;
             var displayPos = pos.RelativeToSpawn();
@@ -165,7 +162,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.CentreMap
         /// <summary>
         ///      • Centre map on a specific waypoint.
         /// </summary>
-        private void OnWaypointOption(string subCommandName, int groupId, CmdArgs args)
+        private void OnWaypointOption(IPlayer player, int groupId, CmdArgs args)
         {
             var waypointId = args.PopInt().GetValueOrDefault(0);
             var target = _worldMap.WaypointMapLayer().ownWaypoints[waypointId];

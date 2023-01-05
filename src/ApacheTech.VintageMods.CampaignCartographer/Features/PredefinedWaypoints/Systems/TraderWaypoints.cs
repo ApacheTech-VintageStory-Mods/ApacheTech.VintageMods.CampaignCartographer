@@ -35,13 +35,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         public override void StartClientSide(ICoreClientAPI capi)
         {
             _waypointService = IOC.Services.Resolve<WaypointTemplateService>();
-            FluentChat.ClientCommand("wpt")
-                .RegisterWith(_capi = capi)
-                .HasDescription(LangEx.FeatureString("PredefinedWaypoints.TraderWaypoints", "Description"))
-                .HasDefaultHandler(DefaultHandler);
+            FluentChat.RegisterCommand("wpt", _capi = capi)!
+                .WithDescription(LangEx.FeatureString("PredefinedWaypoints.TraderWaypoints", "Description"))
+                .WithHandler(DefaultHandler);
         }
 
-        private void DefaultHandler(int groupId, CmdArgs args)
+        private void DefaultHandler(IPlayer player, int groupId, CmdArgs args)
         {
             var found = false;
 

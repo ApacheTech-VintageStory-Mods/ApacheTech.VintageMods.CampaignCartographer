@@ -24,16 +24,15 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Comman
 
         public void Register()
         {
-            FluentChat.ClientCommand("friend")
-                .HasDescription(LangEx.FeatureString("PlayerPins", "Friends.Description"))
-                .RegisterWith(_capi)
-                .HasDefaultHandler(DefaultHandler)
-                .HasSubCommand("add").WithHandler(OnAdd)
-                .HasSubCommand("remove").WithHandler(OnRemove)
-                .HasSubCommand("list").WithHandler((_, id, args) => DefaultHandler(id, args));
+            FluentChat.RegisterCommand("friend", _capi)!
+                .WithDescription(LangEx.FeatureString("PlayerPins", "Friends.Description"))
+                .WithHandler(DefaultHandler)
+                .HasSubCommand("add", s => s.WithHandler(OnAdd).Build())
+                .HasSubCommand("remove", s => s.WithHandler(OnRemove).Build())
+                .HasSubCommand("list", s => s.WithHandler(DefaultHandler).Build());
         }
 
-        private void OnAdd(string subCommandName, int groupId, CmdArgs args)
+        private void OnAdd(IPlayer player, int groupId, CmdArgs args)
         {
             if (args.Length == 0)
             {
@@ -57,19 +56,19 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Comman
                 return;
             }
 
-            var player = players.First();
-            if (_settings.Friends.Values.Contains(player.PlayerUID))
+            var friend = players.First();
+            if (_settings.Friends.Values.Contains(friend.PlayerUID))
             {
-                UserFeedback("PlayerAlreadyAdded", player.PlayerName);
+                UserFeedback("PlayerAlreadyAdded", friend.PlayerName);
                 return;
             }
 
-            _settings.Friends.Add(player.PlayerName, player.PlayerUID);
+            _settings.Friends.Add(friend.PlayerName, friend.PlayerUID);
             ModSettings.World.Save(_settings);
-            UserFeedback("PlayerAdded", player.PlayerName);
+            UserFeedback("PlayerAdded", friend.PlayerName);
         }
 
-        private void OnRemove(string subCommandName, int groupId, CmdArgs args)
+        private void OnRemove(IPlayer player, int groupId, CmdArgs args)
         {
             if (!_settings.Friends.Any())
             {
@@ -100,13 +99,13 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Comman
                 return;
             }
 
-            var player = players.First();
-            _settings.Friends.Remove(player);
+            var friend = players.First();
+            _settings.Friends.Remove(friend);
             ModSettings.World.Save(_settings);
-            UserFeedback("PlayerRemoved", player);
+            UserFeedback("PlayerRemoved", friend);
         }
 
-        private void DefaultHandler(int groupId, CmdArgs args)
+        private void DefaultHandler(IPlayer player, int groupId, CmdArgs args)
         {
             if (!_settings.Friends.Any())
             {

@@ -30,13 +30,12 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PredefinedWaypoin
         /// </param>
         public override void StartClientSide(ICoreClientAPI capi)
         {
-            FluentChat.ClientCommand("wps")
-                .RegisterWith(_capi = capi)
-                .HasDescription(LangEx.FeatureString("PredefinedWaypoints.BlockSelectionWaypoints", "Description"))
-                .HasDefaultHandler(DefaultHandler);
+            FluentChat.RegisterCommand("wps", _capi = capi)!
+                .WithDescription(LangEx.FeatureString("PredefinedWaypoints.BlockSelectionWaypoints", "Description"))
+                .WithHandler(DefaultHandler);
         }
 
-        private void DefaultHandler(int groupId, CmdArgs args)
+        private void DefaultHandler(IPlayer player, int groupId, CmdArgs args)
         {
             var blockSelection = _capi.World.Player.CurrentBlockSelection;
             if (blockSelection is null) return;

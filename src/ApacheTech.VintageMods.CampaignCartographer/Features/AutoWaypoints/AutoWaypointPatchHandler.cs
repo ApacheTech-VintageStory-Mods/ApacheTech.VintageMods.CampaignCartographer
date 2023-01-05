@@ -7,7 +7,7 @@ using Gantry.Core;
 using Gantry.Core.DependencyInjection.Annotation;
 using Gantry.Core.Extensions;
 using Gantry.Services.FileSystem.Abstractions.Contracts;
-using Gantry.Services.FileSystem.Features;
+using Gantry.Services.FileSystem.Configuration.Consumers;
 using JetBrains.Annotations;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;

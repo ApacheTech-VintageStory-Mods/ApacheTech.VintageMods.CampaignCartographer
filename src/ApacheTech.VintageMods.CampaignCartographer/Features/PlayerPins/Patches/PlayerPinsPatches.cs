@@ -1,4 +1,4 @@
-﻿using Gantry.Services.FileSystem.Features;
+﻿using Gantry.Services.FileSystem.Configuration.Consumers;
 using Gantry.Services.HarmonyPatches.Annotations;
 using JetBrains.Annotations;
 using Vintagestory.API.Common;

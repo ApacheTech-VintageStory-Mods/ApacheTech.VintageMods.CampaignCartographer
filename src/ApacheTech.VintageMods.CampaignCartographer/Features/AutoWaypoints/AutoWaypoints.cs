@@ -60,10 +60,9 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
         {
             capi.Event.LevelFinalize += () =>
             {
-                FluentChat.ClientCommand("wpAuto")
-                    .RegisterWith(capi)
-                    .HasDescription(LangEx.FeatureString("AutoWaypoints", "SettingsCommandDescription"))
-                    .HasDefaultHandler((_, _) => IOC.Services.Resolve<AutoWaypointsDialogue>().ToggleGui());
+                FluentChat.RegisterCommand("wpAuto", capi)!
+                    .WithDescription(LangEx.FeatureString("AutoWaypoints", "SettingsCommandDescription"))
+                    .WithHandler((_, _, _) => IOC.Services.Resolve<AutoWaypointsDialogue>().ToggleGui());
 
                 capi.AddModMenuDialogue<AutoWaypointsDialogue>("AutoWaypoints");
             };

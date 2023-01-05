@@ -8,8 +8,8 @@ using Gantry.Core;
 using Gantry.Core.DependencyInjection;
 using Gantry.Core.DependencyInjection.Registration;
 using Gantry.Core.ModSystems;
+using Gantry.Services.FileSystem.Configuration.Abstractions;
 using Gantry.Services.FileSystem.DependencyInjection;
-using Gantry.Services.FileSystem.Features;
 using JetBrains.Annotations;
 using Vintagestory.API.Client;
 using Vintagestory.API.Common;
@@ -33,7 +33,6 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public sealed class WaypointUtil : ClientModSystem, IClientServiceRegistrar
     {
-        private WaypointQueriesRepository _queryRepo;
         private WaypointCommandsRepository _commandRepo;
 
         private Action _cachedAction;
@@ -50,27 +49,25 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         public override void StartClientSide(ICoreClientAPI capi)
         {
             _capi = capi;
-            _queryRepo = IOC.Services.Resolve<WaypointQueriesRepository>();
             _commandRepo = IOC.Services.Resolve<WaypointCommandsRepository>();
 
-            FluentChat.ClientCommand("wputil")
-                .RegisterWith(capi)
-                .HasDescription(LangEx.FeatureString("WaypointUtil", "SettingsCommandDescription"))
-                .HasSubCommand("purge-all").WithHandler(OnPurgeAll)
-                .HasSubCommand("purge-nearby").WithHandler(OnPurgeNearby)
-                .HasSubCommand("purge-icon").WithHandler(OnPurgeByIcon)
-                .HasSubCommand("purge-colour").WithHandler(OnPurgeByColour)
-                .HasSubCommand("purge-title").WithHandler(OnPurgeByTitle)
-                .HasSubCommand(Confirm).WithHandler(OnConfirmation)
-                .HasSubCommand("cancel").WithHandler(OnCancel)
-                .HasSubCommand("reset").WithHandler(OnFactoryReset)
-                .HasSubCommand("silent").WithHandler(OnSilent);
+            FluentChat.RegisterCommand("wputil", capi)!
+                .WithDescription(LangEx.FeatureString("WaypointUtil", "SettingsCommandDescription"))
+                .HasSubCommand("purge-all", s => s.WithHandler(OnPurgeAll).Build())
+                .HasSubCommand("purge-nearby", s => s.WithHandler(OnPurgeNearby).Build())
+                .HasSubCommand("purge-icon", s => s.WithHandler(OnPurgeByIcon).Build())
+                .HasSubCommand("purge-colour", s => s.WithHandler(OnPurgeByColour).Build())
+                .HasSubCommand("purge-title", s => s.WithHandler(OnPurgeByTitle).Build())
+                .HasSubCommand(Confirm, s => s.WithHandler(OnConfirmation).Build())
+                .HasSubCommand("cancel", s => s.WithHandler(OnCancel).Build())
+                .HasSubCommand("reset", s => s.WithHandler(OnFactoryReset).Build())
+                .HasSubCommand("silent", s => s.WithHandler(OnSilent).Build());
         }
 
         /// <summary>
         ///      • Silence waypoint user feedback.
         /// </summary>
-        private void OnSilent(string subCommandName, int groupId, CmdArgs args)
+        private void OnSilent(IPlayer player, int groupId, CmdArgs args)
         {
             IOC.Services.Resolve<WaypointUtilSettings>().SilenceFeedback = args.PopBool().GetValueOrDefault(false);
         }
@@ -78,7 +75,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Reset mod to factory settings.
         /// </summary>
-        private void OnFactoryReset(string subCommandName, int groupId, CmdArgs args)
+        private void OnFactoryReset(IPlayer player, int groupId, CmdArgs args)
         {
             _cachedAction = () =>
             {
@@ -90,7 +87,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Remove all waypoints.
         /// </summary>
-        private void OnPurgeAll(string subCommandName, int groupId, CmdArgs args)
+        private void OnPurgeAll(IPlayer player, int groupId, CmdArgs args)
         {
             _cachedAction = () => _commandRepo.RemoveAll();
             _capi.ShowChatMessage(string.Format(ConfirmationMessage, Confirm));
@@ -99,7 +96,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Remove all waypoints within a given radius of the player.
         /// </summary>
-        private void OnPurgeNearby(string subCommandName, int groupId, CmdArgs args)
+        private void OnPurgeNearby(IPlayer player, int groupId, CmdArgs args)
         {
             var radius = args.PopInt().GetValueOrDefault(10);
             _cachedAction = () => _commandRepo.RemoveNearPlayer(radius);
@@ -109,7 +106,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Remove all waypoints with a specified icon.
         /// </summary>
-        private void OnPurgeByIcon(string subCommandName, int groupId, CmdArgs args)
+        private void OnPurgeByIcon(IPlayer player, int groupId, CmdArgs args)
         {
             var icon = args.PopWord();
             _cachedAction = () => _commandRepo.RemoveByIcon(icon);
@@ -119,7 +116,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Remove all waypoints with a specified colour.
         /// </summary>
-        private void OnPurgeByColour(string subCommandName, int groupId, CmdArgs args)
+        private void OnPurgeByColour(IPlayer player, int groupId, CmdArgs args)
         {
             var colour = args.PopWord();
             _cachedAction = () => _commandRepo.RemoveByColour(colour);
@@ -129,7 +126,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///      • Remove all waypoints where the title starts with a specified string.
         /// </summary>
-        private void OnPurgeByTitle(string subCommandName, int groupId, CmdArgs args)
+        private void OnPurgeByTitle(IPlayer player, int groupId, CmdArgs args)
         {
             var partialTitle = args.PopWord();
             _cachedAction = () => _commandRepo.RemoveByTitle(partialTitle);
@@ -139,7 +136,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///     Confirm choice, and remove selected waypoints.
         /// </summary>
-        private void OnConfirmation(string subCommandName, int groupId, CmdArgs args)
+        private void OnConfirmation(IPlayer player, int groupId, CmdArgs args)
         {
             _cachedAction?.Invoke();
             _cachedAction = null;
@@ -148,7 +145,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil
         /// <summary>
         ///     Cancels the currently cached action.
         /// </summary>
-        private void OnCancel(string subCommandName, int groupId, CmdArgs args)
+        private void OnCancel(IPlayer player, int groupId, CmdArgs args)
         {
             _cachedAction = null;
         }

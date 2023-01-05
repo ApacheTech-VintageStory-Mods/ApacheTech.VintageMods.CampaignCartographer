@@ -49,6 +49,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// <param name="services">The service collection.</param>
         protected override void ConfigureClientModServices(IServiceCollection services)
         {
+            // TODO: ROADMAP: This may be better to push to a separate mod system.
             services.AddProprietaryModSystem<WorldMapManager>();
             services.AddProprietaryModSystem<IWorldMapManager, WorldMapManager>();
 
@@ -77,9 +78,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         /// </summary>
         public override void Dispose()
         {
-            ApiEx.Run(
-                FluentChat.DisposeClientCommands, 
-                FluentChat.DisposeServerCommands);
+            FluentChat.ClearCommands(ApiEx.Current);
         }
     }
 }
