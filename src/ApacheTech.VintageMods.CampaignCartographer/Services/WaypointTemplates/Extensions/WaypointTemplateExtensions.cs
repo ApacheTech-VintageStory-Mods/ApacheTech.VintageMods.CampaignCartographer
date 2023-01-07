@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using ApacheTech.Common.Extensions.Functional;
 using ApacheTech.Common.Extensions.System;
+using ApacheTech.Common.FunctionalCSharp.Extensions;
 using ApacheTech.VintageMods.CampaignCartographer.Services.WaypointTemplates.DataStructures;
 using Gantry.Core.Extensions.GameContent;
 using Gantry.Core;

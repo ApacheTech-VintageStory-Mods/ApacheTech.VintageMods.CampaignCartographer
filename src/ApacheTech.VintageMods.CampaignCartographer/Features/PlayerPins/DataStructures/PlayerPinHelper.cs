@@ -2,6 +2,7 @@
 using System.Drawing;
 using Gantry.Services.FileSystem.Configuration.Consumers;
 using JetBrains.Annotations;
+using Vintagestory.API.Common;
 
 namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.DataStructures
 {
@@ -9,6 +10,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.DataSt
     ///     A helper class that eases the retrieval and setting of pin values, based on an entity's relationship to the current client player.
     /// </summary>
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    [SettingsConsumer(EnumAppSide.Client)]
     public sealed class PlayerPinHelper : WorldSettingsConsumer<PlayerPinsSettings>
     {
         /// <summary>

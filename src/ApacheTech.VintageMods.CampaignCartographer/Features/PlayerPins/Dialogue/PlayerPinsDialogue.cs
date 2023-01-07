@@ -174,7 +174,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Dialog
 
         private bool OnColourChanged(ColourChannel channel, int value)
         {
-            PlayerPinHelper.Colour = PlayerPinHelper.Colour.UpdateColourChannel(channel, value);
+            PlayerPinHelper.Colour = PlayerPinHelper.Colour.UpdateColourChannel(channel, (byte)value);
             RefreshValues();
             return true;
         }

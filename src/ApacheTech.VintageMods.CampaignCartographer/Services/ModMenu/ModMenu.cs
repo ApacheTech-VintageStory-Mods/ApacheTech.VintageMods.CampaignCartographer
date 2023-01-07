@@ -73,5 +73,14 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Services.ModMenu
         ///     The dialogue windows, from features within this mod, that will be displayed within the menu.
         /// </summary>
         public Dictionary<Type, string> FeatureDialogues { get; } = new();
+
+        /// <summary>
+        ///     If this mod allows runtime reloading, you must implement this method to unregister any listeners / handlers
+        /// </summary>
+        public override void Dispose()
+        {
+            FeatureDialogues.Clear();
+        }
+
     }
 }

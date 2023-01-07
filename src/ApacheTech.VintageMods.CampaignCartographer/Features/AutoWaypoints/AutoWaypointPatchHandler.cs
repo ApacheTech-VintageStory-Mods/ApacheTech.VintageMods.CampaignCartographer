@@ -19,6 +19,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints
     /// </summary>
     /// <seealso cref="WorldSettingsConsumer{T}" />
     [UsedImplicitly]
+    [SettingsConsumer(EnumAppSide.Client)]
     public sealed class AutoWaypointPatchHandler : WorldSettingsConsumer<AutoWaypointsSettings>
     {
         // DEV: Still lots of O/C issues in this class, but without needing

@@ -7,12 +7,14 @@ using ApacheTech.VintageMods.FluentChatCommands;
 using Gantry.Core;
 using Gantry.Core.DependencyInjection;
 using Gantry.Core.Extensions.GameContent;
+using Gantry.Services.FileSystem;
 using Gantry.Services.FileSystem.Abstractions.Contracts;
 using Gantry.Services.FileSystem.DependencyInjection;
 using Gantry.Services.FileSystem.Enums;
 using Gantry.Services.HarmonyPatches.DependencyInjection;
 using Gantry.Services.Network.DependencyInjection;
 using JetBrains.Annotations;
+using Vintagestory.API.Client;
 using Vintagestory.API.Common;
 using Vintagestory.GameContent;
 
@@ -79,6 +81,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer
         public override void Dispose()
         {
             FluentChat.ClearCommands(ApiEx.Current);
+            base.Dispose();
         }
     }
 }

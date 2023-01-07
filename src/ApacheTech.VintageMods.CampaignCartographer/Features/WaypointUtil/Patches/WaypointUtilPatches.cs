@@ -10,6 +10,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.WaypointUtil.Patc
 {
     [HarmonySidedPatch(EnumAppSide.Client)]
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    [SettingsConsumer(EnumAppSide.Client)]
     public partial class WaypointUtilPatches : WorldSettingsConsumer<WaypointUtilSettings>
     {
     }

@@ -16,7 +16,7 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Ext
         /// <returns><c>true</c> if the block is a surface deposit of ore; otherwise, <c>false</c>.</returns>
         public static bool IsSurfaceDeposit(this Block block)
         {
-            return block.Code.Path.ContainsAny("-looseores-", "-loosestones-");
+            return block.Code.Path.ContainsAnyOf(new []{ "-looseores-", "-loosestones-" });
         }
         /// <summary>
         ///     Determines whether the specified block entity is a surface deposit of ore.

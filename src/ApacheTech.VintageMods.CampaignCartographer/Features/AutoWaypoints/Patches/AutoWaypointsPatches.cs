@@ -7,8 +7,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.AutoWaypoints.Pat
 {
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     [HarmonySidedPatch(EnumAppSide.Client)]
+    [SettingsConsumer(EnumAppSide.Client)]
     public partial class AutoWaypointsPatches : WorldSettingsConsumer<AutoWaypointsSettings>
     {
-
     }
 }

@@ -9,7 +9,7 @@
 		<GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 		<OutputType>Library</OutputType>
 		<Configurations>Debug;Release;Package</Configurations>
-		<Version>3.1.0.0</Version>
+		<Version>3.1.1.0</Version>
 		<AssemblyVersion>$(Version)</AssemblyVersion>
 		<FileVersion>$(Version)</FileVersion>
 	</PropertyGroup>
@@ -23,37 +23,38 @@
 		<ModInfoGeneratorName>mig.exe</ModInfoGeneratorName>
 		<ModInfoGeneratorPath>$(ModInfoGeneratorDir)$(ModInfoGeneratorName)</ModInfoGeneratorPath>
 		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+		<UserSecretsId>44ca09ff-8cf8-4cd6-84a8-07af9bac37f7</UserSecretsId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Package|AnyCPU'">
-	  <Optimize>true</Optimize>
-	  <DefineConstants>TRACE</DefineConstants>
-	  <DocumentationFile></DocumentationFile>
-	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<Optimize>true</Optimize>
+		<DefineConstants>TRACE</DefineConstants>
+		<DocumentationFile></DocumentationFile>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-	  <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="HOLD\**" />
-	  <Compile Remove="HOLD\WaypointUtil\**" />
-	  <Compile Remove="Store\**" />
-	  <EmbeddedResource Remove="HOLD\**" />
-	  <EmbeddedResource Remove="HOLD\WaypointUtil\**" />
-	  <EmbeddedResource Remove="Store\**" />
-	  <None Remove="HOLD\**" />
-	  <None Remove="HOLD\WaypointUtil\**" />
-	  <None Remove="Store\**" />
+		<Compile Remove="HOLD\**" />
+		<Compile Remove="HOLD\WaypointUtil\**" />
+		<Compile Remove="Store\**" />
+		<EmbeddedResource Remove="HOLD\**" />
+		<EmbeddedResource Remove="HOLD\WaypointUtil\**" />
+		<EmbeddedResource Remove="Store\**" />
+		<None Remove="HOLD\**" />
+		<None Remove="HOLD\WaypointUtil\**" />
+		<None Remove="Store\**" />
 	</ItemGroup>
 
 	<!-- BEGIN -->
-	
+
 	<ItemGroup>
 		<None Remove=".gitkeep" />
 		<None Remove="ApacheTech.VintageMods.WaypointExtensions.csproj.DotSettings" />
@@ -108,17 +109,9 @@
 	<ItemGroup>
 		<PackageReference Include="ApacheTech.VintageMods.FluentChatCommands" Version="2.0.1" />
 		<PackageReference Include="IsExternalInit" Version="1.0.3">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="VintageStory.Gantry.Core" Version="0.3.1" />
-		<PackageReference Include="VintageStory.Gantry.Core.DependencyInjection" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.FileSystem.DependencyInjection" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches.DependencyInjection" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.Network" Version="0.3.0" />
-		<PackageReference Include="VintageStory.Gantry.Services.Network.DependencyInjection" Version="0.3.0" />
 	</ItemGroup>
 
 	<!-- END -->
@@ -126,6 +119,32 @@
 	<ItemGroup>
 		<ProjectCapability Include="DynamicDependentFile" />
 		<ProjectCapability Include="DynamicFileNesting" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Package'">
+		<PackageReference Include="VintageStory.Gantry.Core" Version="0.3.3" />
+		<PackageReference Include="VintageStory.Gantry.Core.DependencyInjection" Version="0.3.2" />
+		<PackageReference Include="VintageStory.Gantry.Services.FileSystem" Version="0.3.3" />
+		<PackageReference Include="VintageStory.Gantry.Services.FileSystem.DependencyInjection" Version="0.3.1" />
+		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches" Version="0.3.2" />
+		<PackageReference Include="VintageStory.Gantry.Services.HarmonyPatches.DependencyInjection" Version="0.3.1" />
+		<PackageReference Include="VintageStory.Gantry.Services.Network" Version="0.3.1" />
+		<PackageReference Include="VintageStory.Gantry.Services.Network.DependencyInjection" Version="0.3.1" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(Configuration)' == 'Debug'">
+		<ProjectReference Include="..\..\..\..\..\ApacheTech\src\ApacheTech.Common.Extensions.Harmony\ApacheTech.Common.Extensions.Harmony\ApacheTech.Common.Extensions.Harmony.csproj" />
+		<ProjectReference Include="..\..\..\..\..\ApacheTech\src\ApacheTech.Common.Extensions\ApacheTech.Common.Extensions\ApacheTech.Common.Extensions.csproj" />
+		<ProjectReference Include="..\..\..\..\..\ApacheTech\src\ApacheTech.Common.FunctionalCSharp\src\ApacheTech.Common.FunctionalCSharp\ApacheTech.Common.FunctionalCSharp.csproj" />
+
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Core\Gantry.Core.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Core.DependencyInjection\Gantry.Core.DependencyInjection.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.FileSystem.DependencyInjection\Gantry.Services.FileSystem.DependencyInjection.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.FileSystem\Gantry.Services.FileSystem.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.HarmonyPatches.DependencyInjection\Gantry.Services.HarmonyPatches.DependencyInjection.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.HarmonyPatches\Gantry.Services.HarmonyPatches.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.Network.DependencyInjection\Gantry.Services.Network.DependencyInjection.csproj" />
+		<ProjectReference Include="..\..\..\..\..\..\Users\Apache\source\repos\MDK\Gantry\src\Gantry.Services.Network\Gantry.Services.Network.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

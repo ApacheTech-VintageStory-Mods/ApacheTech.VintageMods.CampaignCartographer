@@ -7,8 +7,8 @@ namespace ApacheTech.VintageMods.CampaignCartographer.Features.PlayerPins.Patche
 {
     [HarmonySidedPatch(EnumAppSide.Client)]
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
+    [SettingsConsumer(EnumAppSide.Client)]
     public partial class PlayerPinsPatches : WorldSettingsConsumer<PlayerPinsSettings>
     {
-
     }
 }
